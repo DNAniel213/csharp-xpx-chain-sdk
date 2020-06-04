@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BSG.Blockchain.Models;
 
-namespace proximax_gamedev_rest.Controllers
+namespace BSG.Blockchain.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -79,9 +79,9 @@ namespace proximax_gamedev_rest.Controllers
         [HttpPost]
         public async Task<ActionResult<Account>> PostAccount(Account account)
         {
+
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
 
