@@ -22,7 +22,7 @@ namespace Proximax.Sirius.Sdk.NetCore.Examples
             
             Account acc = new Account();
             acc.Id = 1;
-            acc.PrivateKey = "lmao";
+            acc.PrivateKey = "testPrivateKey";
             acc.PublicKey = "lmaoAss";
             //p.TestAPOST(acc);
             var t = Task.Run(() => p.GetAsync());
