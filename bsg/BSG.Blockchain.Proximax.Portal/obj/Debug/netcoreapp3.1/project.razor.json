@@ -20518,7 +20518,7 @@
     ],
     "CSharpLanguageVersion": 800
   },
-  "RootNamespace": "proximax_gamedev_rest",
+  "RootNamespace": "BSG.Blockchain.Proximax.Portal",
   "Documents": [],
   "SerializationFormat": "0.2"
 }

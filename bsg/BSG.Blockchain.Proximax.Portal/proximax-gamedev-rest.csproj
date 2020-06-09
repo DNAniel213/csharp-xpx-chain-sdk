@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>proximax_gamedev_rest</RootNamespace>
+    <RootNamespace>BSG.Blockchain.Proximax.Portal</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
