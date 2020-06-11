@@ -7,9 +7,9 @@ namespace Xarcade.Api.Prototype.Blockchain
 {
     public class ProximaxBlockchainPortal
     {
-        public const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io"; 
+        public const string PROXIMAX_NODE_URL = "http://bctestnet1.brimstone.xpxsirius.io:3000"; 
         public SiriusClient siriusClient = null;
-        public NetworkType network = default(NetworkType);
+        public NetworkType networkType = default(NetworkType);
         public const string TRANSACTION_TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.fff";
         public const string PROXIMAX_MOSAIC_NAME = "same.xpx";
 
@@ -19,7 +19,7 @@ namespace Xarcade.Api.Prototype.Blockchain
             {
                 siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
             }
-            network = this.GetNetworkType().Result;
+            networkType = this.GetNetworkType().Result;
         }
 
         private async Task<NetworkType> GetNetworkType()

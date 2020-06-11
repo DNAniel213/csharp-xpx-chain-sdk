@@ -24,7 +24,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         public XarcadeAccount.Account CreateAccount(long userId)
         {
             XarcadeAccount.Account output = new XarcadeAccount.Account();
-            Account account = Account.GenerateNewAccount(portal.network);
+            Account account = Account.GenerateNewAccount(portal.networkType);
             output.UserId = userId;
             output.WalletAddress = account.PublicAccount.Address.Plain;
             output.PublicKey = account.PublicKey;
@@ -42,7 +42,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         public XarcadeAccount.Account CreateAccount(long userId, string privateKey)
         {
             XarcadeAccount.Account output = new XarcadeAccount.Account();
-            Account account = Account.CreateFromPrivateKey(privateKey, portal.network);
+            Account account = Account.CreateFromPrivateKey(privateKey, portal.networkType);
             output.UserId = userId;
             output.WalletAddress = account.PublicAccount.Address.Plain;
             output.PublicKey = account.PublicKey;
