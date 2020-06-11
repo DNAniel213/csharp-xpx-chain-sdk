@@ -1,4 +1,3 @@
-using XarcadeAccount = Xarcade.Api.Prototype.Blockchain.Models;
 using ProximaX.Sirius.Chain.Sdk.Model.Accounts;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -21,16 +20,10 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// </summary>
         /// <param name="userId">Client-generated user ID</param>
         /// <returns></returns>
-        public XarcadeAccount.Account CreateAccount(long userId)
+        public Account CreateAccount(long userId)
         {
-            XarcadeAccount.Account output = new XarcadeAccount.Account();
             Account account = Account.GenerateNewAccount(portal.networkType);
-            output.UserId = userId;
-            output.WalletAddress = account.PublicAccount.Address.Plain;
-            output.PublicKey = account.PublicKey;
-            output.PrivateKey = account.PrivateKey;
-
-            return output;
+            return account;
         }
 
         /// <summary>
@@ -39,16 +32,12 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="userId">Client-generated user ID</param>
         /// <param name="privateKey">external token for private key</param>
         /// <returns></returns>
-        public XarcadeAccount.Account CreateAccount(long userId, string privateKey)
+        public Account CreateAccount(long userId, string privateKey)
         {
-            XarcadeAccount.Account output = new XarcadeAccount.Account();
             Account account = Account.CreateFromPrivateKey(privateKey, portal.networkType);
-            output.UserId = userId;
-            output.WalletAddress = account.PublicAccount.Address.Plain;
-            output.PublicKey = account.PublicKey;
-            output.PrivateKey = account.PrivateKey;
 
-            return output;
+
+            return account;
         }
 
         /// <summary>
