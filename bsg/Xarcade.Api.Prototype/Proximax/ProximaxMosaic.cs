@@ -1,6 +1,7 @@
 using ProximaX.Sirius.Chain.Sdk.Model.Mosaics;
 using ProximaX.Sirius.Chain.Sdk.Model.Accounts;
 using ProximaX.Sirius.Chain.Sdk.Model.Transactions;
+using ProximaX.Sirius.Chain.Sdk.Model.Transactions.Messages;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Reactive.Linq;
@@ -15,7 +16,7 @@ namespace Xarcade.Api.Prototype.Blockchain
             this.portal = portal;
         }
         /// <summary>
-        /// Generates a new Mosaic 
+        /// Creates a transaction that generates a new mosaic
         /// </summary>
         /// <param name="account">Xarcade's Account Model</param>
         /// <param name="isSupplyMutable">The mosaic supply mutability.</param>
@@ -23,7 +24,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="isLevyMutable">The mosaic levy mutability</param>
         /// <param name="divisibility">The mosaic divisibility.</param>
         /// <param name="duration">The number of blocks the mosaic will be active.</param>
-        public MosaicDefinitionTransaction CreateCurrency(Account account, bool isSupplyMutable, bool isTransferable, bool isLevyMutable, int divisibility, ulong duration)
+        public MosaicDefinitionTransaction CreateCoin(Account account, bool isSupplyMutable, bool isTransferable, bool isLevyMutable, int divisibility, ulong duration)
         {
             var nonce = MosaicNonce.CreateRandom();
             var mosaicId = MosaicId.CreateFromNonce(nonce, account.PublicKey);
@@ -44,12 +45,12 @@ namespace Xarcade.Api.Prototype.Blockchain
         }
         
         /// <summary>
-        /// Modifies currency's supply by specified amount
+        /// Creates a transaction that modifies currency's supply by specified amount
         /// </summary>
         /// <param name="mosaic">Mosaic to add/subtract supply</param>
         /// <param name="amount">mount to add/subtract</param>
         /// <returns></returns>
-        public MosaicSupplyChangeTransaction ModifyCurrencySupply(MosaicDefinitionTransaction mosaic, ulong amount)
+        public MosaicSupplyChangeTransaction ModifyCoinSupply(MosaicDefinitionTransaction mosaic, ulong amount)
         {
             MosaicSupplyType mosaicSupplyType = amount > 0 ? MosaicSupplyType.INCREASE : MosaicSupplyType.DECREASE;
             var mosaicSupplyChangeTransaction = MosaicSupplyChangeTransaction.Create(
@@ -63,13 +64,43 @@ namespace Xarcade.Api.Prototype.Blockchain
         }
 
 
-        public async Task<MosaicInfo> GetMosaicInfo(string mosaicId)
+        /// <summary>
+        /// Gets currency's details
+        /// </summary>
+        /// <param name="mosaicId"></param>
+        /// <returns></returns>
+        public async Task<MosaicInfo> GetCoinInfo(string mosaicId)
         {
             var mosaicInfo = await portal.siriusClient.MosaicHttp.GetMosaic(new MosaicId(mosaicId));
 
             return mosaicInfo;
         }
 
+        /// <summary>
+        /// Creates a transaction that sends coins from one account to anotherz
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <param name="sender"></param>
+        /// <param name="recepient"></param>
+        /// <param name="amount"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public TransferTransaction SendCoin(MosaicInfo currency, Account sender, Address recepient, ulong amount, string message)
+        {
+            Mosaic mosaicToTransfer = new Mosaic(currency.MosaicId, amount);
+
+            var transferTransaction = TransferTransaction.Create(
+                Deadline.Create(),
+                recepient,
+                new List<Mosaic>()
+                {
+                    mosaicToTransfer
+                },
+                PlainMessage.Create(message),
+                portal.networkType
+            );
+            return transferTransaction;
+        }
 
 
 

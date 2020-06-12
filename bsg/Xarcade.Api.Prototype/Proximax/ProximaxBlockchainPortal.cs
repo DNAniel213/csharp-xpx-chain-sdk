@@ -33,7 +33,13 @@ namespace Xarcade.Api.Prototype.Blockchain
             NetworkType type = await siriusClient.NetworkHttp.GetNetworkType();
             return type;
         }
-
+        
+        /// <summary>
+        /// Signs a transaction and then announces it to the blockchain
+        /// </summary>
+        /// <param name="account">Account signing the transaction</param>
+        /// <param name="transaction">Transaction to sign and announce</param>
+        /// <returns></returns>
         public async Task<bool> SignAndAnnounceTransaction(Account account,Transaction transaction)
         {
             if(generationHash != null)
