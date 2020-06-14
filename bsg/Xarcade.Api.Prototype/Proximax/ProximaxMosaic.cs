@@ -2,6 +2,7 @@ using ProximaX.Sirius.Chain.Sdk.Model.Mosaics;
 using ProximaX.Sirius.Chain.Sdk.Model.Accounts;
 using ProximaX.Sirius.Chain.Sdk.Model.Transactions;
 using ProximaX.Sirius.Chain.Sdk.Model.Transactions.Messages;
+using ProximaX.Sirius.Chain.Sdk.Model.Namespaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Reactive.Linq;
@@ -100,6 +101,24 @@ namespace Xarcade.Api.Prototype.Blockchain
                 portal.networkType
             );
             return transferTransaction;
+        }
+
+        /// <summary>
+        /// Creates a transaction that sends coins from one account to anotherz
+        /// </summary>
+        /// <param name="mosaic">Mosaic for mosaic Id</param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public AliasTransaction LinkNamespaceToMosaic(MosaicInfo mosaic, NamespaceInfo name)
+        {
+            var mosaicLink = AliasTransaction.CreateForMosaic(
+                mosaic.MosaicId,
+                name.Id,
+                AliasActionType.LINK,
+                Deadline.Create(),
+                portal.networkType
+            );
+            return mosaicLink;
         }
 
 

@@ -52,7 +52,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         }
         public async Task<NamespaceInfo> GetNamespaceInformation (string namespaceName)
         {
-            NamespaceInfo namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
+            var namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
 
             return namespaceInfo;
         }

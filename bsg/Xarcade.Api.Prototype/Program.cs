@@ -15,7 +15,7 @@ namespace Xarcade.Api.Prototype
         public const string TEST_PRIVATE_KEY_DANE1 = "580B37D8481BDEA4DD1BEA8098EF006AE46DD654FBBC0903418478C1FA363F15"; //Dane 1's account
         public const string TEST_PRIVATE_KEY_DANE2 = "169598F9678F1BE5D959DB8CED4F8FA2297A5124A241E034DC38AD7A0F41B724"; //Dane 2's account
         public const string TEST_PRIVATE_KEY = "90B02ADCFF8D7776EF0016537EBC25709CD1A7F8317CAB3A84DB8FEED52460DC"; //Bruh account
-        public const string namespaceName = "suhdude";
+        public const string namespaceName = "scoobydoo";
         static void Main(string[] args)
         {
             Program p = new Program();
@@ -26,8 +26,9 @@ namespace Xarcade.Api.Prototype
 
             //p.CreateMosaicTest();
             //p.SendMosaicTest();
-            p.CreateNamespace();
+            //p.CreateNamespace();
             //p.CreateSubNamespace();
+            p.LinkMosaicToNamespaceTest();
         }
         
         //Creates a mosaic using Dane's private key
@@ -53,7 +54,7 @@ namespace Xarcade.Api.Prototype
             portal.SignAndAnnounceTransaction(dane1, sendCoinT).GetAwaiter().GetResult();
         }
 
-        //Creates a namespace using Wah's Private Key
+        //Creates a namespace using Bruh's Private Key
         private void CreateNamespace()
         {
             var account = pAccount.CreateAccount(1, TEST_PRIVATE_KEY);
@@ -70,7 +71,7 @@ namespace Xarcade.Api.Prototype
             }
         }
 
-        //Creates a subnamespace using Wah's private key and Parent namespace
+        //Creates a subnamespace using Bruh's private key and Parent namespace
         private void CreateSubNamespace()
         {
             var account = pAccount.CreateAccount(1, TEST_PRIVATE_KEY);
@@ -81,6 +82,17 @@ namespace Xarcade.Api.Prototype
 
             var registerSubNamespace = pNamespace.CreateSubNamespace(subNamespaceName, parentId);
             portal.SignAndAnnounceTransaction(account, registerSubNamespace).GetAwaiter().GetResult();
+        }
+        
+        //Creates a link between the 'linktest' Namespace and a Mosaic
+        private void LinkMosaicToNamespaceTest()
+        {
+            var account = pAccount.CreateAccount(1, TEST_PRIVATE_KEY);
+            var namespaceInfo = pNamespace.GetNamespaceInformation("linktest").GetAwaiter().GetResult();
+            var mosaicInfo = pMosaic.GetCoinInfo("798b57c1850c523c").GetAwaiter().GetResult();
+
+            var link = pMosaic.LinkNamespaceToMosaic(mosaicInfo, namespaceInfo);
+            portal.SignAndAnnounceTransaction(account, link).GetAwaiter().GetResult();
         }
     }
 }
