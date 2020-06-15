@@ -39,12 +39,13 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="namespaceName">The name of the subnamespace </param>
         /// <param name="parentNamespaceId">The name of the parent namespace </param>
         /// <returns></returns>
-        public RegisterNamespaceTransaction CreateSubNamespace (string namespaceName, NamespaceId parentNamespaceId)
+        public RegisterNamespaceTransaction CreateSubNamespace (string namespaceName, string parentNamespaceId)
         {
+            var parentNamespace = new NamespaceId(parentNamespaceId);
             var registerSubNamespace = RegisterNamespaceTransaction.CreateSubNamespace(
                 Deadline.Create(),
                 namespaceName,
-                parentNamespaceId,
+                parentNamespace,
                 portal.networkType
             );
 

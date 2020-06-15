@@ -613,19 +613,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ranz\\.nuget\\packages\\": {}
+    "C:\\Users\\dnani\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Api.Prototype\\Xarcade.Api.Prototype.csproj",
+      "projectUniqueName": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Api.Prototype\\Xarcade.Api.Prototype.csproj",
       "projectName": "Xarcade.Api.Prototype",
-      "projectPath": "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Api.Prototype\\Xarcade.Api.Prototype.csproj",
-      "packagesPath": "C:\\Users\\ranz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Api.Prototype\\obj\\",
+      "projectPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Api.Prototype\\Xarcade.Api.Prototype.csproj",
+      "packagesPath": "C:\\Users\\dnani\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Api.Prototype\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ranz\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\dnani\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
