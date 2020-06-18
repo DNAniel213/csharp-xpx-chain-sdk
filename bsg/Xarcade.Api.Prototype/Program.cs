@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-using XarcadeAccount = Xarcade.Api.Prototype.Blockchain.Models;
-using System.Reactive.Linq;
+﻿using System;
 using Xarcade.Api.Prototype.Blockchain;
 
 /*
@@ -30,7 +27,7 @@ namespace Xarcade.Api.Prototype
             p.pNamespace = new ProximaxNamespace(p.portal);
 
             //p.CreateNewAccountAndSendXpx(); //Creates a new account and sends xpx from BSG_1 to the new account
-            p.GetAccountTransactions(); //Gets all transactions from account
+            //p.GetAccountTransactions(); //Gets all transactions from account
             //p.CreateMosaicTest();
             //p.SendMosaicTest();
             //p.CreateNamespace();
@@ -43,18 +40,21 @@ namespace Xarcade.Api.Prototype
         {
             var newAccount = pAccount.CreateAccount(1);
             //Here ibutang ang pag send sa XPXXX
+            Console.WriteLine(newAccount.Address);
 
-            var newBalance = pAccount.GetAccountInformation(newAccount.PrivateKey).GetAwaiter().GetResult();
+            //var newBalance = pAccount.GetAccountInformation(newAccount.PrivateKey).GetAwaiter().GetResult();
             //Console.Writeline new balanceeee
         }
 
         private void GetAccountTransactions()
         {
             var transactions = pAccount.GetAccountTransactions(TEST_PRIVATE_BSG_1, 10).GetAwaiter().GetResult();
+            int i = 0;
             foreach (var tx in transactions)
             {
-                Console.WriteLine("Sender: " + tx.Signer.PublicKey +
+                Console.WriteLine("tx" + i + " Sender: " + tx.Signer.PublicKey +
                                     " Isconfirmed: " + tx.IsConfirmed());
+                i++;
             }
 
 
@@ -78,7 +78,7 @@ namespace Xarcade.Api.Prototype
         {
             var dane1 = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1); 
             var dane2 = pAccount.CreateAccount(2, TEST_PRIVATE_BSG_2); 
-            var mosaicInfo = pMosaic.GetCoinInfo("10cc5a0ee539b38a").GetAwaiter().GetResult();
+            var mosaicInfo = pMosaic.GetCoinInfo("58df4e1d10799100").GetAwaiter().GetResult();
 
             var sendCoinT = pMosaic.SendCoin(mosaicInfo, dane1, dane2.Address, 20, "hope this works.jpg");
             portal.SignAndAnnounceTransaction(dane1, sendCoinT).GetAwaiter().GetResult();
