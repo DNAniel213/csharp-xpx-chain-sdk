@@ -120,6 +120,19 @@ namespace Xarcade.Api.Prototype
             var link = pMosaic.LinkMosaicAsync(account, mosaicInfo.MosaicID, namespaceInfo).GetAwaiter().GetResult();
         }*/
 
+        //Extends the duration of a rented Namespace using the name of the namespace, user private key, namespace info, and desired duration for extension
+        private void ExtendNamespaceDuration()
+        {
+            ulong? days = 65;//take note of the remaining duration of the namespace | 365 days max
+            ulong? duration = days * 86400/15;
+
+            var account = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1); //AccountDTO
+            //Account account = Account.CreateFromPrivateKey(accountDTO.PrivateKey, portal.networkType);
+            var namespaceInfo = pNamespace.GetNamespaceInformation(namespaceName).GetAwaiter().GetResult();
+            var extendNamespace = pNamespace.ExtendNamespaceDuration(namespaceName,TEST_PRIVATE_BSG_1,namespaceInfo,duration);
+            //portal.SignAndAnnounceTransaction(account, extendNamespace).GetAwaiter().GetResult();
+        }
+
 
     }
 }

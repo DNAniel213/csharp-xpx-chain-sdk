@@ -15,6 +15,8 @@ namespace Xarcade.Api.Prototype.Blockchain
         {
             this.portal = portal;
         }
+
+        public readonly ulong MAX_FEE = 5000000;
         
         /// <summary>
         /// Registers a new Namespace
@@ -56,6 +58,35 @@ namespace Xarcade.Api.Prototype.Blockchain
             var namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
 
             return namespaceInfo;
+        }
+
+        /// <summary>
+        /// Extends Namespace Rent Duration
+        /// </summary>
+        /// <param name="namespaceName">The name of the namespace </param>
+        /// <param name="privatekey">The private key of the user </param>
+        /// <param name="namespaceInfo">The details of the namespace </param>
+        /// <param name="duration">The desired extension duration </param>
+        /// <returns></returns>
+        public RegisterNamespaceTransaction ExtendNamespaceDuration(string namespaceName,string privateKey,NamespaceInfo namespaceInfo, ulong? duration)
+        {
+            var namespaceId = new NamespaceId(namespaceName);
+
+            RegisterNamespaceTransaction renew = new RegisterNamespaceTransaction(
+                portal.networkType,//network type
+                EntityVersion.REGISTER_NAMESPACE.GetValue(),//version
+                Deadline.Create(),//deadline
+                MAX_FEE,//max fee based from FeeCalculationStrategy
+                namespaceName,//namespace Name
+                namespaceId,//namespace Id
+                namespaceInfo.Type,//namespace Type
+                duration,//duration
+                null,//parent Id 
+                null,//signature 
+                null,//signer 
+                null//transaction Info 
+                );
+            return renew;
         }
     
 //TODO Update Namespace
