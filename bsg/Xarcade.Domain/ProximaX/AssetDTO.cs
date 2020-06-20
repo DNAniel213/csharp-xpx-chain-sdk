@@ -1,10 +1,10 @@
 using System;
 
-namespace Xarcade.Domain.ProximaX
+namespace Xarcade.Domain.Models
 {
     public class AssetDTO
     {
-        public string id {get; set;}
+        public string Id {get; set;}
         public string Name {get; set;}
         public ulong Quantity {get; set;}
         public AccountDTO Owner {get; set;}

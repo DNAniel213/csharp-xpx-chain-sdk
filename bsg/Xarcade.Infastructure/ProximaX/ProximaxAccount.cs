@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using ProximaX.Sirius.Chain.Sdk.Model.Accounts;
+using XarcadeModel = Xarcade.Domain.Models;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ProximaX.Sirius.Chain.Sdk.Infrastructure;
@@ -24,10 +25,18 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// </summary>
         /// <param name="userId">Client-generated user ID</param>
         /// <returns></returns>
-        public Account CreateAccount(long userId)
+        public XarcadeModel.AccountDTO CreateAccount(long userId)
         {
+            XarcadeModel.AccountDTO accountDTO = new XarcadeModel.AccountDTO();
             Account account = Account.GenerateNewAccount(portal.networkType);
-            return account;
+
+            accountDTO.UserId           = userId;
+            accountDTO.WalletAddress    = account.Address.Pretty;
+            accountDTO.PrivateKey       = account.PrivateKey;
+            accountDTO.PublicKey        = account.PublicKey;
+            accountDTO.Created          = DateTime.Now;
+
+            return accountDTO;
         }
 
         /// <summary>
@@ -36,10 +45,18 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="userId">Client-generated user ID</param>
         /// <param name="privateKey">external token for private key</param>
         /// <returns></returns>
-        public Account CreateAccount(long userId, string privateKey)
+        public XarcadeModel.AccountDTO CreateAccount(long userId, string privateKey)
         {
+            XarcadeModel.AccountDTO accountDTO = new XarcadeModel.AccountDTO();
             Account account = Account.CreateFromPrivateKey(privateKey, portal.networkType);
-            return account;
+
+            accountDTO.UserId           = userId;
+            accountDTO.WalletAddress    = account.Address.Pretty;
+            accountDTO.PrivateKey       = account.PrivateKey;
+            accountDTO.PublicKey        = account.PublicKey;
+            accountDTO.Created          = DateTime.Now;
+
+            return accountDTO;
         }
 
         /// <summary>
@@ -47,12 +64,18 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        public async Task<AccountInfo> GetAccountInformation(string privateKey)
+        public async Task<XarcadeModel.AccountDTO> GetAccountInformation(string privateKey)
         {
+            XarcadeModel.AccountDTO accountDTO = new XarcadeModel.AccountDTO();
             Address address = new Address(privateKey, portal.networkType);
             AccountInfo accountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(address);
 
-            return accountInfo;
+            accountDTO.UserId           = 000; //get from db
+            accountDTO.WalletAddress    = accountInfo.Address.Pretty;
+            accountDTO.PrivateKey       = privateKey;
+            accountDTO.PublicKey        = accountInfo.PublicKey;
+            accountDTO.Created          = DateTime.Now;
+            return accountDTO;
         }
 
 
@@ -62,15 +85,24 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="privateKey"></param>
         /// <param name="numberOfResults"></param>
         /// <returns></returns>
-        public async Task<List<Transaction>> GetAccountTransactions(string privateKey, int numberOfResults)
+        public async Task<List<XarcadeModel.TransactionDTO>> GetAccountTransactions(string privateKey, int numberOfResults)
         {
-
-            var account = CreateAccount(0, privateKey);
+            List<XarcadeModel.TransactionDTO> transactionDTOList = new List<XarcadeModel.TransactionDTO>();
+            Address address = new Address(privateKey, portal.networkType);
+            AccountInfo accountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(address);
             var queryParams = new QueryParams(numberOfResults, "");
 
-            var transactions = await portal.siriusClient.AccountHttp.Transactions(account.PublicAccount, queryParams);
+            var transactions = await portal.siriusClient.AccountHttp.Transactions(accountInfo.PublicAccount, queryParams);
+            foreach (Transaction transaction in transactions)
+            {
+                XarcadeModel.TransactionDTO iTransaction = new XarcadeModel.TransactionDTO();
+                iTransaction.Hash                        = transaction.TransactionInfo.Hash;
+                iTransaction.Height                      = transaction.TransactionInfo.Height;
+                iTransaction.Created                     = transaction.Deadline.GetLocalDateTime();     
+                transactionDTOList.Add(iTransaction);
+            }
 
-            return transactions;
+            return transactionDTOList;
 
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
+using XarcadeModel = Xarcade.Domain.Models;
 using Xarcade.Api.Prototype.Blockchain;
 
 /*
@@ -28,7 +30,7 @@ namespace Xarcade.Api.Prototype
 
             //p.CreateNewAccountAndSendXpx(); //Creates a new account and sends xpx from BSG_1 to the new account
             //p.GetAccountTransactions(); //Gets all transactions from account
-            p.CreateMosaicTest();
+            //p.CreateMosaicTest();
             //p.SendMosaicTest();
             //p.CreateNamespace();
             //p.CreateSubNamespace();
@@ -38,9 +40,9 @@ namespace Xarcade.Api.Prototype
         //read the function name
         private void CreateNewAccountAndSendXpx()
         {
-            var newAccount = pAccount.CreateAccount(1);
+            XarcadeModel.AccountDTO newAccount = pAccount.CreateAccount(1);
             //Here ibutang ang pag send sa XPXXX
-            Console.WriteLine(newAccount.Address);
+            Console.WriteLine(newAccount.PublicKey);
 
             //var newBalance = pAccount.GetAccountInformation(newAccount.PrivateKey).GetAwaiter().GetResult();
             //Console.Writeline new balanceeee 
@@ -48,12 +50,12 @@ namespace Xarcade.Api.Prototype
 
         private void GetAccountTransactions()
         {
-            var transactions = pAccount.GetAccountTransactions(TEST_PRIVATE_BSG_1, 10).GetAwaiter().GetResult();
+            List<XarcadeModel.TransactionDTO> transactions = pAccount.GetAccountTransactions(TEST_PRIVATE_BSG_1, 10).GetAwaiter().GetResult();
             int i = 0;
             foreach (var tx in transactions)
             {
-                Console.WriteLine("tx" + i + " Sender: " + tx.Signer.PublicKey +
-                                    " Isconfirmed: " + tx.IsConfirmed());
+                Console.WriteLine("tx" + i + " Sender: " + tx.Hash +
+                                    " CreatedOn: " + tx.Created);
                 i++;
             }
 
@@ -64,25 +66,21 @@ namespace Xarcade.Api.Prototype
         //Creates a mosaic using Dane's private key
         private void CreateMosaicTest()
         {
-            var account = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1); 
+            XarcadeModel.AccountDTO account = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1); 
 
-            var createMosaicT = pMosaic.CreateCoin(account, true, true, false, 0, 1000); 
-            var supplyChangeT = pMosaic.ModifyCoinSupply(createMosaicT, 50000);
-            
-            portal.SignAndAnnounceTransaction(account, createMosaicT).GetAwaiter().GetResult();
-            portal.SignAndAnnounceTransaction(account, supplyChangeT).GetAwaiter().GetResult();
-            
+            XarcadeModel.MosaicDTO createMosaicT = pMosaic.CreateMosaicAsync(account, true, true, false, 0, 1000).GetAwaiter().GetResult(); 
+            XarcadeModel.MosaicDTO supplyChangeT = pMosaic.ModifyCoinSupply(account, createMosaicT.MosaicID, 50000).GetAwaiter().GetResult();
+                        
         }
 
         //Sends mosaic from Dane1 to Dane2 accounts. Usually, only need PUBLIC KEY from recepient account 
         private void SendMosaicTest()
         {
-            var dane1 = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1); 
-            var dane2 = pAccount.CreateAccount(2, TEST_PRIVATE_BSG_2); 
-            var mosaicInfo = pMosaic.GetCoinInfo("58df4e1d10799100").GetAwaiter().GetResult();
+            XarcadeModel.AccountDTO dane1 = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1); 
+            XarcadeModel.AccountDTO dane2 = pAccount.CreateAccount(2, TEST_PRIVATE_BSG_2); 
+            XarcadeModel.MosaicDTO mosaicInfo = pMosaic.GetMosaicAsync("58df4e1d10799100").GetAwaiter().GetResult();
 
-            var sendCoinT = pMosaic.SendCoin(mosaicInfo, dane1, dane2.Address, 20, "hope this works.jpg");
-            portal.SignAndAnnounceTransaction(dane1, sendCoinT).GetAwaiter().GetResult();
+            XarcadeModel.TransactionDTO sendCoinT = pMosaic.SendMosaicAsync(mosaicInfo.MosaicID, dane1, dane2.WalletAddress, 20, "hope this works.jpg").GetAwaiter().GetResult();
         }
 
         //Creates a namespace using Bruh's Private Key
@@ -97,8 +95,7 @@ namespace Xarcade.Api.Prototype
             }
             catch (Flurl.Http.FlurlHttpException)
             {
-                var registerNamespace = pNamespace.CreateNamespace(namespaceName, 100);
-                portal.SignAndAnnounceTransaction(account, registerNamespace).GetAwaiter().GetResult();
+                var registerNamespace = pNamespace.CreateNamespace(namespaceName, 100); //Dapat naa na sa sulod daan ang signing
             }
         }
 
@@ -109,20 +106,19 @@ namespace Xarcade.Api.Prototype
 
             var subNamespaceName = "wahwah";
 
-            var registerSubNamespace = pNamespace.CreateSubNamespace(subNamespaceName, namespaceName);
-            portal.SignAndAnnounceTransaction(account, registerSubNamespace).GetAwaiter().GetResult();
+            var registerSubNamespace = pNamespace.CreateSubNamespace(subNamespaceName, namespaceName); //Dapat naa na sa sulod ang pag sign
         }
         
         //Creates a link between the 'linktest' Namespace and a Mosaic
+        /*
         private void LinkMosaicToNamespaceTest()
         {
-            var account = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1);
-            var namespaceInfo = pNamespace.GetNamespaceInformation("linktest").GetAwaiter().GetResult();
-            var mosaicInfo = pMosaic.GetCoinInfo("798b57c1850c523c").GetAwaiter().GetResult();
+            XarcadeModel.AccountDTO account = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1);
+            XarcadeModel.NamespaceDTO namespaceInfo = pNamespace.GetNamespaceInformation("linktest").GetAwaiter().GetResult();
+            XarcadeModel.MosaicDTO mosaicInfo = pMosaic.GetMosaicAsync("798b57c1850c523c").GetAwaiter().GetResult();
 
-            var link = pMosaic.LinkNamespaceToMosaic(mosaicInfo, namespaceInfo);
-            portal.SignAndAnnounceTransaction(account, link).GetAwaiter().GetResult();
-        }
+            var link = pMosaic.LinkMosaicAsync(account, mosaicInfo.MosaicID, namespaceInfo).GetAwaiter().GetResult();
+        }*/
 
 
     }

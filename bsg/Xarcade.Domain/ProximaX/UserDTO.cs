@@ -1,4 +1,4 @@
-namespace Xarcade.Domain.ProximaX
+namespace Xarcade.Domain.Models
 {
     public class UserDTO
     {

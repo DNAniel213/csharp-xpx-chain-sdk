@@ -1,6 +1,6 @@
 using System;
 
-namespace Xarcade.Domain.ProximaX
+namespace Xarcade.Domain.Models
 {
     public class NamespaceDTO
     {

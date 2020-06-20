@@ -166,6 +166,16 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "Xarcade.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Xarcade.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Xarcade.Domain.dll": {}
+        }
       }
     }
   },
@@ -605,10 +615,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Xarcade.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Xarcade.Domain/Xarcade.Domain.csproj",
+      "msbuildProject": "../Xarcade.Domain/Xarcade.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Xarcade.Domain >= 1.0.0",
       "csharp-xpx-chain-sdk >= 0.6.2"
     ]
   },
@@ -635,7 +651,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
+              "projectPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

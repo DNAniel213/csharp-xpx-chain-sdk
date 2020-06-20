@@ -1,7 +1,8 @@
-namespace Xarcade.Domain.ProximaX
+namespace Xarcade.Domain.Models
 {
-    public class MosaicDTO
+    public class MosaicDTO : AssetDTO
     {
+        public ulong MosaicID {get; set;}
         public NamespaceDTO Namespace {get; set;}
     }
 }

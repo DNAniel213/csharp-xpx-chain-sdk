@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BQITXBvrISON2k20X26FGuE5xfXorRCQJffmOy04zeD4iyDJKLGH3Q63GA4ZoEJEHrNtoEek7NOk1TZbN0ucXg==",
+  "dgSpecHash": "iOf2qgDXeGSvOTPTlu9h3o5lOFo64mHaq7WXNXWHlVnCp+mHe6zOcjsaWe/+XLisCd2D4pZX28Wobkt8wywg3w==",
   "success": true,
   "projectFilePath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\Xarcade.Infastructure.csproj",
   "expectedPackageFiles": [
