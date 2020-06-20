@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\dnani\\.nuget\\packages\\": {}
+    "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
       "projectName": "Xarcade.Domain",
-      "projectPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
-      "packagesPath": "C:\\Users\\dnani\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\obj\\",
+      "projectPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
+      "packagesPath": "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dnani\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Noble 6 Elite Crusad\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -56,7 +56,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

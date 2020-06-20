@@ -629,19 +629,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dnani\\.nuget\\packages\\": {}
+    "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\Xarcade.Infastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\Xarcade.Infastructure.csproj",
       "projectName": "Xarcade.Infastructure",
-      "projectPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\Xarcade.Infastructure.csproj",
-      "packagesPath": "C:\\Users\\dnani\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\obj\\",
+      "projectPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\Xarcade.Infastructure.csproj",
+      "packagesPath": "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Infastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dnani\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Noble 6 Elite Crusad\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -652,8 +652,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
-              "projectPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj"
+            "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
+              "projectPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\danesan REPO\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj"
             }
           }
         }
@@ -687,7 +687,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

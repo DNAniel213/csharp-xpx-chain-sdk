@@ -20,3 +20,28 @@ D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\ne
 D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.dll
 D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.pdb
 D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.genruntimeconfig.cache
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.csprojAssemblyReference.cache
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.AssemblyInfoInputs.cache
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.AssemblyInfo.cs
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.csproj.CoreCompileInputs.cache
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.pdb
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Domain.exe
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Infastructure.exe
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Infastructure.deps.json
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Infastructure.runtimeconfig.json
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Infastructure.runtimeconfig.dev.json
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Infastructure.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Infastructure.pdb
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\csharp-xpx-chain-sdk.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Dap.FlatBuffers.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Flurl.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Flurl.Http.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\GuardNet.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Domain.dll
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\bin\Debug\netcoreapp3.1\Xarcade.Domain.pdb
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.csproj.CopyComplete
+C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Infastructure\obj\Debug\netcoreapp3.1\Xarcade.Infastructure.genruntimeconfig.cache

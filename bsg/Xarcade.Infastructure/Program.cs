@@ -17,6 +17,7 @@ namespace Xarcade.Api.Prototype
         public ProximaxAccount pAccount = null;
         public ProximaxMosaic pMosaic = null;
         public ProximaxNamespace pNamespace = null;
+        public ProximaxTransaction pTransaction = null;
         public const string TEST_PRIVATE_BSG_1 = "1A90826869ECCBEF591B049745BF3C17EC2A7FA1E9C91787C711194165FE2034"; //BSG 1's account
         public const string TEST_PRIVATE_BSG_2= "8C0C98ED0D0D703B56EB5FCBA55B02BB9661153C44D2C782F54846D902CEC4B5"; //BSG 2's account
         public const string namespaceName = "foobar";
@@ -27,6 +28,7 @@ namespace Xarcade.Api.Prototype
             p.pAccount = new ProximaxAccount(p.portal);
             p.pMosaic = new ProximaxMosaic(p.portal);
             p.pNamespace = new ProximaxNamespace(p.portal);
+            p.pTransaction = new ProximaxTransaction(p.portal);
 
             //p.CreateNewAccountAndSendXpx(); //Creates a new account and sends xpx from BSG_1 to the new account
             //p.GetAccountTransactions(); //Gets all transactions from account
@@ -35,17 +37,22 @@ namespace Xarcade.Api.Prototype
             //p.CreateNamespace();
             //p.CreateSubNamespace();
             //p.LinkMosaicToNamespaceTest();
+            //p.ExtendNamespaceDuration();
+            p.CreateNewAccountAndSendXpx();
         }
 
         //read the function name
         private void CreateNewAccountAndSendXpx()
         {
-            XarcadeModel.AccountDTO newAccount = pAccount.CreateAccount(1);
-            //Here ibutang ang pag send sa XPXXX
-            Console.WriteLine(newAccount.PublicKey);
+            string message = "Hey! Alright! Buy a shirt, will ya?~";
+            XarcadeModel.AccountDTO newAccount = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1);
+            XarcadeModel.AccountDTO dane2 = pAccount.CreateAccount(2, TEST_PRIVATE_BSG_2);
+            XarcadeModel.TransactionDTO sendCurrency = pTransaction.SendXPXAsync(newAccount, dane2.WalletAddress, 20, message).GetAwaiter().GetResult();
 
+            Console.WriteLine(newAccount.PublicKey);
+            // Verifies whether the new account had 20 mosaic units
             //var newBalance = pAccount.GetAccountInformation(newAccount.PrivateKey).GetAwaiter().GetResult();
-            //Console.Writeline new balanceeee 
+            //Console.WriteLine($"{nameof(newBalance)} : {newBalance}");
         }
 
         private void GetAccountTransactions()
