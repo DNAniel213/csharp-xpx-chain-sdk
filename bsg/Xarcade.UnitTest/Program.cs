@@ -37,10 +37,10 @@ namespace Xarcade.Api.Prototype
             //var database = client.GetDatabase("test");
 
 
-            p.CreateAccountTest(0); //Creates a new account and sends xpx from BSG_1 to the new account
+            //p.CreateAccountTest(0); //Creates a new account and sends xpx from BSG_1 to the new account
             //p.SendXPXTest();
             //p.GetAccountTransactions(); //Gets all transactions from account
-            //p.CreateMosaicTest();
+            p.CreateMosaicTest();
             //p.SendMosaicTest();
             //p.CreateNamespace();
             //p.CreateSubNamespace();
