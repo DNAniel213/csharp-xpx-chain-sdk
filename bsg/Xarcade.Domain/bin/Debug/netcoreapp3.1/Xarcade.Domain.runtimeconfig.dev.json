@@ -1,8 +1,13 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\dnani\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\dnani\\.nuget\\packages"
+=======
+      "C:\\Users\\Noble 6 Elite Crusad\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages"
+>>>>>>> 5c7fefc112680f8da773ac5f2d1c3991c52573ea
     ]
   }
 }
