@@ -1,0 +1,13 @@
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.exe
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.deps.json
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.runtimeconfig.json
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.runtimeconfig.dev.json
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.dll
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.pdb
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.csprojAssemblyReference.cache
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.AssemblyInfoInputs.cache
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.AssemblyInfo.cs
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.dll
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.pdb
+D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.genruntimeconfig.cache

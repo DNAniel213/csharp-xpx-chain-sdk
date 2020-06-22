@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+    <ItemGroup>
+    <ProjectReference Include="..\Xarcade.Domain\Xarcade.Domain.csproj" />
+    <ProjectReference Include="..\Xarcade.Infrastructure\Xarcade.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
