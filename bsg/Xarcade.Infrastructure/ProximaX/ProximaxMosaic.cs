@@ -44,6 +44,11 @@ namespace Xarcade.Api.Prototype.Blockchain
                 portal.networkType);
 
             mosaicDTO.MosaicID = mosaicId.Id;
+            mosaicDTO.AssetID  =  mosaicId.Id + "";
+            mosaicDTO.Name     = null;
+            mosaicDTO.Quantity = 0;
+            mosaicDTO.Created = DateTime.Now;
+            mosaicDTO.Owner    = param.accountDTO;
 
             await portal.SignAndAnnounceTransaction(account, mosaicDefinitionTransaction);
 
@@ -58,21 +63,27 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <returns></returns>
         public async Task<XarcadeModels.MosaicDTO> ModifyMosaicSupply(XarcadeParams.ModifyMosaicSupplyParams param)
         {
-            if(param.accountDTO == null || param.mosaicID == null || param.amount == 0) return null;  //change to exception throwing
+            if(param.accountDTO == null || param.mosaicID == 0 || param.amount == 0) return null;  //change to exception throwing
 
             XarcadeModels.MosaicDTO mosaicDTO = new XarcadeModels.MosaicDTO();
             Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
             MosaicInfo mosaicInfo = await portal.siriusClient.MosaicHttp.GetMosaic(new MosaicId(param.mosaicID));
 
             MosaicSupplyType mosaicSupplyType = param.amount > 0 ? MosaicSupplyType.INCREASE : MosaicSupplyType.DECREASE;
+            ulong sendAmount = Convert.ToUInt32(param.amount);
             MosaicSupplyChangeTransaction mosaicSupplyChangeTransaction = MosaicSupplyChangeTransaction.Create(
                 Deadline.Create(),
                 mosaicInfo.MosaicId,
                 mosaicSupplyType,
-                param.amount,
+                sendAmount,
                 portal.networkType);
     
             mosaicDTO.MosaicID = mosaicInfo.MosaicId.Id;
+            mosaicDTO.AssetID  =  mosaicInfo.MosaicId.Id + "";
+            mosaicDTO.Name     = null;
+            mosaicDTO.Quantity = 0;
+            mosaicDTO.Created = DateTime.Now;
+            mosaicDTO.Owner    = param.accountDTO;
 
             await portal.SignAndAnnounceTransaction(account, mosaicSupplyChangeTransaction);
             

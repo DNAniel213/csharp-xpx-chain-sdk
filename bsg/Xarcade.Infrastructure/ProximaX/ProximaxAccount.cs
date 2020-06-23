@@ -85,11 +85,13 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="privateKey"></param>
         /// <param name="numberOfResults"></param>
         /// <returns></returns>
-        public async Task<List<XarcadeModel.TransactionDTO>> GetAccountTransactions(string privateKey, int numberOfResults)
+        public async Task<List<XarcadeModel.TransactionDTO>> GetAccountTransactions(string address, int numberOfResults)
         {
             List<XarcadeModel.TransactionDTO> transactionDTOList = new List<XarcadeModel.TransactionDTO>();
-            Address address = new Address(privateKey, portal.networkType);
-            AccountInfo accountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(address);
+
+
+            Address addressObject = new Address(address, portal.networkType);
+            AccountInfo accountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(addressObject);
             var queryParams = new QueryParams(numberOfResults, "");
 
             var transactions = await portal.siriusClient.AccountHttp.Transactions(accountInfo.PublicAccount, queryParams);
@@ -98,7 +100,18 @@ namespace Xarcade.Api.Prototype.Blockchain
                 XarcadeModel.TransactionDTO iTransaction = new XarcadeModel.TransactionDTO();
                 iTransaction.Hash                        = transaction.TransactionInfo.Hash;
                 iTransaction.Height                      = transaction.TransactionInfo.Height;
-                iTransaction.Created                     = transaction.Deadline.GetLocalDateTime();     
+                iTransaction.Created                     = transaction.Deadline.GetLocalDateTime();    
+
+                XarcadeModel.AssetDTO assetDTO = new XarcadeModel.AssetDTO
+                {
+                    AssetID = transaction.TransactionInfo.Id,
+                    Name    = "x",
+                    Quantity = 0,
+                    Owner   = null,
+                    Created = DateTime.Now
+                };
+                iTransaction.Asset = assetDTO;
+    
                 transactionDTOList.Add(iTransaction);
             }
 

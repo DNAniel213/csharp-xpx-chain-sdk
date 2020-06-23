@@ -30,6 +30,16 @@ namespace Xarcade.Api.Prototype.Blockchain
         public async Task<XarcadeModel.TransactionDTO> SendXPXAsync(XarcadeParams.SendXpxParams param)
         {
             XarcadeModel.TransactionDTO transactionDTO = new XarcadeModel.TransactionDTO();
+            XarcadeModel.AssetDTO assetDTO = new XarcadeModel.AssetDTO
+            {
+                AssetID = "XPX",
+                Name    = param.message,
+                Quantity = param.amount,
+                Owner   = param.sender,
+                Created = DateTime.Now
+            };
+
+
             var siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
             var client = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
             var networkType = client.NetworkHttp.GetNetworkType().Wait();
@@ -52,6 +62,11 @@ namespace Xarcade.Api.Prototype.Blockchain
                 PlainMessage.Create(param.message),
                 networkType
             );
+
+            transactionDTO.Hash  = transferTransaction.GetHashCode().ToString();
+            transactionDTO.Height = 0000;
+            transactionDTO.Asset = assetDTO;
+
 
             // Get the generation hash 
             await portal.SignAndAnnounceTransaction(senderAccount, transferTransaction);

@@ -1,4 +1,5 @@
 using System.Reactive.Linq;
+using System;
 using ProximaX.Sirius.Chain.Sdk.Model.Blockchain;
 using ProximaX.Sirius.Chain.Sdk.Client;
 using System.Threading.Tasks;
@@ -42,15 +43,25 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <returns></returns>
         public async Task<bool> SignAndAnnounceTransaction(Account account,Transaction transaction)
         {
-            if(generationHash != null)
+            Console.WriteLine("\nConfirm Transaction (y/n): ");
+            var confirm = Console.ReadLine();
+            if(confirm == "y")
             {
-                var signedTransaction = account.Sign(transaction, generationHash);
-                await siriusClient.TransactionHttp.Announce(signedTransaction);
+                if(generationHash != null)
+                {
+                    var signedTransaction = account.Sign(transaction, generationHash);
+                    await siriusClient.TransactionHttp.Announce(signedTransaction);
+                }
+                else 
+                {
+                    //Something bad happens
+                }
             }
-            else 
+            else
             {
-                //Something bad happens
+                Console.WriteLine("TRANSACTION CANCELLED");
             }
+
 
             
             return true; //TODO change to try-catch result

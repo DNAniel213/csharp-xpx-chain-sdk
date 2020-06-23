@@ -11,7 +11,21 @@ namespace Xarcade.Domain.Models
         public string PublicKey {get; set;}
         public DateTime Created {get; set;}
 
-        
+        public override string ToString()
+        {
+
+            var privatekey = PrivateKey != null ? PrivateKey : "hidden";
+            return
+                "===Account DTO==="  +
+                "\nUser ID: "        + UserID +
+                "\nWallet Address: " + WalletAddress + 
+                "\nPublic Key: "     + PublicKey + 
+                "\nPrivate Key: "    + PrivateKey+  
+                "\nDate Created: "   + Created +
+                "\n==End of Account DTO==";
+ 
+
+        }
 
     }
 }

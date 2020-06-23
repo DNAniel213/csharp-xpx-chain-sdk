@@ -28,6 +28,6 @@ namespace Xarcade.Domain.Params
         /// <summary>
         /// The number of blocks the mosaic will be active. Default is 1000
         /// </summary>
-        public ulong duration = 1000;
+        public ulong duration = 10000;
     }
 }

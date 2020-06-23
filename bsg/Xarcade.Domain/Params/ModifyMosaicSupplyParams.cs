@@ -9,8 +9,8 @@ namespace Xarcade.Domain.Params
         /// Account to create the mosaic from
         /// </summary>
         public AccountDTO accountDTO = null;
-        public string mosaicID = null;
-        public ulong amount = 0;
+        public ulong mosaicID = 0;
+        public int amount = 0;
     }
 
 }
