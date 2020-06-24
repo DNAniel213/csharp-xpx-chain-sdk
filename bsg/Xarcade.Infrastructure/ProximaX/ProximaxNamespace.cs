@@ -79,6 +79,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         {
             var namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
             AccountInfo ownerAccountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(namespaceInfo.Owner.Address);
+
             XarcadeModels.AccountDTO ownerDTO = new XarcadeModels.AccountDTO
             {
                 UserID = 0,
@@ -90,7 +91,7 @@ namespace Xarcade.Api.Prototype.Blockchain
             
             XarcadeModels.NamespaceDTO namespaceDTO = new XarcadeModels.NamespaceDTO
             {
-                Domain   = namespaceInfo.Id.Name,
+                Domain   = namespaceName,
                 LayerOne = "",
                 LayerTwo = "",
                 Owner    = ownerDTO,

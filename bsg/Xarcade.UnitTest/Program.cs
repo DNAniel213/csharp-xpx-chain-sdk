@@ -22,7 +22,7 @@ namespace Xarcade.Api.Prototype
 
         public const string TEST_PRIVATE_BSG_1 = "1A90826869ECCBEF591B049745BF3C17EC2A7FA1E9C91787C711194165FE2034"; //BSG 1's account
         public const string TEST_PRIVATE_BSG_2= "8C0C98ED0D0D703B56EB5FCBA55B02BB9661153C44D2C782F54846D902CEC4B5"; //BSG 2's account
-        public const string namespaceName = "foobar";
+        public const string namespaceName = "hola";
         public const string subNamespaceName = "bigfoo";
         static void Main(string[] args)
         {
@@ -65,7 +65,7 @@ namespace Xarcade.Api.Prototype
                     case "5" : p.SendMosaicTest(testAccount, testMosaic); break;
                     case "6" : testNamespace = p.CreateNamespaceTest(testAccount); break;   //TODO make this use the test account to sign
                     case "7" : p.CreateSubNamespaceTest(testAccount); break;           //TODO make this use the test account to sign
-                    //case "8" : p.LinkMosaicToNamespaceTest(testAccount, testMosaic); break;   //TODO Link it with created mosaic
+                    case "8" : p.LinkMosaicToNamespaceTest(testAccount, testMosaic, testNamespace); break;   //TODO Link it with created mosaic
                 }
                 Console.WriteLine("\nPress any key to proceed..");
                 System.Console.ReadKey();
@@ -207,13 +207,13 @@ namespace Xarcade.Api.Prototype
             return createNamespaceT;
         }
         
-        private void LinkMosaicToNamespaceTest()
+        private void LinkMosaicToNamespaceTest(XarcadeModels.AccountDTO newAccount, XarcadeModels.MosaicDTO newMosaic, XarcadeModels.NamespaceDTO newNamespace)
         {
             XarcadeParams.LinkMosaicParams param = new XarcadeParams.LinkMosaicParams
             {
-                accountDTO   =  pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1),
-                mosaicID     = pMosaic.GetMosaicAsync("798b57c1850c523c").GetAwaiter().GetResult().MosaicID,
-                namespaceDTO = pNamespace.GetNamespaceInformation("linktest").GetAwaiter().GetResult()
+                accountDTO   =  pAccount.CreateAccount(1, newAccount.PrivateKey),
+                mosaicID     = pMosaic.GetMosaicAsync(newMosaic.MosaicID).GetAwaiter().GetResult().MosaicID,
+                namespaceDTO = pNamespace.GetNamespaceInformation(newNamespace.Domain).GetAwaiter().GetResult()
             };
 
             var link = pMosaic.LinkMosaicAsync(param).GetAwaiter().GetResult();
