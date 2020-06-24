@@ -10,5 +10,18 @@ namespace Xarcade.Domain.Models
         public AccountDTO Owner {get; set;}
         public DateTime Expiry {get; set;}
         public DateTime Created {get; set;}
+
+        public override string ToString()
+        {
+            return
+                "===Namespace DTO==="  +
+                "\nDomain: "            + Domain +
+                "\nLayer One: "         + LayerOne + 
+                "\nLayer Two: "         + LayerTwo +
+                "\nOwner: "             + Owner +
+                "\nDate Expiry: "       + Expiry + 
+                "\nDate Created: "      + Created +
+                "\n==End of Transaction DTO==";
+        }
     }
 }

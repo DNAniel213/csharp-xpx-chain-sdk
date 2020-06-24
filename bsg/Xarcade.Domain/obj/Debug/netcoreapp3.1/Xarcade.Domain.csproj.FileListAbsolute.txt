@@ -27,3 +27,16 @@ C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xa
 C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.pdb
 C:\Users\Noble 6 Elite Crusad\Desktop\danesan REPO\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.genruntimeconfig.cache
 >>>>>>> 5c7fefc112680f8da773ac5f2d1c3991c52573ea
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.exe
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.deps.json
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.runtimeconfig.json
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.runtimeconfig.dev.json
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.dll
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\bin\Debug\netcoreapp3.1\Xarcade.Domain.pdb
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.csprojAssemblyReference.cache
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.AssemblyInfoInputs.cache
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.AssemblyInfo.cs
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.dll
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.pdb
+C:\Users\ranz\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\obj\Debug\netcoreapp3.1\Xarcade.Domain.genruntimeconfig.cache

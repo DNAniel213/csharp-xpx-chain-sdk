@@ -26,15 +26,24 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="parentNamespaceName">The name of the namespace </param>
         /// <param name="duration">The maximum rent duration of the namespace </param>
         /// <returns></returns>
-        public RegisterNamespaceTransaction CreateNamespace(string parentNamespaceName, ulong duration)
+        public async Task<XarcadeModels.NamespaceDTO> CreateNamespaceAsync(XarcadeParams.CreateNamespaceParams param)
         {
+            XarcadeModels.NamespaceDTO namespaceDTO = new XarcadeModels.NamespaceDTO();
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+
             var registerNamespace = RegisterNamespaceTransaction.CreateRootNamespace(
                 Deadline.Create(),
-                parentNamespaceName,
-                duration,
+                param.Domain,
+                param.duration,
                 portal.networkType);
 
-            return registerNamespace;
+            namespaceDTO.Domain = param.Domain;
+            namespaceDTO.Created = DateTime.Now;
+            namespaceDTO.Expiry = DateTime.Now.AddDays(param.duration);
+            namespaceDTO.Owner = param.accountDTO;
+
+            await portal.SignAndAnnounceTransaction(account, registerNamespace);
+            return namespaceDTO;
         }
 
         /// <summary>
@@ -43,21 +52,32 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="namespaceName">The name of the subnamespace </param>
         /// <param name="parentNamespaceId">The name of the parent namespace </param>
         /// <returns></returns>
-        public RegisterNamespaceTransaction CreateSubNamespace (string namespaceName, string parentNamespaceId)
+        public async Task<XarcadeModels.NamespaceDTO> CreateSubNamespaceAsync (XarcadeParams.CreateNamespaceParams param)
         {
-            var parentNamespace = new NamespaceId(parentNamespaceId);
+            XarcadeModels.NamespaceDTO namespaceDTO = new XarcadeModels.NamespaceDTO();
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+            var parentNamespace = new NamespaceId(param.Domain);
+        
             var registerSubNamespace = RegisterNamespaceTransaction.CreateSubNamespace(
                 Deadline.Create(),
-                namespaceName,
+                param.LayerOne,
                 parentNamespace,
                 portal.networkType
             );
 
-            return registerSubNamespace;
+            namespaceDTO.Domain = param.Domain;
+            namespaceDTO.LayerOne = param.LayerOne;
+            namespaceDTO.LayerTwo = param.LayerTwo;
+            namespaceDTO.Owner = param.accountDTO;
+            namespaceDTO.Created = DateTime.Now;
+            namespaceDTO.Expiry = DateTime.Now; //Need to get actual expiry date @Ranz
+
+            await portal.SignAndAnnounceTransaction(account, registerSubNamespace);
+            return namespaceDTO;
         }
         public async Task<XarcadeModels.NamespaceDTO> GetNamespaceInformation (string namespaceName)
         {
-            NamespaceInfo namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
+            var namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
             AccountInfo ownerAccountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(namespaceInfo.Owner.Address);
             XarcadeModels.AccountDTO ownerDTO = new XarcadeModels.AccountDTO
             {

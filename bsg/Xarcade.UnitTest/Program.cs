@@ -23,6 +23,7 @@ namespace Xarcade.Api.Prototype
         public const string TEST_PRIVATE_BSG_1 = "1A90826869ECCBEF591B049745BF3C17EC2A7FA1E9C91787C711194165FE2034"; //BSG 1's account
         public const string TEST_PRIVATE_BSG_2= "8C0C98ED0D0D703B56EB5FCBA55B02BB9661153C44D2C782F54846D902CEC4B5"; //BSG 2's account
         public const string namespaceName = "foobar";
+        public const string subNamespaceName = "bigfoo";
         static void Main(string[] args)
         {
             Program p = new Program();
@@ -62,8 +63,8 @@ namespace Xarcade.Api.Prototype
                     case "3" : testMosaic = p.CreateMosaicTest(testAccount); break;
                     case "4" : p.ModifyMosaicSupplyTest(testAccount, testMosaic); break;
                     case "5" : p.SendMosaicTest(testAccount, testMosaic); break;
-                    //case "6" : testNamespace = p.CreateNamespace(testAccount); break;   //TODO make this use the test account to sign
-                   // case "7" : p.CreateSubNamespace(); break;           //TODO make this use the test account to sign
+                    case "6" : testNamespace = p.CreateNamespaceTest(testAccount); break;   //TODO make this use the test account to sign
+                    case "7" : p.CreateSubNamespaceTest(testAccount); break;           //TODO make this use the test account to sign
                     //case "8" : p.LinkMosaicToNamespaceTest(testAccount, testMosaic); break;   //TODO Link it with created mosaic
                 }
                 Console.WriteLine("\nPress any key to proceed..");
@@ -178,32 +179,32 @@ namespace Xarcade.Api.Prototype
 
             XarcadeModels.TransactionDTO sendCoinT = pMosaic.SendMosaicAsync(param).GetAwaiter().GetResult();
         }
-
+    
         //Creates a namespace using Bruh's Private Key
     
-        private XarcadeModels.NamespaceDTO CreateNamespace(XarcadeModels.AccountDTO newAccount)
+        private XarcadeModels.NamespaceDTO CreateNamespaceTest(XarcadeModels.AccountDTO newAccount)
         {
-            try
-            {
-                var namespaceInfo = pNamespace.GetNamespaceInformation(namespaceName).GetAwaiter().GetResult();
-                throw new ArgumentNullException($"Namespace already exists!");
-            }
-            catch (Flurl.Http.FlurlHttpException)
-            {
-                var registerNamespace = pNamespace.CreateNamespace(namespaceName, 100); //Dapat naa na sa sulod daan ang signing
-                return registerNamespace;
+            XarcadeParams.CreateNamespaceParams param = new XarcadeParams.CreateNamespaceParams();
+            param.accountDTO = pAccount.CreateAccount(1, newAccount.PrivateKey);
+            param.Domain = namespaceName;
+            XarcadeModels.NamespaceDTO createNamespaceT = pNamespace.CreateNamespaceAsync(param).GetAwaiter().GetResult();
 
-            }
+            Console.WriteLine(createNamespaceT.ToString());
+            return createNamespaceT;
         }
 
         //Creates a subnamespace using Bruh's private key and Parent namespace
-        private void CreateSubNamespace()
+        private XarcadeModels.NamespaceDTO CreateSubNamespaceTest(XarcadeModels.AccountDTO newAccount)
         {
-            var account = pAccount.CreateAccount(1, TEST_PRIVATE_BSG_1);
+            XarcadeParams.CreateNamespaceParams param = new XarcadeParams.CreateNamespaceParams();
+            param.accountDTO = pAccount.CreateAccount(1, newAccount.PrivateKey);
+            param.Domain = namespaceName;
+            param.LayerOne = subNamespaceName;
 
-            var subNamespaceName = "wahwah";
-
-            var registerSubNamespace = pNamespace.CreateSubNamespace(subNamespaceName, namespaceName); //Dapat naa na sa sulod ang pag sign
+            XarcadeModels.NamespaceDTO createNamespaceT = pNamespace.CreateSubNamespaceAsync(param).GetAwaiter().GetResult();
+            
+            Console.WriteLine(createNamespaceT.ToString());
+            return createNamespaceT;
         }
         
         private void LinkMosaicToNamespaceTest()
