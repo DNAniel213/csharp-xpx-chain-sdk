@@ -3,7 +3,7 @@ using System;
 using XarcadeModels = Xarcade.Domain.Models;
 using XarcadeParams = Xarcade.Domain.Params;
 using Xarcade.Api.Prototype.Blockchain;
-using MongoDB.Driver;
+using Xarcade.Api.Prototype.Repository;
 /*
     BSG ACCOUNT
     wallet uid: blackspeargames
@@ -12,8 +12,10 @@ using MongoDB.Driver;
 
 namespace Xarcade.Api.Prototype
 {
-    class Program
+    class ProximaXProgram
     {
+        RepositoryPortal repo = new RepositoryPortal();
+
         public ProximaxBlockchainPortal portal = null;
         public ProximaxAccount pAccount = null;
         public ProximaxMosaic pMosaic = null;
@@ -24,26 +26,34 @@ namespace Xarcade.Api.Prototype
         public const string TEST_PRIVATE_BSG_2= "8C0C98ED0D0D703B56EB5FCBA55B02BB9661153C44D2C782F54846D902CEC4B5"; //BSG 2's account
         public const string namespaceName = "hola";
         public const string subNamespaceName = "bigfoo";
-        static void Main(string[] args)
+        public void ProximaXMain(XarcadeModels.AccountDTO user, bool isNewAccount = false)
         {
-            Program p = new Program();
-            p.portal = new ProximaxBlockchainPortal();
-            p.pAccount = new ProximaxAccount(p.portal);
-            p.pMosaic = new ProximaxMosaic(p.portal);
-            p.pNamespace = new ProximaxNamespace(p.portal);
-            p.pTransaction = new ProximaxTransaction(p.portal);
-            XarcadeModels.AccountDTO testAccount = p.pAccount.CreateAccount(0, TEST_PRIVATE_BSG_1);
+            portal = new ProximaxBlockchainPortal();
+            pAccount = new ProximaxAccount(portal);
+            pMosaic = new ProximaxMosaic(portal);
+            pNamespace = new ProximaxNamespace(portal);
+            pTransaction = new ProximaxTransaction(portal);
+            XarcadeModels.AccountDTO testAccount = pAccount.CreateAccount(0, TEST_PRIVATE_BSG_1);
             XarcadeModels.MosaicDTO  testMosaic  = null;
             XarcadeModels.NamespaceDTO  testNamespace  = null;
 
-            
-            //var client = new MongoClient("mongodb+srv://dane:pikentz213@xarcadeprotodb-ctyys.mongodb.net/<dbname>?retryWrites=true&w=majority");
-            //var database = client.GetDatabase("test");
-
+            if(isNewAccount)
+            {
+                testAccount = pAccount.CreateAccount(0);
+                user.WalletAddress    = testAccount.WalletAddress;
+                user.PrivateKey       = testAccount.PrivateKey;
+                user.PublicKey        = testAccount.PublicKey;
+                user.Created          = DateTime.Now;
+            }
+            else
+            {
+                
+            }
+        
             for (int i = 0; true; i++)
             {
                 Console.WriteLine("\n==Xarcade Progress Test Program==");
-                Console.WriteLine("Enter '0' to create a new account");
+                //Console.WriteLine("Enter '0' to create a new account");
                 Console.WriteLine("Enter '1' to send xpx to the new account");
                 Console.WriteLine("Enter '2' to list transactions of the new account");
                 Console.WriteLine("Enter '3' to create a new mosaic");
@@ -57,28 +67,19 @@ namespace Xarcade.Api.Prototype
                 string choice = Console.ReadLine();
                 switch(choice)
                 {
-                    case "0" : testAccount = p.CreateAccountTest(); break;
-                    case "1" : p.SendXPXTest(testAccount); break;
-                    case "2" : p.GetAccountTransactions(testAccount); break;
-                    case "3" : testMosaic = p.CreateMosaicTest(testAccount); break;
-                    case "4" : p.ModifyMosaicSupplyTest(testAccount, testMosaic); break;
-                    case "5" : p.SendMosaicTest(testAccount, testMosaic); break;
-                    case "6" : testNamespace = p.CreateNamespaceTest(testAccount); break;   //TODO make this use the test account to sign
-                    case "7" : p.CreateSubNamespaceTest(testAccount); break;           //TODO make this use the test account to sign
-                    case "8" : p.LinkMosaicToNamespaceTest(testAccount, testMosaic, testNamespace); break;   //TODO Link it with created mosaic
+                    case "0" : testAccount = CreateAccountTest(); break;
+                    case "1" : SendXPXTest(testAccount); break;
+                    case "2" : GetAccountTransactions(testAccount); break;
+                    case "3" : testMosaic = CreateMosaicTest(testAccount); break;
+                    case "4" : ModifyMosaicSupplyTest(testAccount, testMosaic); break;
+                    case "5" : SendMosaicTest(testAccount, testMosaic); break;
+                    case "6" : testNamespace = CreateNamespaceTest(testAccount); break;   //TODO make this use the test account to sign
+                    case "7" : CreateSubNamespaceTest(testAccount); break;           //TODO make this use the test account to sign
+                    case "8" : LinkMosaicToNamespaceTest(testAccount, testMosaic, testNamespace); break;   //TODO Link it with created mosaic
                 }
                 Console.WriteLine("\nPress any key to proceed..");
                 System.Console.ReadKey();
             }
-
-            //p.CreateAccountTest(0); //Creates a new account and sends xpx from BSG_1 to the new account
-            //p.SendXPXTest();
-            //p.GetAccountTransactions(); //Gets all transactions from account
-            //p.CreateMosaicTest();
-            //p.SendMosaicTest();
-            //p.CreateNamespace();
-            //p.CreateSubNamespace();
-            //p.LinkMosaicToNamespaceTest();
 
         }
 
@@ -184,9 +185,11 @@ namespace Xarcade.Api.Prototype
     
         private XarcadeModels.NamespaceDTO CreateNamespaceTest(XarcadeModels.AccountDTO newAccount)
         {
+            Console.Write("Namespace name:  ");
+            string name = Console.ReadLine();
             XarcadeParams.CreateNamespaceParams param = new XarcadeParams.CreateNamespaceParams();
             param.accountDTO = pAccount.CreateAccount(1, newAccount.PrivateKey);
-            param.Domain = namespaceName;
+            param.Domain = name;
             XarcadeModels.NamespaceDTO createNamespaceT = pNamespace.CreateNamespaceAsync(param).GetAwaiter().GetResult();
 
             Console.WriteLine(createNamespaceT.ToString());
@@ -196,10 +199,14 @@ namespace Xarcade.Api.Prototype
         //Creates a subnamespace using Bruh's private key and Parent namespace
         private XarcadeModels.NamespaceDTO CreateSubNamespaceTest(XarcadeModels.AccountDTO newAccount)
         {
+            Console.Write("Parent Namespace name:  ");
+            string parentName = Console.ReadLine();
+            Console.Write("Child Namespace name:  ");
+            string childName = Console.ReadLine();
             XarcadeParams.CreateNamespaceParams param = new XarcadeParams.CreateNamespaceParams();
             param.accountDTO = pAccount.CreateAccount(1, newAccount.PrivateKey);
-            param.Domain = namespaceName;
-            param.LayerOne = subNamespaceName;
+            param.Domain = parentName;
+            param.LayerOne = childName;
 
             XarcadeModels.NamespaceDTO createNamespaceT = pNamespace.CreateSubNamespaceAsync(param).GetAwaiter().GetResult();
             
@@ -209,11 +216,13 @@ namespace Xarcade.Api.Prototype
         
         private void LinkMosaicToNamespaceTest(XarcadeModels.AccountDTO newAccount, XarcadeModels.MosaicDTO newMosaic, XarcadeModels.NamespaceDTO newNamespace)
         {
+            Console.Write("Namespace to link:  ");
+            string name = Console.ReadLine();
             XarcadeParams.LinkMosaicParams param = new XarcadeParams.LinkMosaicParams
             {
                 accountDTO   =  pAccount.CreateAccount(1, newAccount.PrivateKey),
                 mosaicID     = pMosaic.GetMosaicAsync(newMosaic.MosaicID).GetAwaiter().GetResult().MosaicID,
-                namespaceDTO = pNamespace.GetNamespaceInformation(newNamespace.Domain).GetAwaiter().GetResult()
+                namespaceDTO = pNamespace.GetNamespaceInformation(name).GetAwaiter().GetResult()
             };
 
             var link = pMosaic.LinkMosaicAsync(param).GetAwaiter().GetResult();

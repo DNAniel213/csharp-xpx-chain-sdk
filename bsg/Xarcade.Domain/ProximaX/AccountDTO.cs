@@ -1,5 +1,6 @@
 using System;
 
+
 namespace Xarcade.Domain.Models
 {
     /// <summary>Xarcade's Account Model</summary>

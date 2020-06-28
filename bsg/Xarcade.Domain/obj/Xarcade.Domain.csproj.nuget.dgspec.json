@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {}
+    "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
+    "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
         "projectName": "Xarcade.Domain",
-        "projectPath": "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
-        "packagesPath": "C:\\Users\\ranz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ranz\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\obj\\",
+        "projectPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
+        "packagesPath": "C:\\Users\\dnani\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\dotnet\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ranz\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dnani\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
