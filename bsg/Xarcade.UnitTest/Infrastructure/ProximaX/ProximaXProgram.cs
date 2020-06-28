@@ -107,7 +107,8 @@ namespace Xarcade.Api.Prototype
             Console.WriteLine(sendCurrency.ToString());
             Console.WriteLine(sendCurrency.Asset.ToString());
             Console.WriteLine("Transaction signed and announced!");
-
+            
+            var tracking = pTransaction.MonitorTransactionAsync(sendCurrency,param).GetAwaiter().GetResult();
             // TODO Add tracking here
         }
 
