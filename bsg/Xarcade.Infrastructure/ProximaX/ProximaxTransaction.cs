@@ -98,93 +98,93 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <returns></returns>
         public async Task<XarcadeModel.TransactionDTO> MonitorTransactionAsync(XarcadeModel.TransactionDTO transDTO, XarcadeParams.SendXpxParams param)
         {
-        // Creates instance of SiriusClient
-        var client = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
-        var siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
-        Account senderAccount = Account.CreateFromPrivateKey(param.sender.PrivateKey, portal.networkType);
-        var transactionInfo = await portal.siriusClient.TransactionHttp.GetTransaction(transDTO.Hash);
-        //XarcadeModel.TransactionDTO transaction = GetTransactionInformation(transactionDTO).GetAwaiter().GetResult();
-        //var transaction = GetTransactionInformation(transactionDTO).GetAwaiter().GetResult();
+            // Creates instance of SiriusClient
+            var client = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
+            var siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
+            Account senderAccount = Account.CreateFromPrivateKey(param.sender.PrivateKey, portal.networkType);
+            var transactionInfo = await portal.siriusClient.TransactionHttp.GetTransaction(transDTO.Hash);
+            //XarcadeModel.TransactionDTO transaction = GetTransactionInformation(transactionDTO).GetAwaiter().GetResult();
+            //var transaction = GetTransactionInformation(transactionDTO).GetAwaiter().GetResult();
 
-        // Generates new account
-        var newAccount = Account.GenerateNewAccount(portal.networkType);
+            // Generates new account
+            var newAccount = Account.GenerateNewAccount(portal.networkType);
 
-        // Get the generation hash 
-        var generationHash = await siriusClient.BlockHttp.GetGenerationHash();
+            // Get the generation hash 
+            var generationHash = await siriusClient.BlockHttp.GetGenerationHash();
 
-        // Signs the transaction using the registered account
-        var signedTransaction = senderAccount.Sign
-        (
-            transactionInfo,
-            generationHash
-        );
+            // Signs the transaction using the registered account
+            var signedTransaction = senderAccount.Sign
+            (
+                transactionInfo,
+                generationHash
+            );
 
-        // Creates instance of SiriusWebSocketClient to monitor transactions
-        // If you need to enable the secure protocol use
-        // new SiriusWebSocketClient("bctestnet1.xpxsirius.io", 3000,useSSL:true);
-        var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
+            // Creates instance of SiriusWebSocketClient to monitor transactions
+            // If you need to enable the secure protocol use
+            // new SiriusWebSocketClient("bctestnet1.xpxsirius.io", 3000,useSSL:true);
+            var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
 
-        // Opens the listener
-        await ws.Listener.Open();
+            // Opens the listener
+            await ws.Listener.Open();
 
-        // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
-        // Blocks are generated every 15 seconds in average, so a timeout can be raised if
-        // there is no response after 30 seconds.
-        ws.Listener.NewBlock()
-        .Timeout(TimeSpan.FromSeconds(30))  
-        .Subscribe(
-            block => {
-            Console.WriteLine($"New block is created {block.Height}");
-            },
-            err => {
-            Console.WriteLine($"Unexpected error {err}");
-            ws.Listener.Close();
-            }
-        );
-
-        // Monitors if there is any validation error with the issued transaction
-        var signerAddress = Address.CreateFromPublicKey(signedTransaction.Signer,portal.networkType);
-
-        ws.Listener.TransactionStatus(signerAddress)
-        .Timeout(TimeSpan.FromSeconds(30))  
-        .Subscribe(
-            // transaction info
-            tx =>
-            {
-                Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
-            },
-            // handle if any error occured
-            txErr =>
-            {
-                Console.WriteLine($"Transaction error - {txErr}");
+            // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
+            // Blocks are generated every 15 seconds in average, so a timeout can be raised if
+            // there is no response after 30 seconds.
+            ws.Listener.NewBlock()
+            .Timeout(TimeSpan.FromSeconds(30))  
+            .Subscribe(
+                block => {
+                Console.WriteLine($"New block is created {block.Height}");
+                },
+                err => {
+                Console.WriteLine($"Unexpected error {err}");
                 ws.Listener.Close();
-            }
-        );
-        
+                }
+            );
 
-        // Monitors if the transaction arrives the network but not yet include in the block
-        var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(newAccount.Address)
+            // Monitors if there is any validation error with the issued transaction
+            var signerAddress = Address.CreateFromPublicKey(signedTransaction.Signer,portal.networkType);
+
+            ws.Listener.TransactionStatus(signerAddress)
+            .Timeout(TimeSpan.FromSeconds(30))  
+            .Subscribe(
+                // transaction info
+                tx =>
+                {
+                    Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
+                },
+                // handle if any error occured
+                txErr =>
+                {
+                    Console.WriteLine($"Transaction error - {txErr}");
+                    ws.Listener.Close();
+                }
+            );
+            
+
+            // Monitors if the transaction arrives the network but not yet include in the block
+            var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(newAccount.Address)
+                                                .Take(1)
+                                                .Timeout(TimeSpan.FromSeconds(30));
+
+            // Monitors if the transaction get included in the block
+            var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(newAccount.Address)
                                             .Take(1)
                                             .Timeout(TimeSpan.FromSeconds(30));
 
-        // Monitors if the transaction get included in the block
-        var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(newAccount.Address)
-                                        .Take(1)
-                                        .Timeout(TimeSpan.FromSeconds(30));
+            // Announces to the network
+            await client.TransactionHttp.Announce(signedTransaction);
 
-        // Announces to the network
-        await client.TransactionHttp.Announce(signedTransaction);
+            // Gets the results
+            var unconfirmedResult =  confirmedTx;
 
-        // Gets the results
-        var unconfirmedResult =  confirmedTx;
+            Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
 
-        Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
+            var confirmedResult = confirmedTx;
 
-        var confirmedResult = confirmedTx;
+            Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
 
-        Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
-
-        return null;
+            return null;
         }
     }
 
