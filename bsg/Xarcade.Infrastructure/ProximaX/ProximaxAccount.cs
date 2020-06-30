@@ -30,11 +30,11 @@ namespace Xarcade.Api.Prototype.Blockchain
             XarcadeModel.AccountDTO accountDTO = new XarcadeModel.AccountDTO();
             Account account = Account.GenerateNewAccount(portal.networkType);
 
-            accountDTO.UserID           = userId;
-            accountDTO.WalletAddress    = account.Address.Pretty;
-            accountDTO.PrivateKey       = account.PrivateKey;
-            accountDTO.PublicKey        = account.PublicKey;
-            accountDTO.Created          = DateTime.Now;
+            accountDTO.userID           = userId;
+            accountDTO.walletAddress    = account.Address.Pretty;
+            accountDTO.privateKey       = account.PrivateKey;
+            accountDTO.publicKey        = account.PublicKey;
+            accountDTO.created          = DateTime.Now;
 
             return accountDTO;
         }
@@ -50,11 +50,11 @@ namespace Xarcade.Api.Prototype.Blockchain
             XarcadeModel.AccountDTO accountDTO = new XarcadeModel.AccountDTO();
             Account account = Account.CreateFromPrivateKey(privateKey, portal.networkType);
 
-            accountDTO.UserID           = userId;
-            accountDTO.WalletAddress    = account.Address.Pretty;
-            accountDTO.PrivateKey       = account.PrivateKey;
-            accountDTO.PublicKey        = account.PublicKey;
-            accountDTO.Created          = DateTime.Now;
+            accountDTO.userID           = userId;
+            accountDTO.walletAddress    = account.Address.Pretty;
+            accountDTO.privateKey       = account.PrivateKey;
+            accountDTO.publicKey        = account.PublicKey;
+            accountDTO.created          = DateTime.Now;
 
             return accountDTO;
         }
@@ -70,11 +70,11 @@ namespace Xarcade.Api.Prototype.Blockchain
             Address address = new Address(privateKey, portal.networkType);
             AccountInfo accountInfo = await portal.siriusClient.AccountHttp.GetAccountInfo(address);
 
-            accountDTO.UserID           = 000; //get from db
-            accountDTO.WalletAddress    = accountInfo.Address.Pretty;
-            accountDTO.PrivateKey       = privateKey;
-            accountDTO.PublicKey        = accountInfo.PublicKey;
-            accountDTO.Created          = DateTime.Now;
+            accountDTO.userID           = 000; //get from db
+            accountDTO.walletAddress    = accountInfo.Address.Pretty;
+            accountDTO.privateKey       = privateKey;
+            accountDTO.publicKey        = accountInfo.PublicKey;
+            accountDTO.created          = DateTime.Now;
             return accountDTO;
         }
 

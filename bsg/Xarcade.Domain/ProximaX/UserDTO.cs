@@ -2,11 +2,8 @@
 
 namespace Xarcade.Domain.Models
 {
-    public class UserDTO : OwnerDTO
+    public class UserDTO : AccountDTO
     {
-        public long OwnerId {get; set;}
-
-
-
+        public long ownerID {get; set;}
     }
 }

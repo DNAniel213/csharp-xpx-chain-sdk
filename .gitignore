@@ -24,15 +24,15 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!bsg/.ionide/*
-!bsg/.vscode/*
-!bsg/Xarcade.Domain/bin/*
-!bsg/Xarcade.Domain/obj/*
-!bsg/Xarcade.Infrastructure/bin/*
-!bsg/Xarcade.Infrastructure/obj/*
-!bsg/Xarcade.UnitTest/bin/*
-!bsg/Xarcade.UnitTest/obj/*
-!ramo-blockchain-ref/*
+bsg/.ionide/*
+bsg/.vscode/*
+bsg/Xarcade.Domain/bin/*
+bsg/Xarcade.Domain/obj/*
+bsg/Xarcade.Infrastructure/bin/*
+bsg/Xarcade.Infrastructure/obj/*
+bsg/Xarcade.UnitTest/bin/*
+bsg/Xarcade.UnitTest/obj/*
+ramo-blockchain-ref/*
 *.code-workspace
 
 ### VisualStudioCode Patch ###
@@ -68,4 +68,3 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,git
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-

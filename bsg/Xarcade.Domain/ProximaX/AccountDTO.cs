@@ -6,23 +6,23 @@ namespace Xarcade.Domain.Models
     /// <summary>Xarcade's Account Model</summary>
     public class AccountDTO
     {
-        public long UserID {get; set;}
-        public string WalletAddress {get; set;}
-        public string PrivateKey {get; set;}
-        public string PublicKey {get; set;}
-        public DateTime Created {get; set;}
+        public long userID {get; set;}
+        public string walletAddress {get; set;}
+        public string privateKey {get; set;}
+        public string publicKey {get; set;}
+        public DateTime created {get; set;}
 
         public override string ToString()
         {
 
-            var privatekey = PrivateKey != null ? PrivateKey : "hidden";
+            var privatekey = privateKey != null ? privateKey : "hidden";
             return
                 "===Account DTO==="  +
-                "\nUser ID: "        + UserID +
-                "\nWallet Address: " + WalletAddress + 
-                "\nPublic Key: "     + PublicKey + 
-                "\nPrivate Key: "    + PrivateKey+  
-                "\nDate Created: "   + Created +
+                "\nUser ID: "        + userID +
+                "\nWallet Address: " + walletAddress + 
+                "\nPublic Key: "     + publicKey + 
+                "\nPrivate Key: "    + privateKey+  
+                "\nDate Created: "   + created +
                 "\n==End of Account DTO==";
  
 

@@ -29,7 +29,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         public async Task<XarcadeModels.NamespaceDTO> CreateNamespaceAsync(XarcadeParams.CreateNamespaceParams param)
         {
             XarcadeModels.NamespaceDTO namespaceDTO = new XarcadeModels.NamespaceDTO();
-            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.privateKey, portal.networkType);
 
             var registerNamespace = RegisterNamespaceTransaction.CreateRootNamespace(
                 Deadline.Create(),
@@ -55,7 +55,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         public async Task<XarcadeModels.NamespaceDTO> CreateSubNamespaceAsync (XarcadeParams.CreateNamespaceParams param)
         {
             XarcadeModels.NamespaceDTO namespaceDTO = new XarcadeModels.NamespaceDTO();
-            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.privateKey, portal.networkType);
             var parentNamespace = new NamespaceId(param.Domain);
         
             var registerSubNamespace = RegisterNamespaceTransaction.CreateSubNamespace(
@@ -82,11 +82,11 @@ namespace Xarcade.Api.Prototype.Blockchain
 
             XarcadeModels.AccountDTO ownerDTO = new XarcadeModels.AccountDTO
             {
-                UserID = 0,
-                WalletAddress = ownerAccountInfo.Address.Pretty,
-                PrivateKey    = null,
-                PublicKey     = ownerAccountInfo.PublicKey,
-                Created       = DateTime.Now, //TODO @Dane please get actual creation date
+                userID = 0,
+                walletAddress = ownerAccountInfo.Address.Pretty,
+                privateKey    = null,
+                publicKey     = ownerAccountInfo.PublicKey,
+                created       = DateTime.Now, //TODO @Dane please get actual creation date
             };
             
             XarcadeModels.NamespaceDTO namespaceDTO = new XarcadeModels.NamespaceDTO

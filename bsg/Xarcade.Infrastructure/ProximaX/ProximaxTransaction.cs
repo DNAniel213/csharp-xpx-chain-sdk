@@ -45,7 +45,7 @@ namespace Xarcade.Api.Prototype.Blockchain
             var networkType = client.NetworkHttp.GetNetworkType().Wait();
 
             // The registered account with some currency
-            Account senderAccount = Account.CreateFromPrivateKey(param.sender.PrivateKey, portal.networkType);
+            Account senderAccount = Account.CreateFromPrivateKey(param.sender.privateKey, portal.networkType);
             var Address = new Address(param.recepientAddress,networkType);
             // xpx to be transferred
             var xpxToTransfer = NetworkCurrencyMosaic.CreateRelative(param.amount);
@@ -71,7 +71,6 @@ namespace Xarcade.Api.Prototype.Blockchain
             // Get the generation hash 
             await portal.SignAndAnnounceTransaction(senderAccount, transferTransaction);
 
-
             return transactionDTO;
         }
 
@@ -96,34 +95,14 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name=""> hash value of transaction</param>
         /// </summary>
         /// <returns></returns>
-        public async Task<XarcadeModel.TransactionDTO> MonitorTransactionAsync(XarcadeModel.TransactionDTO transDTO, XarcadeParams.SendXpxParams param)
+        public async Task<Transaction> MonitorTransactionAsync(Transaction transaction)
         {
         // Creates instance of SiriusClient
         var client = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
         var siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
-        Account senderAccount = Account.CreateFromPrivateKey(param.sender.PrivateKey, portal.networkType);
-        var transactionInfo = await portal.siriusClient.TransactionHttp.GetTransaction(transDTO.Hash);
-        //XarcadeModel.TransactionDTO transaction = GetTransactionInformation(transactionDTO).GetAwaiter().GetResult();
-        //var transaction = GetTransactionInformation(transactionDTO).GetAwaiter().GetResult();
 
-        // Generates new account
-        var newAccount = Account.GenerateNewAccount(portal.networkType);
-
-        // Get the generation hash 
-        var generationHash = await siriusClient.BlockHttp.GetGenerationHash();
-
-        // Signs the transaction using the registered account
-        var signedTransaction = senderAccount.Sign
-        (
-            transactionInfo,
-            generationHash
-        );
-
-        // Creates instance of SiriusWebSocketClient to monitor transactions
-        // If you need to enable the secure protocol use
-        // new SiriusWebSocketClient("bctestnet1.xpxsirius.io", 3000,useSSL:true);
         var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
-
+        Console.WriteLine(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
         // Opens the listener
         await ws.Listener.Open();
 
@@ -143,7 +122,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         );
 
         // Monitors if there is any validation error with the issued transaction
-        var signerAddress = Address.CreateFromPublicKey(signedTransaction.Signer,portal.networkType);
+        var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey,portal.networkType);
 
         ws.Listener.TransactionStatus(signerAddress)
         .Timeout(TimeSpan.FromSeconds(30))  
@@ -163,17 +142,15 @@ namespace Xarcade.Api.Prototype.Blockchain
         
 
         // Monitors if the transaction arrives the network but not yet include in the block
-        var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(newAccount.Address)
+        var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
                                             .Take(1)
                                             .Timeout(TimeSpan.FromSeconds(30));
 
         // Monitors if the transaction get included in the block
-        var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(newAccount.Address)
+        var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
                                         .Take(1)
                                         .Timeout(TimeSpan.FromSeconds(30));
 
-        // Announces to the network
-        await client.TransactionHttp.Announce(signedTransaction);
 
         // Gets the results
         var unconfirmedResult =  confirmedTx;

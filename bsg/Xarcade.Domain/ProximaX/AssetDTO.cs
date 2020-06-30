@@ -17,7 +17,7 @@ namespace Xarcade.Domain.Models
                 "\nAssetID: "            + AssetID +
                 "\nName: "         + Name + 
                 "\nQuantity: "          +Quantity + 
-                "\nOwner: "          +Owner.UserID + 
+                "\nOwner: "          +Owner.userID + 
                 "\nDate Created: "   + Created +
                 "\n==End of Asset DTO==";
         }

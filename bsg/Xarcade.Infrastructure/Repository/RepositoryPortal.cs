@@ -50,6 +50,36 @@ namespace Xarcade.Api.Prototype.Repository
             }
             return result;
         }
+        
+        /// <summary>
+        /// Returns a list of documents in a collection
+        /// </summary>
+        /// <param name="collectionName"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public List<BsonDocument> ReadCollection(string collectionName,  FilterDefinition<MongoDB.Bson.BsonDocument> filter )
+        {
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+            var result = collection.Find(filter).ToList();
+            foreach (var doc in result) {
+                Console.WriteLine(doc.ToJson());
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Gets total number of documents in a collection
+        /// </summary>
+        /// <param name="collectionName"></param>
+        /// <returns></returns>
+        public long GetDocumentCount(string collectionName)
+        {
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+            var filter = Builders<BsonDocument>.Filter.Empty;
+
+            return collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
+        }
+
         /// <summary>
         /// Finds and returns a single document from the database. Returns null if no document is found
         /// </summary>
@@ -82,7 +112,6 @@ namespace Xarcade.Api.Prototype.Repository
         {
             var collection = database.GetCollection<BsonDocument>(collectionName);
             var result = collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
-            Console.WriteLine(result);
             if(result < 1)
                 return false;
             else
@@ -139,6 +168,21 @@ namespace Xarcade.Api.Prototype.Repository
             }
             return filterObject;
         }
+
+        public FilterDefinition<MongoDB.Bson.BsonDocument> CreateFilter(KeyValuePair<string, long> filter, FilterOperator filterOperator)
+        {
+            FilterDefinition<MongoDB.Bson.BsonDocument> filterObject = null;
+            switch(filterOperator)
+            {
+                case FilterOperator.EQUAL                  : filterObject = Builders<BsonDocument>.Filter.Eq(filter.Key,filter.Value); break;
+                case FilterOperator.LESSERTHAN             : filterObject = Builders<BsonDocument>.Filter.Lt(filter.Key,filter.Value); break;
+                case FilterOperator.GREATERTHAN            : filterObject = Builders<BsonDocument>.Filter.Gt(filter.Key,filter.Value); break;
+                case FilterOperator.LESSERTHAN_OR_EQUALTO  : filterObject = Builders<BsonDocument>.Filter.Lte(filter.Key,filter.Value); break;
+                case FilterOperator.GREATERTHAN_OR_EQUALTO : filterObject = Builders<BsonDocument>.Filter.Gte(filter.Key,filter.Value); break;
+            }
+            return filterObject;
+        }
+        
         
         /// <summary>
         /// Generates a mongoDB-safe _id

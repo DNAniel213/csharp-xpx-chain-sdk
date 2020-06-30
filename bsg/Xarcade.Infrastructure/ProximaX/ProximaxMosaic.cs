@@ -26,7 +26,7 @@ namespace Xarcade.Api.Prototype.Blockchain
             if(param.accountDTO == null) return null; //replace with throw exception
                 
             XarcadeModels.MosaicDTO mosaicDTO = new XarcadeModels.MosaicDTO();
-            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.privateKey, portal.networkType);
 
             var nonce = MosaicNonce.CreateRandom();
             var mosaicId = MosaicId.CreateFromNonce(nonce, account.PublicKey);
@@ -61,12 +61,13 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// <param name="mosaic">Mosaic to add/subtract supply</param>
         /// <param name="amount">mount to add/subtract</param>
         /// <returns></returns>
-        public async Task<XarcadeModels.MosaicDTO> ModifyMosaicSupply(XarcadeParams.ModifyMosaicSupplyParams param)
+        public async Task<XarcadeModels.TransactionDTO> ModifyMosaicSupply(XarcadeParams.ModifyMosaicSupplyParams param)
         {
             if(param.accountDTO == null || param.mosaicID == 0 || param.amount == 0) return null;  //change to exception throwing
 
             XarcadeModels.MosaicDTO mosaicDTO = new XarcadeModels.MosaicDTO();
-            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+            XarcadeModels.TransactionDTO transactionDTO = new XarcadeModels.TransactionDTO();
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.privateKey, portal.networkType);
             MosaicInfo mosaicInfo = await portal.siriusClient.MosaicHttp.GetMosaic(new MosaicId(param.mosaicID));
 
             MosaicSupplyType mosaicSupplyType = param.amount > 0 ? MosaicSupplyType.INCREASE : MosaicSupplyType.DECREASE;
@@ -85,10 +86,15 @@ namespace Xarcade.Api.Prototype.Blockchain
             mosaicDTO.Created = DateTime.Now;
             mosaicDTO.Owner    = param.accountDTO;
 
+            transactionDTO.Hash = mosaicSupplyChangeTransaction.GetHashCode().ToString();
+            transactionDTO.Height = mosaicSupplyChangeTransaction.TransactionInfo.Height;
+            transactionDTO.Asset = mosaicDTO;
+            transactionDTO.Created = DateTime.Now;
+
             await portal.SignAndAnnounceTransaction(account, mosaicSupplyChangeTransaction);
             
             
-            return mosaicDTO;
+            return transactionDTO;
         }
 
 
@@ -132,7 +138,7 @@ namespace Xarcade.Api.Prototype.Blockchain
 
             XarcadeModels.TransactionDTO transactionDTO = new XarcadeModels .TransactionDTO();
             MosaicInfo mosaicInfo = await portal.siriusClient.MosaicHttp.GetMosaic(new MosaicId(param.mosaicID));
-            Account senderAccount = Account.CreateFromPrivateKey(param.sender.PrivateKey, portal.networkType);
+            Account senderAccount = Account.CreateFromPrivateKey(param.sender.privateKey, portal.networkType);
 
             Mosaic mosaicToTransfer = new Mosaic(mosaicInfo.MosaicId, param.amount);
             Address recepient = new Address(param.recepientAddress, portal.networkType);
@@ -158,12 +164,13 @@ namespace Xarcade.Api.Prototype.Blockchain
         /// Creates a transaction that sends coins from one account to anotherz
         /// </summary>
         /// <returns></returns>
-        public async Task<XarcadeModels.MosaicDTO> LinkMosaicAsync(XarcadeParams.LinkMosaicParams param)
+        public async Task<XarcadeModels.TransactionDTO> LinkMosaicAsync(XarcadeParams.LinkMosaicParams param)
         {
             if(param.accountDTO == null || param.mosaicID == 0 || param.namespaceDTO == null) return null; //Change to exceptions
 
             XarcadeModels.MosaicDTO mosaicDTO = new XarcadeModels.MosaicDTO();
-            Account account = Account.CreateFromPrivateKey(param.accountDTO.PrivateKey, portal.networkType);
+            XarcadeModels.TransactionDTO transactionDTO = new XarcadeModels.TransactionDTO();
+            Account account = Account.CreateFromPrivateKey(param.accountDTO.privateKey, portal.networkType);
 
             MosaicInfo mosaicInfo = await portal.siriusClient.MosaicHttp.GetMosaic(new MosaicId(param.mosaicID));
             var namespaceInfo = await portal.siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(param.namespaceDTO.Domain));
@@ -177,9 +184,22 @@ namespace Xarcade.Api.Prototype.Blockchain
             );
 
 
+            mosaicDTO.MosaicID = mosaicInfo.MosaicId.Id;
+            mosaicDTO.AssetID  =  mosaicInfo.MosaicId.Id + "";
+            mosaicDTO.Name     = null;
+            mosaicDTO.Quantity = 0;
+            mosaicDTO.Created = DateTime.Now;
+            mosaicDTO.Owner    = param.accountDTO;
+
+            transactionDTO.Hash = mosaicLink.GetHashCode().ToString();
+            transactionDTO.Height = mosaicLink.TransactionInfo.Height;
+            transactionDTO.Asset = mosaicDTO;
+            transactionDTO.Created = DateTime.Now;
+
+
             await portal.SignAndAnnounceTransaction(account, mosaicLink);
             
-            return mosaicDTO;
+            return transactionDTO;
         }
 
 

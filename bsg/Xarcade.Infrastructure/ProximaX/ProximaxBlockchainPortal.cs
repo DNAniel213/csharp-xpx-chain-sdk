@@ -50,7 +50,9 @@ namespace Xarcade.Api.Prototype.Blockchain
                 if(generationHash != null)
                 {
                     var signedTransaction = account.Sign(transaction, generationHash);
+                    new ProximaxTransaction(this).MonitorTransactionAsync(transaction).GetAwaiter().GetResult();
                     await siriusClient.TransactionHttp.Announce(signedTransaction);
+
                 }
                 else 
                 {
