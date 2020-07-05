@@ -11,8 +11,8 @@ namespace Xarcade.Api.Prototype.Repository
     public class RepositoryPortal
     {
 
-        MongoClient client = new MongoClient("mongodb+srv://dane:pikentz213@bsg-xarcade-proto-f58v3.mongodb.net/test?retryWrites=true&w=majority");
-        IMongoDatabase database = null;
+        private readonly MongoClient client = new MongoClient("mongodb+srv://dane:pikentz213@bsg-xarcade-proto-f58v3.mongodb.net/test?retryWrites=true&w=majority");
+        private readonly IMongoDatabase database = null;
 
 
         public RepositoryPortal()

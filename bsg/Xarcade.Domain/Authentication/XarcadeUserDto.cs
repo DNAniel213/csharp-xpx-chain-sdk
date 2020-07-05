@@ -1,7 +1,7 @@
 using System;
 
 
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
     /// <summary>Xarcade's Account Model</summary>
     public class XarcadeUserDTO

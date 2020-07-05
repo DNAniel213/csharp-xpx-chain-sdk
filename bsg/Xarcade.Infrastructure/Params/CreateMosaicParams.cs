@@ -1,33 +1,32 @@
-using System;
-using Xarcade.Domain.Models;
+using Xarcade.Domain.ProximaX;
 
-namespace Xarcade.Domain.Params
+namespace Xarcade.Infrastructure.ProximaX.Params
 {
     public class CreateMosaicParams
     {
         /// <summary>
         /// Account to create the mosaic from
         /// </summary>
-        public AccountDTO accountDTO = null;
+        public AccountDTO Account {get; set;} = null;
         /// <summary>
         /// The mosaic supply mutability.
         /// </summary>
-        public bool isSupplyMutable = true;
+        public bool IsSupplyMutable {get; set;} = true;
         /// <summary>
         /// The mosaic transferability. Default is true
         /// </summary>
-        public bool isTransferrable = true;
+        public bool IsTransferrable {get; set;} = true;
         /// <summary>
         /// The mosaic levy mutability. Default is true
         /// </summary>
-        public bool isLevyMutable = false;
+        public bool IsLevyMutable {get; set;} = false;
         /// <summary>
         /// The mosaic divisibility. Default is false
         /// </summary>
-        public int divisibility = 0;
+        public int Divisibility {get; set;} = 0;
         /// <summary>
         /// The number of blocks the mosaic will be active. Default is 1000
         /// </summary>
-        public ulong duration = 10000;
+        public ulong Duration {get; set;} = 10000;
     }
 }

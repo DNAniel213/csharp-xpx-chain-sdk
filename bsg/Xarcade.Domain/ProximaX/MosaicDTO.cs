@@ -1,4 +1,4 @@
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
     public class MosaicDTO : AssetDTO
     {
@@ -13,7 +13,7 @@ namespace Xarcade.Domain.Models
                 "\nAssetID: "            + AssetID +
                 "\nName: "         + Name + 
                 "\nQuantity: "          +Quantity + 
-                "\nOwner: "          +Owner.userID + 
+                "\nOwner: "          +Owner.UserID + 
                 "\nDate Created: "   + Created +
                 "\n==End of Asset_Mosaic DTO==";
         }

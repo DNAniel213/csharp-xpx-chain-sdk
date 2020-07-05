@@ -1,4 +1,4 @@
-using XarcadeModels = Xarcade.Domain.Models;
+using XarcadeModels = Xarcade.Domain.ProximaX;
 using System;
 
 namespace Xarcade.Api.Prototype

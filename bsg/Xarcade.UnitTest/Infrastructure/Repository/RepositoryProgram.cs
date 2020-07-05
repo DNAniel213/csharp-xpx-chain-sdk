@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using XarcadeModels = Xarcade.Domain.Models;
+using XarcadeModels = Xarcade.Domain.ProximaX;
 using Xarcade.Api.Prototype.Repository;
 
 namespace Xarcade.Api.Prototype

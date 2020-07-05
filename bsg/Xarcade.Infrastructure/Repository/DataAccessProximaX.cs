@@ -4,7 +4,7 @@ using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using XarcadeModels = Xarcade.Domain.Models;
+using XarcadeModels = Xarcade.Domain.ProximaX;
 
 
 namespace Xarcade.Api.Prototype.Repository

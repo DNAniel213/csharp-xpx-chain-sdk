@@ -1,9 +1,7 @@
-
-
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
     public class UserDTO : AccountDTO
     {
-        public long ownerID {get; set;}
+        public long OwnerID {get; set;}
     }
 }

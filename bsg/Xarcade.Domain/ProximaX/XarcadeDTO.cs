@@ -1,6 +1,6 @@
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
-    public class XarcadeDTO
+    public class XarcadeDTO :AssetDTO
     {
         
     }

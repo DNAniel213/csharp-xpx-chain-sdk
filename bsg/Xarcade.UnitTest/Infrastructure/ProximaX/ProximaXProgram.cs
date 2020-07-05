@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
-using XarcadeModels = Xarcade.Domain.Models;
-using XarcadeParams = Xarcade.Domain.Params;
+using XarcadeModels = Xarcade.Domain.ProximaX;
+using Xarcade.Infrastructure.ProximaX.Params;
 using Xarcade.Api.Prototype.Blockchain;
 using Xarcade.Api.Prototype.Repository;
 /*
@@ -17,11 +17,6 @@ namespace Xarcade.Api.Prototype
         DataAccessProximaX repo = new DataAccessProximaX();
 
         public ProximaxBlockchainPortal portal = null;
-        public ProximaxAccount pAccount = null;
-        public ProximaxMosaic pMosaic = null;
-        public ProximaxNamespace pNamespace = null;
-        public ProximaxTransaction pTransaction = null;
-
         public const string TEST_PRIVATE_BSG_1 = "1A90826869ECCBEF591B049745BF3C17EC2A7FA1E9C91787C711194165FE2034"; //BSG 1's account
         public const string TEST_PRIVATE_BSG_2= "8C0C98ED0D0D703B56EB5FCBA55B02BB9661153C44D2C782F54846D902CEC4B5"; //BSG 2's account
         public const string namespaceName = "hola";
@@ -29,11 +24,7 @@ namespace Xarcade.Api.Prototype
         public void ProximaXMain(XarcadeModels.XarcadeUserDTO user, bool isNewAccount = false)
         {
             portal = new ProximaxBlockchainPortal();
-            pAccount = new ProximaxAccount(portal);
-            pMosaic = new ProximaxMosaic(portal);
-            pNamespace = new ProximaxNamespace(portal);
-            pTransaction = new ProximaxTransaction(portal);
-            XarcadeModels.AccountDTO testAccount = pAccount.CreateAccount(0, TEST_PRIVATE_BSG_1);
+            XarcadeModels.AccountDTO testAccount = portal.CreateAccount(999, TEST_PRIVATE_BSG_1).GetAwaiter().GetResult();
             XarcadeModels.MosaicDTO  testMosaic  = null;
             XarcadeModels.NamespaceDTO  testNamespace  = null;
 
@@ -86,15 +77,14 @@ namespace Xarcade.Api.Prototype
         //read the function name
         private XarcadeModels.OwnerDTO CreateOwnAccount(long userID)
         {
-            XarcadeModels.AccountDTO newWallet = pAccount.CreateAccount(userID);
-            XarcadeModels.OwnerDTO ownerDTO = new XarcadeModels.OwnerDTO
+            XarcadeModels.AccountDTO newWallet = portal.CreateAccount(userID).GetAwaiter().GetResult();
+            var ownerDTO = new XarcadeModels.OwnerDTO
             {
-                userID = newWallet.userID,
-                walletAddress = newWallet.walletAddress,
-                privateKey = newWallet.privateKey,
-                publicKey = newWallet.publicKey,
-                created = newWallet.created
-
+                UserID        = newWallet.UserID,
+                WalletAddress = newWallet.WalletAddress,
+                PrivateKey    = newWallet.PrivateKey,
+                PublicKey     = newWallet.PublicKey,
+                Created       = newWallet.Created
             };
             Console.WriteLine(ownerDTO.ToString());
             repo.SaveOwner(ownerDTO);
@@ -104,15 +94,15 @@ namespace Xarcade.Api.Prototype
         private XarcadeModels.UserDTO CreateAccountForUser(long ownerID)
         {
             Console.Write("Enter User ID: ");
-            XarcadeModels.AccountDTO newWallet = pAccount.CreateAccount(Convert.ToInt64(Console.ReadLine()));
-            XarcadeModels.UserDTO userDTO = new XarcadeModels.UserDTO
+            XarcadeModels.AccountDTO newWallet = portal.CreateAccount(Convert.ToInt64(Console.ReadLine())).GetAwaiter().GetResult();
+            var userDTO = new XarcadeModels.UserDTO
             {
-                userID = newWallet.userID,
-                walletAddress = newWallet.walletAddress,
-                privateKey = newWallet.privateKey,
-                publicKey = newWallet.publicKey,
-                created = newWallet.created,
-                ownerID = ownerID
+                UserID        = newWallet.UserID,
+                WalletAddress = newWallet.WalletAddress,
+                PrivateKey    = newWallet.PrivateKey,
+                PublicKey     = newWallet.PublicKey,
+                Created       = newWallet.Created,
+                OwnerID       = ownerID
             };
             Console.WriteLine(userDTO.ToString());
             repo.SaveUser(userDTO);
@@ -121,16 +111,16 @@ namespace Xarcade.Api.Prototype
 
         private void SendXPXTest(XarcadeModels.AccountDTO newAccount)
         {   
-            Console.Write("\nHow much XPX should we send to account " + newAccount.userID + " ?:");
-            XarcadeModels.AccountDTO dane2 = pAccount.CreateAccount(999, TEST_PRIVATE_BSG_1);
-            XarcadeParams.SendXpxParams param = new XarcadeParams.SendXpxParams();
-            param.sender = dane2;
-            param.recepientAddress = newAccount.walletAddress;
-            param.amount =  Convert.ToUInt64(Console.ReadLine());
-            param.message = "Pls work.jpg";
-
-            Console.WriteLine("\nSending " + param.amount + " xpx to account " + newAccount.userID + "...");
-            XarcadeModels.TransactionDTO sendCurrency = pTransaction.SendXPXAsync(param).GetAwaiter().GetResult();
+            Console.Write("\nHow much XPX should we send to account " + newAccount.UserID + " ?:");
+            XarcadeModels.AccountDTO dane2 = portal.CreateAccount(999, TEST_PRIVATE_BSG_1).GetAwaiter().GetResult();
+            var param = new SendXpxParams();
+            param.Sender = dane2;
+            param.RecepientAddress = newAccount.WalletAddress;
+            param.Amount =  Convert.ToUInt64(Console.ReadLine());
+            param.Message = "Pls work.jpg";
+            Console.WriteLine(dane2.ToString());
+            Console.WriteLine("\nSending " + param.Amount + " xpx to account " + newAccount.UserID + "...");
+            XarcadeModels.TransactionDTO sendCurrency = portal.SendXPXAsync(param).GetAwaiter().GetResult();
             Console.WriteLine(sendCurrency.ToString());
             Console.WriteLine(sendCurrency.Asset.ToString());
             Console.WriteLine("Transaction signed and announced!");
@@ -142,7 +132,7 @@ namespace Xarcade.Api.Prototype
 
         private void GetAccountTransactions(XarcadeModels.AccountDTO newAccount)
         {
-            List<XarcadeModels.TransactionDTO> transactions = pAccount.GetAccountTransactions(newAccount.walletAddress, 10).GetAwaiter().GetResult();
+            List<XarcadeModels.TransactionDTO> transactions = portal.GetAccountTransactions(newAccount.WalletAddress, 10).GetAwaiter().GetResult();
             int i = 0;
             if(transactions.Count > 0)
             {
@@ -166,9 +156,9 @@ namespace Xarcade.Api.Prototype
         //Creates a mosaic using Dane's private key
         private XarcadeModels.MosaicDTO CreateMosaicTest(XarcadeModels.AccountDTO newAccount)
         {
-            XarcadeParams.CreateMosaicParams param = new XarcadeParams.CreateMosaicParams();
-            param.accountDTO = pAccount.CreateAccount(1, newAccount.privateKey); 
-            XarcadeModels.MosaicDTO createMosaicT = pMosaic.CreateMosaicAsync(param).GetAwaiter().GetResult(); 
+            var param = new CreateMosaicParams();
+            param.Account = portal.CreateAccount(1, newAccount.PrivateKey).GetAwaiter().GetResult(); 
+            XarcadeModels.MosaicDTO createMosaicT = portal.CreateMosaicAsync(param).GetAwaiter().GetResult(); 
             
             Console.WriteLine(createMosaicT.ToString());
             repo.SaveMosaic(createMosaicT);
@@ -181,14 +171,14 @@ namespace Xarcade.Api.Prototype
         {
             Console.Write("Amount to modify:  ");
             int am = Convert.ToInt32(Console.ReadLine());
-            XarcadeParams.ModifyMosaicSupplyParams param = new XarcadeParams.ModifyMosaicSupplyParams
+            var param = new ModifyMosaicSupplyParams
             {
-                accountDTO = newAccount,
-                mosaicID = newMosaic.MosaicID,
-                amount = am
+                Account = newAccount,
+                MosaicID = newMosaic.MosaicID,
+                Amount = am
             };
             Console.Write("Modifying " + newMosaic.MosaicID + " supply by " + am );
-            XarcadeModels.TransactionDTO modifyMosaicT = pMosaic.ModifyMosaicSupply(param).GetAwaiter().GetResult();
+            XarcadeModels.TransactionDTO modifyMosaicT = portal.ModifyMosaicSupply(param).GetAwaiter().GetResult();
             
             repo.SaveTransaction(modifyMosaicT);
 
@@ -203,16 +193,16 @@ namespace Xarcade.Api.Prototype
             string amountToSend = Console.ReadLine();
             Console.Write("Message:  ");
             string message = Console.ReadLine();
-            XarcadeParams.SendMosaicParams param = new XarcadeParams.SendMosaicParams
+            var param = new SendMosaicParams
             {
-                mosaicID = pMosaic.GetMosaicAsync(newMosaic.MosaicID).GetAwaiter().GetResult().MosaicID,
-                sender = pAccount.CreateAccount(1, newAccount.privateKey),
-                recepientAddress = pAccount.CreateAccount(2, TEST_PRIVATE_BSG_1).walletAddress,
-                amount = Convert.ToUInt64(amountToSend),
-                message = message
+                MosaicID = portal.GetMosaicAsync(newMosaic.MosaicID).GetAwaiter().GetResult().MosaicID,
+                Sender = portal.CreateAccount(1, newAccount.PrivateKey).GetAwaiter().GetResult(),
+                RecepientAddress = portal.CreateAccount(2, TEST_PRIVATE_BSG_1).GetAwaiter().GetResult().WalletAddress,
+                Amount = Convert.ToUInt64(amountToSend),
+                Message = message
             };
 
-            XarcadeModels.TransactionDTO sendCoinT = pMosaic.SendMosaicAsync(param).GetAwaiter().GetResult();
+            XarcadeModels.TransactionDTO sendCoinT = portal.SendMosaicAsync(param).GetAwaiter().GetResult();
             repo.SaveTransaction(sendCoinT);
 
         }
@@ -223,10 +213,10 @@ namespace Xarcade.Api.Prototype
         {
             Console.Write("Namespace name:  ");
             string name = Console.ReadLine();
-            XarcadeParams.CreateNamespaceParams param = new XarcadeParams.CreateNamespaceParams();
-            param.accountDTO = pAccount.CreateAccount(1, newAccount.privateKey);
+            var param = new CreateNamespaceParams();
+            param.Account = portal.CreateAccount(1, newAccount.PrivateKey).GetAwaiter().GetResult();
             param.Domain = name;
-            XarcadeModels.NamespaceDTO createNamespaceT = pNamespace.CreateNamespaceAsync(param).GetAwaiter().GetResult();
+            XarcadeModels.NamespaceDTO createNamespaceT = portal.CreateNamespaceAsync(param).GetAwaiter().GetResult();
 
             Console.WriteLine(createNamespaceT.ToString());
             repo.SaveNamespace(createNamespaceT);
@@ -241,12 +231,12 @@ namespace Xarcade.Api.Prototype
             string parentName = Console.ReadLine();
             Console.Write("Child Namespace name:  ");
             string childName = Console.ReadLine();
-            XarcadeParams.CreateNamespaceParams param = new XarcadeParams.CreateNamespaceParams();
-            param.accountDTO = pAccount.CreateAccount(1, newAccount.privateKey);
-            param.Domain = parentName;
-            param.LayerOne = childName;
+            var param = new CreateNamespaceParams();
+            param.Account = portal.CreateAccount(1, newAccount.PrivateKey).GetAwaiter().GetResult();
+            param.Parent = parentName;
+            param.Domain = childName;
 
-            XarcadeModels.NamespaceDTO createNamespaceT = pNamespace.CreateSubNamespaceAsync(param).GetAwaiter().GetResult();
+            XarcadeModels.NamespaceDTO createNamespaceT = portal.CreateNamespaceAsync(param).GetAwaiter().GetResult();
             repo.SaveNamespace(createNamespaceT);
             
             Console.WriteLine(createNamespaceT.ToString());
@@ -257,14 +247,14 @@ namespace Xarcade.Api.Prototype
         {
             Console.Write("Namespace to link:  ");
             string name = Console.ReadLine();
-            XarcadeParams.LinkMosaicParams param = new XarcadeParams.LinkMosaicParams
+            var param = new LinkMosaicParams
             {
-                accountDTO   =  pAccount.CreateAccount(1, newAccount.privateKey),
-                mosaicID     = pMosaic.GetMosaicAsync(newMosaic.MosaicID).GetAwaiter().GetResult().MosaicID,
-                namespaceDTO = pNamespace.GetNamespaceInformation(name).GetAwaiter().GetResult()
+                Account   =  portal.CreateAccount(1, newAccount.PrivateKey).GetAwaiter().GetResult(),
+                MosaicID     = portal.GetMosaicAsync(newMosaic.MosaicID).GetAwaiter().GetResult().MosaicID,
+                Namespace = portal.GetNamespaceInformation(name).GetAwaiter().GetResult()
             };
 
-            var link = pMosaic.LinkMosaicAsync(param).GetAwaiter().GetResult();
+            var link = portal.LinkMosaicAsync(param).GetAwaiter().GetResult();
         }
 
 
