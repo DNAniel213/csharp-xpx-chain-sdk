@@ -121,7 +121,7 @@ namespace Xarcade.Api.Prototype
 
         private void SendXPXTest(XarcadeModels.AccountDTO newAccount)
         {   
-            Console.WriteLine("\nHow much XPX should we send to account " + newAccount.userID + " ?:");
+            Console.Write("\nHow much XPX should we send to account " + newAccount.userID + " ?:");
             XarcadeModels.AccountDTO dane2 = pAccount.CreateAccount(999, TEST_PRIVATE_BSG_1);
             XarcadeParams.SendXpxParams param = new XarcadeParams.SendXpxParams();
             param.sender = dane2;

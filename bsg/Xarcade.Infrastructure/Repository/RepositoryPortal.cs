@@ -92,7 +92,7 @@ namespace Xarcade.Api.Prototype.Repository
             var result = collection.Find(filter);
             if(result.CountDocuments() < 1)
             {
-                Console.WriteLine("Document does not exist");
+                //Console.WriteLine("Document does not exist");
             }
             else
             {

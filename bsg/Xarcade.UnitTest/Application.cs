@@ -21,7 +21,7 @@ namespace Xarcade.Api.Prototype
             Console.WriteLine("Enter 2 to log in to existing account");
             Console.WriteLine("Enter 3 to use default account (skip auth)");
             Console.WriteLine("Enter 4 to just test the cryptography features");
-            Console.WriteLine("input: ");
+            Console.Write("input: ");
             string choice = Console.ReadLine();
             switch(choice)
             {

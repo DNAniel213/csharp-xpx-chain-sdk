@@ -98,11 +98,8 @@ namespace Xarcade.Api.Prototype.Blockchain
         public async Task<Transaction> MonitorTransactionAsync(Transaction transaction)
         {
         // Creates instance of SiriusClient
-        var client = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
-        var siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
 
         var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
-        Console.WriteLine(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
         // Opens the listener
         await ws.Listener.Open();
 
