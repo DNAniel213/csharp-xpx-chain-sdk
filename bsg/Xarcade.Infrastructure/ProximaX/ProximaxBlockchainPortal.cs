@@ -63,7 +63,7 @@ namespace Xarcade.Api.Blockchain
         {
             if(userID < 0)
             {
-                throw new System.ArgumentException("Parameter must be greater than 0", "userID");
+                return null;
                 //TODO log exception
             }
             else
@@ -85,7 +85,7 @@ namespace Xarcade.Api.Blockchain
 
             if(userID <= 0)
             {
-                throw new System.ArgumentException("Parameter must be greater than 0", "userID");
+                return null;
                 //TODO log exception
             }
             else
@@ -102,7 +102,7 @@ namespace Xarcade.Api.Blockchain
 
                 }catch(ArgumentException)
                 {
-                    throw new System.ArgumentException("Not a valid private key", "privateKey");
+                    return null;
                     //TODO log e
                 }
             }
@@ -144,7 +144,7 @@ namespace Xarcade.Api.Blockchain
                 return transactionDTOList;
             }catch(Exception e)
             {
-                throw e;
+                return null;
                 //TODO log e
             }
         }
@@ -153,7 +153,8 @@ namespace Xarcade.Api.Blockchain
         {
             if(param.Account == null)
             {
-                throw new System.ArgumentException("Account parameter is required.", "param");
+                return null;
+                //TODO log exception
             }
                 
             XarcadeModel.MosaicDTO mosaicDTO = new XarcadeModel.MosaicDTO();
@@ -178,9 +179,9 @@ namespace Xarcade.Api.Blockchain
                     networkType);
 
                 await SignAndAnnounceTransaction(account, mosaicDefinitionTransaction);
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e.ToString());
+                return null;
                 //TODO log e
                 //TODO research on possible errors to handle
             }finally
@@ -201,7 +202,7 @@ namespace Xarcade.Api.Blockchain
         {
             if(param.Account == null || param.MosaicID == 0 || param.Amount <= 0) 
             {
-                throw new System.ArgumentException("All parameters are required.", "Account, MosaicID, Amount");
+                return null;
                 //TODO log exception
             } 
 
@@ -226,9 +227,9 @@ namespace Xarcade.Api.Blockchain
 
                     
                 await SignAndAnnounceTransaction(account, mosaicSupplyChangeTransaction);
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                return null;
                 //TODO log e
             }finally
             {
@@ -259,7 +260,7 @@ namespace Xarcade.Api.Blockchain
 
             }catch(Exception e)
             {
-                throw e;
+                return null;
             }
             finally
             {
@@ -274,7 +275,8 @@ namespace Xarcade.Api.Blockchain
         {
             if(param.MosaicID == 0 || param.Sender == null || param.Amount <= 0)
             {
-                throw new System.ArgumentException("All parameters are required.", "Sender, MosaicID, Amount");
+                return null;
+                //TODO log exception
             } 
 
             Account senderAccount = null;
@@ -305,9 +307,9 @@ namespace Xarcade.Api.Blockchain
                 await SignAndAnnounceTransaction(senderAccount, transferTransaction);
 
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                return null;
                 //TODO log e
             }finally
             {
@@ -333,9 +335,11 @@ namespace Xarcade.Api.Blockchain
         {
             if(param.Account == null || param.MosaicID == 0 || param.Namespace == null)
             {
-                throw new System.ArgumentException("All parameters are required.", "AccountDTO, MosaicID, NamespaceDTO");
-            } //Change to exceptions
-
+                return null;
+                //TODO log error
+            } 
+            
+            
             var mosaicDTO = new XarcadeModel.MosaicDTO();
             var transactionDTO = new XarcadeModel.TransactionDTO();
             MosaicInfo mosaicInfo = null;
@@ -356,9 +360,9 @@ namespace Xarcade.Api.Blockchain
                 );
                 await SignAndAnnounceTransaction(account, mosaicLink);
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                return null;
                 //TODO log e
             }finally
             {
@@ -383,7 +387,8 @@ namespace Xarcade.Api.Blockchain
         {
             if(param.Account == null || param.Domain == null)
             {
-                throw new System.ArgumentException("The following parameters are required.", "Account, Domain");
+                return null;
+                //TODO log exception
             }
             var namespaceDTO = new XarcadeModel.NamespaceDTO();
             Account account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
@@ -413,7 +418,7 @@ namespace Xarcade.Api.Blockchain
                 await SignAndAnnounceTransaction(account, registerNamespaceT);
             }catch(Exception e)
             {
-                throw e;
+                return null;
                 //TODO log e
             }finally
             {
@@ -436,9 +441,9 @@ namespace Xarcade.Api.Blockchain
                 var namespaceInfo = await siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
                 ownerAccountInfo  = await siriusClient.AccountHttp.GetAccountInfo(namespaceInfo.Owner.Address);
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                return null;
                 //TODO log e
             }finally
             {
@@ -467,7 +472,8 @@ namespace Xarcade.Api.Blockchain
         {
             if(param.Sender == null || param.RecepientAddress == null || param.Amount <= 0)
             {
-                throw new System.ArgumentException("All parameters are required.", "Sender, RecepientAddress, Amount");
+                return null;
+                //TODO log e
             } 
             XarcadeModel.TransactionDTO transactionDTO = new XarcadeModel.TransactionDTO();
             XarcadeModel.AssetDTO assetDTO = new XarcadeModel.AssetDTO
@@ -507,9 +513,9 @@ namespace Xarcade.Api.Blockchain
                 // Get the generation hash 
                 var result =  SignAndAnnounceTransaction(senderAccount, transferTransaction).GetAwaiter().GetResult();
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                return null;
                 //TODO log e
             }finally
             {
@@ -529,9 +535,9 @@ namespace Xarcade.Api.Blockchain
             {
                 transactionInfo   = await siriusClient.TransactionHttp.GetTransaction(hash);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                return null;
                 //TODO log e
             }
             finally

@@ -17,10 +17,10 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Owners", ownerDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
                 return false;
+                //TODO log e
             }
             return true;
         }
@@ -31,9 +31,9 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Users", userDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
+                //TODO log e
                 return false;
             }
             return true;
@@ -45,9 +45,9 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Namespaces", namespaceDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
+                //TODO log e
                 return false;
             }
             return true;
@@ -59,9 +59,9 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Mosaics", mosaicDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
+                //TODO log e
                 return false;
             }
             return true;
@@ -73,9 +73,9 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Xarcade", xarcadeDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
+                //TODO log e
                 return false;
             }
             return true;
@@ -87,9 +87,9 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Transactions", transactionDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
+                //TODO log e
                 return false;
             }
             return true;
@@ -101,9 +101,10 @@ namespace Xarcade.Api.Prototype.Repository
             {
                 portal.CreateDocument("Authentication", xarUserDTO.ToBsonDocument());
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                Console.WriteLine(e);
+                //TODO log e
+                
                 return false;
             }
             return true;
