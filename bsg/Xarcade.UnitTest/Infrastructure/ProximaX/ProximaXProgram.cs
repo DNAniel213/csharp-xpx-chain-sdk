@@ -2,7 +2,8 @@
 using System;
 using XarcadeModels = Xarcade.Domain.ProximaX;
 using Xarcade.Infrastructure.ProximaX.Params;
-using Xarcade.Api.Prototype.Blockchain;
+using Xarcade.Api.Blockchain;
+using Xarcade.Domain.Authentication;
 using Xarcade.Api.Prototype.Repository;
 /*
     BSG ACCOUNT
@@ -21,7 +22,7 @@ namespace Xarcade.Api.Prototype
         public const string TEST_PRIVATE_BSG_2= "8C0C98ED0D0D703B56EB5FCBA55B02BB9661153C44D2C782F54846D902CEC4B5"; //BSG 2's account
         public const string namespaceName = "hola";
         public const string subNamespaceName = "bigfoo";
-        public void ProximaXMain(XarcadeModels.XarcadeUserDTO user, bool isNewAccount = false)
+        public void ProximaXMain(XarcadeUserDTO user, bool isNewAccount = false)
         {
             portal = new ProximaxBlockchainPortal();
             XarcadeModels.AccountDTO testAccount = portal.CreateAccount(999, TEST_PRIVATE_BSG_1).GetAwaiter().GetResult();
@@ -69,7 +70,7 @@ namespace Xarcade.Api.Prototype
         }
 
 
-        private void ListUserWallets(XarcadeModels.XarcadeUserDTO xarUserDTO)
+        private void ListUserWallets(XarcadeUserDTO xarUserDTO)
         {
             var result = repo.portal.ReadCollection("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("userID", xarUserDTO.userID), FilterOperator.EQUAL));
         }

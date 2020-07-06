@@ -1,10 +1,8 @@
 using MongoDB.Bson;
-using MongoDB.Driver;
 using System;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using XarcadeModels = Xarcade.Domain.ProximaX;
+using Xarcade.Domain.Authentication;
 
 
 namespace Xarcade.Api.Prototype.Repository
@@ -97,7 +95,7 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public bool SaveXarcadeUser(XarcadeModels.XarcadeUserDTO xarUserDTO)
+        public bool SaveXarcadeUser(XarcadeUserDTO xarUserDTO)
         {
             try
             {
@@ -135,12 +133,12 @@ namespace Xarcade.Api.Prototype.Repository
             return null;
         }   
 
-        public XarcadeModels.XarcadeUserDTO LoadXarcadeUser(long userID)
+        public XarcadeUserDTO LoadXarcadeUser(long userID)
         {
             BsonDocument userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
-                XarcadeModels.XarcadeUserDTO xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
+                XarcadeUserDTO xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
                 return xarUserDTO;
             }
 

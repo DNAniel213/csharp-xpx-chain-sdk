@@ -1,6 +1,6 @@
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using XarcadeModel = Xarcade.Domain.ProximaX;
+using Xarcade.Domain.Authentication;
 
 
 namespace Xarcade.Api.Prototype.Repository
@@ -44,9 +44,9 @@ namespace Xarcade.Api.Prototype.Repository
             return ownerDTO;
         }
 
-        public static XarcadeModel.XarcadeUserDTO BsonToXarcadeUserDTO(BsonDocument xarUser)
+        public static XarcadeUserDTO BsonToXarcadeUserDTO(BsonDocument xarUser)
         {
-            XarcadeModel.XarcadeUserDTO xarUserDTO = new XarcadeModel.XarcadeUserDTO();
+            var xarUserDTO = new XarcadeUserDTO();
             xarUserDTO.userID   = xarUser["userID"].AsInt64;
             xarUserDTO.userName = xarUser["userName"].AsString;
             xarUserDTO.password = xarUser["password"].AsString;

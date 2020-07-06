@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using XarcadeModels = Xarcade.Domain.ProximaX;
 using Xarcade.Api.Prototype.Repository;
+using Xarcade.Domain.Authentication;
 
 namespace Xarcade.Api.Prototype
 {
@@ -9,9 +9,9 @@ namespace Xarcade.Api.Prototype
     {
         DataAccessProximaX repo = new DataAccessProximaX();
 
-        public XarcadeModels.XarcadeUserDTO Register()
+        public XarcadeUserDTO Register()
         {
-            XarcadeModels.XarcadeUserDTO user = new XarcadeModels.XarcadeUserDTO();
+            var user = new XarcadeUserDTO();
             Console.WriteLine("\n==Register new User==");
             bool isRegistrationComplete = false, isEmailTaken = true, isUsernameTaken = true;
 
@@ -49,10 +49,10 @@ namespace Xarcade.Api.Prototype
 
         }
 
-        public XarcadeModels.XarcadeUserDTO Login()
+        public XarcadeUserDTO Login()
         {
 
-            XarcadeModels.XarcadeUserDTO user = new XarcadeModels.XarcadeUserDTO();
+            XarcadeUserDTO user = new XarcadeUserDTO();
             Console.WriteLine("\n==Log in==");
             bool isLoginComplete = false;
 
@@ -70,7 +70,7 @@ namespace Xarcade.Api.Prototype
 
                 if(result != null)
                 {
-                    XarcadeModels.XarcadeUserDTO hit = BsonToModel.BsonToXarcadeUserDTO(result);
+                    XarcadeUserDTO hit = BsonToModel.BsonToXarcadeUserDTO(result);
 
                     if(hit.password == password)
                     {

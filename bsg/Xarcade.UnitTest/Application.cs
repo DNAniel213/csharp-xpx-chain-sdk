@@ -1,4 +1,4 @@
-using XarcadeModels = Xarcade.Domain.ProximaX;
+using Xarcade.Domain.Authentication;
 using System;
 
 namespace Xarcade.Api.Prototype
@@ -9,7 +9,7 @@ namespace Xarcade.Api.Prototype
         {
             ProximaXProgram blockChain = new ProximaXProgram();
             RepositoryProgram repository = new RepositoryProgram();
-            XarcadeModels.XarcadeUserDTO user = new XarcadeModels.XarcadeUserDTO
+            XarcadeUserDTO user = new XarcadeUserDTO
             {
                 userID   = 0 ,
                 email    = "dnaniel213@gmail.com",

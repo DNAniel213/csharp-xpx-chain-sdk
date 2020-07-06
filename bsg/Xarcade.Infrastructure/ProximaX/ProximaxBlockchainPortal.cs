@@ -16,7 +16,7 @@ using XarcadeModel = Xarcade.Domain.ProximaX;
 using Xarcade.Api.Blockchain.Abstract;
 using Xarcade.Infrastructure.ProximaX.Params;
 
-namespace Xarcade.Api.Prototype.Blockchain
+namespace Xarcade.Api.Blockchain
 {
     public class ProximaxBlockchainPortal : IBlockchainPortal
     {
@@ -25,8 +25,7 @@ namespace Xarcade.Api.Prototype.Blockchain
         private NetworkType networkType = default(NetworkType);
         private const string TRANSACTION_TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.fff";
         private const string PROXIMAX_MOSAIC_NAME = "same.xpx";
-
-        private string generationHash = null;
+        private static string generationHash = null;
 
         public ProximaxBlockchainPortal()
         {

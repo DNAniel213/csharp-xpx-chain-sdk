@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 
@@ -28,11 +27,21 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public bool CreateDocument(string collectionName, BsonDocument doc)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
+            IMongoCollection<BsonDocument> collection = null;
+            bool success = false;
+            try
+            {
+                collection = database.GetCollection<BsonDocument>(collectionName);
+                collection.InsertOne(doc);
+                success = true;
+            }catch(Exception)
+            {
+                success = false;
+                //TODO log e
+            }
 
-            collection.InsertOne(doc);
             
-            return true;
+            return success;
         } 
 
         /// <summary>
@@ -42,12 +51,22 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public List<BsonDocument> ReadCollection(string collectionName)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            var filter = Builders<BsonDocument>.Filter.Empty;
-            var result = collection.Find(filter).ToList();
-            foreach (var doc in result) {
-                Console.WriteLine(doc.ToJson());
+            FilterDefinition<BsonDocument> filter = null;
+            IMongoCollection<BsonDocument> collection = null;
+            List<BsonDocument> result = null;
+            try
+            {
+                collection = database.GetCollection<BsonDocument>(collectionName);
+                filter = Builders<BsonDocument>.Filter.Empty;
+                result = collection.Find(filter).ToList();
+            }catch(Exception)
+            {
+                result = null;
+                //TODO log e
+            }finally
+            {
             }
+        
             return result;
         }
         
@@ -59,11 +78,22 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public List<BsonDocument> ReadCollection(string collectionName,  FilterDefinition<MongoDB.Bson.BsonDocument> filter )
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            var result = collection.Find(filter).ToList();
-            foreach (var doc in result) {
-                Console.WriteLine(doc.ToJson());
+            IMongoCollection<BsonDocument> collection = null;
+            List<BsonDocument> result = null;
+
+            try
+            {
+                collection = database.GetCollection<BsonDocument>(collectionName);
+                result = collection.Find(filter).ToList();
+            }catch(Exception)
+            {
+                result = null;
+                //TODO log e
+            }finally
+            {
+
             }
+
             return result;
         }
 
@@ -74,10 +104,25 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public long GetDocumentCount(string collectionName)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
             var filter = Builders<BsonDocument>.Filter.Empty;
+            IMongoCollection<BsonDocument> collection = null;
+            long count = 0;
 
-            return collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
+            try
+            {
+                collection = database.GetCollection<BsonDocument>(collectionName);
+                var result = collection.Find(filter).ToList();
+                count = collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
+            }catch(Exception)
+            {
+                count = 0;
+                //TODO log e
+            }finally
+            {
+
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -88,18 +133,24 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public BsonDocument ReadDocument(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            var result = collection.Find(filter);
-            if(result.CountDocuments() < 1)
+            try 
             {
-                //Console.WriteLine("Document does not exist");
-            }
-            else
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var result = collection.Find(filter);
+                if(result.CountDocuments() < 1)
+                {
+                    //Document does not exist
+                    return null;
+                }
+                else
+                {
+                    return result.Single();
+                }
+            }catch(Exception)
             {
-                return result.Single();
+                return null;
+                //TODO log e
             }
-
-            return null;  
         }
 
         /// <summary>
@@ -110,12 +161,20 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public bool CheckExist(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            var result = collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
-            if(result < 1)
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var result = collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
+                if(result < 1)
+                    return false;
+                else
+                    return true;
+            }catch(Exception)
+            {
                 return false;
-            else
-                return true;
+                //TODO log exception
+            }
+
         }
 
         
@@ -129,10 +188,20 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, string newContent)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            var update = Builders<BsonDocument>.Update.Set(field, newContent).CurrentDate("lastModified");
-            var result = collection.UpdateOne(filter, update);
-            return true;
+            bool success = false;
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var update = Builders<BsonDocument>.Update.Set(field, newContent).CurrentDate("lastModified");
+                var result = collection.UpdateOne(filter, update);
+                success = true;
+            }catch(Exception)
+            {
+                success = false;
+                //TODO log e
+            }
+
+            return success;
         }
 
         /// <summary>
@@ -143,10 +212,18 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public bool DeleteDocument(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            var result = collection.DeleteOne(filter);
-
-            return true;
+            bool success = false;
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var result = collection.DeleteOne(filter);
+                success = true;
+            }catch(Exception)
+            {
+                success = false;
+                //TODO log e
+            }
+            return success;
         }
 
         /// <summary>
@@ -165,6 +242,7 @@ namespace Xarcade.Api.Prototype.Repository
                 case FilterOperator.GREATERTHAN            : filterObject = Builders<BsonDocument>.Filter.Gt(filter.Key,filter.Value); break;
                 case FilterOperator.LESSERTHAN_OR_EQUALTO  : filterObject = Builders<BsonDocument>.Filter.Lte(filter.Key,filter.Value); break;
                 case FilterOperator.GREATERTHAN_OR_EQUALTO : filterObject = Builders<BsonDocument>.Filter.Gte(filter.Key,filter.Value); break;
+                default : filterObject = Builders<BsonDocument>.Filter.Eq(filter.Key,filter.Value); break;
             }
             return filterObject;
         }
@@ -179,6 +257,7 @@ namespace Xarcade.Api.Prototype.Repository
                 case FilterOperator.GREATERTHAN            : filterObject = Builders<BsonDocument>.Filter.Gt(filter.Key,filter.Value); break;
                 case FilterOperator.LESSERTHAN_OR_EQUALTO  : filterObject = Builders<BsonDocument>.Filter.Lte(filter.Key,filter.Value); break;
                 case FilterOperator.GREATERTHAN_OR_EQUALTO : filterObject = Builders<BsonDocument>.Filter.Gte(filter.Key,filter.Value); break;
+                default : filterObject = Builders<BsonDocument>.Filter.Eq(filter.Key,filter.Value); break;
             }
             return filterObject;
         }
