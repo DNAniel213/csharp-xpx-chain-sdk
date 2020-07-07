@@ -12,11 +12,10 @@ using ProximaX.Sirius.Chain.Sdk.Model.Mosaics;
 using ProximaX.Sirius.Chain.Sdk.Model.Transactions.Messages;
 using ProximaX.Sirius.Chain.Sdk.Model.Namespaces;
 
-using XarcadeModel = Xarcade.Domain.ProximaX;
-using Xarcade.Api.Blockchain.Abstract;
+using Xarcade.Domain.ProximaX;
 using Xarcade.Infrastructure.ProximaX.Params;
 
-namespace Xarcade.Api.Blockchain
+namespace Xarcade.Infrastructure.ProximaX
 {
     public class ProximaxBlockchainPortal : IBlockchainPortal
     {
@@ -37,10 +36,10 @@ namespace Xarcade.Api.Blockchain
             generationHash = siriusClient.BlockHttp.GetGenerationHash().Wait();
         }
 
-        public async Task<XarcadeModel.TransactionDTO> SignAndAnnounceTransaction(Account account, Transaction transaction)
+        public async Task<TransactionDTO> SignAndAnnounceTransactionAsync(Account account, Transaction transaction)
         {
             SignedTransaction signedTransaction = null;
-            XarcadeModel.TransactionDTO transactionDTO = null;
+            TransactionDTO transactionDTO = null;
             try
             {
                 signedTransaction = account.Sign(transaction, generationHash);
@@ -59,7 +58,7 @@ namespace Xarcade.Api.Blockchain
             return transactionDTO; 
         }
 
-        public async Task<XarcadeModel.AccountDTO> CreateAccount(long userID)
+        public async Task<AccountDTO> CreateAccountAsync(long userID)
         {
             if(userID < 0)
             {
@@ -68,7 +67,7 @@ namespace Xarcade.Api.Blockchain
             }
             else
             {
-                var accountDTO  = new XarcadeModel.AccountDTO();
+                var accountDTO  = new AccountDTO();
                 Account account = Account.GenerateNewAccount(networkType);
 
                 accountDTO.UserID           = userID;
@@ -79,9 +78,9 @@ namespace Xarcade.Api.Blockchain
                 return accountDTO;
             }
         }
-        public async Task<XarcadeModel.AccountDTO> CreateAccount(long userID, string privateKey)
+        public async Task<AccountDTO> CreateAccountAsync(long userID, string privateKey)
         {
-            var accountDTO = new XarcadeModel.AccountDTO();
+            var accountDTO = new AccountDTO();
 
             if(userID <= 0)
             {
@@ -112,7 +111,7 @@ namespace Xarcade.Api.Blockchain
         }
 
 
-        public async Task<List<XarcadeModel.TransactionDTO>> GetAccountTransactions(string address, int numberOfResults)
+        public async Task<List<TransactionDTO>> GetAccountTransactionsAsync(string address, int numberOfResults)
         {
             try
             {
@@ -121,7 +120,7 @@ namespace Xarcade.Api.Blockchain
                     numberOfResults = 10;
                 }
 
-                var transactionDTOList = new List<XarcadeModel.TransactionDTO>();
+                var transactionDTOList = new List<TransactionDTO>();
                 var addressObj = new Address(address, networkType);
                 AccountInfo accountInfo = await siriusClient.AccountHttp.GetAccountInfo(addressObj);
                 var queryParams = new QueryParams(numberOfResults, "");
@@ -129,13 +128,13 @@ namespace Xarcade.Api.Blockchain
                 var transactions = await siriusClient.AccountHttp.Transactions(accountInfo.PublicAccount, queryParams);
                 foreach (Transaction transaction in transactions)
                 {
-                    XarcadeModel.TransactionDTO iTransaction = new XarcadeModel.TransactionDTO();
+                    TransactionDTO iTransaction = new TransactionDTO();
 //FIXME TransactionInfo throwing nonexisting reference
                     //iTransaction.Hash                        = transaction.TransactionInfo.Hash;
                     //iTransaction.Height                      = transaction.TransactionInfo.Height;
                     iTransaction.Created                     = transaction.Deadline.GetLocalDateTime();    
 
-                    XarcadeModel.AssetDTO assetDTO = null;
+                    AssetDTO assetDTO = null;
                     iTransaction.Asset = assetDTO;
         
                     transactionDTOList.Add(iTransaction);
@@ -149,7 +148,7 @@ namespace Xarcade.Api.Blockchain
             }
         }
 
-        public async Task<XarcadeModel.MosaicDTO> CreateMosaicAsync(CreateMosaicParams param)
+        public async Task<MosaicDTO> CreateMosaicAsync(CreateMosaicParams param)
         {
             if(param.Account == null)
             {
@@ -157,7 +156,7 @@ namespace Xarcade.Api.Blockchain
                 //TODO log exception
             }
                 
-            XarcadeModel.MosaicDTO mosaicDTO = new XarcadeModel.MosaicDTO();
+            MosaicDTO mosaicDTO = new MosaicDTO();
             Account account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
             MosaicId mosaicID =  null;
             MosaicDefinitionTransaction mosaicDefinitionTransaction = null;
@@ -178,7 +177,7 @@ namespace Xarcade.Api.Blockchain
                     ),
                     networkType);
 
-                await SignAndAnnounceTransaction(account, mosaicDefinitionTransaction);
+                await SignAndAnnounceTransactionAsync(account, mosaicDefinitionTransaction);
             }catch(Exception)
             {
                 return null;
@@ -198,7 +197,7 @@ namespace Xarcade.Api.Blockchain
             return mosaicDTO;
         }
 
-        public async Task<XarcadeModel.TransactionDTO> ModifyMosaicSupply(ModifyMosaicSupplyParams param)
+        public async Task<TransactionDTO> ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param)
         {
             if(param.Account == null || param.MosaicID == 0 || param.Amount <= 0) 
             {
@@ -206,8 +205,8 @@ namespace Xarcade.Api.Blockchain
                 //TODO log exception
             } 
 
-            XarcadeModel.MosaicDTO mosaicDTO = new XarcadeModel.MosaicDTO();
-            XarcadeModel.TransactionDTO transactionDTO = new XarcadeModel.TransactionDTO();
+            MosaicDTO mosaicDTO = new MosaicDTO();
+            TransactionDTO transactionDTO = new TransactionDTO();
             MosaicInfo mosaicInfo = null;
             Account account = null;
             MosaicSupplyChangeTransaction mosaicSupplyChangeTransaction = null;
@@ -226,7 +225,7 @@ namespace Xarcade.Api.Blockchain
                     networkType);
 
                     
-                await SignAndAnnounceTransaction(account, mosaicSupplyChangeTransaction);
+                await SignAndAnnounceTransactionAsync(account, mosaicSupplyChangeTransaction);
             }catch(Exception)
             {
                 return null;
@@ -250,9 +249,9 @@ namespace Xarcade.Api.Blockchain
         }
 
 //FIXME make this return null if mosaic does isn't found
-        public async Task<XarcadeModel.MosaicDTO> GetMosaicAsync(ulong mosaicID)
+        public async Task<MosaicDTO> GetMosaicAsync(ulong mosaicID)
         {
-            XarcadeModel.MosaicDTO mosaicDTO = new XarcadeModel.MosaicDTO();
+            MosaicDTO mosaicDTO = new MosaicDTO();
             MosaicInfo mosaicInfo = null;
             try
             {
@@ -271,7 +270,7 @@ namespace Xarcade.Api.Blockchain
         }
 
 
-        public async Task<XarcadeModel.TransactionDTO> SendMosaicAsync(SendMosaicParams param)
+        public async Task<TransactionDTO> SendMosaicAsync(SendMosaicParams param)
         {
             if(param.MosaicID == 0 || param.Sender == null || param.Amount <= 0)
             {
@@ -281,8 +280,8 @@ namespace Xarcade.Api.Blockchain
 
             Account senderAccount = null;
             TransferTransaction transferTransaction = null;
-            var transactionDTO = new XarcadeModel.TransactionDTO();
-            var mosaicDTO = new XarcadeModel.MosaicDTO();
+            var transactionDTO = new TransactionDTO();
+            var mosaicDTO = new MosaicDTO();
             MosaicInfo mosaicInfo = null;
 
             try 
@@ -304,7 +303,7 @@ namespace Xarcade.Api.Blockchain
                     networkType
                 );
 
-                await SignAndAnnounceTransaction(senderAccount, transferTransaction);
+                await SignAndAnnounceTransactionAsync(senderAccount, transferTransaction);
 
 
             }catch(Exception)
@@ -331,7 +330,7 @@ namespace Xarcade.Api.Blockchain
             return transactionDTO;
         }
 
-        public async Task<XarcadeModel.TransactionDTO> LinkMosaicAsync(LinkMosaicParams param)
+        public async Task<TransactionDTO> LinkMosaicAsync(LinkMosaicParams param)
         {
             if(param.Account == null || param.MosaicID == 0 || param.Namespace == null)
             {
@@ -340,8 +339,8 @@ namespace Xarcade.Api.Blockchain
             } 
             
             
-            var mosaicDTO = new XarcadeModel.MosaicDTO();
-            var transactionDTO = new XarcadeModel.TransactionDTO();
+            var mosaicDTO = new MosaicDTO();
+            var transactionDTO = new TransactionDTO();
             MosaicInfo mosaicInfo = null;
             AliasTransaction mosaicLink = null;
             Account account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
@@ -358,7 +357,7 @@ namespace Xarcade.Api.Blockchain
                     Deadline.Create(),
                     networkType
                 );
-                await SignAndAnnounceTransaction(account, mosaicLink);
+                await SignAndAnnounceTransactionAsync(account, mosaicLink);
 
             }catch(Exception)
             {
@@ -383,14 +382,14 @@ namespace Xarcade.Api.Blockchain
         }
 
 //TODO @ranz please add check if namespace exists
-        public async Task<XarcadeModel.NamespaceDTO> CreateNamespaceAsync(CreateNamespaceParams param)
+        public async Task<NamespaceDTO> CreateNamespaceAsync(CreateNamespaceParams param)
         {
             if(param.Account == null || param.Domain == null)
             {
                 return null;
                 //TODO log exception
             }
-            var namespaceDTO = new XarcadeModel.NamespaceDTO();
+            var namespaceDTO = new NamespaceDTO();
             Account account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
             RegisterNamespaceTransaction registerNamespaceT = null;
             try
@@ -415,7 +414,7 @@ namespace Xarcade.Api.Blockchain
                 );
                 }
 
-                await SignAndAnnounceTransaction(account, registerNamespaceT);
+                await SignAndAnnounceTransactionAsync(account, registerNamespaceT);
             }catch(Exception e)
             {
                 return null;
@@ -432,10 +431,10 @@ namespace Xarcade.Api.Blockchain
         }
 
 //FIXME make this return null if nonexistent
-        public async Task<XarcadeModel.NamespaceDTO> GetNamespaceInformation (string namespaceName)
+        public async Task<NamespaceDTO> GetNamespaceInformationAsync (string namespaceName)
         {
             AccountInfo ownerAccountInfo = null;
-            XarcadeModel.NamespaceDTO namespaceDTO = null;
+            NamespaceDTO namespaceDTO = null;
             try
             {
                 var namespaceInfo = await siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(namespaceName));
@@ -447,7 +446,7 @@ namespace Xarcade.Api.Blockchain
                 //TODO log e
             }finally
             {
-                XarcadeModel.AccountDTO ownerDTO = new XarcadeModel.AccountDTO
+                AccountDTO ownerDTO = new AccountDTO
                 {
                     UserID = 0,
                     WalletAddress = ownerAccountInfo.Address.Pretty,
@@ -456,7 +455,7 @@ namespace Xarcade.Api.Blockchain
                     Created       = DateTime.Now, //FIXME @Dane please get actual creation date
                 };
                 
-                namespaceDTO = new XarcadeModel.NamespaceDTO
+                namespaceDTO = new NamespaceDTO
                 {
                     Domain   = namespaceName,
                     Owner    = ownerDTO,
@@ -468,15 +467,15 @@ namespace Xarcade.Api.Blockchain
             return namespaceDTO;
         }
 
-        public async Task<XarcadeModel.TransactionDTO> SendXPXAsync(SendXpxParams param)
+        public async Task<TransactionDTO> SendXPXAsync(SendXpxParams param)
         {
             if(param.Sender == null || param.RecepientAddress == null || param.Amount <= 0)
             {
                 return null;
                 //TODO log e
             } 
-            XarcadeModel.TransactionDTO transactionDTO = new XarcadeModel.TransactionDTO();
-            XarcadeModel.AssetDTO assetDTO = new XarcadeModel.AssetDTO
+            TransactionDTO transactionDTO = new TransactionDTO();
+            AssetDTO assetDTO = new AssetDTO
             {
                 AssetID  = "XPX",
                 Name     = param.Message,
@@ -511,7 +510,7 @@ namespace Xarcade.Api.Blockchain
 
 
                 // Get the generation hash 
-                var result =  SignAndAnnounceTransaction(senderAccount, transferTransaction).GetAwaiter().GetResult();
+                var result =  SignAndAnnounceTransactionAsync(senderAccount, transferTransaction).GetAwaiter().GetResult();
 
             }catch(Exception)
             {
@@ -526,10 +525,10 @@ namespace Xarcade.Api.Blockchain
 
 //FIXME make it return null if non-existent
 //FIXME no way to get transaction height
-        public async Task<XarcadeModel.TransactionDTO> GetTransactionInformation (string hash)
+        public async Task<TransactionDTO> GetTransactionInformationAsync (string hash)
         {
-            var transaction = new XarcadeModel.TransactionDTO();
-            var asset = new XarcadeModel.AssetDTO();
+            var transaction = new TransactionDTO();
+            var asset = new AssetDTO();
             Transaction transactionInfo = null;
             try
             {

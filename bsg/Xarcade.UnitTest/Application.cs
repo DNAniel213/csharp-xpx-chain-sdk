@@ -11,10 +11,10 @@ namespace Xarcade.Api.Prototype
             RepositoryProgram repository = new RepositoryProgram();
             XarcadeUserDTO user = new XarcadeUserDTO
             {
-                userID   = 0 ,
-                email    = "dnaniel213@gmail.com",
-                userName = "dnaniel213",
-                password = "encryptedpassword",
+                UserID   = 0 ,
+                Email    = "dnaniel213@gmail.com",
+                UserName = "dnaniel213",
+                Password = "encryptedpassword",
             };
 
             Console.WriteLine("Enter 1 to Register");

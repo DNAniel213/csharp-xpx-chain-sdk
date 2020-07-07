@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using System.Collections.Generic;
 
 
-namespace Xarcade.Api.Prototype.Repository
+namespace Xarcade.Infrastructure.Repository
 {
     public class RepositoryPortal
     {
@@ -28,7 +28,7 @@ namespace Xarcade.Api.Prototype.Repository
         public bool CreateDocument(string collectionName, BsonDocument doc)
         {
             IMongoCollection<BsonDocument> collection = null;
-            bool success = false;
+            var success = false;
             try
             {
                 collection = database.GetCollection<BsonDocument>(collectionName);
@@ -188,7 +188,7 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, string newContent)
         {
-            bool success = false;
+            var success = false;
             try
             {
                 var collection = database.GetCollection<BsonDocument>(collectionName);
@@ -212,7 +212,7 @@ namespace Xarcade.Api.Prototype.Repository
         /// <returns></returns>
         public bool DeleteDocument(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter)
         {
-            bool success = false;
+            var success = false;
             try
             {
                 var collection = database.GetCollection<BsonDocument>(collectionName);

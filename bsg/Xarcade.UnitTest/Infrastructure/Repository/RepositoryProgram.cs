@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Xarcade.Api.Prototype.Repository;
+using Xarcade.Infrastructure.Repository;
 using Xarcade.Domain.Authentication;
 
 namespace Xarcade.Api.Prototype
@@ -20,9 +20,9 @@ namespace Xarcade.Api.Prototype
                 while(isEmailTaken)
                 {
                     Console.Write("Email: ");
-                    user.email = Console.ReadLine();
+                    user.Email = Console.ReadLine();
 
-                    isEmailTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("email", user.email), FilterOperator.EQUAL));
+                    isEmailTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("email", user.Email), FilterOperator.EQUAL));
                     if(isEmailTaken)
                         Console.WriteLine("Email already exists!");
                 }
@@ -30,16 +30,16 @@ namespace Xarcade.Api.Prototype
                 while(isUsernameTaken)
                 {
                     Console.Write("User name: ");
-                    user.userName = Console.ReadLine();
+                    user.UserName = Console.ReadLine();
 
-                    isUsernameTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("userName", user.userName), FilterOperator.EQUAL));
+                    isUsernameTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("userName", user.UserName), FilterOperator.EQUAL));
                     if(isUsernameTaken)
                         Console.WriteLine("Username already exists!");
                 }
 
                 Console.Write("Password: ");
-                user.password = Console.ReadLine();
-                user.userID = repo.portal.GetDocumentCount("Authentication");
+                user.Password = Console.ReadLine();
+                user.UserID = repo.portal.GetDocumentCount("Authentication");
                 repo.SaveXarcadeUser(user);
                 Console.WriteLine("Account Created!");
                 return user;
@@ -72,7 +72,7 @@ namespace Xarcade.Api.Prototype
                 {
                     XarcadeUserDTO hit = BsonToModel.BsonToXarcadeUserDTO(result);
 
-                    if(hit.password == password)
+                    if(hit.Password == password)
                     {
                         isLoginComplete = true;
                         return hit;

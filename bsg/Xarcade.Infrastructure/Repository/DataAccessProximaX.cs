@@ -1,17 +1,17 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using XarcadeModels = Xarcade.Domain.ProximaX;
+using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
 
 
-namespace Xarcade.Api.Prototype.Repository
+namespace Xarcade.Infrastructure.Repository
 {
     public class DataAccessProximaX
     {
         public RepositoryPortal portal = new RepositoryPortal();
 
-        public bool SaveOwner(XarcadeModels.OwnerDTO ownerDTO)
+        public bool SaveOwner(OwnerDTO ownerDTO)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public bool SaveUser(XarcadeModels.UserDTO userDTO)
+        public bool SaveUser(UserDTO userDTO)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public bool SaveNamespace(XarcadeModels.NamespaceDTO namespaceDTO)
+        public bool SaveNamespace(NamespaceDTO namespaceDTO)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public bool SaveMosaic(XarcadeModels.MosaicDTO mosaicDTO)
+        public bool SaveMosaic(MosaicDTO mosaicDTO)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public bool SaveXar(XarcadeModels.XarcadeDTO xarcadeDTO)
+        public bool SaveXar(XarcadeDTO xarcadeDTO)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public bool SaveTransaction(XarcadeModels.TransactionDTO transactionDTO)
+        public bool SaveTransaction(TransactionDTO transactionDTO)
         {
             try
             {
@@ -110,24 +110,24 @@ namespace Xarcade.Api.Prototype.Repository
             return true;
         }
 
-        public XarcadeModels.OwnerDTO LoadOwner(long userID)
+        public OwnerDTO LoadOwner(long userID)
         {
-            BsonDocument ownerBson = portal.ReadDocument("Owners", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
+            var ownerBson = portal.ReadDocument("Owners", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(ownerBson!=null) //if account exists
             {
-                XarcadeModels.OwnerDTO ownerDTO = BsonToModel.BsonToOwnerDTO(ownerBson);
+                OwnerDTO ownerDTO = BsonToModel.BsonToOwnerDTO(ownerBson);
                 return ownerDTO;
             }
 
             return null;
         }   
 
-        public XarcadeModels.UserDTO LoadUser(long userID)
+        public UserDTO LoadUser(long userID)
         {
-            BsonDocument userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
+            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
-                XarcadeModels.UserDTO userDTO = BsonToModel.BsonToUserDTO(userBson);
+                UserDTO userDTO = BsonToModel.BsonToUserDTO(userBson);
                 return userDTO;
             }
 
@@ -136,7 +136,7 @@ namespace Xarcade.Api.Prototype.Repository
 
         public XarcadeUserDTO LoadXarcadeUser(long userID)
         {
-            BsonDocument userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
+            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
                 XarcadeUserDTO xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);

@@ -6,10 +6,10 @@ namespace Xarcade.Domain.Authentication
     /// <summary>Xarcade's Account Model</summary>
     public class ApiKeyDTO
     {
-        public string apiKey {get; set;}
-        public ApiKeyType type {get; set;}
-        public long userID {get; set;}
-        public DateTime created {get; set;}
+        public string ApiKey {get; set;}
+        public ApiKeyType Type {get; set;}
+        public long UserID {get; set;}
+        public DateTime Created {get; set;}
     }
 
     public enum ApiKeyType 

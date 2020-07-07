@@ -1,18 +1,18 @@
 using MongoDB.Bson;
-using XarcadeModel = Xarcade.Domain.ProximaX;
+using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
 
 
-namespace Xarcade.Api.Prototype.Repository
+namespace Xarcade.Infrastructure.Repository
 {
     /// <summary>
     /// Deserializes Bson into Xarcade.Domain Models
     /// </summary>
     public static class BsonToModel
     {
-        public static XarcadeModel.AccountDTO BsonToAccountDTO(BsonDocument account)
+        public static AccountDTO BsonToAccountDTO(BsonDocument account)
         {
-            XarcadeModel.AccountDTO accountDTO = new XarcadeModel.AccountDTO();
+            var accountDTO = new AccountDTO();
             accountDTO.UserID        = account["userID"].AsInt64;
             accountDTO.WalletAddress = account["walletAddress"].AsString;
             accountDTO.PrivateKey    = account["privateKey"].AsString;
@@ -21,9 +21,9 @@ namespace Xarcade.Api.Prototype.Repository
             return accountDTO;
         }
 
-        public static XarcadeModel.UserDTO BsonToUserDTO(BsonDocument user)
+        public static UserDTO BsonToUserDTO(BsonDocument user)
         {
-            XarcadeModel.UserDTO userDTO = new XarcadeModel.UserDTO();
+            var userDTO = new UserDTO();
             userDTO.UserID        = user["userID"].AsInt64;
             userDTO.WalletAddress = user["walletAddress"].AsString;
             userDTO.PrivateKey    = user["privateKey"].AsString;
@@ -33,9 +33,9 @@ namespace Xarcade.Api.Prototype.Repository
             return userDTO;
         }
 
-        public static XarcadeModel.OwnerDTO BsonToOwnerDTO(BsonDocument owner)
+        public static OwnerDTO BsonToOwnerDTO(BsonDocument owner)
         {
-            XarcadeModel.OwnerDTO ownerDTO = new XarcadeModel.OwnerDTO();
+            var ownerDTO = new OwnerDTO();
             ownerDTO.UserID        = owner["userID"].AsInt64;
             ownerDTO.WalletAddress = owner["walletAddress"].AsString;
             ownerDTO.PrivateKey    = owner["privateKey"].AsString;
@@ -47,11 +47,11 @@ namespace Xarcade.Api.Prototype.Repository
         public static XarcadeUserDTO BsonToXarcadeUserDTO(BsonDocument xarUser)
         {
             var xarUserDTO = new XarcadeUserDTO();
-            xarUserDTO.userID   = xarUser["userID"].AsInt64;
-            xarUserDTO.userName = xarUser["userName"].AsString;
-            xarUserDTO.password = xarUser["password"].AsString;
-            xarUserDTO.email    = xarUser["email"].AsString;
-            xarUserDTO.created  = xarUser["created"].ToUniversalTime();
+            xarUserDTO.UserID   = xarUser["userID"].AsInt64;
+            xarUserDTO.UserName = xarUser["userName"].AsString;
+            xarUserDTO.Password = xarUser["password"].AsString;
+            xarUserDTO.Email    = xarUser["email"].AsString;
+            xarUserDTO.Created  = xarUser["created"].ToUniversalTime();
 
             return xarUserDTO;
         }
