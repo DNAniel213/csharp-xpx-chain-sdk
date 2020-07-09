@@ -1,28 +1,62 @@
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using XarcadeModel = Xarcade.Domain.Models;
+using Xarcade.Domain.ProximaX;
+using Xarcade.Domain.Authentication;
 
 
-namespace Xarcade.Api.Prototype.Repository
+namespace Xarcade.Infrastructure.Repository
 {
     /// <summary>
     /// Deserializes Bson into Xarcade.Domain Models
     /// </summary>
     public static class BsonToModel
     {
-        public static XarcadeModel.AccountDTO BsonToAccountDTO(BsonDocument account)
+        public static Account BsonToAccountDTO(BsonDocument account)
         {
-            return BsonSerializer.Deserialize<XarcadeModel.AccountDTO>(account);
+            var accountDTO = new Account();
+            accountDTO.UserID        = account["userID"].AsInt64;
+            accountDTO.WalletAddress = account["walletAddress"].AsString;
+            accountDTO.PrivateKey    = account["privateKey"].AsString;
+            accountDTO.PublicKey     = account["publicKey"].AsString;
+            accountDTO.Created       = account["created"].ToUniversalTime();
+            return accountDTO;
         }
 
-        public static XarcadeModel.UserDTO BsonToUserDTO(BsonDocument account)
+        public static User BsonToUserDTO(BsonDocument user)
         {
-            return BsonSerializer.Deserialize<XarcadeModel.UserDTO>(account);
+            var userDTO = new User();
+            userDTO.UserID        = user["userID"].AsInt64;
+            userDTO.WalletAddress = user["walletAddress"].AsString;
+            userDTO.PrivateKey    = user["privateKey"].AsString;
+            userDTO.PublicKey     = user["publicKey"].AsString;
+            userDTO.Created       = user["created"].ToUniversalTime();
+            userDTO.OwnerID       = user["ownerID"].AsInt64;
+            return userDTO;
         }
-        public static XarcadeModel.UserDTO BsonToOwnerDTO(BsonDocument account)
+
+        public static Owner BsonToOwnerDTO(BsonDocument owner)
         {
-            return BsonSerializer.Deserialize<XarcadeModel.UserDTO>(account);
+            var ownerDTO = new Owner();
+            ownerDTO.UserID        = owner["userID"].AsInt64;
+            ownerDTO.WalletAddress = owner["walletAddress"].AsString;
+            ownerDTO.PrivateKey    = owner["privateKey"].AsString;
+            ownerDTO.PublicKey     = owner["publicKey"].AsString;
+            ownerDTO.Created       = owner["created"].ToUniversalTime();
+            return ownerDTO;
         }
+
+        public static XarcadeUser BsonToXarcadeUserDTO(BsonDocument xarUser)
+        {
+            var xarUserDTO = new XarcadeUser();
+            xarUserDTO.UserID   = xarUser["userID"].AsInt64;
+            xarUserDTO.UserName = xarUser["userName"].AsString;
+            xarUserDTO.Password = xarUser["password"].AsString;
+            xarUserDTO.Email    = xarUser["email"].AsString;
+            xarUserDTO.Created  = xarUser["created"].ToUniversalTime();
+
+            return xarUserDTO;
+        }
+
+
     }
 
 }
