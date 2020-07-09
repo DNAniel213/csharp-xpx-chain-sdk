@@ -1,6 +1,6 @@
 namespace Xarcade.Domain.ProximaX
 {
-    public class UserDTO : AccountDTO
+    public class User : Account
     {
         public long OwnerID {get; set;}
     }

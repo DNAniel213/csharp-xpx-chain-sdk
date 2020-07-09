@@ -7,7 +7,7 @@ namespace Xarcade.Infrastructure.ProximaX.Params
         /// <summary>
         /// Account to create the mosaic from
         /// </summary>
-        public AccountDTO Account {get; set;} = null;
+        public Account Account {get; set;} = null;
         /// <summary>
         /// The mosaic supply mutability.
         /// </summary>

@@ -7,7 +7,7 @@ namespace Xarcade.Infrastructure.ProximaX.Params
         /// <summary>
         /// Account to create the mosaic from
         /// </summary>
-        public AccountDTO Account { get; set; } = null;
+        public Account Account { get; set; } = null;
         public ulong MosaicID { get; set; } = 0;
         public int Amount { get; set; } = -1;
     }

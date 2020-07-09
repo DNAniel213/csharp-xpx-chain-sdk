@@ -179,13 +179,13 @@ namespace Xarcade.Infrastructure.Repository
 
         
         /// <summary>
-        /// Updates a single field of a single document
+        /// Updates a single field of a single document.
         /// </summary>
         /// <param name="collectionName"></param>
         /// <param name="filter"></param>
         /// <param name="field"></param>
         /// <param name="newContent"></param>
-        /// <returns></returns>
+        /// <returns>Returns true if operation succeeded</returns>
         public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, string newContent)
         {
             var success = false;

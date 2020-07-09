@@ -1,7 +1,7 @@
 namespace Xarcade.Domain.ProximaX
 {
-    public class OwnerDTO : AccountDTO 
+    public class Xarcade :Asset
     {
-
+        
     }
 }

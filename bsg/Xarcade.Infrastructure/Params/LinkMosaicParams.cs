@@ -7,9 +7,9 @@ namespace Xarcade.Infrastructure.ProximaX.Params
         /// <summary>
         /// Account to link the mosaic from
         /// </summary>
-        public AccountDTO Account {get; set;} = null;
+        public Account Account {get; set;} = null;
         public ulong MosaicID {get; set;} = 0;
-        public NamespaceDTO Namespace {get; set;} = null;
+        public Namespace Namespace {get; set;} = null;
     }
 
 }

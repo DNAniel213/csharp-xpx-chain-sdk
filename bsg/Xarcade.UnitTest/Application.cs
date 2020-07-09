@@ -9,7 +9,7 @@ namespace Xarcade.Api.Prototype
         {
             ProximaXProgram blockChain = new ProximaXProgram();
             RepositoryProgram repository = new RepositoryProgram();
-            XarcadeUserDTO user = new XarcadeUserDTO
+            XarcadeUser user = new XarcadeUser
             {
                 UserID   = 0 ,
                 Email    = "dnaniel213@gmail.com",

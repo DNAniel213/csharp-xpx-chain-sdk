@@ -9,9 +9,9 @@ namespace Xarcade.Api.Prototype
     {
         DataAccessProximaX repo = new DataAccessProximaX();
 
-        public XarcadeUserDTO Register()
+        public XarcadeUser Register()
         {
-            var user = new XarcadeUserDTO();
+            var user = new XarcadeUser();
             Console.WriteLine("\n==Register new User==");
             bool isRegistrationComplete = false, isEmailTaken = true, isUsernameTaken = true;
 
@@ -49,10 +49,10 @@ namespace Xarcade.Api.Prototype
 
         }
 
-        public XarcadeUserDTO Login()
+        public XarcadeUser Login()
         {
 
-            XarcadeUserDTO user = new XarcadeUserDTO();
+            XarcadeUser user = new XarcadeUser();
             Console.WriteLine("\n==Log in==");
             bool isLoginComplete = false;
 
@@ -70,7 +70,7 @@ namespace Xarcade.Api.Prototype
 
                 if(result != null)
                 {
-                    XarcadeUserDTO hit = BsonToModel.BsonToXarcadeUserDTO(result);
+                    XarcadeUser hit = BsonToModel.BsonToXarcadeUserDTO(result);
 
                     if(hit.Password == password)
                     {

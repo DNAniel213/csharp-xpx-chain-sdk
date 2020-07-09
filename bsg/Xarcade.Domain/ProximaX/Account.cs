@@ -2,7 +2,7 @@ using System;
 namespace Xarcade.Domain.ProximaX
 {
     /// <summary>Xarcade's Account Model</summary>
-    public class AccountDTO
+    public class Account
     {
         public long UserID {get; set;}
         public string WalletAddress {get; set;}

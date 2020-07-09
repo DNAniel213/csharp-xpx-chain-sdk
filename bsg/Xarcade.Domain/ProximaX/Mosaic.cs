@@ -1,25 +1,21 @@
-using System;
-
 namespace Xarcade.Domain.ProximaX
 {
-    public class AssetDTO
+    public class Mosaic : Asset
     {
-        public string AssetID {get; set;}
-        public string Name {get; set;}
-        public ulong Quantity {get; set;}
-        public AccountDTO Owner {get; set;}
-        public DateTime Created {get; set;}
+        public ulong MosaicID {get; set;}
+        public Namespace Namespace {get; set;}
 
         public override string ToString()
         {
             return
-                "===Asset DTO==="  +
+                "===Asset_Mosaic DTO==="  +
+                "\nMosaicID: "            + MosaicID +
                 "\nAssetID: "            + AssetID +
                 "\nName: "         + Name + 
                 "\nQuantity: "          +Quantity + 
                 "\nOwner: "          +Owner.UserID + 
                 "\nDate Created: "   + Created +
-                "\n==End of Asset DTO==";
+                "\n==End of Asset_Mosaic DTO==";
         }
     }
 }

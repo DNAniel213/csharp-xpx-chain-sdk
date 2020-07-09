@@ -12,7 +12,7 @@ namespace Xarcade.Infrastructure.ProximaX
         /// </summary>
         /// <param name="userID">Unique identification that represents the user</param>
         /// <returns>Account Information</returns>
-        Task<AccountDTO> CreateAccountAsync(long userID);
+        Task<Account> CreateAccountAsync(long userID);
 
         /// <summary>
         /// Generates a wallet for a specific user using a private key
@@ -20,7 +20,7 @@ namespace Xarcade.Infrastructure.ProximaX
         /// <param name="userID">Unique identification that represents the user</param>
         /// <param name="privateKey">The private key to create the wallet with</param>
         /// <returns></returns>
-        Task<AccountDTO> CreateAccountAsync(long userID, string privateKey);
+        Task<Account> CreateAccountAsync(long userID, string privateKey);
 
         /// <summary>
         /// Retrieves the transactions of specified account
@@ -28,63 +28,63 @@ namespace Xarcade.Infrastructure.ProximaX
         /// <param name="address">Address representing the wallet</param>
         /// <param name="numberOfResults">The number of results retrieved</param>
         /// <returns></returns>
-        Task<List<TransactionDTO>> GetAccountTransactionsAsync(string address, int numberOfResults);
+        Task<List<Transaction>> GetAccountTransactionsAsync(string address, int numberOfResults);
         
         /// <summary>
         /// Creates a new mosaic
         /// </summary>
         /// <param name="param">Defines the mutability, transferability, divisibility, and levy mutability of new mosaic</param>
         /// <returns></returns>
-        Task<MosaicDTO> CreateMosaicAsync(CreateMosaicParams param);
+        Task<Mosaic> CreateMosaicAsync(CreateMosaicParams param);
 
         /// <summary>
         /// Creates a transaction that modifies currency's supply by specified amount
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<TransactionDTO> ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param);
+        Task<Transaction> ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param);
         
         /// <summary>
         /// Retrieves the mosaic's details using the mosaic ID. Returns null if it does not exist.
         /// </summary>
         /// <param name="mosaicID">Unique identification that represents the mosaic</param>
         /// <returns></returns>
-        Task<MosaicDTO> GetMosaicAsync(ulong mosaicID);
+        Task<Mosaic> GetMosaicAsync(ulong mosaicID);
         
         /// <summary>
         /// Creates a transaction to sends mosaic from one account to another
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<TransactionDTO> SendMosaicAsync(SendMosaicParams param);
+        Task<Transaction> SendMosaicAsync(SendMosaicParams param);
         
         /// <summary>
         /// Links a mosaic to a namespace
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<TransactionDTO> LinkMosaicAsync(LinkMosaicParams param);
+        Task<Transaction> LinkMosaicAsync(LinkMosaicParams param);
         
         /// <summary>
         /// Creates a new namespace
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<NamespaceDTO> CreateNamespaceAsync(CreateNamespaceParams param);
+        Task<Namespace> CreateNamespaceAsync(CreateNamespaceParams param);
 
         /// <summary>
         /// Retrieves namespace information. Returns null if it doesn't exist
         /// </summary>
         /// <param name="namespaceName"></param>
         /// <returns></returns>
-        Task<NamespaceDTO> GetNamespaceInformationAsync (string namespaceName);
+        Task<Namespace> GetNamespaceInformationAsync (string namespaceName);
         
         /// <summary>
         /// Sends xpx to the specified wallet address
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<TransactionDTO> SendXPXAsync(SendXpxParams param);
+        Task<Transaction> SendXPXAsync(SendXpxParams param);
 
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Xarcade.Infrastructure.ProximaX
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<TransactionDTO> GetTransactionInformationAsync (string hash);
+        Task<Transaction> GetTransactionInformationAsync (string hash);
 
     }
 }

@@ -11,7 +11,7 @@ namespace Xarcade.Infrastructure.Repository
     {
         public RepositoryPortal portal = new RepositoryPortal();
 
-        public bool SaveOwner(OwnerDTO ownerDTO)
+        public bool SaveOwner(Owner ownerDTO)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public bool SaveUser(UserDTO userDTO)
+        public bool SaveUser(User userDTO)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public bool SaveNamespace(NamespaceDTO namespaceDTO)
+        public bool SaveNamespace(Namespace namespaceDTO)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public bool SaveMosaic(MosaicDTO mosaicDTO)
+        public bool SaveMosaic(Mosaic mosaicDTO)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public bool SaveXar(XarcadeDTO xarcadeDTO)
+        public bool SaveXar(Domain.ProximaX.Xarcade xarcadeDTO)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public bool SaveTransaction(TransactionDTO transactionDTO)
+        public bool SaveTransaction(Transaction transactionDTO)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public bool SaveXarcadeUser(XarcadeUserDTO xarUserDTO)
+        public bool SaveXarcadeUser(XarcadeUser xarUserDTO)
         {
             try
             {
@@ -110,36 +110,36 @@ namespace Xarcade.Infrastructure.Repository
             return true;
         }
 
-        public OwnerDTO LoadOwner(long userID)
+        public Owner LoadOwner(long userID)
         {
             var ownerBson = portal.ReadDocument("Owners", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(ownerBson!=null) //if account exists
             {
-                OwnerDTO ownerDTO = BsonToModel.BsonToOwnerDTO(ownerBson);
+                Owner ownerDTO = BsonToModel.BsonToOwnerDTO(ownerBson);
                 return ownerDTO;
             }
 
             return null;
         }   
 
-        public UserDTO LoadUser(long userID)
+        public User LoadUser(long userID)
         {
             var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
-                UserDTO userDTO = BsonToModel.BsonToUserDTO(userBson);
+                User userDTO = BsonToModel.BsonToUserDTO(userBson);
                 return userDTO;
             }
 
             return null;
         }   
 
-        public XarcadeUserDTO LoadXarcadeUser(long userID)
+        public XarcadeUser LoadXarcadeUser(long userID)
         {
             var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
-                XarcadeUserDTO xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
+                XarcadeUser xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
                 return xarUserDTO;
             }
 

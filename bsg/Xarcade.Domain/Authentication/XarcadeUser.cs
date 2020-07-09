@@ -4,7 +4,7 @@ using System;
 namespace Xarcade.Domain.Authentication
 {
     /// <summary>Xarcade's Account Model</summary>
-    public class XarcadeUserDTO
+    public class XarcadeUser
     {
         public long UserID {get; set;}
         public string UserName {get; set;}

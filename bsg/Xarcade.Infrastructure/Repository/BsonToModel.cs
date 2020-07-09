@@ -10,9 +10,9 @@ namespace Xarcade.Infrastructure.Repository
     /// </summary>
     public static class BsonToModel
     {
-        public static AccountDTO BsonToAccountDTO(BsonDocument account)
+        public static Account BsonToAccountDTO(BsonDocument account)
         {
-            var accountDTO = new AccountDTO();
+            var accountDTO = new Account();
             accountDTO.UserID        = account["userID"].AsInt64;
             accountDTO.WalletAddress = account["walletAddress"].AsString;
             accountDTO.PrivateKey    = account["privateKey"].AsString;
@@ -21,9 +21,9 @@ namespace Xarcade.Infrastructure.Repository
             return accountDTO;
         }
 
-        public static UserDTO BsonToUserDTO(BsonDocument user)
+        public static User BsonToUserDTO(BsonDocument user)
         {
-            var userDTO = new UserDTO();
+            var userDTO = new User();
             userDTO.UserID        = user["userID"].AsInt64;
             userDTO.WalletAddress = user["walletAddress"].AsString;
             userDTO.PrivateKey    = user["privateKey"].AsString;
@@ -33,9 +33,9 @@ namespace Xarcade.Infrastructure.Repository
             return userDTO;
         }
 
-        public static OwnerDTO BsonToOwnerDTO(BsonDocument owner)
+        public static Owner BsonToOwnerDTO(BsonDocument owner)
         {
-            var ownerDTO = new OwnerDTO();
+            var ownerDTO = new Owner();
             ownerDTO.UserID        = owner["userID"].AsInt64;
             ownerDTO.WalletAddress = owner["walletAddress"].AsString;
             ownerDTO.PrivateKey    = owner["privateKey"].AsString;
@@ -44,9 +44,9 @@ namespace Xarcade.Infrastructure.Repository
             return ownerDTO;
         }
 
-        public static XarcadeUserDTO BsonToXarcadeUserDTO(BsonDocument xarUser)
+        public static XarcadeUser BsonToXarcadeUserDTO(BsonDocument xarUser)
         {
-            var xarUserDTO = new XarcadeUserDTO();
+            var xarUserDTO = new XarcadeUser();
             xarUserDTO.UserID   = xarUser["userID"].AsInt64;
             xarUserDTO.UserName = xarUser["userName"].AsString;
             xarUserDTO.Password = xarUser["password"].AsString;
