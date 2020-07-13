@@ -8,8 +8,6 @@ namespace Xarcade.Application.Xarcade.Models.Token
         public string Name {get; set;}
         public ulong Quantity {get; set;}
         public long Owner {get; set;} //UserId
-        public CustomTokenDto customeTokenDto ;
-        public XarcadeTokenDto xarcadeTokenDto;
 
         public override string ToString()
         {

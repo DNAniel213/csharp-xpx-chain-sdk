@@ -7,8 +7,6 @@ namespace Xarcade.Application.Xarcade.Models.Account
         public long UserID {get; set;}
         public string WalletAddress {get; set;}
         public DateTime Created {get; set;}
-        public OwnerDto OwnerDto {get; set;}
-        public UserDto UserDto {get; set;}
 
         public override string ToString()
         {

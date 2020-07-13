@@ -2,9 +2,9 @@ using System;
 namespace Xarcade.Application.Xarcade.Models.Token
 {
     /// <summary>Xarcade Application Layer Custom Token Dto Composition: GameDto</summary>
-    public class CustomTokenDto
+    public class CustomTokenDto : TokenDto
     {
-        public GameDto Property = new GameDto ();
+        public GameDto Property {get; set;}
         
         public override string ToString()
         {
