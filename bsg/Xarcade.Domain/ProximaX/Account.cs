@@ -1,10 +1,8 @@
 using System;
-
-
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
     /// <summary>Xarcade's Account Model</summary>
-    public class AccountDTO
+    public class Account
     {
         public long UserID {get; set;}
         public string WalletAddress {get; set;}
@@ -15,13 +13,13 @@ namespace Xarcade.Domain.Models
         public override string ToString()
         {
 
-            var privatekey = PrivateKey != null ? PrivateKey : "hidden";
+            var privateKeyString = PrivateKey != null ? PrivateKey : "hidden";
             return
                 "===Account DTO==="  +
                 "\nUser ID: "        + UserID +
                 "\nWallet Address: " + WalletAddress + 
                 "\nPublic Key: "     + PublicKey + 
-                "\nPrivate Key: "    + PrivateKey+  
+                "\nPrivate Key: "    + privateKeyString+  
                 "\nDate Created: "   + Created +
                 "\n==End of Account DTO==";
  

@@ -1,12 +1,12 @@
 using System;
 
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
-    public class TransactionDTO
+    public class Transaction
     {
         public string Hash {get; set;}
         public ulong Height {get; set;}
-        public AssetDTO Asset {get; set;}
+        public Asset Asset {get; set;}
         public DateTime Created {get; set;}
 
         public override string ToString()

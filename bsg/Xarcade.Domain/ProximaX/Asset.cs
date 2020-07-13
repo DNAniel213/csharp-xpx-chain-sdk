@@ -1,13 +1,13 @@
 using System;
 
-namespace Xarcade.Domain.Models
+namespace Xarcade.Domain.ProximaX
 {
-    public class AssetDTO
+    public class Asset
     {
         public string AssetID {get; set;}
         public string Name {get; set;}
         public ulong Quantity {get; set;}
-        public AccountDTO Owner {get; set;}
+        public Account Owner {get; set;}
         public DateTime Created {get; set;}
 
         public override string ToString()

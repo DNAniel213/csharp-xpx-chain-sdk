@@ -1,24 +1,17 @@
 using System;
 using System.Collections.Generic;
-using XarcadeModels = Xarcade.Domain.Models;
-using Xarcade.Api.Prototype.Repository;
+using Xarcade.Infrastructure.Repository;
+using Xarcade.Domain.Authentication;
 
 namespace Xarcade.Api.Prototype
 {
     public class RepositoryProgram
     {
-        RepositoryPortal repo = new RepositoryPortal();
+        DataAccessProximaX repo = new DataAccessProximaX();
 
-        public XarcadeModels.OwnerDTO CreateGame()
+        public XarcadeUser Register()
         {
-            XarcadeModels.OwnerDTO owner = Register();
-            Console.WriteLine("Game Created!");
-
-            return owner;
-        }
-        public XarcadeModels.UserDTO Register()
-        {
-            XarcadeModels.UserDTO user = new XarcadeModels.UserDTO();
+            var user = new XarcadeUser();
             Console.WriteLine("\n==Register new User==");
             bool isRegistrationComplete = false, isEmailTaken = true, isUsernameTaken = true;
 
@@ -27,9 +20,9 @@ namespace Xarcade.Api.Prototype
                 while(isEmailTaken)
                 {
                     Console.Write("Email: ");
-                    user.email = Console.ReadLine();
+                    user.Email = Console.ReadLine();
 
-                    isEmailTaken = repo.CheckExist("Users", repo.CreateFilter(new KeyValuePair<string, string>("Email", user.email), FilterOperator.EQUAL));
+                    isEmailTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("email", user.Email), FilterOperator.EQUAL));
                     if(isEmailTaken)
                         Console.WriteLine("Email already exists!");
                 }
@@ -37,24 +30,18 @@ namespace Xarcade.Api.Prototype
                 while(isUsernameTaken)
                 {
                     Console.Write("User name: ");
-                    user.userName = Console.ReadLine();
+                    user.UserName = Console.ReadLine();
 
-                    isUsernameTaken = repo.CheckExist("Users", repo.CreateFilter(new KeyValuePair<string, string>("Username", user.userName), FilterOperator.EQUAL));
+                    isUsernameTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("userName", user.UserName), FilterOperator.EQUAL));
                     if(isUsernameTaken)
                         Console.WriteLine("Username already exists!");
                 }
 
                 Console.Write("Password: ");
-                user.password = Console.ReadLine();
-                Console.Write("First Name: ");
-                user.fName = Console.ReadLine();
-                Console.Write("Last Name: ");
-                user.lName = Console.ReadLine();
-
-                user.UserID = RepositoryPortal.GenerateID().GetHashCode();
-
+                user.Password = Console.ReadLine();
+                user.UserID = repo.portal.GetDocumentCount("Authentication");
+                repo.SaveXarcadeUser(user);
                 Console.WriteLine("Account Created!");
-                repo.CreateDocument("Users", ModelToBson.AccountDTOtoBson(user));
                 return user;
             }
 
@@ -62,12 +49,12 @@ namespace Xarcade.Api.Prototype
 
         }
 
-        public XarcadeModels.UserDTO Login()
+        public XarcadeUser Login()
         {
 
-            XarcadeModels.UserDTO user = new XarcadeModels.UserDTO();
+            XarcadeUser user = new XarcadeUser();
             Console.WriteLine("\n==Log in==");
-            bool isLoginComplete = false, areCredentialsCorrect = false;
+            bool isLoginComplete = false;
 
             while(!isLoginComplete)
             {
@@ -77,29 +64,22 @@ namespace Xarcade.Api.Prototype
                 Console.Write("Password: ");
                 var password = Console.ReadLine();
 
-                var result = repo.ReadDocument("Users", repo.CreateFilter(new KeyValuePair<string, string>("userName", login), FilterOperator.EQUAL));
+                var result = repo.portal.ReadDocument("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("email", login), FilterOperator.EQUAL));
                 if(result == null)
-                    result = repo.ReadDocument("Users", repo.CreateFilter(new KeyValuePair<string, string>("Email", login), FilterOperator.EQUAL));
-                else if(result == null)
-                    result = repo.ReadDocument("Owners", repo.CreateFilter(new KeyValuePair<string, string>("userName", login), FilterOperator.EQUAL));
-                else if (result == null)
-                    result = repo.ReadDocument("Owners", repo.CreateFilter(new KeyValuePair<string, string>("Email", login), FilterOperator.EQUAL));
+                    result = repo.portal.ReadDocument("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("userName", login), FilterOperator.EQUAL));
 
                 if(result != null)
                 {
-                    var hit = new XarcadeModels.UserDTO();
-                    if(result.GetType().Equals(new XarcadeModels.UserDTO()))
+                    XarcadeUser hit = BsonToModel.BsonToXarcadeUserDTO(result);
+
+                    if(hit.Password == password)
                     {
-                        hit = BsonToModel.BsonToUserDTO(result);
+                        isLoginComplete = true;
+                        return hit;
                     }
                     else
                     {
-                        hit = BsonToModel.BsonToOwnerDTO(result);
-                    }
-                    
-                    if(hit.password == password)
-                    {
-                        return hit;
+                        Console.WriteLine("Credentials incorrect");
                     }
                     
                 }
@@ -107,7 +87,6 @@ namespace Xarcade.Api.Prototype
 
             }
             return null;
-
         }
     }
 }
