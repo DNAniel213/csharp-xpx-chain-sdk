@@ -7,7 +7,7 @@ namespace Xarcade.Application.Xarcade.Models.Transaction
     public class AccountTransactionDto
     {
         public string Hash {get; set;}
-        public AccountDto Account = new AccountDto ();
+        public AccountDto Account {get; set;}
         public ulong BlockNumber {get; set;}
         public DateTime Created {get; set;}
         public override string ToString()
