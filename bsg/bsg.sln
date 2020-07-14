@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xarcade.Domain", "Xarcade.Domain\Xarcade.Domain.csproj", "{62FFFEC1-8CD3-4911-8F01-8B99F2570702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xarcade.Domain", "Xarcade.Domain\Xarcade.Domain.csproj", "{62FFFEC1-8CD3-4911-8F01-8B99F2570702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xarcade.Infrastructure", "Xarcade.Infrastructure\Xarcade.Infrastructure.csproj", "{082A1DDA-8C1B-4B6A-943F-DFF5D7342C6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xarcade.Infrastructure", "Xarcade.Infrastructure\Xarcade.Infrastructure.csproj", "{082A1DDA-8C1B-4B6A-943F-DFF5D7342C6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xarcade.UnitTest", "Xarcade.UnitTest\Xarcade.UnitTest.csproj", "{8DA7ED46-18B1-4DB1-8F9E-8406F524034F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xarcade.UnitTest", "Xarcade.UnitTest\Xarcade.UnitTest.csproj", "{8DA7ED46-18B1-4DB1-8F9E-8406F524034F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xarcade.Application", "Xarcade.Application\Xarcade.Application.csproj", "{630917D8-49C3-4FC5-9723-12EA224F1629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{62FFFEC1-8CD3-4911-8F01-8B99F2570702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +57,23 @@ Global
 		{8DA7ED46-18B1-4DB1-8F9E-8406F524034F}.Release|x64.Build.0 = Release|Any CPU
 		{8DA7ED46-18B1-4DB1-8F9E-8406F524034F}.Release|x86.ActiveCfg = Release|Any CPU
 		{8DA7ED46-18B1-4DB1-8F9E-8406F524034F}.Release|x86.Build.0 = Release|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Debug|x64.Build.0 = Debug|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Debug|x86.Build.0 = Debug|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Release|x64.ActiveCfg = Release|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Release|x64.Build.0 = Release|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Release|x86.ActiveCfg = Release|Any CPU
+		{630917D8-49C3-4FC5-9723-12EA224F1629}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72E8B168-78D4-4085-9A59-5146B571565A}
 	EndGlobalSection
 EndGlobal
