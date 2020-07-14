@@ -10,6 +10,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xarcade.UnitTest", "Xarcade.UnitTest\Xarcade.UnitTest.csproj", "{8DA7ED46-18B1-4DB1-8F9E-8406F524034F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xarcade.Application", "Xarcade.Application\Xarcade.Application.csproj", "{630917D8-49C3-4FC5-9723-12EA224F1629}"
+	ProjectSection(ProjectDependencies) = postProject
+		{62FFFEC1-8CD3-4911-8F01-8B99F2570702} = {62FFFEC1-8CD3-4911-8F01-8B99F2570702}
+		{082A1DDA-8C1B-4B6A-943F-DFF5D7342C6A} = {082A1DDA-8C1B-4B6A-943F-DFF5D7342C6A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
