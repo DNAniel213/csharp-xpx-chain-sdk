@@ -3,9 +3,8 @@ using Xarcade.Domain.Authentication;
 
 namespace Xarcade.Infrastructure.Repository
 {
-    interface IDataAccessProximaX
+    public interface IDataAccessProximaX
     {
-
         public bool SaveOwner(Owner ownerDTO);
         public bool SaveUser(User userDTO);
         public bool SaveNamespace(Namespace namespaceDTO);
