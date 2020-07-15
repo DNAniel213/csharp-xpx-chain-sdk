@@ -9,7 +9,7 @@ using Xarcade.Infrastructure.Utilities.Logger;
 
 namespace Xarcade.Infrastructure.Repository
 {
-    public class DataAccessProximaX
+    public class DataAccessProximaX : IDataAccessProximaX
     {
         private static IConfiguration config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", false, true)

@@ -16,6 +16,7 @@ using ProximaX.Sirius.Chain.Sdk.Model.Namespaces;
 using XarcadeModel = Xarcade.Domain.ProximaX;
 using Xarcade.Infrastructure.ProximaX.Params;
 using Xarcade.Infrastructure.Utilities.Logger;
+using Xarcade.Infrastructure.Abstract;
 
 namespace Xarcade.Infrastructure.ProximaX
 {
