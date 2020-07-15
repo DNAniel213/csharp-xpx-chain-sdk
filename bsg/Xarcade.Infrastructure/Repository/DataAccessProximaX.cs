@@ -27,7 +27,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 return false;
-                //TODO log e
             }
             return true;
         }
@@ -40,7 +39,6 @@ namespace Xarcade.Infrastructure.Repository
 
             }catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return false;
             }
@@ -55,7 +53,6 @@ namespace Xarcade.Infrastructure.Repository
 
             }catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return false;
             }
@@ -70,7 +67,6 @@ namespace Xarcade.Infrastructure.Repository
 
             }catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return false;
             }
@@ -85,7 +81,6 @@ namespace Xarcade.Infrastructure.Repository
 
             }catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return false;
             }
@@ -100,7 +95,6 @@ namespace Xarcade.Infrastructure.Repository
 
             }catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return false;
             }
@@ -115,7 +109,6 @@ namespace Xarcade.Infrastructure.Repository
 
             }catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return false;
             }
