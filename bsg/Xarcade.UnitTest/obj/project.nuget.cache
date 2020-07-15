@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1HPeLg+4wrVG51Sq3eypsj4nw8eogh+EabC4k4XB//CYUDoqRM+GF6fSKV9iZAXGFaimTw/hndVlnB8aRJgMBg==",
+  "dgSpecHash": "eOS+cdBUvJHQxT6VLb7OHFfvwRWccUqDfYpkTR2lp/wvWpQBkvcyEh10gh/9XbIsYWN00P5xvXaC1qfURJD0sA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\john-develop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.UnitTest\\Xarcade.UnitTest.csproj",
+  "projectFilePath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.UnitTest\\Xarcade.UnitTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\csharp-xpx-chain-sdk\\0.6.2\\csharp-xpx-chain-sdk.0.6.2.nupkg.sha512",
     "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\dap.flatbuffers\\1.0.0\\dap.flatbuffers.1.0.0.nupkg.sha512",

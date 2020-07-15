@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\john-develop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {}
+    "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\john-develop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
+    "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\john-develop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
         "projectName": "Xarcade.Domain",
-        "projectPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\john-develop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
+        "projectPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\Xarcade.Domain.csproj",
         "packagesPath": "C:\\Users\\Noble 6 Elite Crusad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\john-develop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Noble 6 Elite Crusad\\Desktop\\csharp-xrcd-rest-proto\\bsg\\Xarcade.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Noble 6 Elite Crusad\\AppData\\Roaming\\NuGet\\NuGet.Config"
