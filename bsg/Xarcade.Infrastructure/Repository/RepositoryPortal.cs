@@ -43,7 +43,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 success = false;
-                //TODO log e
             }
 
             
@@ -69,7 +68,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 result = null;
-                //TODO log e
             }finally
             {
             }
@@ -96,7 +94,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 result = null;
-                //TODO log e
             }finally
             {
 
@@ -125,7 +122,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 count = 0;
-                //TODO log e
             }finally
             {
 
@@ -149,7 +145,6 @@ namespace Xarcade.Infrastructure.Repository
                 if(result.CountDocuments() < 1)
                 {
                     _logger.LogError("Document does not exist!!");
-                    //Document does not exist
                     return null;
                 }
                 else
@@ -160,7 +155,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
         }
 
@@ -184,7 +178,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 return false;
-                //TODO log exception
             }
 
         }
@@ -211,7 +204,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 success = false;
-                //TODO log e
             }
 
             return success;
@@ -235,7 +227,6 @@ namespace Xarcade.Infrastructure.Repository
             {
                 _logger.LogError(e.ToString());
                 success = false;
-                //TODO log e
             }
             return success;
         }

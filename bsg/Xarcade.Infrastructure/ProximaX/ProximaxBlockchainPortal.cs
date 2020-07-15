@@ -50,7 +50,6 @@ namespace Xarcade.Infrastructure.ProximaX
                 string generationHash = await siriusClient.BlockHttp.GetGenerationHash();
                 if (string.IsNullOrWhiteSpace(generationHash))
                 {
-                    //TODO: Log error empty generationHash
                     _logger.LogError("Generation Hash is empty!!");
                     return null;
                 }
@@ -58,7 +57,6 @@ namespace Xarcade.Infrastructure.ProximaX
                 var signedTransaction = account.Sign(transaction, generationHash);
                 if (signedTransaction == null)
                 {
-                    //TODO: Log error empty generationHash
                     _logger.LogError("Generation Hash is empty!!");
                     return null;
                 }
@@ -70,7 +68,6 @@ namespace Xarcade.Infrastructure.ProximaX
             }
             catch(Exception e)
             {
-                //TODO log e
                 _logger.LogError(e.ToString());
                 return null;
             }
@@ -86,7 +83,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("User ID does not exist!!");
                 return null;
-                //TODO log exception
             }
 
             try
@@ -108,7 +104,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log exception
             }
 
 
@@ -122,7 +117,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("User ID does not exist!!");
                 return null;
-                //TODO log exception
             }
 
             try
@@ -144,7 +138,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
 
@@ -161,7 +154,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("Address does not exist!!");
                 return null;
-                //TODO log e
             }
 
             List<XarcadeModel.Transaction> transactionList = null;
@@ -198,7 +190,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transactionList;
@@ -211,7 +202,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("Account does not exist!!");
                 return null;
-                //TODO log exception
             }
                 
             XarcadeModel.Mosaic mosaic = null;
@@ -257,7 +247,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
                 //TODO research on possible errors to handle
             }
 
@@ -271,7 +260,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("Input is invaid!!");
                 return null;
-                //TODO log exception
             } 
 
             XarcadeModel.Transaction transaction = null;
@@ -320,7 +308,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transaction;
@@ -343,7 +330,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return mosaic;
@@ -356,7 +342,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log exception
             } 
 
             XarcadeModel.Mosaic mosaic = null;
@@ -407,7 +392,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }finally
             {
 
@@ -423,7 +407,6 @@ namespace Xarcade.Infrastructure.ProximaX
             if(param.Account == null || param.MosaicID == 0 || param.Namespace == null)
             {
                 return null;
-                //TODO log error
             } 
             
 
@@ -473,7 +456,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             return transaction;
         }
@@ -485,7 +467,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log exception
             }
 
             XarcadeModel.Namespace xarNamespace = null;
@@ -529,7 +510,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return xarNamespace;
@@ -570,7 +550,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return xarNamespace;
@@ -582,7 +561,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log e
             } 
 
             XarcadeModel.Transaction transaction = null;
@@ -633,7 +611,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
             return transaction;
@@ -661,7 +638,6 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transaction;
