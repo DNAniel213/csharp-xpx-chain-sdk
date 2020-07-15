@@ -13,9 +13,9 @@ namespace Xarcade.Application.Xarcade.Models.Token
         {
             return
                 "===Game DTO==="  +
-                "\nGame ID: "     + GameID +
+                "\nGame ID: "     + GameId +
                 "\nName: "        + Name +
-                "\nOwner: "       + GameID +
+                "\nOwner: "       + Owner +
                 "\nExpiry: "      + Expiry +
                 "\n==End of Game DTO==";
         }
