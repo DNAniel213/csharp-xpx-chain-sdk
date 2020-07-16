@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Xarcade.Infrastructure.Utilities.Logger
 {
-    public class BlockchainLogger: ILogger
+    public class DummyLogger: ILogger
     {
         public IConfiguration Configuration
         {
@@ -43,9 +43,9 @@ namespace Xarcade.Infrastructure.Utilities.Logger
                 return;
             }
 
-            var logPath = configuration["BlockchainPortalLogFile"];
-            var logFileCount = Int32.Parse(configuration["BlockchainPortalLogFileCount"]);
-            var fileSizeLimit = Int32.Parse(configuration["BlockchainPortalFileSizeLimt"]);
+            var logPath = configuration["DummyLogFile"];
+            var logFileCount = Int32.Parse(configuration["DummyLogFileCount"]);
+            var fileSizeLimit = Int32.Parse(configuration["DummyFileSizeLimit"]);
 
             Log.Logger = new LoggerConfiguration()
                             .MinimumLevel
