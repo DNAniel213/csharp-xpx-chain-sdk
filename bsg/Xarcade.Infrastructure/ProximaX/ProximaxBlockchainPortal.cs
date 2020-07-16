@@ -2,6 +2,7 @@ using System.Reactive.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 using ProximaX.Sirius.Chain.Sdk.Model.Blockchain;
 using ProximaX.Sirius.Chain.Sdk.Client;
@@ -14,6 +15,7 @@ using ProximaX.Sirius.Chain.Sdk.Model.Namespaces;
 
 using XarcadeModel = Xarcade.Domain.ProximaX;
 using Xarcade.Infrastructure.ProximaX.Params;
+using Xarcade.Infrastructure.Utilities.Logger;
 using Xarcade.Infrastructure.Abstract;
 
 namespace Xarcade.Infrastructure.ProximaX
@@ -22,10 +24,14 @@ namespace Xarcade.Infrastructure.ProximaX
     {
         private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io"; 
         private static SiriusClient siriusClient = null;
+        private static ILogger _logger;
 
 
-        public ProximaxBlockchainPortal()
+        public ProximaxBlockchainPortal(IConfiguration configuration)
         {
+            LoggerFactory.Configuration = configuration;
+            _logger = LoggerFactory.GetLogger(Logger.Dummy);
+
             if (siriusClient == null)
             {
                 siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
@@ -44,14 +50,14 @@ namespace Xarcade.Infrastructure.ProximaX
                 string generationHash = await siriusClient.BlockHttp.GetGenerationHash();
                 if (string.IsNullOrWhiteSpace(generationHash))
                 {
-                    //TODO: Log error empty generationHash
+                    _logger.LogError("Generation Hash is empty!!");
                     return null;
                 }
                 
                 var signedTransaction = account.Sign(transaction, generationHash);
                 if (signedTransaction == null)
                 {
-                    //TODO: Log error empty generationHash
+                    _logger.LogError("Generation Hash is empty!!");
                     return null;
                 }
                 
@@ -60,9 +66,9 @@ namespace Xarcade.Infrastructure.ProximaX
                 //transaction = await GetTransactionInformation(signedTransaction.Hash);
                 //FIXME need to return transaction, but it lacks Height
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return null;
             }
             
@@ -75,8 +81,8 @@ namespace Xarcade.Infrastructure.ProximaX
 
             if(userID < 0)
             {
+                _logger.LogError("User ID does not exist!!");
                 return null;
-                //TODO log exception
             }
 
             try
@@ -94,10 +100,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created          = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log exception
             }
 
 
@@ -109,8 +115,8 @@ namespace Xarcade.Infrastructure.ProximaX
 
             if(userID < 0 || String.IsNullOrEmpty(privateKey))
             {
+                _logger.LogError("User ID does not exist!!");
                 return null;
-                //TODO log exception
             }
 
             try
@@ -128,10 +134,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created          = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
 
@@ -146,8 +152,8 @@ namespace Xarcade.Infrastructure.ProximaX
             
             if(String.IsNullOrWhiteSpace(address))
             {
+                _logger.LogError("Address does not exist!!");
                 return null;
-                //TODO log e
             }
 
             List<XarcadeModel.Transaction> transactionList = null;
@@ -180,10 +186,10 @@ namespace Xarcade.Infrastructure.ProximaX
                 }
 
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transactionList;
@@ -194,8 +200,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Account == null)
             {
+                _logger.LogError("Account does not exist!!");
                 return null;
-                //TODO log exception
             }
                 
             XarcadeModel.Mosaic mosaic = null;
@@ -237,10 +243,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     }
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
                 //TODO research on possible errors to handle
             }
 
@@ -252,8 +258,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Account == null || param.MosaicID == 0 || param.Amount <= 0) 
             {
+                _logger.LogError("Input is invaid!!");
                 return null;
-                //TODO log exception
             } 
 
             XarcadeModel.Transaction transaction = null;
@@ -298,10 +304,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transaction;
@@ -320,10 +326,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     MosaicID = mosaicInfo.MosaicId.Id,
                 };
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return mosaic;
@@ -334,8 +340,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.MosaicID == 0 || param.Sender == null || param.Amount <= 0)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log exception
             } 
 
             XarcadeModel.Mosaic mosaic = null;
@@ -382,10 +388,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }finally
             {
 
@@ -401,7 +407,6 @@ namespace Xarcade.Infrastructure.ProximaX
             if(param.Account == null || param.MosaicID == 0 || param.Namespace == null)
             {
                 return null;
-                //TODO log error
             } 
             
 
@@ -447,10 +452,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             return transaction;
         }
@@ -460,8 +465,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Account == null || param.Domain == null)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log exception
             }
 
             XarcadeModel.Namespace xarNamespace = null;
@@ -501,10 +506,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return xarNamespace;
@@ -541,10 +546,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return xarNamespace;
@@ -554,8 +559,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Sender == null || param.RecepientAddress == null || param.Amount <= 0)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log e
             } 
 
             XarcadeModel.Transaction transaction = null;
@@ -602,10 +607,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
             return transaction;
@@ -629,10 +634,10 @@ namespace Xarcade.Infrastructure.ProximaX
                 };
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transaction;

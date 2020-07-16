@@ -1,15 +1,21 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
+using Xarcade.Infrastructure.Utilities.Logger;
 
 
 namespace Xarcade.Infrastructure.Repository
 {
     public class DataAccessProximaX : IDataAccessProximaX
     {
-        public RepositoryPortal portal = new RepositoryPortal();
+        private static IConfiguration config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", false, true)
+            .Build();
+        public RepositoryPortal portal = new RepositoryPortal(config);
+        private static ILogger _logger;
 
         public bool SaveOwner(Owner ownerDTO)
         {
@@ -17,10 +23,10 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Owners", ownerDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return false;
-                //TODO log e
             }
             return true;
         }
@@ -31,9 +37,9 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Users", userDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return false;
             }
             return true;
@@ -45,9 +51,9 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Namespaces", namespaceDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return false;
             }
             return true;
@@ -59,9 +65,9 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Mosaics", mosaicDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return false;
             }
             return true;
@@ -73,9 +79,9 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Xarcade", xarcadeDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return false;
             }
             return true;
@@ -87,9 +93,9 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Transactions", transactionDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return false;
             }
             return true;
@@ -101,10 +107,9 @@ namespace Xarcade.Infrastructure.Repository
             {
                 portal.CreateDocument("Authentication", xarUserDTO.ToBsonDocument());
 
-            }catch(Exception)
+            }catch(Exception e)
             {
-                //TODO log e
-                
+                _logger.LogError(e.ToString());
                 return false;
             }
             return true;
