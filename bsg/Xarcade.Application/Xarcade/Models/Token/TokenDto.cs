@@ -13,7 +13,7 @@ namespace Xarcade.Application.Xarcade.Models.Token
         {
             return
                 "===Token DTO==="  +
-                "\nToken ID: "    + TokenID +
+                "\nToken ID: "    + TokenId +
                 "\nName: "        + Name +
                 "\nQuanity: "     + Quantity +
                 "\nOwner: "       + Owner +

@@ -7,7 +7,7 @@ using Xarcade.Domain.Authentication;
 
 namespace Xarcade.Infrastructure.Repository
 {
-    public class DataAccessProximaX
+    public class DataAccessProximaX : IDataAccessProximaX
     {
         public RepositoryPortal portal = new RepositoryPortal();
 

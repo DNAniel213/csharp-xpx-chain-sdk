@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Xarcade.Infrastructure.ProximaX.Params;
 using Xarcade.Domain.ProximaX;
 
-namespace Xarcade.Infrastructure.ProximaX
+namespace Xarcade.Infrastructure.Abstract
 {
     public interface IBlockchainPortal
     {
