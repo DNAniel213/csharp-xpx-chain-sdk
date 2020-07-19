@@ -6,6 +6,8 @@ namespace Xarcade.Application.Xarcade.Models.Transaction
     /// <summary>Xarcade Application Layer AccountTransactionDto Composition: AccountDto</summary>
     public class AccountTransactionDto
     {
+        public enum State {Confirmed, Unconfirmed}
+        public State Status {get; set;}
         public string Hash {get; set;}
         public AccountDto Account {get; set;}
         public ulong BlockNumber {get; set;}
@@ -14,6 +16,7 @@ namespace Xarcade.Application.Xarcade.Models.Transaction
         {
             return
                 "===Account Transaction DTO==="  +
+                "\nStatus: "         + Status +
                 "\nHash: "           + Hash +
                 "\nBlockNumber: "    + BlockNumber +
                 "\nCreated: "        + Created +
