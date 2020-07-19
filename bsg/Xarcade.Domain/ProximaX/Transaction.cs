@@ -1,5 +1,4 @@
 using System;
-using Xarcade.Domain.ProximaX;
 
 namespace Xarcade.Domain.ProximaX
 {
