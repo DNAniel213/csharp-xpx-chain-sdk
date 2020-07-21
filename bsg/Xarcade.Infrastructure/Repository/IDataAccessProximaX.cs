@@ -14,5 +14,6 @@ namespace Xarcade.Infrastructure.Repository
         public bool SaveXarcadeUser(XarcadeUser xarUserDTO);
         public Owner LoadOwner(long userID);
         public User LoadUser(long userID);
+        public XarcadeUser LoadXarcadeUser(long userID);
     }
 }
