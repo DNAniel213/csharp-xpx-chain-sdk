@@ -39,8 +39,8 @@ namespace Xarcade.Application.Xarcade
 
             //Creates Mosaic
             var mosaicparam = new CreateMosaicParams();
-            mosaicparam.Account = blockchainPortal.CreateAccountAsync(Token.Owner,ownerdto.PrivateKey).GetAwaiter().GetResult(); 
-            Mosaic createMosaicT = blockchainPortal.CreateMosaicAsync(mosaicparam).GetAwaiter().GetResult(); 
+            mosaicparam.Account = await blockchainPortal.CreateAccountAsync(Token.Owner,ownerdto.PrivateKey); 
+            Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam); 
             
             Console.WriteLine(createMosaicT.ToString());
             repo.SaveMosaic(createMosaicT);
@@ -49,9 +49,9 @@ namespace Xarcade.Application.Xarcade
             Console.Write("Namespace name:  ");
             string name = Console.ReadLine();
             var namespaceparam = new CreateNamespaceParams();
-            namespaceparam.Account = blockchainPortal.CreateAccountAsync(Token.Owner,ownerdto.PrivateKey).GetAwaiter().GetResult();
+            namespaceparam.Account = await blockchainPortal.CreateAccountAsync(Token.Owner,ownerdto.PrivateKey);
             namespaceparam.Domain = name;
-            Namespace createNamespaceT = blockchainPortal.CreateNamespaceAsync(namespaceparam).GetAwaiter().GetResult();
+            Namespace createNamespaceT = await blockchainPortal.CreateNamespaceAsync(namespaceparam);
 
             Console.WriteLine(createNamespaceT.ToString());
             repo.SaveNamespace(createNamespaceT);
@@ -66,7 +66,7 @@ namespace Xarcade.Application.Xarcade
                 Amount = am
             };
             Console.Write("Modifying " + createMosaicT.MosaicID + " supply by " + am );
-            Transaction modifyMosaicT = blockchainPortal.ModifyMosaicSupplyAsync(modifyparam).GetAwaiter().GetResult();
+            Transaction modifyMosaicT = await blockchainPortal.ModifyMosaicSupplyAsync(modifyparam);
             
             repo.SaveTransaction(modifyMosaicT);
             
@@ -78,7 +78,7 @@ namespace Xarcade.Application.Xarcade
                 Namespace = createNamespaceT
             };
 
-            var link = blockchainPortal.LinkMosaicAsync(linkparam).GetAwaiter().GetResult();
+            var link = await blockchainPortal.LinkMosaicAsync(linkparam);
 
             token = new TokenDto
             {
@@ -113,9 +113,9 @@ namespace Xarcade.Application.Xarcade
             Console.Write("Game name:  ");
             string name = Console.ReadLine();
             var gameparam = new CreateNamespaceParams();
-            gameparam.Account = blockchainPortal.CreateAccountAsync(Game.Owner,ownerdto.PrivateKey).GetAwaiter().GetResult();
+            gameparam.Account = await blockchainPortal.CreateAccountAsync(Game.Owner,ownerdto.PrivateKey);
             gameparam.Domain = name;
-            Namespace createGame = blockchainPortal.CreateNamespaceAsync(gameparam).GetAwaiter().GetResult();
+            Namespace createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
 
             Console.WriteLine(createGame.ToString());
             repo.SaveNamespace(createGame);
@@ -137,13 +137,13 @@ namespace Xarcade.Application.Xarcade
             ulong duration = days * 86400/15;
             
             var param = new CreateNamespaceParams();
-            param.Account = blockchainPortal.CreateAccountAsync(Game.Owner,PrivateKey.ToString()).GetAwaiter().GetResult();
+            param.Account = await blockchainPortal.CreateAccountAsync(Game.Owner,PrivateKey.ToString());
             param.Domain = Game.Name;
             
 
             var account = blockchainPortal.CreateAccountAsync(Game.Owner,PrivateKey.ToString());
-            var namespaceInfo = blockchainPortal.GetNamespaceInformationAsync(Game.Name).GetAwaiter().GetResult();
-            Namespace extendGame = blockchainPortal.ExtendNamespaceDurationAsync(Game.Name,PrivateKey.ToString(),namespaceInfo,duration,param).GetAwaiter().GetResult();
+            var namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(Game.Name);
+            Namespace extendGame = await blockchainPortal.ExtendNamespaceDurationAsync(Game.Name,PrivateKey.ToString(),namespaceInfo,duration,param);
             
             Console.WriteLine(extendGame.ToString());
             repo.SaveNamespace(extendGame);
@@ -158,7 +158,7 @@ namespace Xarcade.Application.Xarcade
                 //log error
             }
             var mosaicparam = new CreateMosaicParams();
-            Mosaic createMosaicT = blockchainPortal.CreateMosaicAsync(mosaicparam).GetAwaiter().GetResult(); 
+            Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam); 
 
             //modify mosaic supply
             Console.Write("Amount to modify:  ");
@@ -170,7 +170,7 @@ namespace Xarcade.Application.Xarcade
                 Amount = am
             };
             Console.Write("Modifying " + createMosaicT.MosaicID + " supply by " + am );
-            Transaction modifyMosaicT = blockchainPortal.ModifyMosaicSupplyAsync(modifyparam).GetAwaiter().GetResult();
+            Transaction modifyMosaicT = await blockchainPortal.ModifyMosaicSupplyAsync(modifyparam);
             
             repo.SaveTransaction(modifyMosaicT);
 
@@ -188,13 +188,14 @@ namespace Xarcade.Application.Xarcade
 
             var result = repo.portal.ReadDocument("Mosaic", repo.portal.CreateFilter(new KeyValuePair<string, string>("MosaicId", TokenId.ToString()), FilterOperator.EQUAL));
             Mosaic mosaicDto = BsonToModel.BsonToTokenDTO(result);
+            var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
 
             tokenInfo = new TokenDto
             {
-                TokenId = Convert.ToInt64(mosaicDto.MosaicID),
-                Name = mosaicDto.Namespace.Domain,
-                //Quantity = ,
-                //Owner = ,
+                TokenId = Convert.ToInt64(mosaicinfo.MosaicID),
+                Name = mosaicinfo.Name,
+                Quantity = mosaicinfo.Quantity,
+                Owner = mosaicinfo.Owner.UserID,
             };
 
             return tokenInfo;
@@ -209,14 +210,15 @@ namespace Xarcade.Application.Xarcade
             }
             var result = repo.portal.ReadDocument("Namespace", repo.portal.CreateFilter(new KeyValuePair<string, string>("NamespaceId", GameId.ToString()), FilterOperator.EQUAL));
             Namespace gameDto = BsonToModel.BsonToGameDTO(result);
+            Namespace namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(gameDto.Domain);
             GameDto gameInfo = null;
 
             gameInfo = new GameDto
             {
-                GameId = gameDto.NamespaceId,
-                Name = gameDto.Domain,
-                Owner = gameDto.Owner.UserID,
-                Expiry = gameDto.Expiry
+                GameId = namespaceInfo.NamespaceId,
+                Name = namespaceInfo.Domain,
+                Owner = namespaceInfo.Owner.UserID,
+                Expiry = namespaceInfo.Expiry
             };
 
             return gameInfo;

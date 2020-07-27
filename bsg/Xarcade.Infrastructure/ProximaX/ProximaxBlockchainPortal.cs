@@ -603,8 +603,8 @@ namespace Xarcade.Infrastructure.ProximaX
                     {
                         Domain   = namespaceName,
                         Owner    = owner,
-                        Expiry   = DateTime.Parse(namespaceInfo.EndHeight.ToString()),   //FIXME @John please get actual expiry date namespaceInfo.EndHeight
-                        Created  = DateTime.Parse(namespaceInfo.StartHeight.ToString()) //FIXME @John please get actual creation date
+                        Expiry   = DateTime.Now,   //FIXME @John please get actual expiry date namespaceInfo.EndHeight
+                        Created  = DateTime.Now //FIXME @John please get actual creation date namespaceInfo.StartHeight
                     };
                 }
 
