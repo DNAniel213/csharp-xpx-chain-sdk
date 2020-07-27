@@ -510,9 +510,76 @@ namespace Xarcade.Infrastructure.ProximaX
             return xarNamespace;
         }
 
+        public async Task<XarcadeModel.Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,XarcadeModel.Namespace namespaceInfo, ulong duration, CreateNamespaceParams param)
+        {
+            if(namespaceName == null)
+            {
+                return null;
+                //TODO log namespaceName is empty
+            }
+
+            XarcadeModel.Namespace renewNamespace = null;
+
+            try
+            {
+                var namespaceId = new NamespaceId(namespaceName);
+                var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+                RegisterNamespaceTransaction renew = null;
+                var modelduration = Convert.ToDouble(duration);
+                NamespaceType ntype = new NamespaceType();
+                if(param.Parent != null)
+                {
+                    ntype = NamespaceType.ROOT_NAMESPACE;
+                }
+                else
+                {
+                    ntype = NamespaceType.SUB_NAMESPACE;
+                }
+
+                if(duration != 0)
+                {
+                    renew = new RegisterNamespaceTransaction(
+                    networkType,//network type
+                    EntityVersion.REGISTER_NAMESPACE.GetValue(),//version
+                    Deadline.Create(),//deadline
+                    5000000,//max fee based from FeeCalculationStrategy
+                    namespaceName,//namespace Name
+                    namespaceId,//namespace Id
+                    ntype,//namespace Type
+                    duration,//duration
+                    null,//parent Id 
+                    null,//signature 
+                    null,//signer 
+                    null//transaction Info 
+                );
+                }
+
+                renewNamespace = new XarcadeModel.Namespace
+                {
+                    Domain  = param.Domain,
+                    Created = DateTime.Now,
+                    Expiry  = DateTime.Now.AddDays(modelduration),
+                    Owner   = param.Account,
+                };
+
+            }catch(Exception)
+            {
+                return null;
+                //TODO log e
+            }
+            
+            return renewNamespace;
+        }
+
 //FIXME make this return null if nonexistent
         public async Task<XarcadeModel.Namespace> GetNamespaceInformationAsync (string namespaceName)
         {
+            if(namespaceName == null)
+            {
+                return null;
+                //TODO log namespaceName is empty
+            }
+
             AccountInfo ownerAccountInfo = null;
             XarcadeModel.Namespace xarNamespace = null;
             try
@@ -536,8 +603,8 @@ namespace Xarcade.Infrastructure.ProximaX
                     {
                         Domain   = namespaceName,
                         Owner    = owner,
-                        Expiry   = DateTime.Now,   //FIXME @John please get actual expiry date
-                        Created  = DateTime.Now    //FIXME @John please get actual creation date
+                        Expiry   = DateTime.Parse(namespaceInfo.EndHeight.ToString()),   //FIXME @John please get actual expiry date namespaceInfo.EndHeight
+                        Created  = DateTime.Parse(namespaceInfo.StartHeight.ToString()) //FIXME @John please get actual creation date
                     };
                 }
 

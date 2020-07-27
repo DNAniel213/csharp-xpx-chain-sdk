@@ -2,11 +2,6 @@ using System;
 
 namespace Xarcade.Domain.ProximaX
 {
-    public enum State
-    {
-        Confirmed,
-        Unconfirmed
-    }
     public class Transaction
     {
         public State Status {get; set;} 

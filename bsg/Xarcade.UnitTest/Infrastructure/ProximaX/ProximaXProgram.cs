@@ -260,6 +260,26 @@ namespace Xarcade.Api.Prototype
             var link = portal.LinkMosaicAsync(param).GetAwaiter().GetResult();
         }
 
+        private Namespace ExtendNamespaceDurationTest(Account newAccount)
+        {
+            Console.Write("Namespace name:  ");
+            string namespaceName = Console.ReadLine();
+            Console.Write("Number of Days:  ");
+            ulong days = Convert.ToUInt64(Console.ReadLine());//take note of the remaining duration of the namespace | 365 days max
+            ulong duration = days * 86400/15;
+            
+            var param = new CreateNamespaceParams();
+            param.Account = portal.CreateAccountAsync(1, newAccount.PrivateKey).GetAwaiter().GetResult();
+            param.Domain = namespaceName;
+            
 
+            var account = portal.CreateAccountAsync(1, newAccount.PrivateKey);
+            var namespaceInfo = portal.GetNamespaceInformationAsync(namespaceName).GetAwaiter().GetResult();
+            Namespace extendNamespace = portal.ExtendNamespaceDurationAsync(namespaceName,newAccount.PrivateKey,namespaceInfo,duration,param).GetAwaiter().GetResult();
+            repo.SaveNamespace(extendNamespace);
+
+            Console.WriteLine(extendNamespace.ToString());
+            return extendNamespace;
+        }
     }
 }
