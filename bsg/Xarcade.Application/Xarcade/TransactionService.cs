@@ -36,7 +36,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
-            // Need Function Implementation to getAccountInfo. from BlockChainPortal
+            // Need Function Implementation to getAccountInfo from BlockChainPortal
             // No function currently exists returning AccountInfo
 
             //3. Check if token is enough against the amount to be sent.
@@ -76,7 +76,7 @@ namespace Xarcade.Application.Xarcade
                 Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
                 Hash = sendtokentransaction.Hash,
                 Token = token,
-                BlockNumber = 0, // @ Implement changes to transaction model in Xarcade.domain
+                BlockNumber = 0, // @Janyl Implement changes to transaction model in Xarcade.domain
                 Created = sendtokentransaction.Created,
             };
 
@@ -95,7 +95,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
-            // Need Function Implementation to getAccountInfo. from BlockChainPortal
+            // Need Function Implementation to getAccountInfo from BlockChainPortal
             // No function currently exists returning AccountInfo
 
             //3. Check if token is enough against the amount to be sent.
@@ -122,10 +122,10 @@ namespace Xarcade.Application.Xarcade
             
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, //How to determine status?
+                Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
                 Hash = sendxartransaction.Hash,
                 Token = token,
-                BlockNumber = sendxartransaction.Height, // block number = height?
+                BlockNumber = sendxartransaction.Height, // @Janyl Implement changes to transaction model in Xarcade.domain
                 Created = sendxartransaction.Created,
             };
             return tokentransactiondto;
@@ -146,7 +146,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
-            // Need Function Implementation to getAccountInfo. from BlockChainPortal
+            // Need Function Implementation to getAccountInfo from BlockChainPortal
             // No function currently exists returning AccountInfo
 
             //3. Check if token is enough against the amount to be sent.
@@ -177,10 +177,10 @@ namespace Xarcade.Application.Xarcade
             
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, //How to determine status?
+                Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
                 Hash = sendxpxtransaction.Hash,
                 Token = token,
-                BlockNumber = 0, // Where to find the block number?
+                BlockNumber = 0, // @Janyl Implement changes to transaction model in Xarcade.domain
                 Created = sendxpxtransaction.Created,
             };
             
