@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
 using Xarcade.Infrastructure.Utilities.Logger;
-
+using Xarcade.Infrastructure.Abstract;
 
 namespace Xarcade.Infrastructure.Repository
 {
