@@ -616,7 +616,7 @@ namespace Xarcade.Infrastructure.ProximaX
             return transaction;
         }
 
-//FIXME no way to get transaction height
+//FIXME no way to get transaction height @Fixed by Janyl
         public async Task<XarcadeModel.Transaction> GetTransactionInformationAsync (string hash)
         {
             XarcadeModel.Transaction transaction = null;
@@ -629,7 +629,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 transaction = new XarcadeModel.Transaction
                 {
                     Hash   = transactionInfo.GetHashCode().ToString(),
-                    //transaction.Height = transactionInfo.TransactionInfo.Height;
+                    Height = transactionInfo.TransactionInfo.Height,
                     Asset  = asset,
                 };
 

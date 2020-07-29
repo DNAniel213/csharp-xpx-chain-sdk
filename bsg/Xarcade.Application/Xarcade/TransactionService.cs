@@ -29,32 +29,58 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         public async Task<TokenTransactionDto> SendTokenAsync(TokenDto token,AccountDto sender, AccountDto receiver)
         {
+            //1.Check if user exist.
+            if(sender == null || receiver == null)
+            {
+                _logger.LogError("A user does not exist!!");
+                return null;
+            }
+            //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
+            // Need Function Implementation to getAccountInfo. from BlockChainPortal
+            // No function currently exists returning AccountInfo
+
+            //3. Check if token is enough against the amount to be sent.
+            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
+            if (tokenBalance.Quantity < token.Quantity )
+            {
+                _logger.LogError("Not enough tokens to send!!");
+                return null;
+            }
+
             var SenderUserDB = dataAccessProximaX.LoadUser(sender.UserID); // account from database
             var ReceiverUserDB = dataAccessProximaX.LoadUser(receiver.UserID); //account from database
+
+            //check return from DB if null or not then return error
+            if (SenderUserDB == null || ReceiverUserDB == null)
+            {
+                _logger.LogError("A account does not exist!!");
+                return null;
+            }
  
             var param = new SendMosaicParams
             {
-            MosaicID = token.TokenId, 
-            Sender = SenderUserDB,
-            RecepientAddress = ReceiverUserDB.WalletAddress,
-            Amount =  token.Quantity,
-            Message = "PloxWork.jpeg"
+             MosaicID = token.TokenId, 
+             Sender = SenderUserDB,
+             RecepientAddress = ReceiverUserDB.WalletAddress,
+             Amount =  token.Quantity,
+             Message = "PloxWork.jpeg"
             };
 
-            Transaction sendtokentransaction = blockchainPortal.SendMosaicAsync(param).GetAwaiter().GetResult(); //Update Blockchain
+            Transaction sendtokentransaction = await blockchainPortal.SendMosaicAsync(param); //Update Blockchain
             dataAccessProximaX.SaveTransaction(sendtokentransaction); //Save Transaction in mongodb
             
+            Transaction transactioninfo = await blockchainPortal.GetTransactionInformationAsync(sendtokentransaction.Hash);
+
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, //How to determine status?
+                Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
                 Hash = sendtokentransaction.Hash,
                 Token = token,
-                BlockNumber = 0, // Where to find the block number?
+                BlockNumber = 0, // @ Implement changes to transaction model in Xarcade.domain
                 Created = sendtokentransaction.Created,
             };
-            
 
-            return await Task.FromResult<TokenTransactionDto>(null);
+            return tokentransactiondto;
         }
 
         /// <summary>
@@ -62,19 +88,36 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         public async Task<TokenTransactionDto> SendXarAsync(TokenDto token,AccountDto sender, AccountDto receiver)
         {
+            //1.Check if user exist.
+            if(sender == null || receiver == null)
+            {
+                _logger.LogError("A user does not exist!!");
+                return null;
+            }
+            //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
+            // Need Function Implementation to getAccountInfo. from BlockChainPortal
+            // No function currently exists returning AccountInfo
+
+            //3. Check if token is enough against the amount to be sent.
+            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
+            if (tokenBalance.Quantity < token.Quantity )
+            {
+                _logger.LogError("Not enough tokens to send!!");
+                return null;
+            }
             var SenderUserDB = dataAccessProximaX.LoadUser(sender.UserID); // account from database
             var ReceiverUserDB = dataAccessProximaX.LoadUser(receiver.UserID); //account from database
  
             var param = new SendMosaicParams
             {
-            MosaicID = token.TokenId, 
-            Sender = SenderUserDB,
-            RecepientAddress = ReceiverUserDB.WalletAddress,
-            Amount =  token.Quantity,
-            Message = "PloxWork.jpeg"
+             MosaicID = token.TokenId, 
+             Sender = SenderUserDB,
+             RecepientAddress = ReceiverUserDB.WalletAddress,
+             Amount =  token.Quantity,
+             Message = "PloxWork.jpeg"
             };
 
-            Transaction sendxartransaction = blockchainPortal.SendMosaicAsync(param).GetAwaiter().GetResult(); //Update Blockchain
+            Transaction sendxartransaction = await blockchainPortal.SendMosaicAsync(param); //Update Blockchain
             dataAccessProximaX.SaveTransaction(sendxartransaction); //Save Transaction in mongodb
             
             var tokentransactiondto = new TokenTransactionDto
@@ -82,10 +125,10 @@ namespace Xarcade.Application.Xarcade
                 Status = 0, //How to determine status?
                 Hash = sendxartransaction.Hash,
                 Token = token,
-                BlockNumber = 0, // Where to find the block number?
+                BlockNumber = sendxartransaction.Height, // block number = height?
                 Created = sendxartransaction.Created,
             };
-            return await Task.FromResult<TokenTransactionDto>(null);
+            return tokentransactiondto;
         }
         /// <summary>
         /// Sends a Xpx token from user to another user
@@ -96,9 +139,32 @@ namespace Xarcade.Application.Xarcade
         /// <returns></returns>
         public async Task<TokenTransactionDto> SendXpxAsync(TokenDto token,AccountDto sender, AccountDto receiver)
         {
+            //1.Check if user exist.
+            if(sender == null || receiver == null)
+            {
+                _logger.LogError("A user does not exist!!");
+                return null;
+            }
+            //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
+            // Need Function Implementation to getAccountInfo. from BlockChainPortal
+            // No function currently exists returning AccountInfo
+
+            //3. Check if token is enough against the amount to be sent.
+            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
+            if (tokenBalance.Quantity < token.Quantity )
+            {
+                _logger.LogError("Not enough tokens to send!!");
+                return null;
+            }
             var SenderUserDB = dataAccessProximaX.LoadUser(sender.UserID); // account from database
             var ReceiverUserDB = dataAccessProximaX.LoadUser(receiver.UserID); //account from database
 
+            //check return from DB if null or not then return error
+            if (SenderUserDB == null || ReceiverUserDB == null)
+            {
+                _logger.LogError("An account does not exist!!");
+                return null;
+            }
 
             var param = new SendXpxParams();
             param.Sender = SenderUserDB;
@@ -106,7 +172,7 @@ namespace Xarcade.Application.Xarcade
             param.Amount =  token.Quantity ;
             param.Message = "PloxWork.jpeg";
 
-            Transaction sendxpxtransaction = blockchainPortal.SendXPXAsync(param).GetAwaiter().GetResult(); //Update Blockchain
+            Transaction sendxpxtransaction = await blockchainPortal.SendXPXAsync(param); //Update Blockchain
             dataAccessProximaX.SaveTransaction(sendxpxtransaction); //Save Transaction in mongodb
             
             var tokentransactiondto = new TokenTransactionDto
@@ -118,7 +184,7 @@ namespace Xarcade.Application.Xarcade
                 Created = sendxpxtransaction.Created,
             };
             
-            return await Task.FromResult<TokenTransactionDto>(null);
+            return tokentransactiondto;
         }
     }
 
