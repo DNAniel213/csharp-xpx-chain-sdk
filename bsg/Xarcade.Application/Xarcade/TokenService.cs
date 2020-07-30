@@ -1,15 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Repository;
 using Xarcade.Infrastructure.Utilities.Logger;
-using Xarcade.Infrastructure.ProximaX;
 using Xarcade.Infrastructure.ProximaX.Params;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Token;
-using Xarcade.Application.Xarcade.Models.Account;
 using Xarcade.Domain.ProximaX;
-using System.Collections.Generic;
+using Xarcade.Application.ProximaX;
+
 namespace Xarcade.Application.Xarcade
 {
     public class TokenService:ITokenService
@@ -34,7 +35,7 @@ namespace Xarcade.Application.Xarcade
             }
             TokenDto token = null;
             TokenTransactionDto tokentrans = null;
-            var result = repo.portal.ReadDocument("Owner", repo.portal.CreateFilter(new KeyValuePair<string, string>("userId", Token.Owner.ToString()), FilterOperator.EQUAL));
+            var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", Token.Owner.ToString()), FilterOperator.EQUAL));
             Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
 
             //Creates Mosaic
@@ -82,7 +83,7 @@ namespace Xarcade.Application.Xarcade
 
             token = new TokenDto
             {
-                TokenId = Convert.ToInt64(createMosaicT.MosaicID),
+                TokenId = Convert.ToUInt64(createMosaicT.MosaicID),
                 Name = createNamespaceT.Domain,
                 Quantity = Convert.ToUInt64(modifyparam.Amount),
                 Owner = Token.Owner
@@ -106,7 +107,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
                 //log error
             }
-            var result = repo.portal.ReadDocument("Owner", repo.portal.CreateFilter(new KeyValuePair<string, string>("userId", Game.Owner.ToString()), FilterOperator.EQUAL));
+            var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", Game.Owner.ToString()), FilterOperator.EQUAL));
             Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
 
             //Creates Game
@@ -131,7 +132,7 @@ namespace Xarcade.Application.Xarcade
                 //log error
             }
             //extend namespace
-            var PrivateKey = repo.portal.ReadDocument("Owner", repo.portal.CreateFilter(new KeyValuePair<string, string>("userId", Game.Owner.ToString()), FilterOperator.EQUAL));
+            var PrivateKey = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", Game.Owner.ToString()), FilterOperator.EQUAL));
             Console.Write("Number of Days:  ");
             ulong days = Convert.ToUInt32(Console.ReadLine());//take note of the remaining duration of the namespace | 365 days max
             ulong duration = days * 86400/15;
@@ -186,13 +187,13 @@ namespace Xarcade.Application.Xarcade
             }
             TokenDto tokenInfo = null;
 
-            var result = repo.portal.ReadDocument("Mosaic", repo.portal.CreateFilter(new KeyValuePair<string, string>("MosaicId", TokenId.ToString()), FilterOperator.EQUAL));
+            var result = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, string>("MosaicID", TokenId.ToString()), FilterOperator.EQUAL));
             Mosaic mosaicDto = BsonToModel.BsonToTokenDTO(result);
             var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
 
             tokenInfo = new TokenDto
             {
-                TokenId = Convert.ToInt64(mosaicinfo.MosaicID),
+                TokenId = Convert.ToUInt64(mosaicinfo.MosaicID),
                 Name = mosaicinfo.Name,
                 Quantity = mosaicinfo.Quantity,
                 Owner = mosaicinfo.Owner.UserID,
@@ -208,14 +209,14 @@ namespace Xarcade.Application.Xarcade
                 return null;
                 //log error
             }
-            var result = repo.portal.ReadDocument("Namespace", repo.portal.CreateFilter(new KeyValuePair<string, string>("NamespaceId", GameId.ToString()), FilterOperator.EQUAL));
+            var result = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("NamespaceID", GameId.ToString()), FilterOperator.EQUAL));
             Namespace gameDto = BsonToModel.BsonToGameDTO(result);
             Namespace namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(gameDto.Domain);
             GameDto gameInfo = null;
 
             gameInfo = new GameDto
             {
-                GameId = namespaceInfo.NamespaceId,
+                GameId = namespaceInfo.NamespaceID,
                 Name = namespaceInfo.Domain,
                 Owner = namespaceInfo.Owner.UserID,
                 Expiry = namespaceInfo.Expiry

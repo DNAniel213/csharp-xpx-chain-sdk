@@ -4,7 +4,6 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Transaction
     {
-        public State Status {get; set;} 
         public string Hash {get; set;}
         public ulong Height {get; set;}
         public Asset Asset {get; set;}
@@ -14,7 +13,6 @@ namespace Xarcade.Domain.ProximaX
         {
             return
                 "===Transaction DTO==="  +
-                "\nStatus "          + Status +
                 "\nHash "            + Hash +
                 "\nHeight: "         + Height + 
                 "\nAsset: "          + Asset.AssetID + 
@@ -22,5 +20,4 @@ namespace Xarcade.Domain.ProximaX
                 "\n==End of Transaction DTO==";
         }
     }
-    
 }

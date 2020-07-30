@@ -5,7 +5,7 @@ namespace Xarcade.Infrastructure.Utilities.Logger
 {
     public enum Logger
     {
-        Blockchain
+        Dummy
     }
 
     public static class LoggerFactory
@@ -14,7 +14,7 @@ namespace Xarcade.Infrastructure.Utilities.Logger
 
         private static Dictionary<Logger, ILogger> _loggers = new Dictionary<Logger, ILogger>()
         {
-            {Logger.Blockchain, new BlockchainLogger()},
+            {Logger.Dummy, new DummyLogger()},
         };
 
         public static ILogger GetLogger (Logger logger)

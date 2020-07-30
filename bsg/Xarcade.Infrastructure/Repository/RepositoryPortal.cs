@@ -3,6 +3,8 @@ using MongoDB.Driver;
 using System;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using Xarcade.Infrastructure.Utilities.Logger;
 
 
 namespace Xarcade.Infrastructure.Repository
@@ -12,10 +14,13 @@ namespace Xarcade.Infrastructure.Repository
 
         private readonly MongoClient client = new MongoClient("mongodb+srv://dane:pikentz213@bsg-xarcade-proto-f58v3.mongodb.net/test?retryWrites=true&w=majority");
         private readonly IMongoDatabase database = null;
+        private static ILogger _logger;
 
-
-        public RepositoryPortal()
+        public RepositoryPortal(IConfiguration configuration)
         {
+            LoggerFactory.Configuration = configuration;
+            _logger = LoggerFactory.GetLogger(Logger.Dummy);
+
             database = client.GetDatabase("test");
         }
 
@@ -34,10 +39,10 @@ namespace Xarcade.Infrastructure.Repository
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 collection.InsertOne(doc);
                 success = true;
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 success = false;
-                //TODO log e
             }
 
             
@@ -59,10 +64,10 @@ namespace Xarcade.Infrastructure.Repository
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 filter = Builders<BsonDocument>.Filter.Empty;
                 result = collection.Find(filter).ToList();
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 result = null;
-                //TODO log e
             }finally
             {
             }
@@ -85,10 +90,10 @@ namespace Xarcade.Infrastructure.Repository
             {
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 result = collection.Find(filter).ToList();
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 result = null;
-                //TODO log e
             }finally
             {
 
@@ -113,10 +118,10 @@ namespace Xarcade.Infrastructure.Repository
                 collection = database.GetCollection<BsonDocument>(collectionName);
                 var result = collection.Find(filter).ToList();
                 count = collection.CountDocumentsAsync(filter).GetAwaiter().GetResult();
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 count = 0;
-                //TODO log e
             }finally
             {
 
@@ -139,17 +144,17 @@ namespace Xarcade.Infrastructure.Repository
                 var result = collection.Find(filter);
                 if(result.CountDocuments() < 1)
                 {
-                    //Document does not exist
+                    _logger.LogError("Document does not exist!!");
                     return null;
                 }
                 else
                 {
                     return result.Single();
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
         }
 
@@ -169,10 +174,10 @@ namespace Xarcade.Infrastructure.Repository
                     return false;
                 else
                     return true;
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return false;
-                //TODO log exception
             }
 
         }
@@ -195,10 +200,10 @@ namespace Xarcade.Infrastructure.Repository
                 var update = Builders<BsonDocument>.Update.Set(field, newContent).CurrentDate("lastModified");
                 var result = collection.UpdateOne(filter, update);
                 success = true;
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 success = false;
-                //TODO log e
             }
 
             return success;
@@ -218,10 +223,10 @@ namespace Xarcade.Infrastructure.Repository
                 var collection = database.GetCollection<BsonDocument>(collectionName);
                 var result = collection.DeleteOne(filter);
                 success = true;
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 success = false;
-                //TODO log e
             }
             return success;
         }

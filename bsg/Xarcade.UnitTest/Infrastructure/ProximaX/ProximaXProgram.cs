@@ -5,6 +5,7 @@ using Xarcade.Infrastructure.ProximaX.Params;
 using Xarcade.Infrastructure.ProximaX;
 using Xarcade.Domain.Authentication;
 using Xarcade.Infrastructure.Repository;
+using Microsoft.Extensions.Configuration;
 /*
     BSG ACCOUNT
     wallet uid: blackspeargames
@@ -24,7 +25,10 @@ namespace Xarcade.Api.Prototype
         public const string subNamespaceName = "bigfoo";
         public void ProximaXMain(XarcadeUser user, bool isNewAccount = false)
         {
-            portal = new ProximaxBlockchainPortal();
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false, true)
+                .Build();
+            portal = new ProximaxBlockchainPortal(config);
             Account testAccount = portal.CreateAccountAsync(999, TEST_PRIVATE_BSG_1).GetAwaiter().GetResult();
             Mosaic  testMosaic  = null;
             Namespace  testNamespace  = null;

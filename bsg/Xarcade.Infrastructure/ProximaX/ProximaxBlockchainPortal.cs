@@ -2,6 +2,7 @@ using System.Reactive.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 using ProximaX.Sirius.Chain.Sdk.Model.Blockchain;
 using ProximaX.Sirius.Chain.Sdk.Client;
@@ -14,6 +15,7 @@ using ProximaX.Sirius.Chain.Sdk.Model.Namespaces;
 
 using XarcadeModel = Xarcade.Domain.ProximaX;
 using Xarcade.Infrastructure.ProximaX.Params;
+using Xarcade.Infrastructure.Utilities.Logger;
 using Xarcade.Infrastructure.Abstract;
 
 namespace Xarcade.Infrastructure.ProximaX
@@ -22,10 +24,14 @@ namespace Xarcade.Infrastructure.ProximaX
     {
         private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io"; 
         private static SiriusClient siriusClient = null;
+        private static ILogger _logger;
 
 
-        public ProximaxBlockchainPortal()
+        public ProximaxBlockchainPortal(IConfiguration configuration)
         {
+            LoggerFactory.Configuration = configuration;
+            _logger = LoggerFactory.GetLogger(Logger.Dummy);
+
             if (siriusClient == null)
             {
                 siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
@@ -44,14 +50,14 @@ namespace Xarcade.Infrastructure.ProximaX
                 string generationHash = await siriusClient.BlockHttp.GetGenerationHash();
                 if (string.IsNullOrWhiteSpace(generationHash))
                 {
-                    //TODO: Log error empty generationHash
+                    _logger.LogError("Generation Hash is empty!!");
                     return null;
                 }
                 
                 var signedTransaction = account.Sign(transaction, generationHash);
                 if (signedTransaction == null)
                 {
-                    //TODO: Log error empty generationHash
+                    _logger.LogError("Generation Hash is empty!!");
                     return null;
                 }
                 
@@ -60,9 +66,9 @@ namespace Xarcade.Infrastructure.ProximaX
                 //transaction = await GetTransactionInformation(signedTransaction.Hash);
                 //FIXME need to return transaction, but it lacks Height
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                //TODO log e
+                _logger.LogError(e.ToString());
                 return null;
             }
             
@@ -75,8 +81,8 @@ namespace Xarcade.Infrastructure.ProximaX
 
             if(userID < 0)
             {
+                _logger.LogError("User ID does not exist!!");
                 return null;
-                //TODO log exception
             }
 
             try
@@ -94,10 +100,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created          = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log exception
             }
 
 
@@ -109,8 +115,8 @@ namespace Xarcade.Infrastructure.ProximaX
 
             if(userID < 0 || String.IsNullOrEmpty(privateKey))
             {
+                _logger.LogError("User ID does not exist!!");
                 return null;
-                //TODO log exception
             }
 
             try
@@ -128,10 +134,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created          = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
 
@@ -146,8 +152,8 @@ namespace Xarcade.Infrastructure.ProximaX
             
             if(String.IsNullOrWhiteSpace(address))
             {
+                _logger.LogError("Address does not exist!!");
                 return null;
-                //TODO log e
             }
 
             List<XarcadeModel.Transaction> transactionList = null;
@@ -180,10 +186,10 @@ namespace Xarcade.Infrastructure.ProximaX
                 }
 
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transactionList;
@@ -194,8 +200,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Account == null)
             {
+                _logger.LogError("Account does not exist!!");
                 return null;
-                //TODO log exception
             }
                 
             XarcadeModel.Mosaic mosaic = null;
@@ -237,10 +243,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     }
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
                 //TODO research on possible errors to handle
             }
 
@@ -252,8 +258,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Account == null || param.MosaicID == 0 || param.Amount <= 0) 
             {
+                _logger.LogError("Input is invaid!!");
                 return null;
-                //TODO log exception
             } 
 
             XarcadeModel.Transaction transaction = null;
@@ -298,10 +304,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transaction;
@@ -320,10 +326,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     MosaicID = mosaicInfo.MosaicId.Id,
                 };
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return mosaic;
@@ -334,8 +340,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.MosaicID == 0 || param.Sender == null || param.Amount <= 0)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log exception
             } 
 
             XarcadeModel.Mosaic mosaic = null;
@@ -382,10 +388,10 @@ namespace Xarcade.Infrastructure.ProximaX
                         Created = DateTime.Now,
                     };
                 }
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }finally
             {
 
@@ -401,7 +407,6 @@ namespace Xarcade.Infrastructure.ProximaX
             if(param.Account == null || param.MosaicID == 0 || param.Namespace == null)
             {
                 return null;
-                //TODO log error
             } 
             
 
@@ -447,10 +452,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             return transaction;
         }
@@ -460,8 +465,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Account == null || param.Domain == null)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log exception
             }
 
             XarcadeModel.Namespace xarNamespace = null;
@@ -501,10 +506,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return xarNamespace;
@@ -574,12 +579,6 @@ namespace Xarcade.Infrastructure.ProximaX
 //FIXME make this return null if nonexistent
         public async Task<XarcadeModel.Namespace> GetNamespaceInformationAsync (string namespaceName)
         {
-            if(namespaceName == null)
-            {
-                return null;
-                //TODO log namespaceName is empty
-            }
-
             AccountInfo ownerAccountInfo = null;
             XarcadeModel.Namespace xarNamespace = null;
             try
@@ -604,14 +603,14 @@ namespace Xarcade.Infrastructure.ProximaX
                         Domain   = namespaceName,
                         Owner    = owner,
                         Expiry   = DateTime.Now,   //FIXME @John please get actual expiry date namespaceInfo.EndHeight
-                        Created  = DateTime.Now //FIXME @John please get actual creation date namespaceInfo.StartHeight
+                        Created  = DateTime.Now    //FIXME @John please get actual creation date namespaceInfo.StartHeight
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return xarNamespace;
@@ -621,8 +620,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(param.Sender == null || param.RecepientAddress == null || param.Amount <= 0)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log e
             } 
 
             XarcadeModel.Transaction transaction = null;
@@ -669,10 +668,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     };
                 }
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
             return transaction;
@@ -696,10 +695,10 @@ namespace Xarcade.Infrastructure.ProximaX
                 };
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
 
             return transaction;
@@ -711,68 +710,68 @@ namespace Xarcade.Infrastructure.ProximaX
         public async Task<Transaction> MonitorTransactionAsync(Transaction transaction)
         {
             var networkType = await siriusClient.NetworkHttp.GetNetworkType();
-            // Creates instance of SiriusClient
+        // Creates instance of SiriusClient
 
-            var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
-            // Opens the listener
-            await ws.Listener.Open();
+        var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
+        // Opens the listener
+        await ws.Listener.Open();
 
-            // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
-            // Blocks are generated every 15 seconds in average, so a timeout can be raised if
-            // there is no response after 30 seconds.
-            ws.Listener.NewBlock()
-            .Timeout(TimeSpan.FromSeconds(30))  
-            .Subscribe(
-                block => {
-                Console.WriteLine($"New block is created {block.Height}");
-                },
-                err => {
-                Console.WriteLine($"Unexpected error {err}");
+        // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
+        // Blocks are generated every 15 seconds in average, so a timeout can be raised if
+        // there is no response after 30 seconds.
+        ws.Listener.NewBlock()
+        .Timeout(TimeSpan.FromSeconds(30))  
+        .Subscribe(
+            block => {
+            Console.WriteLine($"New block is created {block.Height}");
+            },
+            err => {
+            Console.WriteLine($"Unexpected error {err}");
+            ws.Listener.Close();
+            }
+        );
+
+        // Monitors if there is any validation error with the issued transaction
+        var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey, networkType);
+
+        ws.Listener.TransactionStatus(signerAddress)
+        .Timeout(TimeSpan.FromSeconds(30))  
+        .Subscribe(
+            // transaction info
+            tx =>
+            {
+                Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
+            },
+            // handle if any error occured
+            txErr =>
+            {
+                Console.WriteLine($"Transaction error - {txErr}");
                 ws.Listener.Close();
-                }
-            );
+            }
+        );
+        
 
-            // Monitors if there is any validation error with the issued transaction
-            var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey, networkType);
-
-            ws.Listener.TransactionStatus(signerAddress)
-            .Timeout(TimeSpan.FromSeconds(30))  
-            .Subscribe(
-                // transaction info
-                tx =>
-                {
-                    Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
-                },
-                // handle if any error occured
-                txErr =>
-                {
-                    Console.WriteLine($"Transaction error - {txErr}");
-                    ws.Listener.Close();
-                }
-            );
-            
-
-            // Monitors if the transaction arrives the network but not yet include in the block
-            var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
-                                                .Take(1)
-                                                .Timeout(TimeSpan.FromSeconds(30));
-
-            // Monitors if the transaction get included in the block
-            var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
+        // Monitors if the transaction arrives the network but not yet include in the block
+        var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
                                             .Take(1)
                                             .Timeout(TimeSpan.FromSeconds(30));
 
+        // Monitors if the transaction get included in the block
+        var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
+                                        .Take(1)
+                                        .Timeout(TimeSpan.FromSeconds(30));
 
-            // Gets the results
-            var unconfirmedResult =  confirmedTx;
 
-            Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
+        // Gets the results
+        var unconfirmedResult =  confirmedTx;
 
-            var confirmedResult = confirmedTx;
+        Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
 
-            Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
+        var confirmedResult = confirmedTx;
 
-            return null;
+        Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
+
+        return null;
         }
 
 

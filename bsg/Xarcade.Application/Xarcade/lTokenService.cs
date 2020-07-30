@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Token;
 
-namespace Xarcade.Application.Xarcade
+namespace Xarcade.Application.ProximaX
 {
     public interface ITokenService
     {
