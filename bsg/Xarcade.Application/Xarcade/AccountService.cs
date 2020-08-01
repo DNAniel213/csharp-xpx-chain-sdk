@@ -4,6 +4,7 @@ using Xarcade.Infrastructure.Repository;
 using Xarcade.Infrastructure.Utilities.Logger;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Account;
+using Xarcade.Domain.ProximaX;
 
 namespace Xarcade.Application.Xarcade
 {
@@ -24,7 +25,25 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         public async Task<AccountTransactionDto> CreateOwnerAccountAsync(long UserID)
         {
-            return await Task.FromResult<AccountTransactionDto>(null);
+            var wallet = await blockchainPortal.CreateAccountAsync(UserID);
+            var owner = new OwnerDto
+            {
+                UserID = wallet.UserID,
+                WalletAddress = wallet.WalletAddress,
+                Created = wallet.Created
+            };
+
+            var accountTransaction = await blockchainPortal.GetTransactionInformationAsync(owner.WalletAddress);
+            var accountTransactionDto = new AccountTransactionDto
+            {
+                Hash = accountTransaction.Hash,
+                Account = owner,
+                BlockNumber = 0,
+                Created = accountTransaction.Created
+            };
+
+            dataAccessProximaX.SaveOwner(accountTransaction);
+            return accountTransactionDto;
         }
 
         /// <summary>
@@ -32,7 +51,26 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         public async Task<AccountTransactionDto> CreateUserAccountAsync(long UserID, long OwnerID)
         {
-            return await Task.FromResult<AccountTransactionDto>(null);
+            var wallet = await blockchainPortal.CreateAccountAsync(UserID);
+
+            var user = new UserDto
+            {
+                UserID = wallet.UserID,
+                OwnerID = OwnerID,
+                WalletAddress = wallet.WalletAddress,
+                Created = wallet.Created
+            };
+
+            var accountTransaction = await blockchainPortal.GetTransactionInformationAsync(user.WalletAddress);
+            var accountTransactionDto = new AccountTransactionDto
+            {
+                Hash = accountTransaction.Hash,
+                Account = user,
+                BlockNumber = 0,
+                Created = accountTransaction.Created
+            };
+
+            return accountTransactionDto;
         }
 
         /// <summary>
@@ -40,7 +78,7 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         public async Task<OwnerDto> GetOwnerAccountAsync(long UserID)
         {
-            return await Task.FromResult<OwnerDto>(null);
+            
         }
 
         /// <summary>
