@@ -59,14 +59,21 @@ namespace Xarcade.Application.Xarcade
  
             var param = new SendMosaicParams
             {
-             MosaicID = token.TokenId, 
-             Sender = SenderUserDB,
-             RecepientAddress = ReceiverUserDB.WalletAddress,
-             Amount =  token.Quantity,
-             Message = "PloxWork.jpeg"
+                MosaicID = token.TokenId, 
+                Sender = SenderUserDB,
+                RecepientAddress = ReceiverUserDB.WalletAddress,
+                Amount =  token.Quantity,
+                Message = "PloxWork.jpeg"
             };
 
             Transaction sendtokentransaction = await blockchainPortal.SendMosaicAsync(param); //Update Blockchain
+
+            if (sendtokentransaction == null)
+            {
+                _logger.LogError("The transaction does not exist.");
+                return null;
+            }
+
             dataAccessProximaX.SaveTransaction(sendtokentransaction); //Save Transaction in mongodb
             
             Transaction transactioninfo = await blockchainPortal.GetTransactionInformationAsync(sendtokentransaction.Hash);
@@ -76,7 +83,7 @@ namespace Xarcade.Application.Xarcade
                 Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
                 Hash = sendtokentransaction.Hash,
                 Token = token,
-                BlockNumber = 0, // @Janyl Implement changes to transaction model in Xarcade.domain
+                BlockNumber = sendtokentransaction.Height, 
                 Created = sendtokentransaction.Created,
             };
 
@@ -110,14 +117,21 @@ namespace Xarcade.Application.Xarcade
  
             var param = new SendMosaicParams
             {
-             MosaicID = token.TokenId, 
-             Sender = SenderUserDB,
-             RecepientAddress = ReceiverUserDB.WalletAddress,
-             Amount =  token.Quantity,
-             Message = "PloxWork.jpeg"
+                MosaicID = token.TokenId, 
+                Sender = SenderUserDB,
+                RecepientAddress = ReceiverUserDB.WalletAddress,
+                Amount =  token.Quantity,
+                Message = "PloxWork.jpeg"
             };
 
             Transaction sendxartransaction = await blockchainPortal.SendMosaicAsync(param); //Update Blockchain
+            
+            if (sendxartransaction == null)
+            {
+                _logger.LogError("The transaction does not exist.");
+                return null;
+            }
+
             dataAccessProximaX.SaveTransaction(sendxartransaction); //Save Transaction in mongodb
             
             var tokentransactiondto = new TokenTransactionDto
@@ -165,14 +179,22 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError("An account does not exist!!");
                 return null;
             }
-
-            var param = new SendXpxParams();
-            param.Sender = SenderUserDB;
-            param.RecepientAddress = ReceiverUserDB.WalletAddress;
-            param.Amount =  token.Quantity ;
-            param.Message = "PloxWork.jpeg";
+            var param = new SendXpxParams
+            {
+                Sender = SenderUserDB,
+                RecepientAddress = ReceiverUserDB.WalletAddress,
+                Amount =  token.Quantity,
+                Message = "PloxWork.jpeg"
+            };
 
             Transaction sendxpxtransaction = await blockchainPortal.SendXPXAsync(param); //Update Blockchain
+            
+            if (sendxpxtransaction == null)
+            {
+                _logger.LogError("The transaction does not exist.");
+                return null;
+            }
+
             dataAccessProximaX.SaveTransaction(sendxpxtransaction); //Save Transaction in mongodb
             
             var tokentransactiondto = new TokenTransactionDto
