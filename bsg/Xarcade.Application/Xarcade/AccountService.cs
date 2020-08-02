@@ -21,11 +21,29 @@ namespace Xarcade.Application.Xarcade
         }
 
         /// <summary>
-        /// Empty body function to avoid errors for now
+        /// Creates the Owner account
         /// </summary>
-        public async Task<AccountTransactionDto> CreateOwnerAccountAsync(long UserID)
+        /// <param name="UserID">Unique identification that represents the user</param>
+        public async Task<OwnerDto> CreateOwnerAccountAsync(long UserID)
         {
             var wallet = await blockchainPortal.CreateAccountAsync(UserID);
+
+            if (wallet == null)
+            {
+                _logger.LogError("Wallet returned null!!");
+                return null;
+            }
+
+            //save to db
+            var domOwner = new Owner
+            {
+                UserID = wallet.UserID,
+                WalletAddress = wallet.WalletAddress,
+                PrivateKey = wallet.PrivateKey,
+                PublicKey = wallet.PublicKey,
+                Created = wallet.Created
+            };
+
             var owner = new OwnerDto
             {
                 UserID = wallet.UserID,
@@ -33,25 +51,35 @@ namespace Xarcade.Application.Xarcade
                 Created = wallet.Created
             };
 
-            var accountTransaction = await blockchainPortal.GetTransactionInformationAsync(owner.WalletAddress);
-            var accountTransactionDto = new AccountTransactionDto
-            {
-                Hash = accountTransaction.Hash,
-                Account = owner,
-                BlockNumber = 0,
-                Created = accountTransaction.Created
-            };
-
-            dataAccessProximaX.SaveOwner(accountTransaction);
-            return accountTransactionDto;
+            dataAccessProximaX.SaveOwner(domOwner);
+            return owner;
         }
 
         /// <summary>
-        /// Empty body function to avoid errors for now
+        /// Creates a user account
         /// </summary>
-        public async Task<AccountTransactionDto> CreateUserAccountAsync(long UserID, long OwnerID)
+        /// <param name="UserID">Unique identification that represents the user</param>
+        /// <param name="OwnerID">Unique identification that represents the owner</param>
+        public async Task<UserDto> CreateUserAccountAsync(long UserID, long OwnerID)
         {
             var wallet = await blockchainPortal.CreateAccountAsync(UserID);
+            
+            if (wallet == null)
+            {
+                _logger.LogError("Wallet returned null!!");
+                return null;
+            }
+
+            //save to db
+            var domUser = new User
+            {
+                UserID = wallet.UserID,
+                OwnerID = OwnerID,
+                WalletAddress = wallet.WalletAddress,
+                PrivateKey = wallet.PrivateKey,
+                PublicKey = wallet.PublicKey,
+                Created = wallet.Created
+            };
 
             var user = new UserDto
             {
@@ -61,32 +89,41 @@ namespace Xarcade.Application.Xarcade
                 Created = wallet.Created
             };
 
-            var accountTransaction = await blockchainPortal.GetTransactionInformationAsync(user.WalletAddress);
-            var accountTransactionDto = new AccountTransactionDto
-            {
-                Hash = accountTransaction.Hash,
-                Account = user,
-                BlockNumber = 0,
-                Created = accountTransaction.Created
-            };
-
-            return accountTransactionDto;
+            dataAccessProximaX.SaveUser(domUser); //save to db
+            return user;
         }
 
         /// <summary>
-        /// Empty body function to avoid errors for now
+        /// Gets the account information of a specific Owner
         /// </summary>
+        /// <param name="OwnerID">Unique identification that represents the owner</param>
         public async Task<OwnerDto> GetOwnerAccountAsync(long UserID)
         {
-            
+            var ownerDB = dataAccessProximaX.LoadOwner(UserID);
+
+            var ownerAccountInfo = new OwnerDto
+            {
+
+            };
+
+            return ownerAccountInfo;
         }
 
         /// <summary>
-        /// Empty body function to avoid errors for now
+        /// Gets the account information of a specific User
         /// </summary>
+        /// <param name="UserID">Unique identification that represents the user</param>
+        /// <param name="OwnerID">Unique identification that represents the owner</param>
         public async Task<UserDto> GetUserAccountAsync(long UserID, long OwnerID)
         {
-            return await Task.FromResult<UserDto>(null);
+            var userDB = dataAccessProximaX.LoadUser(UserID);
+            
+            var userAccountInfo = new UserDto
+            {
+
+            };
+
+            return userAccountInfo;
         }
     }
 }
