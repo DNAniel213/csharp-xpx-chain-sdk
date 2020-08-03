@@ -36,8 +36,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
-            // Need Function Implementation to getAccountInfo from BlockChainPortal
-            // No function currently exists returning AccountInfo
+            // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
             var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
@@ -65,22 +64,21 @@ namespace Xarcade.Application.Xarcade
                 Amount =  token.Quantity,
                 Message = "PloxWork.jpeg"
             };
-
-            Transaction sendtokentransaction = await blockchainPortal.SendMosaicAsync(param); //Update Blockchain
-
+            
+            Transaction sendtokentransaction = await blockchainPortal.SendMosaicAsync(param); 
+            
+            //check if the transaction received is correct before saving to DB.
             if (sendtokentransaction == null)
             {
                 _logger.LogError("The transaction does not exist.");
                 return null;
             }
 
-            dataAccessProximaX.SaveTransaction(sendtokentransaction); //Save Transaction in mongodb
-            
-            Transaction transactioninfo = await blockchainPortal.GetTransactionInformationAsync(sendtokentransaction.Hash);
+            dataAccessProximaX.SaveTransaction(sendtokentransaction); 
 
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
+                Status = 0, // @John Get Status from Monitor Transaction via Listeners
                 Hash = sendtokentransaction.Hash,
                 Token = token,
                 BlockNumber = sendtokentransaction.Height, 
@@ -102,8 +100,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
-            // Need Function Implementation to getAccountInfo from BlockChainPortal
-            // No function currently exists returning AccountInfo
+            // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
             var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
@@ -112,9 +109,17 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError("Not enough tokens to send!!");
                 return null;
             }
+            
             var SenderUserDB = dataAccessProximaX.LoadUser(sender.UserID); // account from database
             var ReceiverUserDB = dataAccessProximaX.LoadUser(receiver.UserID); //account from database
- 
+            
+            //check return from DB if null or not then return error
+            if (SenderUserDB == null || ReceiverUserDB == null)
+            {
+                _logger.LogError("A account does not exist!!");
+                return null;
+            }
+
             var param = new SendMosaicParams
             {
                 MosaicID = token.TokenId, 
@@ -124,22 +129,24 @@ namespace Xarcade.Application.Xarcade
                 Message = "PloxWork.jpeg"
             };
 
-            Transaction sendxartransaction = await blockchainPortal.SendMosaicAsync(param); //Update Blockchain
+            Transaction sendxartransaction = await blockchainPortal.SendMosaicAsync(param); 
             
+            //check if the transaction received is correct before saving to DB.
             if (sendxartransaction == null)
             {
                 _logger.LogError("The transaction does not exist.");
                 return null;
             }
 
-            dataAccessProximaX.SaveTransaction(sendxartransaction); //Save Transaction in mongodb
+            //Save Transaction in mongodb
+            dataAccessProximaX.SaveTransaction(sendxartransaction); 
             
             var tokentransactiondto = new TokenTransactionDto
             {
                 Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
                 Hash = sendxartransaction.Hash,
                 Token = token,
-                BlockNumber = sendxartransaction.Height, // @Janyl Implement changes to transaction model in Xarcade.domain
+                BlockNumber = sendxartransaction.Height,
                 Created = sendxartransaction.Created,
             };
             return tokentransactiondto;
@@ -160,8 +167,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             //2. Check if Xpx balance of sender is enough since sending mosaics I think has a fee.
-            // Need Function Implementation to getAccountInfo from BlockChainPortal
-            // No function currently exists returning AccountInfo
+            // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
             var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
@@ -187,25 +193,27 @@ namespace Xarcade.Application.Xarcade
                 Message = "PloxWork.jpeg"
             };
 
-            Transaction sendxpxtransaction = await blockchainPortal.SendXPXAsync(param); //Update Blockchain
-            
+            Transaction sendxpxtransaction = await blockchainPortal.SendXPXAsync(param);
+
+            //check if the transaction received is correct before saving to DB.
             if (sendxpxtransaction == null)
             {
                 _logger.LogError("The transaction does not exist.");
                 return null;
             }
 
-            dataAccessProximaX.SaveTransaction(sendxpxtransaction); //Save Transaction in mongodb
-            
+            //Save Transaction in mongodb
+            dataAccessProximaX.SaveTransaction(sendxpxtransaction); 
+           
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, // @Janyl Implement changes BlockChainPortal.transaction to return transactioninfo
+                Status = 0, // @John for Get Status from Monitor Transaction via Listeners
                 Hash = sendxpxtransaction.Hash,
                 Token = token,
-                BlockNumber = 0, // @Janyl Implement changes to transaction model in Xarcade.domain
+                BlockNumber = sendxpxtransaction.Height,
                 Created = sendxpxtransaction.Created,
             };
-            
+
             return tokentransactiondto;
         }
     }
