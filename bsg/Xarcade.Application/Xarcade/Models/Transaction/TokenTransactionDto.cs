@@ -3,9 +3,10 @@ using Xarcade.Application.Xarcade.Models.Token;
 
 namespace Xarcade.Application.Xarcade.Models.Transaction
 {
-    /// <summary>Xarcade Application Layer TokenTransactionDto Composition: TokenDto</summary>
+    /// <summary>Xarcade Application Layer TokenTransactionDto</summary>
     public class TokenTransactionDto
     {
+        public State Status ;
         public string Hash {get; set;}
         public TokenDto Token {get; set;}
         public ulong BlockNumber {get; set;}
@@ -14,6 +15,7 @@ namespace Xarcade.Application.Xarcade.Models.Transaction
         {
             return
                 "===Token Transaction DTO==="  +
+                "\nStatus: "         + Status +
                 "\nHash: "           + Hash +
                 "\nBlockNumber: "    + BlockNumber +
                 "\nCreated: "        + Created +
