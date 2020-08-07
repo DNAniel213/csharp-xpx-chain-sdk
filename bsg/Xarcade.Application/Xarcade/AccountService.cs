@@ -1,8 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Repository;
 using Xarcade.Infrastructure.Utilities.Logger;
-using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Account;
 using Xarcade.Domain.ProximaX;
 
@@ -26,6 +26,12 @@ namespace Xarcade.Application.Xarcade
         /// <param name="UserID">Unique identification that represents the user</param>
         public async Task<OwnerDto> CreateOwnerAccountAsync(long UserID)
         {
+            if (UserID <= 0)
+            {
+                _logger.LogError("Invalid User ID!!");
+                return null;
+            }
+            
             var wallet = await blockchainPortal.CreateAccountAsync(UserID);
 
             if (wallet == null)
@@ -34,10 +40,21 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
 
-            //save to db
+            //save to db owner table
             var domOwner = new Owner
             {
-                UserID = wallet.UserID,
+                UserID = UserID,
+                WalletAddress = wallet.WalletAddress,
+                PrivateKey = wallet.PrivateKey,
+                PublicKey = wallet.PublicKey,
+                Created = wallet.Created
+            };
+
+            //save to db user table
+            var domUser = new User
+            {
+                UserID = UserID,
+                OwnerID = UserID,
                 WalletAddress = wallet.WalletAddress,
                 PrivateKey = wallet.PrivateKey,
                 PublicKey = wallet.PublicKey,
@@ -46,12 +63,21 @@ namespace Xarcade.Application.Xarcade
 
             var owner = new OwnerDto
             {
-                UserID = wallet.UserID,
+                UserID = UserID,
                 WalletAddress = wallet.WalletAddress,
                 Created = wallet.Created
             };
 
-            dataAccessProximaX.SaveOwner(domOwner);
+            try
+            {
+                dataAccessProximaX.SaveOwner(domOwner);
+                dataAccessProximaX.SaveUser(domUser); 
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+
             return owner;
         }
 
@@ -62,6 +88,12 @@ namespace Xarcade.Application.Xarcade
         /// <param name="OwnerID">Unique identification that represents the owner</param>
         public async Task<UserDto> CreateUserAccountAsync(long UserID, long OwnerID)
         {
+            if (UserID <= 0)
+            {
+                _logger.LogError("Invalid User ID!!");
+                return null;
+            }
+
             var wallet = await blockchainPortal.CreateAccountAsync(UserID);
             
             if (wallet == null)
@@ -73,7 +105,7 @@ namespace Xarcade.Application.Xarcade
             //save to db
             var domUser = new User
             {
-                UserID = wallet.UserID,
+                UserID = UserID,
                 OwnerID = OwnerID,
                 WalletAddress = wallet.WalletAddress,
                 PrivateKey = wallet.PrivateKey,
@@ -83,13 +115,21 @@ namespace Xarcade.Application.Xarcade
 
             var user = new UserDto
             {
-                UserID = wallet.UserID,
+                UserID = UserID,
                 OwnerID = OwnerID,
                 WalletAddress = wallet.WalletAddress,
                 Created = wallet.Created
             };
 
-            dataAccessProximaX.SaveUser(domUser); //save to db
+            try
+            {
+                dataAccessProximaX.SaveUser(domUser); //save to db
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+
             return user;
         }
 
