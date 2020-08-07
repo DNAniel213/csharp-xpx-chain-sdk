@@ -279,7 +279,7 @@ namespace Xarcade.Api.Prototype
 
             var account = portal.CreateAccountAsync(1, newAccount.PrivateKey);
             var namespaceInfo = portal.GetNamespaceInformationAsync(namespaceName).GetAwaiter().GetResult();
-            Namespace extendNamespace = portal.ExtendNamespaceDurationAsync(namespaceName,newAccount.PrivateKey,namespaceInfo,duration,param).GetAwaiter().GetResult();
+            Namespace extendNamespace = portal.ExtendNamespaceDurationAsync(namespaceName,newAccount.PrivateKey,namespaceInfo,param).GetAwaiter().GetResult();
             repo.SaveNamespace(extendNamespace);
 
             Console.WriteLine(extendNamespace.ToString());

@@ -10,6 +10,7 @@ namespace Xarcade.Infrastructure.ProximaX.Params
         public Account Account {get; set;} = null;
         public ulong MosaicID {get; set;} = 0;
         public Namespace Namespace {get; set;} = null;
+        public long AssetID {get; set;} = 0;
     }
 
 }

@@ -234,7 +234,7 @@ namespace Xarcade.Infrastructure.ProximaX
                         mosaic = new XarcadeModel.Mosaic
                         {
                             MosaicID = mosaicID.Id,
-                            AssetID  =  mosaicID.Id + "",
+                            AssetID  = param.AssetID,
                             Name     = null,
                             Quantity = 0,
                             Created  = DateTime.Now,
@@ -289,7 +289,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  =  mosaicInfo.MosaicId.Id + "",
+                        AssetID  = param.AssetID,
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -373,7 +373,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = param.MosaicID,
-                        AssetID  =  param.MosaicID + "",
+                        AssetID  = param.AssetID,
                         Name     = mosaicInfo.MetaId,
                         Quantity = param.Amount,
                         Created  = DateTime.Now,
@@ -435,7 +435,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  =  mosaicInfo.MosaicId.Id + "",
+                        AssetID  = param.AssetID,
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -515,7 +515,7 @@ namespace Xarcade.Infrastructure.ProximaX
             return xarNamespace;
         }
 
-        public async Task<XarcadeModel.Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,XarcadeModel.Namespace namespaceInfo, ulong duration, CreateNamespaceParams param)
+        public async Task<XarcadeModel.Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,XarcadeModel.Namespace namespaceInfo, CreateNamespaceParams param)
         {
             if(namespaceName == null)
             {
@@ -530,18 +530,19 @@ namespace Xarcade.Infrastructure.ProximaX
                 var namespaceId = new NamespaceId(namespaceName);
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
                 RegisterNamespaceTransaction renew = null;
-                var modelduration = Convert.ToDouble(duration);
+                var modelduration = Convert.ToDouble(param.Duration);
                 NamespaceType ntype = new NamespaceType();
+
                 if(param.Parent != null)
-                {
-                    ntype = NamespaceType.ROOT_NAMESPACE;
-                }
-                else
                 {
                     ntype = NamespaceType.SUB_NAMESPACE;
                 }
+                else
+                {
+                    ntype = NamespaceType.ROOT_NAMESPACE;
+                }
 
-                if(duration != 0)
+                if(param.Duration != 0)
                 {
                     renew = new RegisterNamespaceTransaction(
                     networkType,//network type
@@ -551,7 +552,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     namespaceName,//namespace Name
                     namespaceId,//namespace Id
                     ntype,//namespace Type
-                    duration,//duration
+                    param.Duration,//duration
                     null,//parent Id 
                     null,//signature 
                     null,//signer 
@@ -627,7 +628,7 @@ namespace Xarcade.Infrastructure.ProximaX
             XarcadeModel.Transaction transaction = null;
             var asset = new XarcadeModel.Asset
             {
-                AssetID  = "XPX",
+                AssetID  = param.AssetID,
                 Name     = param.Message,
                 Quantity = param.Amount,
                 Owner    = param.Sender,
@@ -677,7 +678,7 @@ namespace Xarcade.Infrastructure.ProximaX
             return transaction;
         }
 
-//FIXME no way to get transaction height
+//FIXME no way to get transaction height @Fixed by Janyl
         public async Task<XarcadeModel.Transaction> GetTransactionInformationAsync (string hash)
         {
             XarcadeModel.Transaction transaction = null;
@@ -690,7 +691,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 transaction = new XarcadeModel.Transaction
                 {
                     Hash   = transactionInfo.GetHashCode().ToString(),
-                    //transaction.Height = transactionInfo.TransactionInfo.Height;
+                    Height = transactionInfo.TransactionInfo.Height,
                     Asset  = asset,
                 };
 

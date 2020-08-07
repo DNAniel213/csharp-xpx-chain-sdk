@@ -10,7 +10,7 @@ namespace Xarcade.Application.Xarcade.Models.Token
         {
             return
                 "===Custom Token DTO==="  +
-                "\nGame ID: "     + Property.GameId +
+                "\nGame ID: "     + Property.GameID +
                 "\nName: "        + Property.Name +
                 "\nOwner: "       + Property.Owner +
                 "\nExpiry: "      + Property.Expiry +
