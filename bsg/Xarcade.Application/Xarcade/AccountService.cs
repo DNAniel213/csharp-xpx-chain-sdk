@@ -143,7 +143,8 @@ namespace Xarcade.Application.Xarcade
 
             var ownerAccountInfo = new OwnerDto
             {
-
+                UserID = UserID,
+                WalletAddress = ownerDB.WalletAddress,
             };
 
             return ownerAccountInfo;
@@ -154,7 +155,7 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
-        public async Task<UserDto> GetUserAccountAsync(long UserID, long OwnerID)
+        public async Task<UserDto> GetUserAccountAsync(long UserID)
         {
             var userDB = dataAccessProximaX.LoadUser(UserID);
             
