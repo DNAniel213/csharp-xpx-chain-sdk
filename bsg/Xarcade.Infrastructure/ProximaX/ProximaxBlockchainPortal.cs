@@ -234,7 +234,7 @@ namespace Xarcade.Infrastructure.ProximaX
                         mosaic = new XarcadeModel.Mosaic
                         {
                             MosaicID = mosaicID.Id,
-                            AssetID  = param.AssetID,
+                            AssetID  = Convert.ToInt64(mosaicID.Id),
                             Name     = null,
                             Quantity = 0,
                             Created  = DateTime.Now,
@@ -289,7 +289,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  = param.AssetID,
+                        AssetID  = Convert.ToInt64(mosaicInfo.MosaicId.Id),
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -373,7 +373,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = param.MosaicID,
-                        AssetID  = param.AssetID,
+                        AssetID  = Convert.ToInt64(param.MosaicID),
                         Name     = mosaicInfo.MetaId,
                         Quantity = param.Amount,
                         Created  = DateTime.Now,
@@ -435,7 +435,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  = param.AssetID,
+                        AssetID  = Convert.ToInt64(mosaicInfo.MosaicId.Id),
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -603,8 +603,8 @@ namespace Xarcade.Infrastructure.ProximaX
                     {
                         Domain   = namespaceName,
                         Owner    = owner,
-                        Expiry   = DateTime.Now,   //FIXME @John please get actual expiry date namespaceInfo.EndHeight
-                        Created  = DateTime.Now    //FIXME @John please get actual creation date namespaceInfo.StartHeight
+                        Expiry   = DateTime.Now,   //FIXME @John please get actual expiry date
+                        Created  = DateTime.Now    //FIXME @John please get actual creation date
                     };
                 }
 
@@ -628,7 +628,7 @@ namespace Xarcade.Infrastructure.ProximaX
             XarcadeModel.Transaction transaction = null;
             var asset = new XarcadeModel.Asset
             {
-                AssetID  = param.AssetID,
+                AssetID  = 0,
                 Name     = param.Message,
                 Quantity = param.Amount,
                 Owner    = param.Sender,

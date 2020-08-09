@@ -3,10 +3,9 @@ using Xarcade.Application.Xarcade.Models.Account;
 
 namespace Xarcade.Application.Xarcade.Models.Transaction
 {
-    /// <summary>Xarcade Application Layer AccountTransactionDto</summary>
+    /// <summary>Xarcade Application Layer AccountTransactionDto Composition: AccountDto</summary>
     public class AccountTransactionDto
     {
-        public State Status ;
         public string Hash {get; set;}
         public AccountDto Account {get; set;}
         public ulong BlockNumber {get; set;}
@@ -15,7 +14,6 @@ namespace Xarcade.Application.Xarcade.Models.Transaction
         {
             return
                 "===Account Transaction DTO==="  +
-                "\nStatus: "         + Status +
                 "\nHash: "           + Hash +
                 "\nBlockNumber: "    + BlockNumber +
                 "\nCreated: "        + Created +

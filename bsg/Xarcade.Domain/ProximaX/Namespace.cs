@@ -4,7 +4,7 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Namespace
     {
-        public long NamespaceID {get; set;}
+        public long NamespaceId {get; set;}
         public string Domain {get; set;}
         public string LayerOne {get; set;}
         public string LayerTwo {get; set;}
@@ -16,7 +16,7 @@ namespace Xarcade.Domain.ProximaX
         {
             return
                 "===Namespace DTO==="  +
-                "\nNamespace Id: "      + NamespaceID +
+                "\nNamespace Id: "      + NamespaceId +
                 "\nDomain: "            + Domain +
                 "\nLayer One: "         + LayerOne + 
                 "\nLayer Two: "         + LayerTwo +

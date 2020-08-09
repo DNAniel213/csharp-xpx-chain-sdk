@@ -9,11 +9,10 @@ using Xarcade.Infrastructure.ProximaX.Params;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Token;
 using Xarcade.Domain.ProximaX;
-using Xarcade.Application.ProximaX;
 
 namespace Xarcade.Application.Xarcade
 {
-    public class TokenService:ITokenService
+    public class TokenService
     {
         private readonly IDataAccessProximaX dataAccessProximaX;
         private readonly IBlockchainPortal blockchainPortal;
@@ -79,9 +78,9 @@ namespace Xarcade.Application.Xarcade
                 //Creates Mosaic
                 var mosaicparam = new CreateMosaicParams
                 {
-                    AssetID         = Convert.ToInt64(Token.TokenId),
+                    //AssetID         = Convert.ToInt64(Token.TokenId),
                     Account         = a,
-                    Namespace       = nsdto
+                    //Namespace       = nsdto
                 };
                 Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
                 Mosaic m = new Mosaic
@@ -110,7 +109,6 @@ namespace Xarcade.Application.Xarcade
                     Account   =  mosaicparam.Account,
                     MosaicID  =  createMosaicT.MosaicID,
                     Namespace =  nsdto,
-                    AssetID =    Convert.ToInt64(Token.TokenId),
                 };
                 var link = await blockchainPortal.LinkMosaicAsync(linkparam);
 
@@ -293,7 +291,7 @@ namespace Xarcade.Application.Xarcade
                 var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
                 tokenInfo = new TokenDto
                 {
-                    TokenId = Convert.ToUInt64(mosaicinfo.MosaicID),
+                    TokenId = Convert.ToInt64(mosaicinfo.MosaicID),
                     Name = mosaicinfo.Name,
                     Quantity = mosaicinfo.Quantity,
                     Owner = mosaicinfo.Owner.UserID,
@@ -323,7 +321,7 @@ namespace Xarcade.Application.Xarcade
 
             gameInfo = new GameDto
             {
-                GameID = namespaceInfo.NamespaceID,
+                GameId = namespaceInfo.NamespaceId,
                 Name = namespaceInfo.Domain,
                 Owner = namespaceInfo.Owner.UserID,
                 Expiry = namespaceInfo.Expiry

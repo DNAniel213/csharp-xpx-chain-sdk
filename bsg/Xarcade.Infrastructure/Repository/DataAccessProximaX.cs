@@ -149,7 +149,6 @@ namespace Xarcade.Infrastructure.Repository
             }
 
             return null;
-        }
-   
+        }   
     }
 }

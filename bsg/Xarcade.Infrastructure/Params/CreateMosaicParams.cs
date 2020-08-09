@@ -28,13 +28,5 @@ namespace Xarcade.Infrastructure.ProximaX.Params
         /// The number of blocks the mosaic will be active. Default is 1000
         /// </summary>
         public ulong Duration {get; set;} = 10000;
-        /// <summary>
-        /// The Id of the asset connected to this mosaic. Default is 0
-        /// </summary>
-        public long AssetID {get; set;} = 0;
-        /// <summary>
-        /// The Namespace connected of this mosaic. Default is null
-        /// </summary>
-        public Namespace Namespace {get; set;} = null;
     }
 }

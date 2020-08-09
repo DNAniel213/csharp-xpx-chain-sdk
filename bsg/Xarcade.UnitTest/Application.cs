@@ -34,7 +34,7 @@ namespace Xarcade.Api.Prototype
 
             TokenDto tokentest = new TokenDto
             {
-                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),//should be generated
+                TokenId = Convert.ToInt64(DateTime.Now.Ticks),//should be generated
                 Name = "tokentest",
                 Quantity = 0,
                 Owner = user.UserID
@@ -43,7 +43,7 @@ namespace Xarcade.Api.Prototype
             //ulong duration = Convert.ToUInt32(Console.ReadLine());
             GameDto creategametest = new GameDto
             {
-                GameID = DateTime.Now.Ticks,//should be generated
+                GameId = DateTime.Now.Ticks,//should be generated
                 Name = "gametest2",
                 Owner = user.UserID,
                 //Expiry = DateTime.Now.AddDays(364)

@@ -7,30 +7,8 @@ namespace Xarcade.Application.Xarcade
 {
     public interface ITransactionService
     {
-        /// <summary>
-        /// Sends a Token from a user to another user
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="sender"></param>
-        /// <param name="receiver"></param>
-        /// <returns></returns>
         Task<TokenTransactionDto> SendTokenAsync(TokenDto token,AccountDto sender, AccountDto receiver);
-        
-        /// <summary>
-        /// Sends an Xar from a user to another user
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="sender"></param>
-        /// <param name="receiver"></param>
-        /// <returns></returns>
         Task<TokenTransactionDto> SendXarAsync(TokenDto token,AccountDto sender, AccountDto receiver);
-        /// <summary>
-        /// Sends a Xpx from a user to another user
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="sender"></param>
-        /// <param name="receiver"></param>
-        /// <returns></returns>
         Task<TokenTransactionDto> SendXpxAsync(TokenDto token,AccountDto sender, AccountDto receiver);
     }
 } 

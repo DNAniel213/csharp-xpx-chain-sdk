@@ -9,13 +9,12 @@ namespace Xarcade.Domain.ProximaX
         {
             return
                 "===Asset_Mosaic DTO==="  +
-                "\nAssetID: "             + AssetID +
-                "\nName: "                + Name + 
-                "\nQuantity: "            + Quantity + 
-                "\nOwner: "               + Owner.UserID + 
-                "\nDate Created: "        + Created +
                 "\nMosaicID: "            + MosaicID +
-                "\nNamespace: "           + Namespace +
+                "\nAssetID: "            + AssetID +
+                "\nName: "         + Name + 
+                "\nQuantity: "          +Quantity + 
+                "\nOwner: "          +Owner.UserID + 
+                "\nDate Created: "   + Created +
                 "\n==End of Asset_Mosaic DTO==";
         }
     }

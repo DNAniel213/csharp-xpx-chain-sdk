@@ -14,23 +14,23 @@ namespace Xarcade.Infrastructure.Repository
         public static Account BsonToAccountDTO(BsonDocument account)
         {
             var accountDTO = new Account();
-            accountDTO.UserID        = account["UserID"].AsInt64;
-            accountDTO.WalletAddress = account["WalletAddress"].AsString;
-            accountDTO.PrivateKey    = account["PrivateKey"].AsString;
-            accountDTO.PublicKey     = account["PublicKey"].AsString;
-            accountDTO.Created       = account["Created"].ToUniversalTime();
+            accountDTO.UserID        = account["userID"].AsInt64;
+            accountDTO.WalletAddress = account["walletAddress"].AsString;
+            accountDTO.PrivateKey    = account["privateKey"].AsString;
+            accountDTO.PublicKey     = account["publicKey"].AsString;
+            accountDTO.Created       = account["created"].ToUniversalTime();
             return accountDTO;
         }
 
         public static User BsonToUserDTO(BsonDocument user)
         {
             var userDTO = new User();
-            userDTO.UserID        = user["UserID"].AsInt64;
-            userDTO.WalletAddress = user["WalletAddress"].AsString;
-            userDTO.PrivateKey    = user["PrivateKey"].AsString;
-            userDTO.PublicKey     = user["PublicKey"].AsString;
-            userDTO.Created       = user["Created"].ToUniversalTime();
-            userDTO.OwnerID       = user["OwnerID"].AsInt64;
+            userDTO.UserID        = user["userID"].AsInt64;
+            userDTO.WalletAddress = user["walletAddress"].AsString;
+            userDTO.PrivateKey    = user["privateKey"].AsString;
+            userDTO.PublicKey     = user["publicKey"].AsString;
+            userDTO.Created       = user["created"].ToUniversalTime();
+            userDTO.OwnerID       = user["ownerID"].AsInt64;
             return userDTO;
         }
 
@@ -60,7 +60,7 @@ namespace Xarcade.Infrastructure.Repository
         public static Namespace BsonToGameDTO(BsonDocument game)
         {
             var gameDTO = new Namespace();
-            gameDTO.NamespaceID = game["NamespaceID"].AsInt64;
+            gameDTO.NamespaceId = game["NamespaceID"].AsInt64;
             gameDTO.Domain      = game["Domain"].AsString;
             try
             {
@@ -91,6 +91,7 @@ namespace Xarcade.Infrastructure.Repository
             mosaicDTO.Created   = token["Created"].ToUniversalTime();//no out
             return mosaicDTO;
         }
+
     }
 
 }

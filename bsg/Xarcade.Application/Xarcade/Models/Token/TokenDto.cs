@@ -4,7 +4,7 @@ namespace Xarcade.Application.Xarcade.Models.Token
     /// <summary>Xarcade Application Layer Token DTO Model</summary>
     public class TokenDto
     {
-        public ulong TokenId {get; set;}
+        public long TokenId {get; set;}
         public string Name {get; set;}
         public ulong Quantity {get; set;}
         public long Owner {get; set;} //UserId
