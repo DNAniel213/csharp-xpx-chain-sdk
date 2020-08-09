@@ -68,7 +68,7 @@ namespace Xarcade.Infrastructure.Repository
                 gameDTO.LayerTwo    = game["LayerTwo"].AsString;
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
             }
             gameDTO.Owner       = BsonToOwnerDTO(game["Owner"].AsBsonDocument);
             gameDTO.Expiry      = game["Expiry"].ToUniversalTime();

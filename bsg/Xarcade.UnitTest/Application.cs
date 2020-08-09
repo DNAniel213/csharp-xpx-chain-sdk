@@ -71,7 +71,7 @@ namespace Xarcade.Api.Prototype
                 case "1":  user = repository.Register(); break;
                 case "2":  user = repository.Login();    break; 
                 case "3":  blockChain.ProximaXMain(user);   break;
-                case "5":  var ct = ts.CreateTokenAsync(tokentest).GetAwaiter().GetResult(); break;
+                case "5":  var ct = ts.CreateTokenAsync(tokentest,"naisu2").GetAwaiter().GetResult(); break;
                 case "6":  var cg= ts.CreateGameAsync(creategametest).GetAwaiter().GetResult(); break;
                 case "7":  var extendgame = ts.ExtendGameAsync(creategametest,duration).GetAwaiter().GetResult(); break;
                 case "8":  var modsupply= ts.ModifyTokenSupplyAsync(tokentest).GetAwaiter().GetResult(); break;
