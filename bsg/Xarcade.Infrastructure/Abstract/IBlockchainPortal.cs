@@ -94,5 +94,10 @@ namespace Xarcade.Infrastructure.Abstract
         /// <returns></returns>
         Task<Transaction> GetTransactionInformationAsync (string hash);
 
+        /// <summary>
+        /// Retrieves the account information
+        /// </summary>
+        Task<Account> GetAccountInformationAsync(string address);
+
     }
 }

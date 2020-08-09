@@ -643,6 +643,30 @@ namespace Xarcade.Infrastructure.ProximaX
             return transaction;
         }
 
+        //FIXME: This does not work properly yet -Ranz
+        public async Task<XarcadeModel.Account> GetAccountInformationAsync (string address)
+        {
+            XarcadeModel.Account account = null;
+
+            try
+            {
+                var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+                //var accountInfo = await siriusClient.AccountHttp.GetAccountInfo();
+
+                account = new XarcadeModel.Account
+                {
+                    //WalletAddress = accountInfo.Address.Plain
+                };
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+
+            return account;
+        }
+
 
 
 //FIXME this still doesn't work properly @John
