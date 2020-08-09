@@ -34,6 +34,8 @@ bsg/Xarcade.Infrastructure/bin/*
 bsg/Xarcade.Infrastructure/obj/*
 bsg/Xarcade.UnitTest/bin/*
 bsg/Xarcade.UnitTest/obj/*
+bsg/Xarcade.WebApi/bin/*
+bsg/Xarcade.WebApi/obj/*
 ramo-blockchain-ref/*
 *.code-workspace
 
@@ -78,3 +80,5 @@ bsg/Xarcade.Infrastructure/bin/*
 bsg/Xarcade.Infrastructure/obj/*
 bsg/Xarcade.UnitTest/bin/*
 bsg/Xarcade.UnitTest/obj/*
+bsg/Xarcade.WebApi/bin/*
+bsg/Xarcade.WebApi/obj/*
