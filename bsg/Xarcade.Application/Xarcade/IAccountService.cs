@@ -34,6 +34,6 @@ namespace Xarcade.Application.Xarcade
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
         /// <returns></returns>
-        Task<UserDto> GetUserAccountAsync(long UserID, long OwnerID);
+        Task<UserDto> GetUserAccountAsync(long UserID);
     }
 }
