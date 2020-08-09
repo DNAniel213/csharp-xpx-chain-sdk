@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Repository;
@@ -165,6 +166,18 @@ namespace Xarcade.Application.Xarcade
             };
 
             return userAccountInfo;
+        }
+
+        /// <summary>
+        /// Gets the account information of a specific User
+        /// </summary>
+        /// <param name="UserID">Unique identification that represents the user</param>
+        /// <param name="OwnerID">Unique identification that represents the owner</param>
+        public async Task<List<UserDto>> GetUserList(long OwnerID)
+        {
+            var userDB = dataAccessProximaX.LoadOwner(OwnerID);
+            
+            return null;
         }
     }
 }
