@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System;
+
 namespace Xarcade.WebApi.Controllers.Xarcade.Models
 {
     public class GameViewModel
