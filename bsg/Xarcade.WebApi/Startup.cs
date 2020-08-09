@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Xarcade.Application.Xarcade;
+using Xarcade.Application.ProximaX;
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Repository;
 using Xarcade.Infrastructure.ProximaX;
@@ -31,8 +32,8 @@ namespace Xarcade.WebApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<ITransactionService, TransactionService>();
-            services.AddTransient<ITokenService, TokenServices>();
+            //services.AddTransient<ITransactionService, TransactionService>();
+            //services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IDataAccessProximaX, DataAccessProximaX>();
             services.AddTransient<IBlockchainPortal, ProximaxBlockchainPortal>();
             services.AddControllers();

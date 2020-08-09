@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xarcade.WebApi.Controllers.Xarcade.Models;
 using Xarcade.Application.Xarcade;
+using Xarcade.Application.ProximaX;
 using Xarcade.Application.Xarcade.Models.Account;
 
 namespace Xarcade.WebApi.Controllers.Xarcade.V1
@@ -15,12 +16,14 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         public readonly ITransactionService transactionService = null;
         public readonly IAccountService accountService = null;
         public readonly ITokenService tokenService = null;
-        public AccountController(ITransactionService transactionService, IAccountService accountService, ITokenService tokenService)
+        public TransactionController(ITransactionService transactionService, IAccountService accountService, ITokenService tokenService)
         {
             this.transactionService = transactionService;
             this.accountService = accountService;
             this.tokenService = tokenService;
         }
+
+        /*
 
         [HttpPost]
         [Route(Routes.SendToken)]
@@ -62,6 +65,8 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 response.ViewModel = null;
             }
         }
+
+        */
 
 
     }

@@ -6,18 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xarcade.WebApi.Controllers.Xarcade.Models;
 using Xarcade.Application.Xarcade;
+using Xarcade.Application.ProximaX;
 using Xarcade.Application.Xarcade.Models.Account;
+using Xarcade.Application.Xarcade.Models.Token;
 
 namespace Xarcade.WebApi.Controllers.Xarcade.V1
 {
     public class TokenController : ControllerBase
     {
         public readonly ITokenService tokenService = null;
-        public AccountController(ITokenService tokenService)
+        public TokenController(ITokenService tokenService)
         {
             this.tokenService = tokenService;
         }
-
+/*
         [HttpPost]
         [Route(Routes.GenerateToken)]
         public async Task<Response> CreateToken(string name, ulong supply, long owner)
@@ -233,7 +235,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 response.Message = "Missing or incorrect parameters";
                 return response;
             }
-            
+
             TokenViewModel tokenViewModel = new TokenViewModel();
 
             try
@@ -279,6 +281,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             return gameViewModel;
         }
+        */
 
 
     }

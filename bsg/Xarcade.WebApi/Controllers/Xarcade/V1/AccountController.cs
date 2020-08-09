@@ -114,14 +114,14 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             try
             {
-                var userDto = await accountService.CreateUserAccountAsync(userId);
+                Console.WriteLine("user id : " + userId + " owner id : " + ownerId);
+                var userDto = await accountService.CreateUserAccountAsync(userId, ownerId);
 
                 var userViewModel = new UserViewModel
                 {
                     WalletAddress = userDto.WalletAddress,
                     Name = null,
                     Email = null,
-                    Users = null
                 };
 
                 response.Message = "Success!";
