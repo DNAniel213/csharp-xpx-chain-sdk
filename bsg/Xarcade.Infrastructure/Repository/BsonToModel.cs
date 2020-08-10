@@ -79,16 +79,20 @@ namespace Xarcade.Infrastructure.Repository
  
         public static Mosaic BsonToTokenDTO(BsonDocument token)
         {
-            //Console.WriteLine(token["Namespace"].AsBsonDocument);
-            Console.WriteLine(token["Owner"].AsBsonDocument);
             var mosaicDTO = new Mosaic();
             mosaicDTO.MosaicID  = (ulong)token["MosaicID"].AsInt64;
-            //mosaicDTO.Namespace = BsonToGameDTO(token["Namespace"]);//no out
-            mosaicDTO.AssetID   = token["AssetID"].AsInt64;//no out
-            mosaicDTO.Name      = token["Name"].AsString;//no out
-            mosaicDTO.Quantity  = (ulong)token["Quantity"].AsInt64;//no out
-            mosaicDTO.Owner     = BsonToOwnerDTO(token["Owner"].AsBsonDocument);//no out
-            mosaicDTO.Created   = token["Created"].ToUniversalTime();//no out
+            try
+            {
+                mosaicDTO.Namespace = BsonToGameDTO(token["Namespace"].AsBsonDocument);
+            }catch(Exception e)
+            {
+                //Console.WriteLine(e.ToString());s
+            }
+            mosaicDTO.AssetID   = token["AssetID"].AsInt64;
+            mosaicDTO.Name      = token["Name"].AsString;
+            mosaicDTO.Quantity  = (ulong)token["Quantity"].AsInt64;
+            mosaicDTO.Owner     = BsonToOwnerDTO(token["Owner"].AsBsonDocument);
+            mosaicDTO.Created   = token["Created"].ToUniversalTime();
             return mosaicDTO;
         }
 
