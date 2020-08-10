@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Repository;
@@ -13,6 +14,7 @@ namespace Xarcade.Application.Xarcade
         private readonly IDataAccessProximaX dataAccessProximaX;
         private readonly IBlockchainPortal blockchainPortal;
         private static ILogger _logger;
+        DataAccessProximaX repo = new DataAccessProximaX();
 
         public AccountService(IDataAccessProximaX dataAccessProximaX, IBlockchainPortal blockchainPortal)
         {
@@ -26,6 +28,12 @@ namespace Xarcade.Application.Xarcade
         /// <param name="UserID">Unique identification that represents the user</param>
         public async Task<OwnerDto> CreateOwnerAccountAsync(long UserID)
         {
+            if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", UserID), FilterOperator.EQUAL)))
+            {
+                _logger.LogError("User ID already exists!!");
+                return null;
+            }
+
             if (UserID <= 0)
             {
                 _logger.LogError("Invalid User ID!!");
@@ -49,7 +57,7 @@ namespace Xarcade.Application.Xarcade
                 PublicKey = wallet.PublicKey,
                 Created = wallet.Created
             };
-
+            
             //save to db user table
             var domUser = new User
             {
@@ -88,12 +96,18 @@ namespace Xarcade.Application.Xarcade
         /// <param name="OwnerID">Unique identification that represents the owner</param>
         public async Task<UserDto> CreateUserAccountAsync(long UserID, long OwnerID)
         {
+            if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", UserID), FilterOperator.EQUAL)))
+            {
+                _logger.LogError("User ID already exists!!");
+                return null;
+            }
+
             if (UserID <= 0)
             {
                 _logger.LogError("Invalid User ID!!");
                 return null;
             }
-
+            
             var wallet = await blockchainPortal.CreateAccountAsync(UserID);
             
             if (wallet == null)
@@ -141,10 +155,17 @@ namespace Xarcade.Application.Xarcade
         {
             var ownerDB = dataAccessProximaX.LoadOwner(UserID);
 
+            if (ownerDB == null)
+            {
+                _logger.LogError("User not found!!");
+                return null;
+            }
+
             var ownerAccountInfo = new OwnerDto
             {
                 UserID = UserID,
                 WalletAddress = ownerDB.WalletAddress,
+                Created = ownerDB.Created
             };
 
             return ownerAccountInfo;
@@ -158,13 +179,34 @@ namespace Xarcade.Application.Xarcade
         public async Task<UserDto> GetUserAccountAsync(long UserID)
         {
             var userDB = dataAccessProximaX.LoadUser(UserID);
+
+            if (userDB == null)
+            {
+                _logger.LogError("User not found!!");
+                return null;
+            }
             
             var userAccountInfo = new UserDto
             {
-
+                UserID = UserID,
+                OwnerID = userDB.OwnerID,
+                WalletAddress = userDB.WalletAddress,
+                Created = userDB.Created
             };
 
             return userAccountInfo;
+        }
+
+        /// <summary>
+        /// Gets the account information of a specific User TODO: finish this functionS
+        /// </summary>
+        /// <param name="UserID">Unique identification that represents the user</param>
+        /// <param name="OwnerID">Unique identification that represents the owner</param>
+        public async Task<List<UserDto>> GetUserList(long OwnerID)
+        {
+            var userDB = dataAccessProximaX.LoadOwner(OwnerID);
+            
+            return null;
         }
     }
 }

@@ -1,0 +1,163 @@
+2020-08-02 12:27:03.078 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 12:30:32.417 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 12:31:53.138 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 12:35:20.928 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 12:38:47.750 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 12:41:29.248 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 12:51:36.064 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 13:11:51.092 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 13:30:11.367 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 13:31:28.906 +08:00 [ERR] [ReadDocument][156] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 13:39:20.598 +08:00 [ERR] [ReadDocument][158] System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at MongoDB.Driver.IAsyncCursorExtensions.Single[TDocument](IAsyncCursor`1 cursor, CancellationToken cancellationToken)
+   at MongoDB.Driver.IAsyncCursorSourceExtensions.Single[TDocument](IAsyncCursorSource`1 source, CancellationToken cancellationToken)
+   at MongoDB.Driver.IFindFluentExtensions.Single[TDocument,TProjection](IFindFluent`2 find, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.ReadDocument(String collectionName, FilterDefinition`1 filter) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 152
+2020-08-02 13:50:12.512 +08:00 [ERR] [ModifyMosaicSupplyAsync][309] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/177FE50E63881E80
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 272
+2020-08-02 13:50:12.546 +08:00 [ERR] [CreateDocument][44] System.ArgumentNullException: Value cannot be null. (Parameter 'document')
+   at MongoDB.Driver.Core.Misc.Ensure.IsNotNull[T](T value, String paramName)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, Action`2 bulkWrite)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.CreateDocument(String collectionName, BsonDocument doc) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 40
+2020-08-02 13:50:12.675 +08:00 [ERR] [LinkMosaicAsync][457] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/177FE50E63881E80
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 419
+2020-08-02 13:54:29.059 +08:00 [ERR] [ModifyMosaicSupplyAsync][309] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/74C3334DBBB78177
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 272
+2020-08-02 13:54:29.094 +08:00 [ERR] [CreateDocument][44] System.ArgumentNullException: Value cannot be null. (Parameter 'document')
+   at MongoDB.Driver.Core.Misc.Ensure.IsNotNull[T](T value, String paramName)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, Action`2 bulkWrite)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.CreateDocument(String collectionName, BsonDocument doc) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 40
+2020-08-02 13:54:29.204 +08:00 [ERR] [LinkMosaicAsync][457] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/74C3334DBBB78177
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 419
+2020-08-02 14:59:48.509 +08:00 [ERR] [ModifyMosaicSupplyAsync][309] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/4BF757BF08241D2D
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 272
+2020-08-02 14:59:48.543 +08:00 [ERR] [CreateDocument][44] System.ArgumentNullException: Value cannot be null. (Parameter 'document')
+   at MongoDB.Driver.Core.Misc.Ensure.IsNotNull[T](T value, String paramName)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, Action`2 bulkWrite)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.CreateDocument(String collectionName, BsonDocument doc) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 40
+2020-08-02 14:59:48.671 +08:00 [ERR] [LinkMosaicAsync][457] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/4BF757BF08241D2D
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 419
+2020-08-02 18:58:47.481 +08:00 [ERR] [CreateNamespaceAsync][511] System.IO.InvalidDataException: Invalid name space name Cool Game 1
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in C:\Users\Noble 6 Elite Crusad\Desktop\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 480

@@ -17,7 +17,7 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token);
+        Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName);
 
         /// <summary>
         /// Creates game
@@ -31,14 +31,14 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="Game"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> ExtendGameAsync(GameDto Game);
+        Task<TokenTransactionDto> ExtendGameAsync(GameDto Game, ulong duration);
 
         /// <summary>
         /// Modifies token supply 
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> ModifyTokenSupply(TokenDto Token);
+        Task<TokenTransactionDto> ModifyTokenSupplyAsync(TokenDto Token);
 
         /// <summary>
         /// Retrieves the information of a specific token
