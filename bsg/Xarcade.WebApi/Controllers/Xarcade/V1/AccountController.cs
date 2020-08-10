@@ -20,13 +20,13 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpGet]
         [Route(Routes.Owner)]
-        public async Task<OwnerViewModel> GetOwner([FromQuery] long userId)
+        public async Task<OwnerViewModel> GetOwner([FromQuery] long ownerId)
         {
-            if(userId < 0)  return null;
+            if(ownerId < 0)  return null;
             OwnerViewModel ownerViewModel = null;
             try
             {
-                var ownerDto = await accountService.GetOwnerAccountAsync(userId);
+                var ownerDto = await accountService.GetOwnerAccountAsync(ownerId);
 
                 ownerViewModel.WalletAddress = ownerDto.WalletAddress;
                 ownerViewModel.Name = "Dane";
@@ -49,12 +49,12 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             try
             {
+
                 var userDto = await accountService.GetUserAccountAsync(userId);
 
                 userViewModel.WalletAddress = userDto.WalletAddress;
-                userViewModel.Name = "Dane";
-                userViewModel.Email = "Dane@gmail.com";
-
+                userViewModel.Name = "Foo " + userId;
+                userViewModel.Email = "Foo@bar.com";
             }catch(Exception e)
             {
                 userViewModel = null; 
@@ -67,6 +67,8 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.GenerateOwner)]
         public async Task<Response> CreateOwnerWallet(long ownerId) //TODO Propose email and Name
         {
+            Console.WriteLine("owner id : " + ownerId);
+
             Response response = new Response();
 
             if(ownerId < 0) 
@@ -103,6 +105,8 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.GenerateUser)]
         public async Task<Response> CreateUserWallet(long userId, long ownerId) //TODO Propose email and Name
         {
+            Console.WriteLine("user id : " + userId + " owner id : " + ownerId);
+
             Response response = new Response();
 
             if(ownerId < 0) 
@@ -114,7 +118,6 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             try
             {
-                Console.WriteLine("user id : " + userId + " owner id : " + ownerId);
                 var userDto = await accountService.CreateUserAccountAsync(userId, ownerId);
 
                 var userViewModel = new UserViewModel
