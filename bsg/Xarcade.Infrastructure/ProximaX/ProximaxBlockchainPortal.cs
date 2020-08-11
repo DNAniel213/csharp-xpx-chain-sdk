@@ -519,8 +519,8 @@ namespace Xarcade.Infrastructure.ProximaX
         {
             if(namespaceName == null)
             {
+                _logger.LogError("Input is invalid!!");
                 return null;
-                //TODO log namespaceName is empty
             }
 
             XarcadeModel.Namespace renewNamespace = null;
@@ -568,10 +568,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     Owner   = param.Account,
                 };
 
-            }catch(Exception)
+            }catch(Exception e)
             {
+                _logger.LogError(e.ToString());
                 return null;
-                //TODO log e
             }
             
             return renewNamespace;
@@ -710,67 +710,77 @@ namespace Xarcade.Infrastructure.ProximaX
 //FIXME this still doesn't work properly @John
         public async Task<Transaction> MonitorTransactionAsync(Transaction transaction)
         {
-            var networkType = await siriusClient.NetworkHttp.GetNetworkType();
-            // Creates instance of SiriusClient
+            if(transaction == null)
+            {
+                _logger.LogError("Input is invalid!!");
+                return null;
+            }
 
-            var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
-            // Opens the listener
-            await ws.Listener.Open();
+            try
+            {
+                var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+                // Creates instance of SiriusClient
+                var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
+                // Opens the listener
+                await ws.Listener.Open();
 
-            // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
-            // Blocks are generated every 15 seconds in average, so a timeout can be raised if
-            // there is no response after 30 seconds.
-            ws.Listener.NewBlock()
-            .Timeout(TimeSpan.FromSeconds(30))  
-            .Subscribe(
-                block => {
-                Console.WriteLine($"New block is created {block.Height}");
-                },
-                err => {
-                Console.WriteLine($"Unexpected error {err}");
-                ws.Listener.Close();
-                }
-            );
-
-            // Monitors if there is any validation error with the issued transaction
-            var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey, networkType);
-
-            ws.Listener.TransactionStatus(signerAddress)
-            .Timeout(TimeSpan.FromSeconds(30))  
-            .Subscribe(
-                // transaction info
-                tx =>
-                {
-                    Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
-                },
-                // handle if any error occured
-                txErr =>
-                {
-                    Console.WriteLine($"Transaction error - {txErr}");
+                // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
+                // Blocks are generated every 15 seconds in average, so a timeout can be raised if
+                // there is no response after 30 seconds.
+                ws.Listener.NewBlock()
+                .Timeout(TimeSpan.FromSeconds(30))  
+                .Subscribe(
+                    block => {
+                    Console.WriteLine($"New block is created {block.Height}");
+                    },
+                    err => {
+                    Console.WriteLine($"Unexpected error {err}");
                     ws.Listener.Close();
-                }
-            );
-            
+                    }
+                );
 
-            // Monitors if the transaction arrives the network but not yet include in the block
-            var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
+                // Monitors if there is any validation error with the issued transaction
+                var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey, networkType);
+
+                ws.Listener.TransactionStatus(signerAddress)
+                .Timeout(TimeSpan.FromSeconds(30))  
+                .Subscribe(
+                    // transaction info
+                    tx =>
+                    {
+                        Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
+                    },
+                    // handle if any error occured
+                    txErr =>
+                    {
+                        Console.WriteLine($"Transaction error - {txErr}");
+                        ws.Listener.Close();
+                    }
+                );
+                // Monitors if the transaction arrives the network but not yet include in the block
+                var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
+                                                    .Take(1)
+                                                    .Timeout(TimeSpan.FromSeconds(30));
+
+                // Monitors if the transaction get included in the block
+                var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
                                                 .Take(1)
                                                 .Timeout(TimeSpan.FromSeconds(30));
+                                                
+                // Gets the results
+                var unconfirmedResult =  confirmedTx;
 
-            // Monitors if the transaction get included in the block
-            var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
-                                            .Take(1)
-                                            .Timeout(TimeSpan.FromSeconds(30));
+                Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
 
+                var confirmedResult = confirmedTx;
 
-            // Gets the results
-            var unconfirmedResult =  confirmedTx;
-
-            Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
-
-            var confirmedResult = confirmedTx;
-
-            Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
+                Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
 
             return null;
         }
