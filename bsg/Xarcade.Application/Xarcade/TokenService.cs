@@ -43,7 +43,7 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError("Invalid Input!!");
                 return null;
             }
-            TokenTransactionDto tokentrans = null;
+            TokenTransactionDto ttd = null;
 
             try
             {
@@ -133,13 +133,30 @@ namespace Xarcade.Application.Xarcade
                 };
                 repo.SaveTransaction(t);
 
+                TokenDto td = new TokenDto
+                {
+                    TokenId = Token.TokenId,
+                    Name = Token.Name,
+                    Quantity = am,
+                    Owner = ownerdto.UserID,
+                };
+
+                ttd = new TokenTransactionDto
+                {
+                    Status = 0,
+                    Hash = t.Hash,
+                    Token = td,
+                    BlockNumber = 0,
+                    Created = DateTime.Now,
+                };
+
             }catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
                 return null;
             }
             
-            return tokentrans;
+            return ttd;
         }
 
         public async Task<TokenTransactionDto> CreateGameAsync(GameDto Game)
