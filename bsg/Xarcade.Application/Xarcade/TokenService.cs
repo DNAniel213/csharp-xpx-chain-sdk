@@ -104,7 +104,7 @@ namespace Xarcade.Application.Xarcade
                     Name = Token.Name,
                     Quantity = am,
                     Owner = ownerdto,
-                    Created = DateTime.Now
+                    Created = m.Created
                 };
 
                 //Links Mosaic To Namespace
@@ -129,7 +129,7 @@ namespace Xarcade.Application.Xarcade
                     Hash = link.Hash,
                     Height = link.Height,
                     Asset = tokenasset,
-                    Created = DateTime.Now
+                    Created = m.Created
                 };
                 repo.SaveTransaction(t);
 
@@ -147,7 +147,7 @@ namespace Xarcade.Application.Xarcade
                     Hash = t.Hash,
                     Token = td,
                     BlockNumber = 0,
-                    Created = DateTime.Now,
+                    Created = m.Created
                 };
 
             }catch(Exception e)
