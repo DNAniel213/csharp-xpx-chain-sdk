@@ -461,15 +461,16 @@ namespace Xarcade.Infrastructure.ProximaX
         }
 
 //TODO @ranz please add check if namespace exists
-        public async Task<XarcadeModel.Namespace> CreateNamespaceAsync(CreateNamespaceParams param)
+        public async Task<(XarcadeModel.Namespace gameName,XarcadeModel.Transaction tx)> CreateNamespaceAsync(CreateNamespaceParams param)
         {
             if(param.Account == null || param.Domain == null)
             {
                 _logger.LogError("Input is invalid!!");
-                return null;
+                return (null,null);
             }
 
             XarcadeModel.Namespace xarNamespace = null;
+            XarcadeModel.Transaction xarTransaction = null;
             try
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
@@ -496,7 +497,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
                 if(account != null && registerNamespaceT != null)
                 {
-                    await SignAndAnnounceTransactionAsync(account, registerNamespaceT);
+                    var trans = await SignAndAnnounceTransactionAsync(account, registerNamespaceT);
                     xarNamespace = new XarcadeModel.Namespace
                     {
                         Domain  = param.Domain,
@@ -504,15 +505,22 @@ namespace Xarcade.Infrastructure.ProximaX
                         Expiry  = DateTime.Now.AddDays(param.Duration),
                         Owner   = param.Account,
                     };
+                    xarTransaction = new XarcadeModel.Transaction
+                    {
+                        Hash = trans.Hash,
+                        Height = trans.Height,
+                        Asset = trans.Asset,
+                        Created = trans.Created,
+                    };
                 }
 
             }catch(Exception e)
             {
                 _logger.LogError(e.ToString());
-                return null;
+                return (null,null);
             }
 
-            return xarNamespace;
+            return (xarNamespace,xarTransaction);
         }
 
         public async Task<XarcadeModel.Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,XarcadeModel.Namespace namespaceInfo, CreateNamespaceParams param)

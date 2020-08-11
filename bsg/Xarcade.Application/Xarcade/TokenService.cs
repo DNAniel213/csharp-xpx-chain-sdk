@@ -186,8 +186,8 @@ namespace Xarcade.Application.Xarcade
                         Parent = null,
                     };
                     //Creates Game
-                    Namespace createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
-                    repo.SaveNamespace(createGame);
+                    var createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
+                    repo.SaveNamespace(createGame.gameName);
                 }
                 
 
