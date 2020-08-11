@@ -171,16 +171,15 @@ namespace Xarcade.Application.Xarcade
             {
                 var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Game.Owner), FilterOperator.EQUAL));
                 Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
-
-                //Creates Game
                 var gameparam = new CreateNamespaceParams
                 {
-                    Account = await blockchainPortal.CreateAccountAsync(Game.Owner,ownerdto.PrivateKey),
+                    Account = ownerdto,
                     Domain = Game.Name,
+                    Duration = 1000,
+                    Parent = null,
                 };
-
+                //Creates Game
                 Namespace createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
-
                 repo.SaveNamespace(createGame);
 
             }catch(Exception e)
