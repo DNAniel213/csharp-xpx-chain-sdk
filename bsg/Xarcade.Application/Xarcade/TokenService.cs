@@ -169,18 +169,27 @@ namespace Xarcade.Application.Xarcade
             
             try
             {
-                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Game.Owner), FilterOperator.EQUAL));
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
-                var gameparam = new CreateNamespaceParams
+                var nsExist = repo.portal.CheckExist("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("Domain", Game.Name), FilterOperator.EQUAL));
+                if(nsExist == true)
                 {
-                    Account = ownerdto,
-                    Domain = Game.Name,
-                    Duration = 1000,
-                    Parent = null,
-                };
-                //Creates Game
-                Namespace createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
-                repo.SaveNamespace(createGame);
+                    Console.WriteLine("Invalid Namespace. Namespace already exists!");
+                    return null;
+                }else
+                {
+                    var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Game.Owner), FilterOperator.EQUAL));
+                    Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+                    var gameparam = new CreateNamespaceParams
+                    {
+                        Account = ownerdto,
+                        Domain = Game.Name,
+                        Duration = 1000,
+                        Parent = null,
+                    };
+                    //Creates Game
+                    Namespace createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
+                    repo.SaveNamespace(createGame);
+                }
+                
 
             }catch(Exception e)
             {
