@@ -1,22 +1,7 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 
-# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,git,unity
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,git,unity
-
-### Git ###
-# Created by git for backups. To disable backups in Git:
-# $ git config --global mergetool.keepBackup false
-*.orig
-
-# Created by git when using merge tools for conflicts
-*.BACKUP.*
-*.BASE.*
-*.LOCAL.*
-*.REMOTE.*
-*_BACKUP_*.txt
-*_BASE_*.txt
-*_LOCAL_*.txt
-*_REMOTE_*.txt
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,unity
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,unity
 
 ### Unity ###
 # This .gitignore file should be placed at the root of your Unity project directory
@@ -125,25 +110,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,git,unity
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,unity
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
-bsg/Xarcade.Application/bin/*
-bsg/Xarcade.Application/obj/*
-bsg/Xarcade.Domain/bin/*
-bsg/Xarcade.Domain/obj/*
-bsg/Xarcade.Infrastructure/bin/*
-bsg/Xarcade.Infrastructure/obj/*
-bsg/Xarcade.UnitTest/bin/*
-bsg/Xarcade.UnitTest/obj/*
-bsg/Xarcade.WebApi/bin/*
-bsg/Xarcade.WebApi/obj/*
-
-Xarcade.IdleClickerGame/[Ll]ibrary/
-Xarcade.IdleClickerGame/[Tt]emp/
-Xarcade.IdleClickerGame/[Oo]bj/
-Xarcade.IdleClickerGame/[Bb]uild/
-Xarcade.IdleClickerGame/[Bb]uilds/
-Xarcade.IdleClickerGame/[Ll]ogs/
-Xarcade.IdleClickerGame/[Uu]ser[Ss]ettings/
