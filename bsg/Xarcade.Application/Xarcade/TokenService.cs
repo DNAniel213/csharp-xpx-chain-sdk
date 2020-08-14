@@ -25,16 +25,102 @@ namespace Xarcade.Application.Xarcade
             this.dataAccessProximaX = dataAccessProximaX;
             this.blockchainPortal = blockchainPortal;
         }
-
+        //link the mosaic to namespace
+        public async Task<TokenTransactionDto> RegisterTokenAsync(TokenDto Token, GameDto Game)
+        {
+            return null;
+        }
+        public async Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId)
+        {
+            return null;
+        }
+        //create xarcade token
         public async Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto Token)
         {
             if (Token == null)
             {
+                _logger.LogError("Invalid Input!!");
+                return null;
+            }
+            TokenTransactionDto ttd = null;
+            try
+            {
+                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL)); 
+                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+
+                Console.Write("Token quantity:");
+                ulong am = Convert.ToUInt64(Console.ReadLine());
+
+                Account a = new Account
+                {
+                    UserID          = ownerdto.UserID,
+                    WalletAddress   = ownerdto.WalletAddress,
+                    PrivateKey      = ownerdto.PrivateKey,
+                    PublicKey       = ownerdto.PublicKey,
+                    Created         = ownerdto.Created
+                };
+                //Creates Mosaic
+                var mosaicparam = new CreateMosaicParams
+                {
+                    Account             = a,
+                    //IsSupplyMutable   = ,
+                    //IsLevyMutable     = ,
+                    //IsTransferrable   = ,
+                    //Divisibility      = ,
+                    //Duration          = ,
+                };
+                Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
+                Mosaic m = new Mosaic
+                {
+                    AssetID = Convert.ToInt64(Token.TokenId),
+                    Name = null,
+                    Quantity = Token.Quantity,
+                    Owner = ownerdto,
+                    Created = DateTime.Now,
+                    MosaicID = createMosaicT.MosaicID,
+                    Namespace = null
+                };
+                this.dataAccessProximaX.SaveMosaic(m);
+                var modsupply = new ModifyMosaicSupplyParams
+                {
+                    Account   =  a,
+                    MosaicID  =  createMosaicT.MosaicID,
+                    Amount    =  Convert.ToInt32(am),
+                };
+                var supplied = await blockchainPortal.ModifyMosaicSupplyAsync(modsupply);
+
+                Asset tokenasset = new Asset
+                {
+                    AssetID = Convert.ToInt64(Token.TokenId),
+                    Name = "XarcadeToken",
+                    Quantity = am,
+                    Owner = ownerdto,
+                    Created = m.Created
+                };
+
+                TokenDto t = new TokenDto
+                {
+                    TokenId = tokenasset.AssetID,
+                    Name = tokenasset.Name,
+                    Quantity = tokenasset.Quantity,
+                    Owner = tokenasset.Owner.UserID
+                };
+
+                ttd = new TokenTransactionDto
+                {
+                    Status = State.Unconfirmed,
+                    Hash = null,
+                    Token = t,
+                    BlockNumber = 0,
+                    Created = tokenasset.Created
+                };
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
                 return null;
             }
 
-            
-            return null;
+            return ttd;
         }
         public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName)
         {
@@ -75,7 +161,6 @@ namespace Xarcade.Application.Xarcade
                     PublicKey       = ownerdto.PublicKey,
                     Created         = ownerdto.Created
                 };
-
                 //Creates Mosaic
                 var mosaicparam = new CreateMosaicParams
                 {
@@ -97,7 +182,7 @@ namespace Xarcade.Application.Xarcade
                     MosaicID = createMosaicT.MosaicID,
                     Namespace = nsdto
                 };
-                repo.SaveMosaic(m);
+                this.dataAccessProximaX.SaveMosaic(m);
                 Asset tokenasset = new Asset
                 {
                     AssetID = Convert.ToInt64(Token.TokenId),
@@ -131,7 +216,7 @@ namespace Xarcade.Application.Xarcade
                     Asset = tokenasset,
                     Created = m.Created
                 };
-                repo.SaveTransaction(t);
+                this.dataAccessProximaX.SaveTransaction(t);
 
                 TokenDto td = new TokenDto
                 {
@@ -187,7 +272,7 @@ namespace Xarcade.Application.Xarcade
                     };
                     //Creates Game
                     var createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
-                    repo.SaveNamespace(createGame.gameName);
+                    this.dataAccessProximaX.SaveNamespace(createGame.gameName);
                 }
                 
 
@@ -221,7 +306,7 @@ namespace Xarcade.Application.Xarcade
                 };
                 var namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(Game.Name);
                 var extendGame = await blockchainPortal.ExtendNamespaceDurationAsync(Game.Name,ownerdto.PrivateKey,namespaceInfo,param);
-                repo.SaveNamespace(extendGame);
+                this.dataAccessProximaX.SaveNamespace(extendGame);
 
             }catch(Exception e)
             {
@@ -267,7 +352,7 @@ namespace Xarcade.Application.Xarcade
                     Asset = modifyMosaicT.Asset,
                     Created = modifyMosaicT.Created,
                 };
-                repo.SaveTransaction(t);
+                this.dataAccessProximaX.SaveTransaction(t);
 
             }catch(Exception e)
             {

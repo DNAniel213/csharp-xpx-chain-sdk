@@ -22,7 +22,7 @@ namespace Xarcade.Infrastructure.ProximaX
 {
     public class ProximaxBlockchainPortal : IBlockchainPortal
     {
-        private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io"; 
+        private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io";
         private static SiriusClient siriusClient = null;
         private static ILogger _logger;
 
@@ -728,7 +728,7 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
                 // Creates instance of SiriusClient
-                var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
+                var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 443, true);
                 // Opens the listener
                 await ws.Listener.Open();
 

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Token;
 
@@ -47,6 +48,20 @@ namespace Xarcade.Application.ProximaX
         /// <param name="GameId"></param>
         /// <returns></returns>
         Task<GameDto> GetGameInfoAsync(long GameId);
+
+        /// <summary>
+        /// Creates xarcade token
+        /// </summary>
+        /// <param name="Token"></param>
+        /// <returns></returns>
+        Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto Token);
+
+        /// <summary>
+        /// Retrieves a list of tokens
+        /// </summary>
+        /// <param name="Token"></param>
+        /// <returns></returns>
+        Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId);
 
     }
 }

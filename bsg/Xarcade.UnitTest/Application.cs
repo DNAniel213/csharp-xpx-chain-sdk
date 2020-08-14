@@ -34,7 +34,7 @@ namespace Xarcade.Api.Prototype
 
             TokenDto tokentest = new TokenDto
             {
-                TokenId = Convert.ToInt64(DateTime.Now.Ticks),//should be generated
+                TokenId = Convert.ToInt64(DateTime.Now.Ticks),//addan ug randomness
                 Name = "tokentest",
                 Quantity = 0,
                 Owner = user.UserID
