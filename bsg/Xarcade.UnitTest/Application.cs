@@ -31,12 +31,15 @@ namespace Xarcade.Api.Prototype
                 UserName = "dnaniel213",
                 Password = "encryptedpassword",
             };
-
+            XarcadeTokenDto xartokentest = new XarcadeTokenDto
+            {
+                TokenId = Convert.ToInt64(DateTime.Now.Ticks),
+                Owner = user.UserID
+            };
             TokenDto tokentest = new TokenDto
             {
                 TokenId = Convert.ToInt64(DateTime.Now.Ticks),//addan ug randomness
                 Name = "tokentest",
-                Quantity = 0,
                 Owner = user.UserID
             };
             //Console.WriteLine("Duration of the game (days):");
@@ -71,7 +74,7 @@ namespace Xarcade.Api.Prototype
                 case "1":  user = repository.Register(); break;
                 case "2":  user = repository.Login();    break; 
                 case "3":  blockChain.ProximaXMain(user);   break;
-                case "5":  var ct = ts.CreateTokenAsync(tokentest,"naisu2").GetAwaiter().GetResult(); break;
+                case "5":  var ct = ts.CreateXarTokenAsync(xartokentest).GetAwaiter().GetResult(); Console.WriteLine(ct); break;
                 case "6":  var cg= ts.CreateGameAsync(creategametest).GetAwaiter().GetResult(); break;
                 case "7":  var extendgame = ts.ExtendGameAsync(creategametest,duration).GetAwaiter().GetResult(); break;
                 case "8":  var modsupply= ts.ModifyTokenSupplyAsync(tokentest).GetAwaiter().GetResult(); break;

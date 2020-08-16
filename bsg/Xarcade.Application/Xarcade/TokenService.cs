@@ -28,16 +28,70 @@ namespace Xarcade.Application.Xarcade
         //link the mosaic to namespace
         public async Task<TokenTransactionDto> RegisterTokenAsync(TokenDto Token, GameDto Game)
         {
-            return null;
+            if(Token == null || Game == null)
+            {
+                _logger.LogError("Invalid Input!!");
+                return null;
+            }
+            
+            TokenTransactionDto ttd = null;
+
+            try
+            {
+                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL)); 
+                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+
+                var mosaicresult = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Token.TokenId), FilterOperator.EQUAL));
+                Mosaic m = BsonToModel.BsonToTokenDTO(mosaicresult);
+
+                var namespaceresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("Domain", Game.Name), FilterOperator.EQUAL));
+                Namespace n = BsonToModel.BsonToGameDTO(namespaceresult);
+
+                Account a = new Account
+                {
+                    UserID          = ownerdto.UserID,
+                    WalletAddress   = ownerdto.WalletAddress,
+                    PrivateKey      = ownerdto.PrivateKey,
+                    PublicKey       = ownerdto.PublicKey,
+                    Created         = ownerdto.Created
+                };
+                //Links Mosaic To Namespace
+                var linkparam = new LinkMosaicParams
+                {
+                    Account   =  a,
+                    MosaicID  =  m.MosaicID,
+                    Namespace =  n,
+                };
+                var link = await blockchainPortal.LinkMosaicAsync(linkparam);
+                TokenDto tdto = new TokenDto
+                {
+                    TokenId     = link.Asset.AssetID,
+                    Name        = link.Asset.Name,
+                    Quantity    = link.Asset.Quantity,
+                    Owner       = link.Asset.Owner.UserID
+                };
+                ttd = new TokenTransactionDto
+                {
+                    Status      = State.Confirmed,
+                    Hash        = link.Hash,
+                    Token       = tdto,
+                    BlockNumber = link.Height,
+                    Created     = link.Created
+                };
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+            }
+            return ttd;
         }
         public async Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId)
         {
             return null;
         }
         //create xarcade token
-        public async Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto Token)
+        public async Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto xar)
         {
-            if (Token == null)
+            if (xar == null)
             {
                 _logger.LogError("Invalid Input!!");
                 return null;
@@ -45,11 +99,11 @@ namespace Xarcade.Application.Xarcade
             TokenTransactionDto ttd = null;
             try
             {
-                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL)); 
+                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", xar.Owner), FilterOperator.EQUAL)); 
                 Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
 
                 Console.Write("Token quantity:");
-                ulong am = Convert.ToUInt64(Console.ReadLine());
+                ulong quan = Convert.ToUInt64(Console.ReadLine());
 
                 Account a = new Account
                 {
@@ -62,64 +116,51 @@ namespace Xarcade.Application.Xarcade
                 //Creates Mosaic
                 var mosaicparam = new CreateMosaicParams
                 {
-                    Account             = a,
-                    //IsSupplyMutable   = ,
-                    //IsLevyMutable     = ,
-                    //IsTransferrable   = ,
-                    //Divisibility      = ,
-                    //Duration          = ,
+                    Account = a,
                 };
                 Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
+
                 Mosaic m = new Mosaic
                 {
-                    AssetID = Convert.ToInt64(Token.TokenId),
-                    Name = null,
-                    Quantity = Token.Quantity,
-                    Owner = ownerdto,
-                    Created = DateTime.Now,
+                    AssetID = Convert.ToInt64(xar.TokenId),
+                    Name = "XarcadeToken",
+                    Quantity = quan,
+                    Owner = createMosaicT.Owner,
+                    Created = createMosaicT.Created,
                     MosaicID = createMosaicT.MosaicID,
                     Namespace = null
                 };
                 this.dataAccessProximaX.SaveMosaic(m);
+
                 var modsupply = new ModifyMosaicSupplyParams
                 {
                     Account   =  a,
                     MosaicID  =  createMosaicT.MosaicID,
-                    Amount    =  Convert.ToInt32(am),
+                    Amount    =  Convert.ToInt32(quan),
                 };
                 var supplied = await blockchainPortal.ModifyMosaicSupplyAsync(modsupply);
 
-                Asset tokenasset = new Asset
-                {
-                    AssetID = Convert.ToInt64(Token.TokenId),
-                    Name = "XarcadeToken",
-                    Quantity = am,
-                    Owner = ownerdto,
-                    Created = m.Created
-                };
-
                 TokenDto t = new TokenDto
                 {
-                    TokenId = tokenasset.AssetID,
-                    Name = tokenasset.Name,
-                    Quantity = tokenasset.Quantity,
-                    Owner = tokenasset.Owner.UserID
+                    TokenId = xar.TokenId,
+                    Name = m.Name,
+                    Quantity = quan,
+                    Owner = a.UserID
                 };
 
                 ttd = new TokenTransactionDto
                 {
                     Status = State.Unconfirmed,
-                    Hash = null,
+                    Hash = supplied.Hash,
                     Token = t,
-                    BlockNumber = 0,
-                    Created = tokenasset.Created
+                    BlockNumber = supplied.Height,
+                    Created = supplied.Created
                 };
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                _logger.LogError(e.ToString());
                 return null;
             }
-
             return ttd;
         }
         public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName)
@@ -164,13 +205,9 @@ namespace Xarcade.Application.Xarcade
                 //Creates Mosaic
                 var mosaicparam = new CreateMosaicParams
                 {
-                    Account             = a,
-                    //IsSupplyMutable   = ,
-                    //IsLevyMutable     = ,
-                    //IsTransferrable   = ,
-                    //Divisibility      = ,
-                    //Duration          = ,
+                    Account = a,
                 };
+
                 Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
                 Mosaic m = new Mosaic
                 {
@@ -191,16 +228,7 @@ namespace Xarcade.Application.Xarcade
                     Owner = ownerdto,
                     Created = m.Created
                 };
-
-                //Links Mosaic To Namespace
-                var linkparam = new LinkMosaicParams
-                {
-                    Account   =  a,
-                    MosaicID  =  createMosaicT.MosaicID,
-                    Namespace =  nsdto,
-                };
-                var link = await blockchainPortal.LinkMosaicAsync(linkparam);
-                //Adds supply to mosaic
+                //Adds supply to mosaic i hope
                 var modsupply = new ModifyMosaicSupplyParams
                 {
                     Account   =  a,
@@ -211,8 +239,8 @@ namespace Xarcade.Application.Xarcade
 
                 Transaction t = new Transaction
                 {
-                    Hash = link.Hash,
-                    Height = link.Height,
+                    Hash = supplied.Hash,
+                    Height = supplied.Height,
                     Asset = tokenasset,
                     Created = m.Created
                 };
@@ -228,10 +256,10 @@ namespace Xarcade.Application.Xarcade
 
                 ttd = new TokenTransactionDto
                 {
-                    Status = 0,
+                    Status = State.Unconfirmed,
                     Hash = t.Hash,
                     Token = td,
-                    BlockNumber = 0,
+                    BlockNumber = t.Height, 
                     Created = m.Created
                 };
 
