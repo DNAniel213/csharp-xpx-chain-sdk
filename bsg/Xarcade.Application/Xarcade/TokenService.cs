@@ -41,7 +41,7 @@ namespace Xarcade.Application.Xarcade
                 var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL)); 
                 Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
 
-                var mosaicresult = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Token.TokenId), FilterOperator.EQUAL));
+                var mosaicresult = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Convert.ToInt64(Token.TokenId)), FilterOperator.EQUAL));
                 Mosaic m = BsonToModel.BsonToTokenDTO(mosaicresult);
 
                 var namespaceresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("Domain", Game.Name), FilterOperator.EQUAL));
@@ -65,7 +65,7 @@ namespace Xarcade.Application.Xarcade
                 var link = await blockchainPortal.LinkMosaicAsync(linkparam);
                 TokenDto tdto = new TokenDto
                 {
-                    TokenId     = link.Asset.AssetID,
+                    TokenId     = Convert.ToUInt64(link.Asset.AssetID),
                     Name        = link.Asset.Name,
                     Quantity    = link.Asset.Quantity,
                     Owner       = link.Asset.Owner.UserID
@@ -416,7 +416,7 @@ namespace Xarcade.Application.Xarcade
                 var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
                 tokenInfo = new TokenDto
                 {
-                    TokenId = mosaicinfo.AssetID,
+                    TokenId = Convert.ToUInt64(mosaicinfo.AssetID),
                     Name = mosaicinfo.Name,
                     Quantity = mosaicinfo.Quantity,
                     Owner = mosaicinfo.Owner.UserID,

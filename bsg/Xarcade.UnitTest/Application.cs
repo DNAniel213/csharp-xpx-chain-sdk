@@ -33,12 +33,12 @@ namespace Xarcade.Api.Prototype
             };
             XarcadeTokenDto xartokentest = new XarcadeTokenDto
             {
-                TokenId = Convert.ToInt64(DateTime.Now.Ticks),
+                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),
                 Owner = user.UserID
             };
             TokenDto tokentest = new TokenDto
             {
-                TokenId = Convert.ToInt64(DateTime.Now.Ticks),//addan ug randomness
+                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),//TO ADD some randomness
                 Name = "tokentest",
                 Owner = user.UserID
             };
