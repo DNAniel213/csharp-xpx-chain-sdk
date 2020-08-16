@@ -49,6 +49,7 @@ namespace Xarcade.Api.Prototype
                 Console.WriteLine("Enter '8' Link Namespace to mosaic");
                 Console.WriteLine("Enter '9' to create a wallet for other user");
                 Console.WriteLine("Enter 'a' to list user wallets");
+                Console.WriteLine("Enter 'b' to get user token balance");
 
                 
                 Console.Write("input: ");
@@ -66,6 +67,7 @@ namespace Xarcade.Api.Prototype
                     case "8" : LinkMosaicToNamespaceTest(testAccount, testMosaic, testNamespace); break;   //TODO Link it with created mosaic
                     case "9" : CreateAccountForUser(user.UserID); break;   //TODO Link it with created mosaic
                     case "a" : ListUserWallets(user); break;   //TODO Link it with created mosaic
+                    case "b" : GetTokenBalance(testAccount); break;   
                 }
                 Console.WriteLine("\nPress any key to proceed..");
                 System.Console.ReadKey();
@@ -73,6 +75,13 @@ namespace Xarcade.Api.Prototype
 
         }
 
+        private void GetTokenBalance(Account account)
+        {
+            Console.Write("Token name:  ");
+            string tokenName = Console.ReadLine(); 
+            Asset tokenbalance = portal.GetTokenBalanceAsync(account,tokenName).GetAwaiter().GetResult();
+            Console.WriteLine(tokenbalance.ToString());
+        }
 
         private void ListUserWallets(XarcadeUser xarUserDTO)
         {

@@ -1,4 +1,5 @@
 using System.Reactive.Linq;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,7 +25,9 @@ namespace Xarcade.Infrastructure.ProximaX
     {
         private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io";
         private static SiriusClient siriusClient = null;
+        private static NetworkType network;
         private static ILogger _logger;
+        
 
 
         public ProximaxBlockchainPortal(IConfiguration configuration)
@@ -36,6 +39,19 @@ namespace Xarcade.Infrastructure.ProximaX
             {
                 siriusClient = new SiriusClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL);
             }
+            network = this.GetNetworkType();
+        }
+
+        /// <summary> 
+        /// Retrieves the _network type of the Proximax node
+        /// </summary>
+        /// 
+        /// <returns> 
+        /// Network type (testnet or mainnet)
+        /// </returns>
+        private NetworkType GetNetworkType()
+        {
+            return siriusClient.NetworkHttp.GetNetworkType().GetAwaiter().GetResult();
         }
 
         public async Task<XarcadeModel.Transaction> SignAndAnnounceTransactionAsync(Account account, Transaction transaction)
@@ -808,6 +824,79 @@ namespace Xarcade.Infrastructure.ProximaX
             }
 
             return null;
+        }
+
+        /// <summary> 
+        /// Retrieve the current native coin balance of the user in the blockchain
+        /// </summary>
+        /// 
+        /// <param name="account"> 
+        /// User's account information
+        /// </param>
+        /// 
+        /// <returns> 
+        /// User Account Balance
+        /// </returns>
+        public async Task<XarcadeModel.Asset> GetTokenBalanceAsync(XarcadeModel.Account account, string tokenName)
+        {
+            XarcadeModel.Asset accountAssetBalance = null;
+            XarcadeModel.Account tokenOwner = null;
+
+            if (account == null)
+            {
+                _logger.LogError("Account parameter is null!");
+                return null;
+            }
+
+            AccountInfo accountInfo;
+            try
+            {
+                accountInfo = await siriusClient.AccountHttp.GetAccountInfo(new Address (account.WalletAddress, network));
+                if (accountInfo == null)
+                {
+                    _logger.LogError("ProximaX GetAccountInfo returned null!");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"A ProximaX exception occured when trying to call GetAccountInfo! Exception ({ex.Message})");
+                return null;
+            }
+
+            var mosaicId = accountInfo.Mosaics.Select(m => m.HexId).ToList();
+            var mosaicNames = await siriusClient.MosaicHttp.GetMosaicNames(mosaicId);
+            
+            if (mosaicNames == null)
+            {
+                _logger.LogError("ProximaX GetAccountInfo GetMosaicNames null!");
+                return null;
+            }
+
+            var hexId = mosaicNames.Where(n => n.Names.Any(name => name.Equals(tokenName))).FirstOrDefault();
+            var mosaic = accountInfo.Mosaics.Where(m => m.HexId == hexId.MosaicId.HexId).FirstOrDefault();
+
+            var balance = mosaic.Amount;
+
+            tokenOwner = new XarcadeModel.Account()
+                {
+                    UserID = 0,
+                    WalletAddress = account.WalletAddress,
+                    PrivateKey = account.PrivateKey,
+                    PublicKey = account.PublicKey,
+                    Created = DateTime.Now
+                };
+
+            accountAssetBalance = new XarcadeModel.Asset()
+                {
+                    AssetID = "0",
+                    Name = tokenName,
+                    Quantity = mosaic.Amount,
+                    Owner = tokenOwner,
+                    Created = DateTime.Now
+                };
+
+            return accountAssetBalance;
         }
 
 
