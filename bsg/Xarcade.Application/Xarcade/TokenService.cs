@@ -75,7 +75,7 @@ namespace Xarcade.Application.Xarcade
                     Status      = State.Confirmed,
                     Hash        = link.Hash,
                     Token       = tdto,
-                    BlockNumber = link.Height,
+                    BlockNumber = 0,
                     Created     = link.Created
                 };
             }catch(Exception e)
@@ -153,7 +153,7 @@ namespace Xarcade.Application.Xarcade
                     Status = State.Unconfirmed,
                     Hash = supplied.Hash,
                     Token = t,
-                    BlockNumber = supplied.Height,
+                    BlockNumber = 0,
                     Created = supplied.Created
                 };
             }catch(Exception e)
@@ -259,7 +259,7 @@ namespace Xarcade.Application.Xarcade
                     Status = State.Unconfirmed,
                     Hash = t.Hash,
                     Token = td,
-                    BlockNumber = t.Height, 
+                    BlockNumber = 0, 
                     Created = m.Created
                 };
 
