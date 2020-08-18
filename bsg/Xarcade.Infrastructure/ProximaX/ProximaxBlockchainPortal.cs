@@ -22,7 +22,7 @@ namespace Xarcade.Infrastructure.ProximaX
 {
     public class ProximaxBlockchainPortal : IBlockchainPortal
     {
-        private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io"; 
+        private const string PROXIMAX_NODE_URL = "https://bctestnet1.brimstone.xpxsirius.io";
         private static SiriusClient siriusClient = null;
         private static ILogger _logger;
 
@@ -234,7 +234,7 @@ namespace Xarcade.Infrastructure.ProximaX
                         mosaic = new XarcadeModel.Mosaic
                         {
                             MosaicID = mosaicID.Id,
-                            AssetID  =  mosaicID.Id + "",
+                            AssetID  = Convert.ToInt64(mosaicID.Id),
                             Name     = null,
                             Quantity = 0,
                             Created  = DateTime.Now,
@@ -289,7 +289,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  =  mosaicInfo.MosaicId.Id + "",
+                        AssetID  = Convert.ToInt64(mosaicInfo.MosaicId.Id),
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -373,7 +373,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = param.MosaicID,
-                        AssetID  =  param.MosaicID + "",
+                        AssetID  = Convert.ToInt64(param.MosaicID),
                         Name     = mosaicInfo.MetaId,
                         Quantity = param.Amount,
                         Created  = DateTime.Now,
@@ -435,7 +435,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  =  mosaicInfo.MosaicId.Id + "",
+                        AssetID  = Convert.ToInt64(mosaicInfo.MosaicId.Id),
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -461,15 +461,16 @@ namespace Xarcade.Infrastructure.ProximaX
         }
 
 //TODO @ranz please add check if namespace exists
-        public async Task<XarcadeModel.Namespace> CreateNamespaceAsync(CreateNamespaceParams param)
+        public async Task<(XarcadeModel.Namespace gameName,XarcadeModel.Transaction tx)> CreateNamespaceAsync(CreateNamespaceParams param)
         {
             if(param.Account == null || param.Domain == null)
             {
                 _logger.LogError("Input is invalid!!");
-                return null;
+                return (null,null);
             }
 
             XarcadeModel.Namespace xarNamespace = null;
+            XarcadeModel.Transaction xarTransaction = null;
             try
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
@@ -496,7 +497,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
                 if(account != null && registerNamespaceT != null)
                 {
-                    await SignAndAnnounceTransactionAsync(account, registerNamespaceT);
+                    var trans = await SignAndAnnounceTransactionAsync(account, registerNamespaceT);
                     xarNamespace = new XarcadeModel.Namespace
                     {
                         Domain  = param.Domain,
@@ -504,15 +505,84 @@ namespace Xarcade.Infrastructure.ProximaX
                         Expiry  = DateTime.Now.AddDays(param.Duration),
                         Owner   = param.Account,
                     };
+                    xarTransaction = new XarcadeModel.Transaction
+                    {
+                        Hash = trans.Hash,
+                        Height = trans.Height,
+                        Asset = trans.Asset,
+                        Created = trans.Created,
+                    };
                 }
+
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return (null,null);
+            }
+
+            return (xarNamespace,xarTransaction);
+        }
+
+        public async Task<XarcadeModel.Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,XarcadeModel.Namespace namespaceInfo, CreateNamespaceParams param)
+        {
+            if(namespaceName == null)
+            {
+                _logger.LogError("Input is invalid!!");
+                return null;
+            }
+
+            XarcadeModel.Namespace renewNamespace = null;
+
+            try
+            {
+                var namespaceId = new NamespaceId(namespaceName);
+                var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+                RegisterNamespaceTransaction renew = null;
+                var modelduration = Convert.ToDouble(param.Duration);
+                NamespaceType ntype = new NamespaceType();
+
+                if(param.Parent != null)
+                {
+                    ntype = NamespaceType.SUB_NAMESPACE;
+                }
+                else
+                {
+                    ntype = NamespaceType.ROOT_NAMESPACE;
+                }
+
+                if(param.Duration != 0)
+                {
+                    renew = new RegisterNamespaceTransaction(
+                    networkType,//network type
+                    EntityVersion.REGISTER_NAMESPACE.GetValue(),//version
+                    Deadline.Create(),//deadline
+                    5000000,//max fee based from FeeCalculationStrategy
+                    namespaceName,//namespace Name
+                    namespaceId,//namespace Id
+                    ntype,//namespace Type
+                    param.Duration,//duration
+                    null,//parent Id 
+                    null,//signature 
+                    null,//signer 
+                    null//transaction Info 
+                );
+                }
+
+                renewNamespace = new XarcadeModel.Namespace
+                {
+                    Domain  = param.Domain,
+                    Created = DateTime.Now,
+                    Expiry  = DateTime.Now.AddDays(modelduration),
+                    Owner   = param.Account,
+                };
 
             }catch(Exception e)
             {
                 _logger.LogError(e.ToString());
                 return null;
             }
-
-            return xarNamespace;
+            
+            return renewNamespace;
         }
 
 //FIXME make this return null if nonexistent
@@ -566,7 +636,7 @@ namespace Xarcade.Infrastructure.ProximaX
             XarcadeModel.Transaction transaction = null;
             var asset = new XarcadeModel.Asset
             {
-                AssetID  = "XPX",
+                AssetID  = 0,
                 Name     = param.Message,
                 Quantity = param.Amount,
                 Owner    = param.Sender,
@@ -648,69 +718,79 @@ namespace Xarcade.Infrastructure.ProximaX
 //FIXME this still doesn't work properly @John
         public async Task<Transaction> MonitorTransactionAsync(Transaction transaction)
         {
-            var networkType = await siriusClient.NetworkHttp.GetNetworkType();
-        // Creates instance of SiriusClient
-
-        var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 3000);
-        // Opens the listener
-        await ws.Listener.Open();
-
-        // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
-        // Blocks are generated every 15 seconds in average, so a timeout can be raised if
-        // there is no response after 30 seconds.
-        ws.Listener.NewBlock()
-        .Timeout(TimeSpan.FromSeconds(30))  
-        .Subscribe(
-            block => {
-            Console.WriteLine($"New block is created {block.Height}");
-            },
-            err => {
-            Console.WriteLine($"Unexpected error {err}");
-            ws.Listener.Close();
-            }
-        );
-
-        // Monitors if there is any validation error with the issued transaction
-        var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey, networkType);
-
-        ws.Listener.TransactionStatus(signerAddress)
-        .Timeout(TimeSpan.FromSeconds(30))  
-        .Subscribe(
-            // transaction info
-            tx =>
+            if(transaction == null)
             {
-                Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
-            },
-            // handle if any error occured
-            txErr =>
-            {
-                Console.WriteLine($"Transaction error - {txErr}");
-                ws.Listener.Close();
+                _logger.LogError("Input is invalid!!");
+                return null;
             }
-        );
-        
 
-        // Monitors if the transaction arrives the network but not yet include in the block
-        var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
-                                            .Take(1)
-                                            .Timeout(TimeSpan.FromSeconds(30));
+            try
+            {
+                var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+                // Creates instance of SiriusClient
+                var ws = new SiriusWebSocketClient(ProximaxBlockchainPortal.PROXIMAX_NODE_URL, 443, true);
+                // Opens the listener
+                await ws.Listener.Open();
 
-        // Monitors if the transaction get included in the block
-        var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
-                                        .Take(1)
-                                        .Timeout(TimeSpan.FromSeconds(30));
+                // Monitors if the websocker listener is alive by subscribing to NewBlock channel.
+                // Blocks are generated every 15 seconds in average, so a timeout can be raised if
+                // there is no response after 30 seconds.
+                ws.Listener.NewBlock()
+                .Timeout(TimeSpan.FromSeconds(30))  
+                .Subscribe(
+                    block => {
+                    Console.WriteLine($"New block is created {block.Height}");
+                    },
+                    err => {
+                    Console.WriteLine($"Unexpected error {err}");
+                    ws.Listener.Close();
+                    }
+                );
 
+                // Monitors if there is any validation error with the issued transaction
+                var signerAddress = Address.CreateFromPublicKey(transaction.Signer.PublicKey, networkType);
 
-        // Gets the results
-        var unconfirmedResult =  confirmedTx;
+                ws.Listener.TransactionStatus(signerAddress)
+                .Timeout(TimeSpan.FromSeconds(30))  
+                .Subscribe(
+                    // transaction info
+                    tx =>
+                    {
+                        Console.WriteLine($"Transaction id {tx.Hash} - status {tx.Status}");
+                    },
+                    // handle if any error occured
+                    txErr =>
+                    {
+                        Console.WriteLine($"Transaction error - {txErr}");
+                        ws.Listener.Close();
+                    }
+                );
+                // Monitors if the transaction arrives the network but not yet include in the block
+                var unconfirmedTx = await ws.Listener.UnconfirmedTransactionsAdded(signerAddress)
+                                                    .Take(1)
+                                                    .Timeout(TimeSpan.FromSeconds(30));
 
-        Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
+                // Monitors if the transaction get included in the block
+                var confirmedTx = await ws.Listener.ConfirmedTransactionsGiven(signerAddress)
+                                                .Take(1)
+                                                .Timeout(TimeSpan.FromSeconds(30));
+                                                
+                // Gets the results
+                var unconfirmedResult =  confirmedTx;
 
-        var confirmedResult = confirmedTx;
+                Console.WriteLine($"Request transaction {unconfirmedResult.TransactionInfo.Hash} reached network");
 
-        Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
+                var confirmedResult = confirmedTx;
 
-        return null;
+                Console.WriteLine($"Request confirmed with transaction {confirmedResult.TransactionInfo.Hash}");
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+
+            return null;
         }
 
 

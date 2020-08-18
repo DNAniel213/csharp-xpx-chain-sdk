@@ -223,12 +223,12 @@ namespace Xarcade.Api.Prototype
             var param = new CreateNamespaceParams();
             param.Account = portal.CreateAccountAsync(1, newAccount.PrivateKey).GetAwaiter().GetResult();
             param.Domain = name;
-            Namespace createNamespaceT = portal.CreateNamespaceAsync(param).GetAwaiter().GetResult();
+            var createNamespaceT = portal.CreateNamespaceAsync(param).GetAwaiter().GetResult();
 
             Console.WriteLine(createNamespaceT.ToString());
-            repo.SaveNamespace(createNamespaceT);
+            repo.SaveNamespace(createNamespaceT.gameName);
             
-            return createNamespaceT;
+            return createNamespaceT.gameName;
         }
 
         //Creates a subnamespace using Bruh's private key and Parent namespace
@@ -243,11 +243,11 @@ namespace Xarcade.Api.Prototype
             param.Parent = parentName;
             param.Domain = childName;
 
-            Namespace createNamespaceT = portal.CreateNamespaceAsync(param).GetAwaiter().GetResult();
-            repo.SaveNamespace(createNamespaceT);
+            var createNamespaceT = portal.CreateNamespaceAsync(param).GetAwaiter().GetResult();
+            repo.SaveNamespace(createNamespaceT.gameName);
             
             Console.WriteLine(createNamespaceT.ToString());
-            return createNamespaceT;
+            return createNamespaceT.gameName;
         }
         
         private void LinkMosaicToNamespaceTest(Account newAccount, Mosaic newMosaic, Namespace newNamespace)
@@ -264,6 +264,26 @@ namespace Xarcade.Api.Prototype
             var link = portal.LinkMosaicAsync(param).GetAwaiter().GetResult();
         }
 
+        private Namespace ExtendNamespaceDurationTest(Account newAccount)
+        {
+            Console.Write("Namespace name:  ");
+            string namespaceName = Console.ReadLine();
+            Console.Write("Number of Days:  ");
+            ulong days = Convert.ToUInt64(Console.ReadLine());//take note of the remaining duration of the namespace | 365 days max
+            ulong duration = days * 86400/15;
+            
+            var param = new CreateNamespaceParams();
+            param.Account = portal.CreateAccountAsync(1, newAccount.PrivateKey).GetAwaiter().GetResult();
+            param.Domain = namespaceName;
+            
 
+            var account = portal.CreateAccountAsync(1, newAccount.PrivateKey);
+            var namespaceInfo = portal.GetNamespaceInformationAsync(namespaceName).GetAwaiter().GetResult();
+            Namespace extendNamespace = portal.ExtendNamespaceDurationAsync(namespaceName,newAccount.PrivateKey,namespaceInfo,param).GetAwaiter().GetResult();
+            repo.SaveNamespace(extendNamespace);
+
+            Console.WriteLine(extendNamespace.ToString());
+            return extendNamespace;
+        }
     }
 }

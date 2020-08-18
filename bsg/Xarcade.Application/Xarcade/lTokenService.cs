@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Token;
 
@@ -17,7 +18,7 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token);
+        Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName);
 
         /// <summary>
         /// Creates game
@@ -31,14 +32,14 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="Game"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> ExtendGameAsync(GameDto Game);
+        Task<TokenTransactionDto> ExtendGameAsync(GameDto Game, ulong duration);
 
         /// <summary>
         /// Modifies token supply 
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> ModifyTokenSupply(TokenDto Token);
+        Task<TokenTransactionDto> ModifyTokenSupplyAsync(TokenDto Token);
 
         /// <summary>
         /// Retrieves the information of a specific token
@@ -53,6 +54,20 @@ namespace Xarcade.Application.ProximaX
         /// <param name="GameId"></param>
         /// <returns></returns>
         Task<GameDto> GetGameInfoAsync(long GameId);
+
+        /// <summary>
+        /// Creates xarcade token
+        /// </summary>
+        /// <param name="Token"></param>
+        /// <returns></returns>
+        Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto Token);
+
+        /// <summary>
+        /// Retrieves a list of tokens
+        /// </summary>
+        /// <param name="Token"></param>
+        /// <returns></returns>
+        Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId);
 
     }
 }

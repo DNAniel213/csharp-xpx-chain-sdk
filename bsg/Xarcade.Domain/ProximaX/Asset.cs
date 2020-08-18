@@ -4,7 +4,7 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Asset
     {
-        public string AssetID {get; set;}
+        public long AssetID {get; set;}
         public string Name {get; set;}
         public ulong Quantity {get; set;}
         public Account Owner {get; set;}
