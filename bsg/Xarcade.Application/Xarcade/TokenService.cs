@@ -86,7 +86,40 @@ namespace Xarcade.Application.Xarcade
         }
         public async Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId)
         {
-            return null;
+            if (userId == 0 || gameId == 0)
+            {
+                _logger.LogError("Invalid Input!");
+                return null;
+            }
+            
+            List<TokenDto> ttdlist = new List<TokenDto>();
+            try
+            {
+                var ownerresult = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("Owner", userId), FilterOperator.EQUAL));
+                Owner ownerdto = BsonToModel.BsonToOwnerDTO(ownerresult);
+                var tokenlist = repo.portal.ReadCollection("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerdto), FilterOperator.EQUAL));
+                
+                foreach (var token in tokenlist)
+                {
+                    Mosaic t = BsonToModel.BsonToTokenDTO(token);
+                    TokenDto ttd = new TokenDto
+                    {
+                        TokenId     = Convert.ToUInt64(t.AssetID),
+                        Name        = t.Name,
+                        Quantity    = t.Quantity,
+                        Owner       = t.Owner.UserID
+                    };
+                    ttdlist.Add(ttd);
+                }
+                
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+
+            return ttdlist;
         }
         //create xarcade token
         public async Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto xar)
@@ -293,10 +326,10 @@ namespace Xarcade.Application.Xarcade
                     Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
                     var gameparam = new CreateNamespaceParams
                     {
-                        Account = ownerdto,
-                        Domain = Game.Name,
-                        Duration = 1000,
-                        Parent = null,
+                        Account     = ownerdto,
+                        Domain      = Game.Name,
+                        Duration    = 1000,
+                        Parent      = null,
                     };
                     //Creates Game
                     var createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
@@ -375,9 +408,9 @@ namespace Xarcade.Application.Xarcade
 
                 Transaction t = new Transaction
                 {
-                    Hash = modifyMosaicT.Hash,
-                    Height = modifyMosaicT.Height,
-                    Asset = modifyMosaicT.Asset,
+                    Hash    = modifyMosaicT.Hash,
+                    Height  = modifyMosaicT.Height,
+                    Asset   = modifyMosaicT.Asset,
                     Created = modifyMosaicT.Created,
                 };
                 this.dataAccessProximaX.SaveTransaction(t);
@@ -416,10 +449,10 @@ namespace Xarcade.Application.Xarcade
                 var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
                 tokenInfo = new TokenDto
                 {
-                    TokenId = Convert.ToUInt64(mosaicinfo.AssetID),
-                    Name = mosaicinfo.Name,
-                    Quantity = mosaicinfo.Quantity,
-                    Owner = mosaicinfo.Owner.UserID,
+                    TokenId     = Convert.ToUInt64(mosaicinfo.AssetID),
+                    Name        = mosaicinfo.Name,
+                    Quantity    = mosaicinfo.Quantity,
+                    Owner       = mosaicinfo.Owner.UserID,
                 };
 
             }catch(Exception e)
@@ -446,10 +479,10 @@ namespace Xarcade.Application.Xarcade
 
             gameInfo = new GameDto
             {
-                GameId = namespaceInfo.NamespaceId,
-                Name = namespaceInfo.Domain,
-                Owner = namespaceInfo.Owner.UserID,
-                Expiry = namespaceInfo.Expiry
+                GameId  = namespaceInfo.NamespaceId,
+                Name    = namespaceInfo.Domain,
+                Owner   = namespaceInfo.Owner.UserID,
+                Expiry  = namespaceInfo.Expiry
             };
 
             return gameInfo;
