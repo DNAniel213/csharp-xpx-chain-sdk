@@ -60,7 +60,7 @@ namespace Xarcade.Api.Prototype
             Console.WriteLine("Enter 2 to log in to existing account");
             Console.WriteLine("Enter 3 to use default account (skip auth)");
             Console.WriteLine("Enter 4 to just test the cryptography features");
-            Console.WriteLine("Enter 5 to just test the register token feature");
+            Console.WriteLine("Enter 5 to just test the get game info feature");
 
             Console.Write("input: ");
             string choice = Console.ReadLine();
@@ -69,7 +69,7 @@ namespace Xarcade.Api.Prototype
                 case "1":  user = repository.Register(); break;
                 case "2":  user = repository.Login();    break; 
                 case "3":  blockChain.ProximaXMain(user);   break;
-                case "5":  var tokenlist = ts.RegisterTokenAsync(tokentest,gametest).GetAwaiter().GetResult(); break;
+                case "5":  var gameinfo = ts.GetGameInfoAsync(1).GetAwaiter().GetResult(); Console.WriteLine(gameinfo); break;
                 //case "0":  var result = ts.CreateTokenAsync(tokentest).GetAwaiter().GetResult(); break;
             }
 

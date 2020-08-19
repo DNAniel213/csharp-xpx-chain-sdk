@@ -483,18 +483,26 @@ namespace Xarcade.Application.Xarcade
                 return null;
                 //log error
             }
-            var result = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceID", GameId), FilterOperator.EQUAL));
-            Namespace gameDto = BsonToModel.BsonToGameDTO(result);
-            Namespace namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(gameDto.Domain);
+            
             GameDto gameInfo = null;
-
-            gameInfo = new GameDto
+            try
             {
-                GameId  = namespaceInfo.NamespaceId,
-                Name    = namespaceInfo.Domain,
-                Owner   = namespaceInfo.Owner.UserID,
-                Expiry  = namespaceInfo.Expiry
-            };
+                var result = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", GameId), FilterOperator.EQUAL));
+                Namespace gameDto = BsonToModel.BsonToGameDTO(result);
+                //Namespace namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(gameDto.Domain);
+
+                gameInfo = new GameDto
+                {
+                    GameId  = gameDto.NamespaceId,
+                    Name    = gameDto.Domain,
+                    Owner   = gameDto.Owner.UserID,
+                    Expiry  = gameDto.Expiry
+                };
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
             return gameInfo;
         }
