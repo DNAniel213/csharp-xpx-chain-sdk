@@ -86,19 +86,19 @@ namespace Xarcade.Application.Xarcade
         }
         public async Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId)
         {
-            if (userId == 0 || gameId == 0)
+            if (userId < 0 || gameId < 0)
             {
-                _logger.LogError("Invalid Input!");
+                Console.WriteLine("Invalid Input!");
                 return null;
             }
             
             List<TokenDto> ttdlist = new List<TokenDto>();
             try
             {
-                var ownerresult = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("Owner", userId), FilterOperator.EQUAL));
+                var ownerresult = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", userId), FilterOperator.EQUAL));
                 Owner ownerdto = BsonToModel.BsonToOwnerDTO(ownerresult);
                 var tokenlist = repo.portal.ReadCollection("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerdto), FilterOperator.EQUAL));
-                
+                var nsresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", gameId), FilterOperator.EQUAL));
                 foreach (var token in tokenlist)
                 {
                     Mosaic t = BsonToModel.BsonToTokenDTO(token);
@@ -109,13 +109,14 @@ namespace Xarcade.Application.Xarcade
                         Quantity    = t.Quantity,
                         Owner       = t.Owner.UserID
                     };
+                    Console.WriteLine(ttd);
                     ttdlist.Add(ttd);
                 }
                 
             }
             catch(Exception e)
             {
-                _logger.LogError(e.ToString());
+                Console.WriteLine(e.ToString());
                 return null;
             }
 
@@ -333,7 +334,17 @@ namespace Xarcade.Application.Xarcade
                     };
                     //Creates Game
                     var createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
-                    this.dataAccessProximaX.SaveNamespace(createGame.gameName);
+                    Namespace ns = new Namespace
+                    {
+                        NamespaceId     = createGame.gameName.NamespaceId,
+                        Domain          = createGame.gameName.Domain,
+                        LayerOne        = createGame.gameName.LayerOne,
+                        LayerTwo        = createGame.gameName.LayerTwo,
+                        Owner           = createGame.gameName.Owner,
+                        Expiry          = createGame.gameName.Expiry,
+                        Created         = createGame.gameName.Created
+                    };
+                    this.dataAccessProximaX.SaveNamespace(ns);
                 }
                 
 
@@ -348,7 +359,7 @@ namespace Xarcade.Application.Xarcade
 
         public async Task<TokenTransactionDto> ExtendGameAsync(GameDto Game, ulong duration)
         {
-            if (Game == null || duration == 0)
+            if (Game == null || duration <= 0)
             {
                 _logger.LogError("At least one input is empty!");
                 return null;
@@ -426,7 +437,7 @@ namespace Xarcade.Application.Xarcade
 
         public async Task<TokenDto> GetTokenInfoAsync(long TokenId)
         {
-            if (TokenId == 0)
+            if (TokenId < 0)
             {
                 _logger.LogError("Invalid Input!!");
                 return null;
@@ -467,7 +478,7 @@ namespace Xarcade.Application.Xarcade
 
         public async Task<GameDto> GetGameInfoAsync(long GameId)
         {
-            if (GameId == 0)
+            if (GameId < 0)
             {
                 return null;
                 //log error
