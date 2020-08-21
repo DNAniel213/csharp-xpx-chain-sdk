@@ -36,7 +36,7 @@ Coded by www.creative-tim.com
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="sidebar" data-color="black" data-active-color="danger">
       <div class="logo">
         <a href="https://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -171,176 +171,147 @@ Coded by www.creative-tim.com
       <!-- End Navbar -->
       <div class="content">
         <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <!-- Token Card -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">XAR Balance</p>
-                      <p class="card-title">150XAR<p>
+                  <div class="col-5 col-md-12" >
+                    <div class="text-center" style="height:100px">
+                      <img src="../assets/img/dane-icon.png" style="height:100px" class="rounded" alt="aaa">
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update Now
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
                 <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-money-coins text-success"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Revenue</p>
-                      <p class="card-title">1,345XAR<p>
+                  <div class="col-12 col-md-12">
+                    <div class="numbers text-center">
+                      <p class="card-category">DANE Coin</p>
+                      <p class="card-title">26000DANE<p>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar-o"></i>
-                  Last day
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-vector text-danger"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-clock-o"></i>
-                  In the last hour
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-favourite-28 text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">New Users</p>
-                      <p class="card-title">+10K<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update now
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Player Transactions</h5>
-                <p class="card-category">24 Hours performance</p>
-              </div>
-              <div class="card-body ">
-                <canvas id=chartHours width="400" height="100"></canvas>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-history"></i> Updated 3 minutes ago
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Token Exchange Statistics</h5>
-                <p class="card-category">30 Days</p>
-              </div>
-              <div class="card-body ">
-                <canvas id="chartEmail"></canvas>
-              </div>
-              <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-primary"></i> Bought
-                  <i class="fa fa-circle text-warning"></i> Exchanged from XAR
-                  <i class="fa fa-circle text-danger"></i> Disposed
-                  <i class="fa fa-circle text-gray"></i> Uncirculated
-                </div>
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar"></i> Amount of DANE Coins moved
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-title">DANE Coin Value</h5>
-                <p class="card-category">Line Chart with Points</p>
-              </div>
-              <div class="card-body">
-                <canvas id="speedChart" width="400" height="100"></canvas>
               </div>
               <div class="card-footer">
-                <div class="chart-legend">
-                  <i class="fa fa-circle text-info"></i> 2019
-                  <i class="fa fa-circle text-warning"></i> 2020
-                </div>
-                <hr />
-                <div class="card-stats">
-                  <i class="fa fa-check"></i> Data updated every 24 hours
+                <hr>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal">
+                      <i class="nc-icon nc-simple-add"></i>
+                      Add supply
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
+                      <i class="nc-icon nc-send"></i>
+                      Send
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
+                    <i class="nc-icon nc-settings-gear-65"></i>
+                      Modify
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- END Token Card -->
+          <!-- Token Card -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-12" >
+                    <div class="text-center" style="height:100px">
+                      <img src="../assets/img/bsg.jpg" style="height:100px" class="rounded" alt="aaa">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="numbers text-center">
+                      <p class="card-category">BSG Tokens</p>
+                      <p class="card-title">100BSGT<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#addSupplyModal">
+                      <i class="nc-icon nc-simple-add"></i>
+                      Add supply
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
+                      <i class="nc-icon nc-send"></i>
+                      Send
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
+                    <i class="nc-icon nc-settings-gear-65"></i>
+                      Modify
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END Token Card -->
+          <!-- Token Card -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-12" >
+                    <div class="text-center" style="height:100px">
+                      <img src="../assets/img/donkey-icon.jpg" style="height:100px" class="rounded" alt="aaa">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-12">
+                    <div class="numbers text-center">
+                      <p class="card-category">DONKEY Coin</p>
+                      <p class="card-title">539DNK<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#addSupplyModal">
+                      <i class="nc-icon nc-simple-add"></i>
+                      Add supply
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
+                      <i class="nc-icon nc-send"></i>
+                      Send
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
+                    <i class="nc-icon nc-settings-gear-65"></i>
+                      Modify
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END Token Card -->
+          </div>
         </div>
+      </div>
       </div>
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
@@ -355,7 +326,7 @@ Coded by www.creative-tim.com
             <div class="credits ml-auto">
               <span class="copyright">
                 © <script>
-                  document.write(new Date().getFullYear())
+                  document.write(new Date().getFullYear());
                 </script>, made with <i class="fa fa-heart heart"></i> by Black Spear Games
               </span>
             </div>
@@ -364,6 +335,103 @@ Coded by www.creative-tim.com
       </footer>
     </div>
   </div>
+
+  <!-- Add Supply Modal -->
+  <div class="modal fade" id="addSupplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Token Supply</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+          <div class="form-group">
+            <label> XPX to DANE</label>
+            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to convert" value="0">
+          </div>
+          <label> This will cost ####XPX</label>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Add Supply Modal -->
+
+  <!-- Send Supply Modal -->
+  <div class="modal fade" id="sendSupplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send Token</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Send Tokens to </label>
+            <input type="text" class="form-control" placeholder="Recepient ID" value="2801">
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal"> <i class="nc-icon nc-send"></i> Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Send Supply Modal -->
+
+  <!-- Modify Token Modal -->
+  <div class="modal fade" id="modifyTokenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send Token</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>ID: 139120945</label>
+          <div class="form-group">
+            <label>Token Name</label>
+            <input type="text" class="form-control" placeholder="Recepient ID" value="DANE Coin">
+          </div>
+          <div class="form-group">
+            <label>Divisibility</label>
+            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+          </div>
+          <div class="form-group">
+            <label>Divisibility</label>
+            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+          </div>
+          <div class="form-group">
+            <label>Divisibility</label>
+            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal"> Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Modify Token Modal -->
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>

@@ -4215,4 +4215,46 @@ License - nucleoapp.com/license/
     width: 38%;
     padding: 15px; } }
 
+
+    .card-register {
+      background-color: #FF8F5E;
+      border-radius: 8px;
+      color: #fff;
+      max-width: 350px;
+      margin: 20px 0 70px;
+      min-height: 400px;
+      padding: 30px;
+    }
+    
+    .card-register label {
+      margin-top: 15px;
+    }
+    
+    .card-register .card-title {
+      color: #B33C12;
+      text-align: center;
+    }
+    
+    .card-register .btn {
+      margin-top: 30px;
+    }
+    
+    .card-register .forgot {
+      text-align: center;
+    }
+    
+    .card-register .input-group-text {
+      border: 1px solid #FFFFFF;
+    }
+  .card.no-transition:hover,
+  .card.page-carousel:hover,
+  .card.card-refine:hover,
+  .card.card-register:hover {
+    box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+    transform: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+    -moz-transform: none;
+  }
+  
 /*# sourceMappingURL=paper-dashboard.css.map */

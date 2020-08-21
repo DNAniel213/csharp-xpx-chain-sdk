@@ -388,6 +388,24 @@ demo = {
     marker.setMap(map);
   },
 
+  NOTIF_NotEnoughXPXError : function(from, align)
+  {
+    color = 'danger';
+
+    $.notify({
+      icon: "nc-icon nc-bell-55",
+      message: "Oof! You don't have enough XPX to convert"
+
+    }, {
+      type: color,
+      timer: 8000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
+  },
+
   showNotification: function(from, align) {
     color = 'primary';
 
@@ -406,3 +424,14 @@ demo = {
   }
 
 };
+
+var rangeSlider = document.getElementById("rs-range-line");
+var rangeBullet = document.getElementById("rs-bullet");
+
+rangeSlider.addEventListener("input", showSliderValue, false);
+
+function showSliderValue() {
+  rangeBullet.innerHTML = rangeSlider.value;
+  var bulletPosition = (rangeSlider.value /rangeSlider.max);
+  rangeBullet.style.left = (bulletPosition * 578) + "px";
+}
