@@ -541,14 +541,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 var modelduration = Convert.ToDouble(param.Duration);
                 NamespaceType ntype = new NamespaceType();
 
-                if(param.Parent != null)
-                {
-                    ntype = NamespaceType.SUB_NAMESPACE;
-                }
-                else
-                {
-                    ntype = NamespaceType.ROOT_NAMESPACE;
-                }
+                ntype = param.Parent != null ? NamespaceType.SUB_NAMESPACE : NamespaceType.ROOT_NAMESPACE;
 
                 if(param.Duration != 0)
                 {

@@ -18,7 +18,6 @@ namespace Xarcade.Application.Xarcade
         private readonly IDataAccessProximaX dataAccessProximaX;
         private readonly IBlockchainPortal blockchainPortal;
         private static ILogger _logger;
-        DataAccessProximaX repo = new DataAccessProximaX();
 
         public TokenService(IDataAccessProximaX dataAccessProximaX, IBlockchainPortal blockchainPortal)
         {
@@ -34,20 +33,16 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             
-            TokenTransactionDto ttd = null;
+            TokenTransactionDto tokentransaction = null;
 
             try
             {
-                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL)); 
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+                 
+                Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
+                Mosaic mosaic = dataAccessProximaX.LoadMosaic(Convert.ToInt64(Token.TokenId));
+                Namespace game = dataAccessProximaX.LoadNamespace(Game.Name);
 
-                var mosaicresult = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Convert.ToInt64(Token.TokenId)), FilterOperator.EQUAL));
-                Mosaic m = BsonToModel.BsonToTokenDTO(mosaicresult);
-
-                var namespaceresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("Domain", Game.Name), FilterOperator.EQUAL));
-                Namespace n = BsonToModel.BsonToGameDTO(namespaceresult);
-
-                Account a = new Account
+                Account account = new Account
                 {
                     UserID          = ownerdto.UserID,
                     WalletAddress   = ownerdto.WalletAddress,
@@ -58,31 +53,40 @@ namespace Xarcade.Application.Xarcade
                 //Links Mosaic To Namespace
                 var linkparam = new LinkMosaicParams
                 {
-                    Account   =  a,
-                    MosaicID  =  m.MosaicID,
-                    Namespace =  n,
+                    Account   =  account,
+                    MosaicID  =  mosaic.MosaicID,
+                    Namespace =  game,
                 };
                 var link = await blockchainPortal.LinkMosaicAsync(linkparam);
-                TokenDto tdto = new TokenDto
+                if (link != null)
                 {
-                    TokenId     = Convert.ToUInt64(link.Asset.AssetID),
-                    Name        = link.Asset.Name,
-                    Quantity    = link.Asset.Quantity,
-                    Owner       = link.Asset.Owner.UserID
-                };
-                ttd = new TokenTransactionDto
+                    TokenDto tdto = new TokenDto
+                    {
+                        TokenId     = Convert.ToUInt64(link.Asset.AssetID),
+                        Name        = link.Asset.Name,
+                        Quantity    = link.Asset.Quantity,
+                        Owner       = link.Asset.Owner.UserID
+                    };
+
+                    tokentransaction = new TokenTransactionDto
+                    {
+                        Status      = State.Confirmed,
+                        Hash        = link.Hash,
+                        Token       = tdto,
+                        BlockNumber = link.Height,
+                        Created     = link.Created
+                    };
+                }
+                else
                 {
-                    Status      = State.Confirmed,
-                    Hash        = link.Hash,
-                    Token       = tdto,
-                    BlockNumber = link.Height,
-                    Created     = link.Created
-                };
+                    _logger.LogInfo("LinkMosaicAsync failed!");
+                }
+                
             }catch(Exception e)
             {
                 _logger.LogError(e.ToString());
             }
-            return ttd;
+            return tokentransaction;
         }
         public async Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId)
         {
@@ -92,25 +96,25 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             
-            List<TokenDto> ttdlist = new List<TokenDto>();
+            List<TokenDto> tokendtolist = new List<TokenDto>();
             try
             {
-                var ownerresult = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", userId), FilterOperator.EQUAL));
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(ownerresult);
-                var tokenlist = repo.portal.ReadCollection("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerdto), FilterOperator.EQUAL));
-                var nsresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", gameId), FilterOperator.EQUAL));
+                
+                Owner ownerdto = dataAccessProximaX.LoadOwner(userId);
+                var tokenlist = dataAccessProximaX.LoadMosaicList(ownerdto);
+                //var nsresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", gameId), FilterOperator.EQUAL));
                 foreach (var token in tokenlist)
                 {
-                    Mosaic t = BsonToModel.BsonToTokenDTO(token);
-                    TokenDto ttd = new TokenDto
+                    Mosaic mosaic = BsonToModel.BsonToTokenDTO(token);
+                    TokenDto tokendto = new TokenDto
                     {
-                        TokenId     = Convert.ToUInt64(t.AssetID),
-                        Name        = t.Name,
-                        Quantity    = t.Quantity,
-                        Owner       = t.Owner.UserID
+                        TokenId     = Convert.ToUInt64(mosaic.AssetID),
+                        Name        = mosaic.Name,
+                        Quantity    = mosaic.Quantity,
+                        Owner       = mosaic.Owner.UserID
                     };
-                    Console.WriteLine(ttd);
-                    ttdlist.Add(ttd);
+                    Console.WriteLine(tokendto);
+                    tokendtolist.Add(tokendto);
                 }
                 
             }
@@ -120,7 +124,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
 
-            return ttdlist;
+            return tokendtolist;
         }
         //create xarcade token
         public async Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto xar)
@@ -130,16 +134,15 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError("Invalid Input!!");
                 return null;
             }
-            TokenTransactionDto ttd = null;
+            TokenTransactionDto tokentransaction = null;
             try
             {
-                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", xar.Owner), FilterOperator.EQUAL)); 
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+                Owner ownerdto = dataAccessProximaX.LoadOwner(xar.Owner);
 
                 Console.Write("Token quantity:");
-                ulong quan = Convert.ToUInt64(Console.ReadLine());
+                ulong quantity = Convert.ToUInt64(Console.ReadLine());
 
-                Account a = new Account
+                Account account = new Account
                 {
                     UserID          = ownerdto.UserID,
                     WalletAddress   = ownerdto.WalletAddress,
@@ -150,43 +153,44 @@ namespace Xarcade.Application.Xarcade
                 //Creates Mosaic
                 var mosaicparam = new CreateMosaicParams
                 {
-                    Account = a,
+                    Account = account,
                 };
                 Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
 
-                Mosaic m = new Mosaic
+                Mosaic mosaic = new Mosaic
                 {
                     AssetID = Convert.ToInt64(xar.TokenId),
                     Name = "XarcadeToken",
-                    Quantity = quan,
+                    Quantity = quantity,
                     Owner = createMosaicT.Owner,
                     Created = createMosaicT.Created,
                     MosaicID = createMosaicT.MosaicID,
                     Namespace = null
                 };
-                this.dataAccessProximaX.SaveMosaic(m);
+                dataAccessProximaX.SaveMosaic(mosaic);
 
                 var modsupply = new ModifyMosaicSupplyParams
                 {
-                    Account   =  a,
+                    Account   =  account,
                     MosaicID  =  createMosaicT.MosaicID,
-                    Amount    =  Convert.ToInt32(quan),
+                    Amount    =  Convert.ToInt32(quantity),
                 };
                 var supplied = await blockchainPortal.ModifyMosaicSupplyAsync(modsupply);
-
-                TokenDto t = new TokenDto
+                dataAccessProximaX.SaveTransaction(supplied);
+                
+                TokenDto token = new TokenDto
                 {
                     TokenId = xar.TokenId,
-                    Name = m.Name,
-                    Quantity = quan,
-                    Owner = a.UserID
+                    Name = mosaic.Name,
+                    Quantity = quantity,
+                    Owner = account.UserID
                 };
 
-                ttd = new TokenTransactionDto
+                tokentransaction = new TokenTransactionDto
                 {
                     Status = State.Unconfirmed,
                     Hash = supplied.Hash,
-                    Token = t,
+                    Token = token,
                     BlockNumber = supplied.Height,
                     Created = supplied.Created
                 };
@@ -195,7 +199,7 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError(e.ToString());
                 return null;
             }
-            return ttd;
+            return tokentransaction;
         }
         public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName)
         {
@@ -204,12 +208,11 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError("Invalid Input!!");
                 return null;
             }
-            TokenTransactionDto ttd = null;
+            TokenTransactionDto tokentransaction = null;
 
             try
             {
-                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL)); 
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+                Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
                 //Retrieves a list of namespaces of the owner
                 //var nslist = repo.portal.ReadCollection("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerdto), FilterOperator.EQUAL));
                 //foreach(var nsdocu in nslist)
@@ -217,18 +220,17 @@ namespace Xarcade.Application.Xarcade
                 //    Namespace namesp = BsonToModel.BsonToGameDTO(nsdocu);
                 //    Console.WriteLine(namesp);
                 //}
-                var nsDocu =  repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("Domain", NamespaceName), FilterOperator.EQUAL));
-                Namespace nsdto = BsonToModel.BsonToGameDTO(nsDocu);
-                if(nsdto.Owner.UserID != ownerdto.UserID)
+                Namespace game = dataAccessProximaX.LoadNamespace(NamespaceName);
+                if(game.Owner.UserID != ownerdto.UserID)
                 {
                     Console.WriteLine("This is not your namespace!");
                     return null;
                 }
 
                 Console.Write("Token quantity:");
-                ulong am = Convert.ToUInt64(Console.ReadLine());
+                ulong amount = Convert.ToUInt64(Console.ReadLine());
 
-                Account a = new Account
+                Account account = new Account
                 {
                     UserID          = ownerdto.UserID,
                     WalletAddress   = ownerdto.WalletAddress,
@@ -239,62 +241,62 @@ namespace Xarcade.Application.Xarcade
                 //Creates Mosaic
                 var mosaicparam = new CreateMosaicParams
                 {
-                    Account = a,
+                    Account = account,
                 };
 
                 Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
-                Mosaic m = new Mosaic
+                Mosaic mosaic = new Mosaic
                 {
-                    AssetID = Convert.ToInt64(Token.TokenId),
-                    Name = nsdto.Domain,
-                    Quantity = Token.Quantity,
-                    Owner = ownerdto,
-                    Created = DateTime.Now,
-                    MosaicID = createMosaicT.MosaicID,
-                    Namespace = nsdto
+                    AssetID     = Convert.ToInt64(Token.TokenId),
+                    Name        = game.Domain,
+                    Quantity    = Token.Quantity,
+                    Owner       = ownerdto,
+                    Created     = DateTime.Now,
+                    MosaicID    = createMosaicT.MosaicID,
+                    Namespace   = game
                 };
-                this.dataAccessProximaX.SaveMosaic(m);
+                this.dataAccessProximaX.SaveMosaic(mosaic);
                 Asset tokenasset = new Asset
                 {
-                    AssetID = Convert.ToInt64(Token.TokenId),
-                    Name = Token.Name,
-                    Quantity = am,
-                    Owner = ownerdto,
-                    Created = m.Created
+                    AssetID     = Convert.ToInt64(Token.TokenId),
+                    Name        = Token.Name,
+                    Quantity    = amount,
+                    Owner       = ownerdto,
+                    Created     = mosaic.Created
                 };
                 //Adds supply to mosaic i hope
                 var modsupply = new ModifyMosaicSupplyParams
                 {
-                    Account   =  a,
+                    Account   =  account,
                     MosaicID  =  createMosaicT.MosaicID,
-                    Amount    =  Convert.ToInt32(am),
+                    Amount    =  Convert.ToInt32(amount),
                 };
                 var supplied = await blockchainPortal.ModifyMosaicSupplyAsync(modsupply);
 
-                Transaction t = new Transaction
+                Transaction transaction = new Transaction
                 {
-                    Hash = supplied.Hash,
-                    Height = supplied.Height,
-                    Asset = tokenasset,
-                    Created = m.Created
+                    Hash    = supplied.Hash,
+                    Height  = supplied.Height,
+                    Asset   = tokenasset,
+                    Created = mosaic.Created
                 };
-                this.dataAccessProximaX.SaveTransaction(t);
+                this.dataAccessProximaX.SaveTransaction(transaction);
 
-                TokenDto td = new TokenDto
+                TokenDto tokendto = new TokenDto
                 {
-                    TokenId = Token.TokenId,
-                    Name = Token.Name,
-                    Quantity = am,
-                    Owner = ownerdto.UserID,
+                    TokenId     = Token.TokenId,
+                    Name        = Token.Name,
+                    Quantity    = amount,
+                    Owner       = ownerdto.UserID,
                 };
 
-                ttd = new TokenTransactionDto
+                tokentransaction = new TokenTransactionDto
                 {
-                    Status = State.Unconfirmed,
-                    Hash = t.Hash,
-                    Token = td,
-                    BlockNumber = t.Height, 
-                    Created = m.Created
+                    Status      = State.Unconfirmed,
+                    Hash        = transaction.Hash,
+                    Token       = tokendto,
+                    BlockNumber = transaction.Height, 
+                    Created     = mosaic.Created
                 };
 
             }catch(Exception e)
@@ -303,7 +305,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
             
-            return ttd;
+            return tokentransaction;
         }
 
         public async Task<TokenTransactionDto> CreateGameAsync(GameDto Game)
@@ -316,15 +318,14 @@ namespace Xarcade.Application.Xarcade
             
             try
             {
-                var nsExist = repo.portal.CheckExist("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, string>("Domain", Game.Name), FilterOperator.EQUAL));
-                if(nsExist == true)
+                var gamecheck = dataAccessProximaX.CheckExistNamespace(Game.Name);
+                if(gamecheck == true)
                 {
-                    Console.WriteLine("Invalid Namespace. Namespace already exists!");
+                    Console.WriteLine("Invalid Game. Game already exists!");
                     return null;
                 }else
                 {
-                    var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Game.Owner), FilterOperator.EQUAL));
-                    Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+                    Owner ownerdto = dataAccessProximaX.LoadOwner(Game.Owner);
                     var gameparam = new CreateNamespaceParams
                     {
                         Account     = ownerdto,
@@ -334,7 +335,7 @@ namespace Xarcade.Application.Xarcade
                     };
                     //Creates Game
                     var createGame = await blockchainPortal.CreateNamespaceAsync(gameparam);
-                    Namespace ns = new Namespace
+                    Namespace game = new Namespace
                     {
                         NamespaceId     = createGame.gameName.NamespaceId,
                         Domain          = createGame.gameName.Domain,
@@ -344,7 +345,7 @@ namespace Xarcade.Application.Xarcade
                         Expiry          = createGame.gameName.Expiry,
                         Created         = createGame.gameName.Created
                     };
-                    this.dataAccessProximaX.SaveNamespace(ns);
+                    this.dataAccessProximaX.SaveNamespace(game);
                 }
                 
 
@@ -367,8 +368,7 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
-                var result = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Game.Owner), FilterOperator.EQUAL));
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(result);
+                Owner ownerdto = dataAccessProximaX.LoadOwner(Game.Owner);
                 Console.WriteLine("Extending " + Game.Name + " duration by " + duration);
                 var param = new CreateNamespaceParams
                 {
@@ -399,20 +399,18 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
-                var ownerresult = repo.portal.ReadDocument("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", Token.Owner), FilterOperator.EQUAL));
-                Owner ownerdto = BsonToModel.BsonToOwnerDTO(ownerresult);
-                var mosaicresult = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Convert.ToInt64(Token.TokenId)), FilterOperator.EQUAL));
-                Mosaic mosaicDto = BsonToModel.BsonToTokenDTO(mosaicresult);
+                Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
+                Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(Convert.ToInt64(Token.TokenId));
                 //modify mosaic supply
                 Console.Write("Amount to modify:  ");
-                int am = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Modifying " + mosaicDto.MosaicID + " supply by " + am );
+                int amount = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Modifying " + mosaicDto.MosaicID + " supply by " + amount );
 
                 var modifyparam = new ModifyMosaicSupplyParams
                 {
                     Account = ownerdto,
                     MosaicID = mosaicDto.MosaicID,
-                    Amount = am
+                    Amount = amount
                 };
 
                 var modifyMosaicT = await blockchainPortal.ModifyMosaicSupplyAsync(modifyparam);
@@ -442,36 +440,33 @@ namespace Xarcade.Application.Xarcade
                 _logger.LogError("Invalid Input!!");
                 return null;
             }
+
             TokenDto tokenInfo = null;
-            try
+            Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(TokenId);
+
+            if(mosaicDto == null)
             {
-                var result = repo.portal.ReadDocument("Mosaics", repo.portal.CreateFilter(new KeyValuePair<string, long>("AssetID", TokenId), FilterOperator.EQUAL));
-
-                Mosaic mosaicDto = BsonToModel.BsonToTokenDTO(result);
-                if(mosaicDto == null)
-                {
-                    Console.WriteLine("NO");
-                }else
-                {
-                    Console.WriteLine("YES");
-                }
-
+                Console.WriteLine("Mosaic not found!");
+            }
+            else
+            {
                 Console.WriteLine(mosaicDto.MosaicID);
                 var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
-                tokenInfo = new TokenDto
+                if(mosaicinfo != null)
                 {
-                    TokenId     = Convert.ToUInt64(mosaicinfo.AssetID),
-                    Name        = mosaicinfo.Name,
-                    Quantity    = mosaicinfo.Quantity,
-                    Owner       = mosaicinfo.Owner.UserID,
-                };
-
-            }catch(Exception e)
-            {
-                _logger.LogError(e.ToString());
-                return null;
+                    tokenInfo = new TokenDto
+                    {
+                        TokenId     = Convert.ToUInt64(mosaicinfo.AssetID),
+                        Name        = mosaicinfo.Name,
+                        Quantity    = mosaicinfo.Quantity,
+                        Owner       = mosaicinfo.Owner.UserID,
+                    };
+                }
+                else
+                {
+                    _logger.LogInfo("GetMosaicAsync failed!");
+                }
             }
-            
 
             return tokenInfo;
         }
@@ -480,30 +475,20 @@ namespace Xarcade.Application.Xarcade
         {
             if (GameId < 0)
             {
+                _logger.LogError("Game ID is not valid!");
                 return null;
-                //log error
             }
             
             GameDto gameInfo = null;
-            try
+            Namespace gameDto = dataAccessProximaX.LoadNamespace(GameId);
+            gameInfo = new GameDto
             {
-                var result = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", GameId), FilterOperator.EQUAL));
-                Namespace gameDto = BsonToModel.BsonToGameDTO(result);
-                //Namespace namespaceInfo = await blockchainPortal.GetNamespaceInformationAsync(gameDto.Domain);
-
-                gameInfo = new GameDto
-                {
-                    GameId  = gameDto.NamespaceId,
-                    Name    = gameDto.Domain,
-                    Owner   = gameDto.Owner.UserID,
-                    Expiry  = gameDto.Expiry
-                };
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
+                GameId  = gameDto.NamespaceId,
+                Name    = gameDto.Domain,
+                Owner   = gameDto.Owner.UserID,
+                Expiry  = gameDto.Expiry
+            };
+            
             return gameInfo;
         }
 
