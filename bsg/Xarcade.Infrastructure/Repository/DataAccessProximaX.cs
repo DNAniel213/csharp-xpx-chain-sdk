@@ -150,6 +150,64 @@ namespace Xarcade.Infrastructure.Repository
             }
 
             return null;
-        }   
+        }
+
+        public Mosaic LoadMosaic(long tokenID)
+        {
+            var mosaicBson = portal.ReadDocument("Mosaics", portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Convert.ToInt64(tokenID)), FilterOperator.EQUAL));
+            if(mosaicBson != null) //if mosaic exists
+            {
+                Mosaic mosaicDTO = BsonToModel.BsonToTokenDTO(mosaicBson);
+                return mosaicDTO;
+            }
+
+            return null;
+        }
+
+        public Namespace LoadNamespace(string gameName)
+        {
+            var namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("Domain", gameName), FilterOperator.EQUAL));
+            if(namespaceBson != null) //if namespace exists
+            {
+                Namespace namespaceDTO = BsonToModel.BsonToGameDTO(namespaceBson);
+                return namespaceDTO;
+            }
+
+            return null;
+        }
+
+        public Namespace LoadNamespace(long gameID)
+        {
+            var namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", gameID), FilterOperator.EQUAL));
+            if(namespaceBson != null) //if namespace exists
+            {
+                Namespace namespaceDTO = BsonToModel.BsonToGameDTO(namespaceBson);
+                return namespaceDTO;
+            }
+
+            return null;
+        }
+
+        public List<BsonDocument> LoadMosaicList(Owner ownerDTO)
+        {
+            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerDTO), FilterOperator.EQUAL));
+            if(mosaicListBson != null)//if the list exists
+            {
+                return mosaicListBson;
+            }
+            
+            return null;
+        }
+
+        public Boolean CheckExistNamespace(string namespaceName)
+        {
+            var nsExist = portal.CheckExist("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("Domain", namespaceName), FilterOperator.EQUAL));
+            if(nsExist == true)//if namespace already exists
+            {
+                return nsExist;
+            }
+            
+            return false;
+        }
     }
 }

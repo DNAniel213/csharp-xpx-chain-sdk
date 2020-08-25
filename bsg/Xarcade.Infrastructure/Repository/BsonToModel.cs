@@ -60,7 +60,7 @@ namespace Xarcade.Infrastructure.Repository
         public static Namespace BsonToGameDTO(BsonDocument game)
         {
             var gameDTO = new Namespace();
-            gameDTO.NamespaceId = game["NamespaceID"].AsInt64;
+            gameDTO.NamespaceId = game["NamespaceId"].AsInt64;
             gameDTO.Domain      = game["Domain"].AsString;
             try
             {

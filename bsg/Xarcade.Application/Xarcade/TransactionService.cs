@@ -39,7 +39,7 @@ namespace Xarcade.Application.Xarcade
             // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
-            var tokenBalance = await blockchainPortal.GetMosaicAsync(Convert.ToUInt64(token.TokenId));
+            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
             if (tokenBalance.Quantity < token.Quantity )
             {
                 _logger.LogError("Not enough tokens to send!!");
@@ -58,7 +58,7 @@ namespace Xarcade.Application.Xarcade
  
             var param = new SendMosaicParams
             {
-                MosaicID = Convert.ToUInt64(token.TokenId), 
+                MosaicID = token.TokenId, 
                 Sender = SenderUserDB,
                 RecepientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
@@ -103,7 +103,7 @@ namespace Xarcade.Application.Xarcade
             // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
-            var tokenBalance = await blockchainPortal.GetMosaicAsync(Convert.ToUInt64(token.TokenId));
+            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
             if (tokenBalance.Quantity < token.Quantity )
             {
                 _logger.LogError("Not enough tokens to send!!");
@@ -122,7 +122,7 @@ namespace Xarcade.Application.Xarcade
 
             var param = new SendMosaicParams
             {
-                MosaicID = Convert.ToUInt64(token.TokenId), 
+                MosaicID = token.TokenId, 
                 Sender = SenderUserDB,
                 RecepientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
@@ -170,7 +170,7 @@ namespace Xarcade.Application.Xarcade
             // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
-            var tokenBalance = await blockchainPortal.GetMosaicAsync(Convert.ToUInt64(token.TokenId));
+            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
             if (tokenBalance.Quantity < token.Quantity )
             {
                 _logger.LogError("Not enough tokens to send!!");

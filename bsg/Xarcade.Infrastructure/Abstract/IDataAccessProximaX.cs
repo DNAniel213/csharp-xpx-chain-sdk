@@ -1,4 +1,8 @@
-﻿using Xarcade.Domain.ProximaX;
+﻿using System;
+using System.Collections.Generic;
+using MongoDB.Bson;
+
+using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
 
 namespace Xarcade.Infrastructure.Abstract
@@ -14,5 +18,10 @@ namespace Xarcade.Infrastructure.Abstract
         bool SaveXarcadeUser(XarcadeUser xarUserDTO);
         Owner LoadOwner(long userID);
         User LoadUser(long userID);
+        Mosaic LoadMosaic(long tokenID);
+        Namespace LoadNamespace(string gameName);
+        Namespace LoadNamespace(long gameID);
+        List<BsonDocument> LoadMosaicList(Owner ownerDTO);
+        Boolean CheckExistNamespace(string namespaceName);
     }
 }
