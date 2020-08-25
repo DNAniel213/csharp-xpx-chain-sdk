@@ -73,6 +73,13 @@ namespace Xarcade.Infrastructure.Abstract
         Task<Namespace> CreateNamespaceAsync(CreateNamespaceParams param);
 
         /// <summary>
+        /// Extends a new namespace duration
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        Task<Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,Namespace namespaceInfo, CreateNamespaceParams param);
+        
+        /// <summary>
         /// Retrieves namespace information. Returns null if it doesn't exist
         /// </summary>
         /// <param name="namespaceName"></param>
@@ -93,6 +100,11 @@ namespace Xarcade.Infrastructure.Abstract
         /// <param name="param"></param>
         /// <returns></returns>
         Task<Transaction> GetTransactionInformationAsync (string hash);
+
+        /// <summary>
+        /// Retrieves the account information
+        /// </summary>
+        Task<Account> GetAccountInformationAsync(string address);
 
     }
 }

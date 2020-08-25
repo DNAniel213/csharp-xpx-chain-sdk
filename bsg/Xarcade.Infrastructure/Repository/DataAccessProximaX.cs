@@ -117,7 +117,7 @@ namespace Xarcade.Infrastructure.Repository
 
         public Owner LoadOwner(long userID)
         {
-            var ownerBson = portal.ReadDocument("Owners", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
+            var ownerBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
             if(ownerBson!=null) //if account exists
             {
                 Owner ownerDTO = BsonToModel.BsonToOwnerDTO(ownerBson);
@@ -129,7 +129,8 @@ namespace Xarcade.Infrastructure.Repository
 
         public User LoadUser(long userID)
         {
-            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
+            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
+
             if(userBson!=null) //if account exists
             {
                 User userDTO = BsonToModel.BsonToUserDTO(userBson);
@@ -141,7 +142,7 @@ namespace Xarcade.Infrastructure.Repository
 
         public XarcadeUser LoadXarcadeUser(long userID)
         {
-            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("userID", userID+""), FilterOperator.EQUAL));
+            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
                 XarcadeUser xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);

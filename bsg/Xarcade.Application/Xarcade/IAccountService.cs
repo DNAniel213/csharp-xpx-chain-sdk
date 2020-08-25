@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Account;
 
 namespace Xarcade.Application.Xarcade
@@ -11,7 +11,7 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <returns></returns>
-        Task<AccountTransactionDto> CreateOwnerAccountAsync(long UserID);
+        Task<OwnerDto> CreateOwnerAccountAsync(long UserID);
 
         /// <summary>
         /// Creates the User Account
@@ -19,7 +19,7 @@ namespace Xarcade.Application.Xarcade
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
         /// <returns></returns>
-        Task<AccountTransactionDto> CreateUserAccountAsync(long UserID, long OwnerID);
+        Task<UserDto> CreateUserAccountAsync(long UserID, long OwnerID);
 
         /// <summary>
         /// Retrieves the information of a specific owner account
@@ -32,8 +32,14 @@ namespace Xarcade.Application.Xarcade
         /// Retrieves the information of a specific user account
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
+        /// <returns></returns>
+        Task<UserDto> GetUserAccountAsync(long UserID);
+
+        /// <summary>
+        /// Retrieves the information of all the owners
+        /// </summary>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
         /// <returns></returns>
-        Task<UserDto> GetUserAccountAsync(long UserID, long OwnerID);
+        Task<List<UserDto>> GetUserList(long OwnerID);
     }
 }

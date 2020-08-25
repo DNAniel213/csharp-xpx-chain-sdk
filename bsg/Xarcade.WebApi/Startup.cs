@@ -10,6 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Xarcade.Application.Xarcade;
+using Xarcade.Application.ProximaX;
+using Xarcade.Infrastructure.Abstract;
+using Xarcade.Infrastructure.Repository;
+using Xarcade.Infrastructure.ProximaX;
 
 namespace Xarcade.WebApi
 {
@@ -25,6 +30,12 @@ namespace Xarcade.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddTransient<IAccountService, AccountService>();
+            //services.AddTransient<ITransactionService, TransactionService>();
+            //services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IDataAccessProximaX, DataAccessProximaX>();
+            services.AddTransient<IBlockchainPortal, ProximaxBlockchainPortal>();
             services.AddControllers();
         }
 

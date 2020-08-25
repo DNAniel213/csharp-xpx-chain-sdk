@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Xarcade.Infrastructure.Utilities.Logger;
+using Xarcade.Domain.ProximaX;
 
 
 namespace Xarcade.Infrastructure.Repository
@@ -149,7 +150,7 @@ namespace Xarcade.Infrastructure.Repository
                 }
                 else
                 {
-                    return result.Single();
+                    return result.FirstOrDefault();
                 }
             }catch(Exception e)
             {
@@ -267,6 +268,20 @@ namespace Xarcade.Infrastructure.Repository
             return filterObject;
         }
         
+        public FilterDefinition<MongoDB.Bson.BsonDocument> CreateFilter(KeyValuePair<string, Owner> filter, FilterOperator filterOperator)
+        {
+            FilterDefinition<MongoDB.Bson.BsonDocument> filterObject = null;
+            switch(filterOperator)
+            {
+                case FilterOperator.EQUAL                  : filterObject = Builders<BsonDocument>.Filter.Eq(filter.Key,filter.Value); break;
+                case FilterOperator.LESSERTHAN             : filterObject = Builders<BsonDocument>.Filter.Lt(filter.Key,filter.Value); break;
+                case FilterOperator.GREATERTHAN            : filterObject = Builders<BsonDocument>.Filter.Gt(filter.Key,filter.Value); break;
+                case FilterOperator.LESSERTHAN_OR_EQUALTO  : filterObject = Builders<BsonDocument>.Filter.Lte(filter.Key,filter.Value); break;
+                case FilterOperator.GREATERTHAN_OR_EQUALTO : filterObject = Builders<BsonDocument>.Filter.Gte(filter.Key,filter.Value); break;
+                default : filterObject = Builders<BsonDocument>.Filter.Eq(filter.Key,filter.Value); break;
+            }
+            return filterObject;
+        }
         
         /// <summary>
         /// Generates a mongoDB-safe _id
