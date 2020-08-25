@@ -60,7 +60,7 @@ namespace Xarcade.Application.Xarcade
                 var link = await blockchainPortal.LinkMosaicAsync(linkparam);
                 if (link != null)
                 {
-                    TokenDto tdto = new TokenDto
+                    TokenDto tokendto = new TokenDto
                     {
                         TokenId     = Convert.ToUInt64(link.Asset.AssetID),
                         Name        = link.Asset.Name,
@@ -72,7 +72,7 @@ namespace Xarcade.Application.Xarcade
                     {
                         Status      = State.Confirmed,
                         Hash        = link.Hash,
-                        Token       = tdto,
+                        Token       = tokendto,
                         BlockNumber = link.Height,
                         Created     = link.Created
                     };
@@ -446,7 +446,7 @@ namespace Xarcade.Application.Xarcade
 
             if(mosaicDto == null)
             {
-                Console.WriteLine("Mosaic not found!");
+                _logger.LogInfo("Mosaic not found!");
             }
             else
             {
