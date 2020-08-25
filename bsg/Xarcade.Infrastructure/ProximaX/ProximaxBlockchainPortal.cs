@@ -848,6 +848,12 @@ namespace Xarcade.Infrastructure.ProximaX
                 return null;
             }
 
+            if (tokenName == null)
+            {
+                _logger.LogError("Token parameter is null!");
+                return null;
+            }
+
             AccountInfo accountInfo;
             try
             {
@@ -879,22 +885,22 @@ namespace Xarcade.Infrastructure.ProximaX
             var balance = mosaic.Amount;
 
             tokenOwner = new XarcadeModel.Account()
-                {
-                    UserID = 0,
-                    WalletAddress = account.WalletAddress,
-                    PrivateKey = account.PrivateKey,
-                    PublicKey = account.PublicKey,
-                    Created = DateTime.Now
-                };
+            {
+                UserID = 0,
+                WalletAddress = account.WalletAddress,
+                PrivateKey = account.PrivateKey,
+                PublicKey = account.PublicKey,
+                Created = DateTime.Now
+            };
 
             accountAssetBalance = new XarcadeModel.Asset()
-                {
-                    AssetID = "0",
-                    Name = tokenName,
-                    Quantity = mosaic.Amount,
-                    Owner = tokenOwner,
-                    Created = DateTime.Now
-                };
+            {
+                AssetID = "0",
+                Name = tokenName,
+                Quantity = mosaic.Amount,
+                Owner = tokenOwner,
+                Created = DateTime.Now
+            };
 
             return accountAssetBalance;
         }
