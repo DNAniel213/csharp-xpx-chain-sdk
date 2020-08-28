@@ -895,7 +895,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
             accountAssetBalance = new XarcadeModel.Asset()
             {
-                AssetID = "0",
+                AssetID = 0,
                 Name = tokenName,
                 Quantity = mosaic.Amount,
                 Owner = tokenOwner,
