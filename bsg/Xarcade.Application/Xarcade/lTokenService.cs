@@ -50,13 +50,6 @@ namespace Xarcade.Application.ProximaX
         Task<GameDto> GetGameInfoAsync(long GameId);
 
         /// <summary>
-        /// Creates xarcade token
-        /// </summary>
-        /// <param name="Token"></param>
-        /// <returns></returns>
-        Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto Token);
-
-        /// <summary>
         /// Retrieves a list of tokens
         /// </summary>
         /// <param name="Token"></param>
