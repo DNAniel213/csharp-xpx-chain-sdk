@@ -85,6 +85,7 @@ namespace Xarcade.Infrastructure.Repository
                 mosaicDTO.Namespace = BsonToGameDTO(token["Namespace"].AsBsonDocument);
             }catch(Exception e)
             {
+                //Console.WriteLine(e.ToString());
             }
             mosaicDTO.AssetID   = token["AssetID"].AsInt64;
             mosaicDTO.Name      = token["Name"].AsString;

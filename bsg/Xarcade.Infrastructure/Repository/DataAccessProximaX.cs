@@ -211,5 +211,16 @@ namespace Xarcade.Infrastructure.Repository
             
             return false;
         }
+
+        public Boolean CheckExistToken(string tokenName)
+        {
+            var tokenExist = portal.CheckExist("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("Name", tokenName), FilterOperator.EQUAL));
+            if(tokenExist == true)//if namespace already exists
+            {
+                return tokenExist;
+            }
+            
+            return false;
+        }
     }
 }

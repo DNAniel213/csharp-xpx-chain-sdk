@@ -8,12 +8,6 @@ namespace Xarcade.Application.ProximaX
     public interface ITokenService
     {
         /// <summary>
-        /// Creates Xar Token
-        /// </summary>
-        /// <param name="Token"></param>
-        /// <returns></returns>
-        Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto Token);
-        /// <summary>
         /// Creates token
         /// </summary>
         /// <param name="Token"></param>
