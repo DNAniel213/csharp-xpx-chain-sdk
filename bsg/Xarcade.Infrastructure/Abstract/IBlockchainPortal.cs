@@ -35,7 +35,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="param">Defines the mutability, transferability, divisibility, and levy mutability of new mosaic</param>
         /// <returns></returns>
-        Task<Mosaic> CreateMosaicAsync(CreateMosaicParams param);
+        Task<(Mosaic tMosaic, Transaction tx)> CreateMosaicAsync(CreateMosaicParams param);
 
         /// <summary>
         /// Creates a transaction that modifies currency's supply by specified amount

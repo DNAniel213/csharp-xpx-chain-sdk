@@ -60,7 +60,7 @@ namespace Xarcade.Infrastructure.Repository
         public static Namespace BsonToGameDTO(BsonDocument game)
         {
             var gameDTO = new Namespace();
-            gameDTO.NamespaceId = game["NamespaceId"].AsInt64;
+            gameDTO.NamespaceId = game["NamespaceID"].AsInt64;
             gameDTO.Domain      = game["Domain"].AsString;
             try
             {
@@ -68,7 +68,6 @@ namespace Xarcade.Infrastructure.Repository
                 gameDTO.LayerTwo    = game["LayerTwo"].AsString;
             }catch(Exception e)
             {
-                //Console.WriteLine(e.ToString());
             }
             gameDTO.Owner       = BsonToOwnerDTO(game["Owner"].AsBsonDocument);
             gameDTO.Expiry      = game["Expiry"].ToUniversalTime();
@@ -86,7 +85,6 @@ namespace Xarcade.Infrastructure.Repository
                 mosaicDTO.Namespace = BsonToGameDTO(token["Namespace"].AsBsonDocument);
             }catch(Exception e)
             {
-                //Console.WriteLine(e.ToString());s
             }
             mosaicDTO.AssetID   = token["AssetID"].AsInt64;
             mosaicDTO.Name      = token["Name"].AsString;

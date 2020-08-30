@@ -118,8 +118,10 @@ namespace Xarcade.Infrastructure.Repository
         public Owner LoadOwner(long userID)
         {
             var ownerBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
+            
             if(ownerBson!=null) //if account exists
             {
+
                 Owner ownerDTO = BsonToModel.BsonToOwnerDTO(ownerBson);
                 return ownerDTO;
             }

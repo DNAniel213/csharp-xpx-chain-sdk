@@ -67,7 +67,6 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.GenerateOwner)]
         public async Task<Response> CreateOwnerWallet(long ownerId) //TODO Propose email and Name
         {
-            Console.WriteLine("owner id : " + ownerId);
 
             Response response = new Response();
 
@@ -105,7 +104,6 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.GenerateUser)]
         public async Task<Response> CreateUserWallet(long userId, long ownerId) //TODO Propose email and Name
         {
-            Console.WriteLine("user id : " + userId + " owner id : " + ownerId);
 
             Response response = new Response();
 

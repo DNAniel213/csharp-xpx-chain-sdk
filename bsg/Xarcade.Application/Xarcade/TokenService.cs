@@ -92,7 +92,6 @@ namespace Xarcade.Application.Xarcade
         {
             if (userId < 0 || gameId < 0)
             {
-                Console.WriteLine("Invalid Input!");
                 return null;
             }
             
@@ -113,14 +112,12 @@ namespace Xarcade.Application.Xarcade
                         Quantity    = mosaic.Quantity,
                         Owner       = mosaic.Owner.UserID
                     };
-                    Console.WriteLine(tokendto);
                     tokendtolist.Add(tokendto);
                 }
                 
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
                 return null;
             }
 
@@ -139,8 +136,7 @@ namespace Xarcade.Application.Xarcade
             {
                 Owner ownerdto = dataAccessProximaX.LoadOwner(xar.Owner);
 
-                Console.Write("Token quantity:");
-                ulong quantity = Convert.ToUInt64(Console.ReadLine());
+                ulong quantity = 0;
 
                 Account account = new Account
                 {
@@ -155,16 +151,16 @@ namespace Xarcade.Application.Xarcade
                 {
                     Account = account,
                 };
-                Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
+                var mosaicTuple = await blockchainPortal.CreateMosaicAsync(mosaicparam);
 
                 Mosaic mosaic = new Mosaic
                 {
                     AssetID = Convert.ToInt64(xar.TokenId),
                     Name = "XarcadeToken",
                     Quantity = quantity,
-                    Owner = createMosaicT.Owner,
-                    Created = createMosaicT.Created,
-                    MosaicID = createMosaicT.MosaicID,
+                    Owner = mosaicTuple.tMosaic.Owner,
+                    Created = mosaicTuple.tMosaic.Created,
+                    MosaicID = mosaicTuple.tMosaic.MosaicID,
                     Namespace = null
                 };
                 dataAccessProximaX.SaveMosaic(mosaic);
@@ -172,7 +168,7 @@ namespace Xarcade.Application.Xarcade
                 var modsupply = new ModifyMosaicSupplyParams
                 {
                     Account   =  account,
-                    MosaicID  =  createMosaicT.MosaicID,
+                    MosaicID  =  mosaicTuple.tMosaic.MosaicID,
                     Amount    =  Convert.ToInt32(quantity),
                 };
                 var supplied = await blockchainPortal.ModifyMosaicSupplyAsync(modsupply);
@@ -213,22 +209,20 @@ namespace Xarcade.Application.Xarcade
             try
             {
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
-                //Retrieves a list of namespaces of the owner
-                //var nslist = repo.portal.ReadCollection("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerdto), FilterOperator.EQUAL));
-                //foreach(var nsdocu in nslist)
-                //{
-                //    Namespace namesp = BsonToModel.BsonToGameDTO(nsdocu);
-                //    Console.WriteLine(namesp);
-                //}
+
                 Namespace game = dataAccessProximaX.LoadNamespace(NamespaceName);
-                if(game.Owner.UserID != ownerdto.UserID)
+                if(game != null)
                 {
-                    Console.WriteLine("This is not your namespace!");
-                    return null;
+                    if(game.Owner.UserID != ownerdto.UserID)
+                    {
+                        
+                        return null;
+                    }
                 }
 
-                Console.Write("Token quantity:");
-                ulong amount = Convert.ToUInt64(Console.ReadLine());
+
+
+                ulong amount = Token.Quantity;
 
                 Account account = new Account
                 {
@@ -244,43 +238,18 @@ namespace Xarcade.Application.Xarcade
                     Account = account,
                 };
 
-                Mosaic createMosaicT = await blockchainPortal.CreateMosaicAsync(mosaicparam);
+                var mosaicTuple = await blockchainPortal.CreateMosaicAsync(mosaicparam);
                 Mosaic mosaic = new Mosaic
                 {
                     AssetID     = Convert.ToInt64(Token.TokenId),
-                    Name        = game.Domain,
+                    Name        = Token.Name,
                     Quantity    = Token.Quantity,
                     Owner       = ownerdto,
                     Created     = DateTime.Now,
-                    MosaicID    = createMosaicT.MosaicID,
+                    MosaicID    = mosaicTuple.tMosaic.MosaicID,
                     Namespace   = game
                 };
                 this.dataAccessProximaX.SaveMosaic(mosaic);
-                Asset tokenasset = new Asset
-                {
-                    AssetID     = Convert.ToInt64(Token.TokenId),
-                    Name        = Token.Name,
-                    Quantity    = amount,
-                    Owner       = ownerdto,
-                    Created     = mosaic.Created
-                };
-                //Adds supply to mosaic i hope
-                var modsupply = new ModifyMosaicSupplyParams
-                {
-                    Account   =  account,
-                    MosaicID  =  createMosaicT.MosaicID,
-                    Amount    =  Convert.ToInt32(amount),
-                };
-                var supplied = await blockchainPortal.ModifyMosaicSupplyAsync(modsupply);
-
-                Transaction transaction = new Transaction
-                {
-                    Hash    = supplied.Hash,
-                    Height  = supplied.Height,
-                    Asset   = tokenasset,
-                    Created = mosaic.Created
-                };
-                this.dataAccessProximaX.SaveTransaction(transaction);
 
                 TokenDto tokendto = new TokenDto
                 {
@@ -293,15 +262,14 @@ namespace Xarcade.Application.Xarcade
                 tokentransaction = new TokenTransactionDto
                 {
                     Status      = State.Unconfirmed,
-                    Hash        = transaction.Hash,
+                    Hash        = mosaicTuple.tx.Hash,
                     Token       = tokendto,
-                    BlockNumber = transaction.Height, 
+                    BlockNumber = mosaicTuple.tx.Height, 
                     Created     = mosaic.Created
                 };
-
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                _logger.LogError(e.ToString());
                 return null;
             }
             
@@ -321,7 +289,6 @@ namespace Xarcade.Application.Xarcade
                 var gamecheck = dataAccessProximaX.CheckExistNamespace(Game.Name);
                 if(gamecheck == true)
                 {
-                    Console.WriteLine("Invalid Game. Game already exists!");
                     return null;
                 }else
                 {
@@ -369,7 +336,6 @@ namespace Xarcade.Application.Xarcade
             try
             {
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Game.Owner);
-                Console.WriteLine("Extending " + Game.Name + " duration by " + duration);
                 var param = new CreateNamespaceParams
                 {
                     Account = ownerdto,
@@ -382,7 +348,7 @@ namespace Xarcade.Application.Xarcade
 
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                _logger.LogError(e.ToString());
                 return null;
             }
 
@@ -402,9 +368,8 @@ namespace Xarcade.Application.Xarcade
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
                 Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(Convert.ToInt64(Token.TokenId));
                 //modify mosaic supply
-                Console.Write("Amount to modify:  ");
                 int amount = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Modifying " + mosaicDto.MosaicID + " supply by " + amount );
+                
 
                 var modifyparam = new ModifyMosaicSupplyParams
                 {
@@ -426,7 +391,7 @@ namespace Xarcade.Application.Xarcade
 
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                _logger.LogError(e.ToString());
                 return null;
             }
 
@@ -450,7 +415,6 @@ namespace Xarcade.Application.Xarcade
             }
             else
             {
-                Console.WriteLine(mosaicDto.MosaicID);
                 var mosaicinfo = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
                 if(mosaicinfo != null)
                 {

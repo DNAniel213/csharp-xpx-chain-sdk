@@ -189,4 +189,15 @@
 }
 
 
-
+.btn-fab
+{
+  position: fixed;
+  width: 70px; 
+  height: 70px; 
+  padding: 10px 16px; 
+  border-radius: 35px; 
+  font-size: 250%; 
+  text-align: center; 
+  left: 40vmin;
+  bottom: 5vh;
+}

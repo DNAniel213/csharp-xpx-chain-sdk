@@ -145,6 +145,7 @@ namespace Xarcade.Infrastructure.Repository
                 var result = collection.Find(filter);
                 if(result.CountDocuments() < 1)
                 {
+                    Console.WriteLine("AAAANOO");
                     _logger.LogError("Document does not exist!!");
                     return null;
                 }

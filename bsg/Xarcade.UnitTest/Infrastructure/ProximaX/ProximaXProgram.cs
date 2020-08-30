@@ -174,7 +174,7 @@ namespace Xarcade.Api.Prototype
         {
             var param = new CreateMosaicParams();
             param.Account = portal.CreateAccountAsync(1, newAccount.PrivateKey).GetAwaiter().GetResult(); 
-            Mosaic createMosaicT = portal.CreateMosaicAsync(param).GetAwaiter().GetResult(); 
+            Mosaic createMosaicT = portal.CreateMosaicAsync(param).GetAwaiter().GetResult().tMosaic; 
             
             Console.WriteLine(createMosaicT.ToString());
             repo.SaveMosaic(createMosaicT);
