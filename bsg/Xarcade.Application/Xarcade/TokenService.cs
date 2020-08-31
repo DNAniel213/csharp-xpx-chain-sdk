@@ -37,9 +37,8 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
-                 
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
-                Mosaic mosaic = dataAccessProximaX.LoadMosaic(Convert.ToInt64(Token.TokenId));
+                Mosaic mosaic = dataAccessProximaX.LoadMosaic(Token.TokenId);
                 Namespace game = dataAccessProximaX.LoadNamespace(Game.Name);
 
                 Account account = new Account
@@ -62,7 +61,7 @@ namespace Xarcade.Application.Xarcade
                 {
                     TokenDto tokendto = new TokenDto
                     {
-                        TokenId     = Convert.ToUInt64(link.Asset.AssetID),
+                        TokenId     = link.Asset.AssetID,
                         Name        = link.Asset.Name,
                         Quantity    = link.Asset.Quantity,
                         Owner       = link.Asset.Owner.UserID
@@ -88,9 +87,9 @@ namespace Xarcade.Application.Xarcade
             }
             return tokentransaction;
         }
-        public async Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId)
+        public async Task<List<TokenDto>> GetTokenListAsync(string userId, string gameId)
         {
-            if (userId < 0 || gameId < 0)
+            if (String.IsNullOrWhiteSpace(userId) || String.IsNullOrWhiteSpace(gameId))
             {
                 return null;
             }
@@ -107,7 +106,7 @@ namespace Xarcade.Application.Xarcade
                     Mosaic mosaic = BsonToModel.BsonToTokenDTO(token);
                     TokenDto tokendto = new TokenDto
                     {
-                        TokenId     = Convert.ToUInt64(mosaic.AssetID),
+                        TokenId     = mosaic.AssetID,
                         Name        = mosaic.Name,
                         Quantity    = mosaic.Quantity,
                         Owner       = mosaic.Owner.UserID
@@ -155,7 +154,7 @@ namespace Xarcade.Application.Xarcade
 
                 Mosaic mosaic = new Mosaic
                 {
-                    AssetID = Convert.ToInt64(xar.TokenId),
+                    AssetID = xar.TokenId,
                     Name = "XarcadeToken",
                     Quantity = quantity,
                     Owner = mosaicTuple.tMosaic.Owner,
@@ -208,9 +207,11 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
+
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
 
                 Namespace game = dataAccessProximaX.LoadNamespace(NamespaceName);
+
                 if(game != null)
                 {
                     if(game.Owner.UserID != ownerdto.UserID)
@@ -219,9 +220,6 @@ namespace Xarcade.Application.Xarcade
                         return null;
                     }
                 }
-
-
-
                 ulong amount = Token.Quantity;
 
                 Account account = new Account
@@ -239,9 +237,10 @@ namespace Xarcade.Application.Xarcade
                 };
 
                 var mosaicTuple = await blockchainPortal.CreateMosaicAsync(mosaicparam);
+
                 Mosaic mosaic = new Mosaic
                 {
-                    AssetID     = Convert.ToInt64(Token.TokenId),
+                    AssetID     = Token.TokenId,
                     Name        = Token.Name,
                     Quantity    = Token.Quantity,
                     Owner       = ownerdto,
@@ -251,7 +250,7 @@ namespace Xarcade.Application.Xarcade
                 };
                 this.dataAccessProximaX.SaveMosaic(mosaic);
 
-                TokenDto tokendto = new TokenDto
+                var tokendto = new TokenDto
                 {
                     TokenId     = Token.TokenId,
                     Name        = Token.Name,
@@ -267,6 +266,7 @@ namespace Xarcade.Application.Xarcade
                     BlockNumber = mosaicTuple.tx.Height, 
                     Created     = mosaic.Created
                 };
+
             }catch(Exception e)
             {
                 _logger.LogError(e.ToString());
@@ -366,7 +366,7 @@ namespace Xarcade.Application.Xarcade
             try
             {
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
-                Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(Convert.ToInt64(Token.TokenId));
+                Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(Token.TokenId);
                 //modify mosaic supply
                 int amount = Convert.ToInt32(Console.ReadLine());
                 
@@ -398,9 +398,9 @@ namespace Xarcade.Application.Xarcade
             return null;
         }
 
-        public async Task<TokenDto> GetTokenInfoAsync(long TokenId)
+        public async Task<TokenDto> GetTokenInfoAsync(string TokenId)
         {
-            if (TokenId < 0)
+            if (String.IsNullOrWhiteSpace(TokenId))
             {
                 _logger.LogError("Invalid Input!!");
                 return null;
@@ -420,7 +420,7 @@ namespace Xarcade.Application.Xarcade
                 {
                     tokenInfo = new TokenDto
                     {
-                        TokenId     = Convert.ToUInt64(mosaicinfo.AssetID),
+                        TokenId     = mosaicinfo.AssetID,
                         Name        = mosaicinfo.Name,
                         Quantity    = mosaicinfo.Quantity,
                         Owner       = mosaicinfo.Owner.UserID,
@@ -435,9 +435,9 @@ namespace Xarcade.Application.Xarcade
             return tokenInfo;
         }
 
-        public async Task<GameDto> GetGameInfoAsync(long GameId)
+        public async Task<GameDto> GetGameInfoAsync(string GameId)
         {
-            if (GameId < 0)
+            if (String.IsNullOrWhiteSpace(GameId))
             {
                 _logger.LogError("Game ID is not valid!");
                 return null;

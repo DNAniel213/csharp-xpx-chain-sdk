@@ -4,7 +4,7 @@ namespace Xarcade.Infrastructure.ProximaX.Params
 {
     public class SendMosaicParams
     {
-        public ulong MosaicID { get; set; } = 0;
+        public string MosaicID { get; set; } = null;
         /// <summary>
         /// Account to send the mosaic from
         /// </summary>

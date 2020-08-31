@@ -14,7 +14,7 @@ namespace Xarcade.Infrastructure.Repository
         public static Account BsonToAccountDTO(BsonDocument account)
         {
             var accountDTO = new Account();
-            accountDTO.UserID        = account["UserID"].AsInt64;
+            accountDTO.UserID        = account["UserID"].AsString;
             accountDTO.WalletAddress = account["WalletAddress"].AsString;
             accountDTO.PrivateKey    = account["PrivateKey"].AsString;
             accountDTO.PublicKey     = account["PublicKey"].AsString;
@@ -25,19 +25,19 @@ namespace Xarcade.Infrastructure.Repository
         public static User BsonToUserDTO(BsonDocument user)
         {
             var userDTO = new User();
-            userDTO.UserID        = user["UserID"].AsInt64;
+            userDTO.UserID        = user["UserID"].AsString;
             userDTO.WalletAddress = user["WalletAddress"].AsString;
             userDTO.PrivateKey    = user["PrivateKey"].AsString;
             userDTO.PublicKey     = user["PublicKey"].AsString;
             userDTO.Created       = user["Created"].ToUniversalTime();
-            userDTO.OwnerID       = user["OwnerID"].AsInt64;
+            userDTO.OwnerID       = user["OwnerID"].AsString;
             return userDTO;
         }
 
         public static Owner BsonToOwnerDTO(BsonDocument owner)
         {
             var ownerDTO = new Owner();
-            ownerDTO.UserID        = owner["UserID"].AsInt64;
+            ownerDTO.UserID        = owner["UserID"].AsString;
             ownerDTO.WalletAddress = owner["WalletAddress"].AsString;
             ownerDTO.PrivateKey    = owner["PrivateKey"].AsString;
             ownerDTO.PublicKey     = owner["PublicKey"].AsString;
@@ -60,10 +60,12 @@ namespace Xarcade.Infrastructure.Repository
         public static Namespace BsonToGameDTO(BsonDocument game)
         {
             var gameDTO = new Namespace();
-            gameDTO.NamespaceId = game["NamespaceID"].AsInt64;
+            gameDTO.NamespaceId = game["NamespaceID"].AsString;
             gameDTO.Domain      = game["Domain"].AsString;
+
             try
             {
+
                 gameDTO.LayerOne    = game["LayerOne"].AsString;
                 gameDTO.LayerTwo    = game["LayerTwo"].AsString;
             }catch(Exception e)
@@ -79,7 +81,7 @@ namespace Xarcade.Infrastructure.Repository
         public static Mosaic BsonToTokenDTO(BsonDocument token)
         {
             var mosaicDTO = new Mosaic();
-            mosaicDTO.MosaicID  = (ulong)token["MosaicID"].AsInt64;
+            mosaicDTO.MosaicID  = token["MosaicID"].AsString;
             try
             {
                 mosaicDTO.Namespace = BsonToGameDTO(token["Namespace"].AsBsonDocument);
@@ -87,7 +89,7 @@ namespace Xarcade.Infrastructure.Repository
             {
                 //Console.WriteLine(e.ToString());
             }
-            mosaicDTO.AssetID   = token["AssetID"].AsInt64;
+            mosaicDTO.AssetID   = token["AssetID"].AsString;
             mosaicDTO.Name      = token["Name"].AsString;
             mosaicDTO.Quantity  = (ulong)token["Quantity"].AsInt64;
             mosaicDTO.Owner     = BsonToOwnerDTO(token["Owner"].AsBsonDocument);

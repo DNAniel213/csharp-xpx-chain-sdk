@@ -4,7 +4,7 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Namespace
     {
-        public long NamespaceId {get; set;}
+        public string NamespaceId {get; set;}
         public string Domain {get; set;}
         public string LayerOne {get; set;}
         public string LayerTwo {get; set;}

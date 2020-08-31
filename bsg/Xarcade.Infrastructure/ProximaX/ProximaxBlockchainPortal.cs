@@ -91,11 +91,11 @@ namespace Xarcade.Infrastructure.ProximaX
             return xarTransaction; 
         }
 
-        public async Task<XarcadeModel.Account> CreateAccountAsync(long userID)
+        public async Task<XarcadeModel.Account> CreateAccountAsync(string userID)
         {
             XarcadeModel.Account xarAccount  = null;
 
-            if(userID < 0)
+            if(String.IsNullOrWhiteSpace(userID))
             {
                 _logger.LogError("User ID does not exist!!");
                 return null;
@@ -125,11 +125,11 @@ namespace Xarcade.Infrastructure.ProximaX
 
             return xarAccount;
         }
-        public async Task<XarcadeModel.Account> CreateAccountAsync(long userID, string privateKey)
+        public async Task<XarcadeModel.Account> CreateAccountAsync(string userID, string privateKey)
         {
             XarcadeModel.Account xarAccount = null;
 
-            if(userID < 0 || String.IsNullOrEmpty(privateKey))
+            if(String.IsNullOrEmpty(userID) || String.IsNullOrEmpty(privateKey))
             {
                 _logger.LogError("User ID does not exist!!");
                 return null;
@@ -225,6 +225,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
             try
             {
+
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
                 Account account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
 
@@ -247,12 +248,12 @@ namespace Xarcade.Infrastructure.ProximaX
 
                     if(account!= null && mosaicDefinitionTransaction!= null)
                     {
+                        
                         await SignAndAnnounceTransactionAsync(account, mosaicDefinitionTransaction);
                     
                         mosaic = new XarcadeModel.Mosaic
                         {
-                            MosaicID = mosaicID.Id,
-                            AssetID  = Convert.ToInt64(mosaicID.Id),
+                            MosaicID = mosaicID.Id +"",
                             Name     = null,
                             Quantity = 0,
                             Created  = DateTime.Now,
@@ -266,6 +267,7 @@ namespace Xarcade.Infrastructure.ProximaX
                             Asset   = mosaic,
                             Created = DateTime.Now,
                         };
+                        
                     }
                 }
 
@@ -282,7 +284,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
         public async Task<XarcadeModel.Transaction> ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param)
         {
-            if(param.Account == null || param.MosaicID == 0 || param.Amount <= 0) 
+            if(param.Account == null || String.IsNullOrWhiteSpace(param.MosaicID) || param.Amount <= 0) 
             {
                 _logger.LogError("Input is invaid!!");
                 return null;
@@ -314,8 +316,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
                     mosaic = new XarcadeModel.Mosaic
                     {
-                        MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  = Convert.ToInt64(mosaicInfo.MosaicId.Id),
+                        MosaicID = mosaicInfo.MosaicId.Id + "",
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -339,8 +340,8 @@ namespace Xarcade.Infrastructure.ProximaX
             return transaction;
         }
 
-//FIXME make this return null if mosaic does isn't found
-        public async Task<XarcadeModel.Mosaic> GetMosaicAsync(ulong mosaicID)
+//FIXME make this return null if mosaic  isn't found
+        public async Task<XarcadeModel.Mosaic> GetMosaicAsync(string mosaicID)
         {
             XarcadeModel.Mosaic mosaic = null;
             MosaicInfo mosaicInfo = null;
@@ -349,7 +350,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(mosaicID));
                 mosaic = new XarcadeModel.Mosaic
                 {
-                    MosaicID = mosaicInfo.MosaicId.Id,
+                    MosaicID = mosaicInfo.MosaicId.Id + "",
                 };
 
             }catch(Exception e)
@@ -364,7 +365,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
         public async Task<XarcadeModel.Transaction> SendMosaicAsync(SendMosaicParams param)
         {
-            if(param.MosaicID == 0 || param.Sender == null || param.Amount <= 0)
+            if(String.IsNullOrWhiteSpace(param.MosaicID) || param.Sender == null || param.Amount <= 0)
             {
                 _logger.LogError("Input is invalid!!");
                 return null;
@@ -398,8 +399,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     await SignAndAnnounceTransactionAsync(senderAccount, transferTransaction);
                     mosaic = new XarcadeModel.Mosaic
                     {
-                        MosaicID = param.MosaicID,
-                        AssetID  = Convert.ToInt64(param.MosaicID),
+                        MosaicID = param.MosaicID + "",
                         Name     = mosaicInfo.MetaId,
                         Quantity = param.Amount,
                         Created  = DateTime.Now,
@@ -430,7 +430,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
         public async Task<XarcadeModel.Transaction> LinkMosaicAsync(LinkMosaicParams param)
         {
-            if(param.Account == null || param.MosaicID == 0 || param.Namespace == null)
+            if(param.Account == null || String.IsNullOrWhiteSpace(param.MosaicID) || param.Namespace == null)
             {
                 return null;
             } 
@@ -460,8 +460,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
                     mosaic = new XarcadeModel.Mosaic
                     {
-                        MosaicID = mosaicInfo.MosaicId.Id,
-                        AssetID  = Convert.ToInt64(mosaicInfo.MosaicId.Id),
+                        MosaicID = mosaicInfo.MosaicId.Id + "",
                         Name     = null,
                         Quantity = 0,
                         Created  = DateTime.Now,
@@ -619,7 +618,6 @@ namespace Xarcade.Infrastructure.ProximaX
                 {
                     var owner = new XarcadeModel.Account
                     {
-                        UserID = 0,
                         WalletAddress = ownerAccountInfo.Address.Pretty,
                         PrivateKey    = null,
                         PublicKey     = ownerAccountInfo.PublicKey,
@@ -655,7 +653,6 @@ namespace Xarcade.Infrastructure.ProximaX
             XarcadeModel.Transaction transaction = null;
             var asset = new XarcadeModel.Asset
             {
-                AssetID  = 0,
                 Name     = param.Message,
                 Quantity = param.Amount,
                 Owner    = param.Sender,
@@ -894,7 +891,6 @@ namespace Xarcade.Infrastructure.ProximaX
 
             tokenOwner = new XarcadeModel.Account()
             {
-                UserID = 0,
                 WalletAddress = account.WalletAddress,
                 PrivateKey = account.PrivateKey,
                 PublicKey = account.PublicKey,
@@ -903,7 +899,6 @@ namespace Xarcade.Infrastructure.ProximaX
 
             accountAssetBalance = new XarcadeModel.Asset()
             {
-                AssetID = 0,
                 Name = tokenName,
                 Quantity = mosaic.Amount,
                 Owner = tokenOwner,

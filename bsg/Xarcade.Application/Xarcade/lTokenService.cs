@@ -40,21 +40,21 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="TokenId"></param>
         /// <returns></returns>
-        Task<TokenDto> GetTokenInfoAsync(long TokenId);
+        Task<TokenDto> GetTokenInfoAsync(string TokenId);
 
         /// <summary>
         /// Retrieves the information of a specific game
         /// </summary>
         /// <param name="GameId"></param>
         /// <returns></returns>
-        Task<GameDto> GetGameInfoAsync(long GameId);
+        Task<GameDto> GetGameInfoAsync(string GameId);
 
         /// <summary>
         /// Retrieves a list of tokens
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId);
+        Task<List<TokenDto>> GetTokenListAsync(string userId, string gameId);
 
     }
 }

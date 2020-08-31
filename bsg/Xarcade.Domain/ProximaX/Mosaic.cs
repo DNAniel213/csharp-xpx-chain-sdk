@@ -2,7 +2,7 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Mosaic : Asset
     {
-        public ulong MosaicID {get; set;}
+        public string MosaicID {get; set;}
         public Namespace Namespace {get; set;}
 
         public override string ToString()

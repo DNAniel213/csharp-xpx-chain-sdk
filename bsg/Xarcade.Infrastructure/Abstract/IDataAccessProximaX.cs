@@ -16,11 +16,11 @@ namespace Xarcade.Infrastructure.Abstract
         bool SaveXar(Domain.ProximaX.Xarcade xarcadeDTO);
         bool SaveTransaction(Transaction transactionDTO);
         bool SaveXarcadeUser(XarcadeUser xarUserDTO);
-        Owner LoadOwner(long userID);
-        User LoadUser(long userID);
-        Mosaic LoadMosaic(long tokenID);
+        Owner LoadOwner(string userID);
+        User LoadUser(string userID);
+        Mosaic LoadMosaic(string tokenID);
         Namespace LoadNamespace(string gameName);
-        Namespace LoadNamespace(long gameID);
+        Namespace LoadNamespaceFromID(string gameID);
         List<BsonDocument> LoadMosaicList(Owner ownerDTO);
         Boolean CheckExistNamespace(string namespaceName);
         Boolean CheckExistToken(string tokenName);
