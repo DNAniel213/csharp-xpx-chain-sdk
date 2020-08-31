@@ -59,7 +59,7 @@ Coded by www.creative-tim.com
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
+          <li >
             <a href="./tokens.html">
               <i class="nc-icon nc-diamond"></i>
               <p>Tokens</p>
@@ -116,7 +116,7 @@ Coded by www.creative-tim.com
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:;">Xarcade Web API Games</a>
+            <a class="navbar-brand" href="javascript:;">Xarcade Web API Tokens</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -171,176 +171,60 @@ Coded by www.creative-tim.com
       <!-- End Navbar -->
       <div class="content">
         <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <!-- Game Card -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">XAR Balance</p>
-                      <p class="card-title">150XAR<p>
+                  <div class=" col-md-12" >
+                    <div class="text-center" style="height:100px">
+                      <img src="../assets/img/dane-icon.png" style="height:100px" class="rounded" alt="aaa">
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update Now
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
                 <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-money-coins text-success"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Revenue</p>
-                      <p class="card-title">1,345XAR<p>
+                  <div class="col-12 col-md-12">
+                    <div class="numbers text-center">
+                      <p class="card-category">Uses DANE COIN</p>
+                      <p class="card-title">Flappy Dog Game<p>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar-o"></i>
-                  Last day
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-vector text-danger"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-clock-o"></i>
-                  In the last hour
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-favourite-28 text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">New Users</p>
-                      <p class="card-title">+10K<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update now
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Player Transactions</h5>
-                <p class="card-category">24 Hours performance</p>
-              </div>
-              <div class="card-body ">
-                <canvas id=chartHours width="400" height="100"></canvas>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-history"></i> Updated 3 minutes ago
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Token Exchange Statistics</h5>
-                <p class="card-category">30 Days</p>
-              </div>
-              <div class="card-body ">
-                <canvas id="chartEmail"></canvas>
-              </div>
-              <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-primary"></i> Bought
-                  <i class="fa fa-circle text-warning"></i> Exchanged from XAR
-                  <i class="fa fa-circle text-danger"></i> Disposed
-                  <i class="fa fa-circle text-gray"></i> Uncirculated
-                </div>
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar"></i> Amount of DANE Coins moved
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-title">DANE Coin Value</h5>
-                <p class="card-category">Line Chart with Points</p>
-              </div>
-              <div class="card-body">
-                <canvas id="speedChart" width="400" height="100"></canvas>
               </div>
               <div class="card-footer">
-                <div class="chart-legend">
-                  <i class="fa fa-circle text-info"></i> 2019
-                  <i class="fa fa-circle text-warning"></i> 2020
-                </div>
-                <hr />
-                <div class="card-stats">
-                  <i class="fa fa-check"></i> Data updated every 24 hours
+                <hr>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal">
+                      <i class="nc-icon nc-simple-add"></i>
+                      Add supply
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
+                      <i class="nc-icon nc-send"></i>
+                      Send
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
+                    <i class="nc-icon nc-settings-gear-65"></i>
+                      Modify
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- END Game Card -->
+
+          <div class="btn btn-info btn-round btn-fab btn-lg"  data-toggle="modal" data-target="#createGameModal" data-tooltip="tooltip"  data-placement="right" title="Create New Game">
+            +
+          </div>
+
+          </div>
         </div>
+      </div>
       </div>
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
@@ -355,7 +239,7 @@ Coded by www.creative-tim.com
             <div class="credits ml-auto">
               <span class="copyright">
                 © <script>
-                  document.write(new Date().getFullYear())
+                  document.write(new Date().getFullYear());
                 </script>, made with <i class="fa fa-heart heart"></i> by Black Spear Games
               </span>
             </div>
@@ -364,6 +248,43 @@ Coded by www.creative-tim.com
       </footer>
     </div>
   </div>
+
+  <!-- Create Game Modal -->
+  <div class="modal fade" id="createGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create New Game</h5>
+          
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Game Title</label>
+            <input type="text" class="form-control" placeholder="Recepient ID" value="DANE Coin">
+          </div>
+
+
+          <div class="form-group">
+            <label>Details?</label>
+            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal"> Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Create Game Modal -->
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>

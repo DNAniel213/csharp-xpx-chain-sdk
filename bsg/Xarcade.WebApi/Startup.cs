@@ -33,7 +33,7 @@ namespace Xarcade.WebApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddTransient<IAccountService, AccountService>();
             //services.AddTransient<ITransactionService, TransactionService>();
-            //services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IDataAccessProximaX, DataAccessProximaX>();
             services.AddTransient<IBlockchainPortal, ProximaxBlockchainPortal>();
             services.AddControllers();

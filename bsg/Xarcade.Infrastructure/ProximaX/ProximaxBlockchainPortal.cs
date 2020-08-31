@@ -211,16 +211,18 @@ namespace Xarcade.Infrastructure.ProximaX
             return transactionList;
 
         }
-
-        public async Task<XarcadeModel.Mosaic> CreateMosaicAsync(CreateMosaicParams param)
+        public async Task<(XarcadeModel.Mosaic tMosaic, XarcadeModel.Transaction tx)> CreateMosaicAsync(CreateMosaicParams param)
         {
             if(param.Account == null)
             {
                 _logger.LogError("Account does not exist!!");
-                return null;
+
+                return (null, null);
             }
                 
             XarcadeModel.Mosaic mosaic = null;
+            XarcadeModel.Transaction transaction = null;
+
             try
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
@@ -256,18 +258,26 @@ namespace Xarcade.Infrastructure.ProximaX
                             Created  = DateTime.Now,
                             Owner    = param.Account,
                         };
+
+                        transaction = new XarcadeModel.Transaction
+                        {
+                            Hash    = mosaicDefinitionTransaction.GetHashCode().ToString(),
+                            Height  = 1,
+                            Asset   = mosaic,
+                            Created = DateTime.Now,
+                        };
                     }
                 }
 
             }catch(Exception e)
             {
+
                 _logger.LogError(e.ToString());
-                return null;
+                return (null, null);
                 //TODO research on possible errors to handle
             }
 
-
-            return mosaic;
+            return (mosaic,transaction) ;
         }
 
         public async Task<XarcadeModel.Transaction> ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param)
@@ -772,10 +782,8 @@ namespace Xarcade.Infrastructure.ProximaX
                 .Timeout(TimeSpan.FromSeconds(30))  
                 .Subscribe(
                     block => {
-                    Console.WriteLine($"New block is created {block.Height}");
                     },
                     err => {
-                    Console.WriteLine($"Unexpected error {err}");
                     ws.Listener.Close();
                     }
                 );

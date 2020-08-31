@@ -394,7 +394,7 @@ demo = {
 
     $.notify({
       icon: "nc-icon nc-bell-55",
-      message: "Oof! You don't have enough XPX to convert"
+      message: "Oof! You don't have enough balance to perform this transaction"
 
     }, {
       type: color,
@@ -406,32 +406,10 @@ demo = {
     });
   },
 
-  showNotification: function(from, align) {
-    color = 'primary';
-
-    $.notify({
-      icon: "nc-icon nc-bell-55",
-      message: "Welcome to <b>Paper Dashboard</b> - a beautiful bootstrap dashboard for every web developer."
-
-    }, {
-      type: color,
-      timer: 8000,
-      placement: {
-        from: from,
-        align: align
-      }
-    });
-  }
 
 };
 
-var rangeSlider = document.getElementById("rs-range-line");
-var rangeBullet = document.getElementById("rs-bullet");
 
-rangeSlider.addEventListener("input", showSliderValue, false);
-
-function showSliderValue() {
-  rangeBullet.innerHTML = rangeSlider.value;
-  var bulletPosition = (rangeSlider.value /rangeSlider.max);
-  rangeBullet.style.left = (bulletPosition * 578) + "px";
-}
+$(function () {
+  $('[data-tooltip="tooltip"]').tooltip()
+})

@@ -19,14 +19,14 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         {
             this.tokenService = tokenService;
         }
-/*
+
         [HttpPost]
         [Route(Routes.GenerateToken)]
-        public async Task<Response> CreateToken(string name, ulong supply, long owner)
+        public async Task<Response> CreateToken(string name,  long owner, string namespaceName)
         {
             Response response = new Response();
 
-            if(string.IsNullOrWhiteSpace(name) || supply < 0) 
+            if(string.IsNullOrWhiteSpace(name) || owner < 0) 
             {
                 response.ViewModel = null;
                 response.Message = "Missing or incorrect parameters";
@@ -37,20 +37,21 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             {
                 var tokenDto = new TokenDto
                 {
-                    TokenId = "Needs to be generated", //TODO needs to be generated
+                    TokenId =  0, //TODO needs to be generated
                     Name = name,
-                    Quantity = supply,
+                    Quantity = 0,
                     Owner    = owner
                 };
 
-                var token = await tokenService.CreateTokenAsync(tokenDto);
-                var tokenViewModel = new TokenViewModel
+                var tokenTransaction = await tokenService.CreateTokenAsync(tokenDto, namespaceName);
+                var tokenTransactionViewModel = new TransactionViewModel
                 {
-                    Name = name,
-                    Quantity = supply
+                    Hash = tokenTransaction.Hash,
+                    Created = tokenTransaction.Created,
+                    Status = tokenTransaction.Status + ""
                 };
                 response.Message = "Success!";
-                response.ViewModel = tokenViewModel;
+                response.ViewModel = tokenTransactionViewModel;
             }catch(Exception e)
             {
                 response.Message = e.ToString();
@@ -67,7 +68,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         {
             Response response = new Response();
 
-            if(string.IsNullOrWhiteSpace(name) || supply < 0) 
+            if(string.IsNullOrWhiteSpace(name) || duration < 0 || owner < 0) 
             {
                 response.ViewModel = null;
                 response.Message = "Missing or incorrect parameters";
@@ -81,14 +82,14 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                     GameId = 00, //TODO needs to be generated
                     Name = name,
                     Owner = owner,
-                    Expiry = DateTime.Now() //TODO needs long
+                    Expiry = DateTime.Now //TODO needs long
                 };
                 var game = await tokenService.CreateGameAsync(gameDto);
 
                 var gameViewModel = new GameViewModel
                 {
                     Name = name,
-                    Expiry = DateTime.Now(), //TODO needs long conversion
+                    Expiry = DateTime.Now, //TODO needs long conversion
                     Tokens = null
                 };
                 response.Message = "Success!";
@@ -104,7 +105,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpPost]
         [Route(Routes.ExtendGame)]
-        public async Task<Response> ExtendGame(long gameId, long duration)
+        public async Task<Response> ExtendGame(long gameId, ulong duration)
         {
             Response response = new Response();
 
@@ -120,19 +121,18 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 var gameDto = new GameDto
                 {
                     GameId = gameId,
-                    Name = name,
                 };
-                var game = await tokenService.ExtendGameAsync(gameDto); //TODO propose add duration to make things simpler
+                var gameTransactionDTO = await tokenService.ExtendGameAsync(gameDto, duration); //TODO propose add duration to make things simpler
 
-                var gameViewModel = new GameViewModel
+                var gameTransactionViewModel = new TransactionViewModel
                 {
-                    Name = game.Name,
-                    Expiry = game.Expiry, //TODO return new expiry date
-                    Tokens = null
+                    Hash = gameTransactionDTO.Hash,
+                    Created = gameTransactionDTO.Created,
+                    Status = gameTransactionDTO.Status +"",
                 };
                 
                 response.Message = "Success!";
-                response.ViewModel = gameViewModel;
+                response.ViewModel = gameTransactionViewModel;
             }catch(Exception e)
             {
                 response.Message = e.ToString();
@@ -144,7 +144,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpPost]
         [Route(Routes.ModifyTokenSupply)]
-        public async Task<Response> ModifyTokenSupply(long tokenId, long supply)
+        public async Task<Response> ModifyTokenSupply(ulong tokenId, ulong supply)
         {
             Response response = new Response();
 
@@ -184,7 +184,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpPost]
         [Route(Routes.GenerateXarToken)]
-        public async Task<Response> CreateXarToken(string name, ulong supply, long Owner)
+        public async Task<Response> CreateXarToken(string name, ulong supply, long owner)
         {
             Response response = new Response();
 
@@ -199,12 +199,12 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             {
                 var xarDto = new XarcadeTokenDto
                 {
-                    TokenId = "Needs to be generated", //TODO needs to be generated
+                    TokenId = 0, //TODO needs to be generated
                     Name = name,
                     Owner = owner,
                 };
 
-                var xarTokenTransaction = await tokenService.CreateXarToken(xarDto);
+                var xarTokenTransaction = await tokenService.CreateXarTokenAsync(xarDto);
 
                 var xarTokenTransactionViewModel = new TransactionViewModel
                 {
@@ -228,15 +228,13 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.Token)]        
         public async Task<TokenViewModel> GetTokenInfo(long tokenId)
         {
+            TokenViewModel tokenViewModel = new TokenViewModel();
 
             if(tokenId < 0) 
             {
-                response.ViewModel = null;
-                response.Message = "Missing or incorrect parameters";
-                return response;
+                tokenViewModel = null;
             }
 
-            TokenViewModel tokenViewModel = new TokenViewModel();
 
             try
             {
@@ -255,15 +253,13 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.Token)]        
         public async Task<GameViewModel> GetGameInfo(long gameId)
         {
+            var gameViewModel = new GameViewModel();
 
             if(gameId < 0) 
             {
-                response.ViewModel = null;
-                response.Message = "Missing or incorrect parameters";
-                return response;
+               gameViewModel = null;
             }
 
-            var gameViewModel = new GameViewModel();
             try
             {
                 var game = await tokenService.GetGameInfoAsync(gameId);
@@ -281,7 +277,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             return gameViewModel;
         }
-        */
+        
 
 
     }
