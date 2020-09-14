@@ -33,22 +33,22 @@ namespace Xarcade.Api.Prototype
             };
             XarcadeTokenDto xartokentest = new XarcadeTokenDto
             {
-                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),
-                Owner = user.UserID
+                TokenId = Guid.NewGuid().ToString(),
+                Owner = user.UserID +""
             };
             TokenDto tokentest = new TokenDto
             {
-                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),//TO ADD some randomness
+                TokenId = Guid.NewGuid().ToString(),//TO ADD some randomness
                 Name = "tokentest",
-                Owner = user.UserID
+                Owner = user.UserID + ""
             };
             //Console.WriteLine("Duration of the game (days):");
             //ulong duration = Convert.ToUInt32(Console.ReadLine());
             GameDto gametest = new GameDto
             {
-                GameId = 1,//should be generated
+                GameId = Guid.NewGuid().ToString(),//should be generated
                 Name = "token",
-                Owner = user.UserID,
+                Owner = user.UserID + "",
                 //Expiry = DateTime.Now.AddDays(364)
             };
             //long tokID = 637321661762507047;
@@ -69,7 +69,7 @@ namespace Xarcade.Api.Prototype
                 case "1":  user = repository.Register(); break;
                 case "2":  user = repository.Login();    break; 
                 case "3":  blockChain.ProximaXMain(user);   break;
-                case "5":  var gameinfo = ts.GetGameInfoAsync(1).GetAwaiter().GetResult(); Console.WriteLine(gameinfo); break;
+                case "5":  var gameinfo = ts.GetGameInfoAsync(1 + "").GetAwaiter().GetResult(); Console.WriteLine(gameinfo); break;
                 //case "0":  var result = ts.CreateTokenAsync(tokentest).GetAwaiter().GetResult(); break;
             }
 

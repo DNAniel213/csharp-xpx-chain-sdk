@@ -12,7 +12,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="userID">Unique identification that represents the user</param>
         /// <returns>Account Information</returns>
-        Task<Account> CreateAccountAsync(long userID);
+        Task<Account> CreateAccountAsync(string userID);
 
         /// <summary>
         /// Generates a wallet for a specific user using a private key
@@ -20,7 +20,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// <param name="userID">Unique identification that represents the user</param>
         /// <param name="privateKey">The private key to create the wallet with</param>
         /// <returns></returns>
-        Task<Account> CreateAccountAsync(long userID, string privateKey);
+        Task<Account> CreateAccountAsync(string userID, string privateKey);
 
         /// <summary>
         /// Retrieves the transactions of specified account
@@ -49,7 +49,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="mosaicID">Unique identification that represents the mosaic</param>
         /// <returns></returns>
-        Task<Mosaic> GetMosaicAsync(ulong mosaicID);
+        Task<Mosaic> GetMosaicAsync(string mosaicID);
         
         /// <summary>
         /// Creates a transaction to sends mosaic from one account to another

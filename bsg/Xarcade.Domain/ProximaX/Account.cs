@@ -4,7 +4,7 @@ namespace Xarcade.Domain.ProximaX
     /// <summary>Xarcade's Account Model</summary>
     public class Account
     {
-        public long UserID {get; set;}
+        public string UserID {get; set;}
         public string WalletAddress {get; set;}
         public string PrivateKey {get; set;}
         public string PublicKey {get; set;}
