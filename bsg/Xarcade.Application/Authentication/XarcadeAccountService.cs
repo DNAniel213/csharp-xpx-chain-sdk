@@ -46,7 +46,7 @@ namespace Xarcade.Application.Authentication
 
             if (string.IsNullOrEmpty(origin))
             {
-                _logger.LogError("Origin is empty");
+                //_logger.LogError("Origin is empty");
                 return false;
             }
 
@@ -57,7 +57,7 @@ namespace Xarcade.Application.Authentication
             var existingUser = await Task.Run(() => this.dataAccessAuthentication.LoadXarcadeUser(searchKey));
             if (existingUser != null && string.Equals(existingUser.UserID, account.UserId))
             {
-                _logger.LogError("User already exist");
+                //_logger.LogError("User already exist");
                 return false;
             }
 
@@ -83,7 +83,7 @@ namespace Xarcade.Application.Authentication
             var isOk = await Task.Run(() => this.dataAccessAuthentication.SaveXarcadeUser(xarcadeUser));
             if (!isOk)
             {
-                _logger.LogError("An error occured when trying to save the user");
+               // _logger.LogError("An error occured when trying to save the user");
                 return false;
             }
 
@@ -100,7 +100,7 @@ namespace Xarcade.Application.Authentication
             {
                 // To Evaluate: Maybe we need to expose an api to send a verification mail
                 // or should this be handled by the customer service
-                _logger.LogError("Sending verification mail failed");
+                //_logger.LogError("Sending verification mail failed");
                 return false;
             }
 
@@ -111,7 +111,7 @@ namespace Xarcade.Application.Authentication
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(origin))
             {
-                _logger.LogError("Invalid ForgotPasswordAsync parameters");
+                //_logger.LogError("Invalid ForgotPasswordAsync parameters");
                 return false;
             }
 
@@ -122,7 +122,7 @@ namespace Xarcade.Application.Authentication
             var existingUser = await Task.Run(() => this.dataAccessAuthentication.LoadXarcadeUser(searchKey));
             if (existingUser == null)
             {
-                _logger.LogError("User does not exist");
+                //_logger.LogError("User does not exist");
                 return false;
             }
 
@@ -136,7 +136,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 return false;
             }
 
@@ -153,7 +153,7 @@ namespace Xarcade.Application.Authentication
             {
                 // To Evaluate: Maybe we need to expose an api to send a verification mail
                 // or should this be handled by the customer service
-                _logger.LogError("Sending forgot password mail failed");
+                //_logger.LogError("Sending forgot password mail failed");
                 return false;
             }
 
@@ -171,7 +171,7 @@ namespace Xarcade.Application.Authentication
 
             if (string.IsNullOrEmpty(userId))
             {
-                _logger.LogError("User Id is null");
+                //_logger.LogError("User Id is null");
                 return false;
             }
 
@@ -182,14 +182,14 @@ namespace Xarcade.Application.Authentication
             var existingUser = await Task.Run(() => this.dataAccessAuthentication.LoadXarcadeUser(searchKey));
             if (existingUser == null)
             {
-                _logger.LogError("User does not exist");
+               // _logger.LogError("User does not exist");
                 return false;
             }
 
             if (string.Equals(existingUser.PasswordReset.ResetToken, resetDetails.Token) &&
                 existingUser.PasswordReset.ResetTokenExpiry > DateTime.UtcNow)
             {
-                _logger.LogError("Invalid reset token");
+                //_logger.LogError("Invalid reset token");
                 return false;
             }
 
@@ -205,7 +205,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 return false;
             }
 
@@ -225,7 +225,7 @@ namespace Xarcade.Application.Authentication
 
             if (string.IsNullOrEmpty(ipAddress))
             {
-                _logger.LogError("IP Address is empty");
+               // _logger.LogError("IP Address is empty");
                 authenticationResult.AuthenticationError = AuthenticationError.InvalidIpAddress;
                 return authenticationResult;
             }
@@ -238,14 +238,14 @@ namespace Xarcade.Application.Authentication
 
             if (existingUser == null || !existingUser.Verification.IsVerified)
             {
-                _logger.LogError("Account is not verified");
+                //_logger.LogError("Account is not verified");
                 authenticationResult.AuthenticationError = AuthenticationError.AccountNotVerified;
                 return authenticationResult;
             }
 
             if (!BCrypt.Net.BCrypt.Verify(loginDetails.Password, existingUser.PasswordHash))
             {
-                _logger.LogError("Invalid password");
+                //_logger.LogError("Invalid password");
                 authenticationResult.AuthenticationError = AuthenticationError.InvalidPassword;
                 return authenticationResult;
             }
@@ -262,7 +262,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 authenticationResult.AuthenticationError = AuthenticationError.AccountUpdateFailed;
                 return authenticationResult;
             }
@@ -288,7 +288,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 return null;
             }
 
@@ -310,7 +310,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 return false;
             }
 
@@ -321,7 +321,7 @@ namespace Xarcade.Application.Authentication
         {
             if (string.IsNullOrEmpty(token))
             {
-                _logger.LogError("Token is empty");
+                //_logger.LogError("Token is empty");
                 return false;
             }
 
@@ -333,13 +333,13 @@ namespace Xarcade.Application.Authentication
 
             if (existingUser == null)
             {
-                _logger.LogError("Account is not verified");   
+                //_logger.LogError("Account is not verified");   
                 return false;
             }
 
             if (existingUser.Verification.IsVerified)
             {
-                _logger.LogError("Account is already verified");
+                //_logger.LogError("Account is already verified");
                 return false;
             }
 
@@ -350,7 +350,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 return false;
             }
 
@@ -361,7 +361,7 @@ namespace Xarcade.Application.Authentication
         {
             if (string.IsNullOrEmpty(userId))
             {
-                _logger.LogError("User Id is empty");
+                //_logger.LogError("User Id is empty");
                 return null;
             }
 
@@ -395,13 +395,13 @@ namespace Xarcade.Application.Authentication
 
             if (!string.Equals(existingUser.UserDetails.Email, account.Email))
             {
-                _logger.LogError("Email is already taken!");
+                //_logger.LogError("Email is already taken!");
                 return false;
             }
 
             if (!existingUser.Verification.IsVerified)
             {
-                _logger.LogError("Account is not yet verified!");
+                //_logger.LogError("Account is not yet verified!");
                 return false;
             }
 
@@ -424,7 +424,7 @@ namespace Xarcade.Application.Authentication
             var isUpdated = await Task.Run(() => this.dataAccessAuthentication.UpdateXarcadeUser(existingUser));
             if (!isUpdated)
             {
-                _logger.LogError("Xarcade user update failed");
+                //_logger.LogError("Xarcade user update failed");
                 return false;
             }
 
@@ -455,14 +455,14 @@ namespace Xarcade.Application.Authentication
 
             if (existingUser == null)
             {
-                _logger.LogError("User does not exist");
+                //_logger.LogError("User does not exist");
                 return (null, null);
             }
 
             var refreshToken = existingUser.RefreshTokens.FirstOrDefault(x => x.Token == token);
             if (refreshToken == null || !refreshToken.IsActive)
             {
-                _logger.LogError("User does not exist");
+                //_logger.LogError("User does not exist");
                 return (null, null);
             }
             return (refreshToken, existingUser);
