@@ -17,6 +17,11 @@ namespace Xarcade.Infrastructure.Repository
         public RepositoryPortal portal = new RepositoryPortal(config);
         private static ILogger _logger;
 
+        public DataAccessProximaX()
+        {
+
+        }
+
         public bool SaveOwner(Owner ownerDTO)
         {
             try
@@ -143,9 +148,33 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }   
 
-        public XarcadeUser LoadXarcadeUser(string userID)
+        public XarcadeUser LoadXarcadeUser(XarcadeUserSearchKey searchKey)
         {
-            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("UserID", userID), FilterOperator.EQUAL));
+            string key = null;
+            string value = null;
+
+            if(!string.IsNullOrEmpty(searchKey.UserID))
+            {
+                key = "UserID";
+                value = searchKey.UserID;
+            }
+            else if(!string.IsNullOrEmpty(searchKey.Email))
+            {
+                key = "Email";
+                value = searchKey.UserID;
+            }
+            else if(!string.IsNullOrEmpty(searchKey.Username))
+            {
+                key = "Username";
+                value = searchKey.UserID;
+            }
+            else if(!string.IsNullOrEmpty(searchKey.VerificationToken))
+            {
+                key = "VerificationToken";
+                value = searchKey.UserID;
+            }
+
+            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>(key, value), FilterOperator.EQUAL));
             if(userBson!=null) //if account exists
             {
                 XarcadeUser xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
@@ -204,6 +233,20 @@ namespace Xarcade.Infrastructure.Repository
             
             return null;
         }
+
+
+
+        //TODO halp
+        public bool UpdateXarcadeUser(XarcadeUser user)
+        {
+            return true;
+        }
+
+
+
+
+
+
 
 
 

@@ -48,14 +48,77 @@ namespace Xarcade.Infrastructure.Repository
         public static XarcadeUser BsonToXarcadeUserDTO(BsonDocument xarUser)
         {
             var xarUserDTO = new XarcadeUser();
-            xarUserDTO.UserID   = xarUser["UserID"].AsInt64;
-            xarUserDTO.UserName = xarUser["UserName"].AsString;
-            xarUserDTO.Password = xarUser["Password"].AsString;
-            xarUserDTO.Email    = xarUser["Email"].AsString;
-            xarUserDTO.Created  = xarUser["Created"].ToUniversalTime();
 
+            xarUserDTO.UserID   = xarUser["UserID"].AsString;
+            xarUserDTO.Username = xarUser["UserName"].AsString;
+            xarUserDTO.PasswordHash = xarUser["Password"].AsString;
+            xarUserDTO.AcceptTerms    = xarUser["Email"].AsBoolean;
+            xarUserDTO.Created  = xarUser["Created"].ToUniversalTime();
+            xarUserDTO.Modified  = xarUser["Created"].ToUniversalTime();
+            xarUserDTO.Role = (Role)xarUser["Role"].ToInt32();
+
+            xarUserDTO.UserDetails = BsonToXarcadeUserDetails(xarUser["UserDetails"].AsBsonDocument);
+            xarUserDTO.Verification = BsonToVerificationDetails(xarUser["VerificationDetails"].AsBsonDocument);
+            xarUserDTO.PasswordReset = BsonToPasswordResetDetails(xarUser["PasswordReset"].AsBsonDocument);
+
+            foreach (BsonDocument bsonRefreshToken in xarUser["RefreshTokens"].AsBsonArray)
+            {
+                var refreshToken = BsonToRefreshToken(bsonRefreshToken);
+                xarUserDTO.RefreshTokens.Add(refreshToken);
+            }
             return xarUserDTO;
         }
+        public static PasswordResetDetails BsonToPasswordResetDetails(BsonDocument xarPasswordResetBson)
+        {
+            var xarPasswordResetDetails = new PasswordResetDetails();
+
+            xarPasswordResetDetails.ResetToken = xarPasswordResetBson["ResetToken"].AsString;
+            xarPasswordResetDetails.PasswordReset = xarPasswordResetBson["PasswordReset"].ToUniversalTime();
+            xarPasswordResetDetails.ResetTokenExpiry = xarPasswordResetBson["ResetTokenExpiry"].ToUniversalTime();
+
+            return xarPasswordResetDetails;
+        }
+        public static RefreshToken BsonToRefreshToken(BsonDocument xarRefreshTokenBson)
+        {
+            var xarRefreshToken = new RefreshToken();
+
+            xarRefreshToken.TokenId     = xarRefreshTokenBson["TokenId"].AsInt32;
+            xarRefreshToken.XarcadeUser = BsonToXarcadeUserDTO(xarRefreshTokenBson["XarcadeUser"].AsBsonDocument);
+            xarRefreshToken.Token       = xarRefreshTokenBson["Token"].AsString;
+            xarRefreshToken.Expiry      = xarRefreshTokenBson["Expiry"].ToUniversalTime();
+            xarRefreshToken.IsExpired   = xarRefreshTokenBson["IsExpired"].AsBoolean;
+            xarRefreshToken.Created     = xarRefreshTokenBson["CreatorIp"].ToUniversalTime();
+            xarRefreshToken.CreatorIp   = xarRefreshTokenBson["CreatorIp"].AsString;
+            xarRefreshToken.Revoked     = xarRefreshTokenBson["Revoked"].ToUniversalTime();
+            xarRefreshToken.RevokerIp   = xarRefreshTokenBson["RevokerIp"].AsString;
+            xarRefreshToken.ReplacementToken = xarRefreshTokenBson["ReplacementToken"].AsString;
+            xarRefreshToken.IsActive    = xarRefreshTokenBson["IsActive"].AsBoolean;
+
+            return xarRefreshToken;
+        }
+
+        public static XarcadeUserDetails BsonToXarcadeUserDetails(BsonDocument xarUserDetailsBson)
+        {
+            var xarUserDetails = new XarcadeUserDetails();
+
+            xarUserDetails.FirstName = xarUserDetailsBson["FirstName"].AsString;
+            xarUserDetails.LastName = xarUserDetailsBson["LastName"].AsString;
+            xarUserDetails.Email = xarUserDetailsBson["Email"].AsString;
+
+            return xarUserDetails;
+        }
+
+        public static VerificationDetails BsonToVerificationDetails(BsonDocument verificationDetailsBson)
+        {
+            var xarVerificationToken = new VerificationDetails();
+
+            xarVerificationToken.VerificationToken = verificationDetailsBson["VerificationToken"].AsString;
+            xarVerificationToken.Verified = verificationDetailsBson["Verified"].ToUniversalTime();
+            xarVerificationToken.IsVerified = verificationDetailsBson["IsVerified"].AsBoolean;
+
+            return xarVerificationToken;
+        }
+
 
         public static Namespace BsonToGameDTO(BsonDocument game)
         {

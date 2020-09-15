@@ -1,27 +1,20 @@
-using System;
-
+﻿using System;
+using System.Collections.Generic;
 
 namespace Xarcade.Domain.Authentication
 {
-    /// <summary>Xarcade's Account Model</summary>
     public class XarcadeUser
     {
-        public long UserID {get; set;}
-        public string UserName {get; set;}
-        public string Password {get; set;}
-        public string Email {get; set;}
-        public DateTime Created {get; set;}
-
-        public override string ToString()
-        {
-            return
-                "===XarcadeUser DTO==="  +
-                "\nuserID: "            + UserID +
-                "\nuserName: "         + UserName + 
-                "\npassword: "          + "*******" + 
-                "\nemail: "   +         Email +
-                "\nDate Created: "   + Created +
-                "\n==End of XarcadeUser DTO==";
-        }
+        public string UserID { get; set; }
+        public XarcadeUserDetails UserDetails { get; set; }
+        public string Username { get; set; }
+        public string PasswordHash { get; set; }
+        public Role Role { get; set; }
+        public bool AcceptTerms { get; set; }
+        public VerificationDetails Verification { get; set; }
+        public PasswordResetDetails PasswordReset { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+        public List<RefreshToken> RefreshTokens { get; set; }
     }
 }

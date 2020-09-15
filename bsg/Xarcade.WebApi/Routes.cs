@@ -13,6 +13,7 @@ namespace Xarcade.WebApi
         public const string Token = "token/token";
         public const string GenerateXarToken = "token/generate/xar";
         public const string SendToken = "transaction/send/token";
+        public const string Register = "register";
 
     }
 }

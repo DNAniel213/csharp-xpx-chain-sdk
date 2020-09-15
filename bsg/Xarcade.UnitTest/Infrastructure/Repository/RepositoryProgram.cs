@@ -8,7 +8,7 @@ namespace Xarcade.Api.Prototype
     public class RepositoryProgram
     {
         DataAccessProximaX repo = new DataAccessProximaX();
-
+/*
         public XarcadeUser Register()
         {
             var user = new XarcadeUser();
@@ -88,5 +88,6 @@ namespace Xarcade.Api.Prototype
             }
             return null;
         }
+        */
     }
 }

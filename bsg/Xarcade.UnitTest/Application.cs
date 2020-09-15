@@ -26,10 +26,7 @@ namespace Xarcade.Api.Prototype
 
             XarcadeUser user = new XarcadeUser
             {
-                UserID   = 0,
-                Email    = "dnaniel213@gmail.com",
-                UserName = "dnaniel213",
-                Password = "encryptedpassword",
+                UserID   = ")",
             };
             XarcadeTokenDto xartokentest = new XarcadeTokenDto
             {
@@ -64,6 +61,7 @@ namespace Xarcade.Api.Prototype
 
             Console.Write("input: ");
             string choice = Console.ReadLine();
+            /*
             switch(choice)
             {
                 case "1":  user = repository.Register(); break;
@@ -72,7 +70,7 @@ namespace Xarcade.Api.Prototype
                 case "5":  var gameinfo = ts.GetGameInfoAsync(1 + "").GetAwaiter().GetResult(); Console.WriteLine(gameinfo); break;
                 //case "0":  var result = ts.CreateTokenAsync(tokentest).GetAwaiter().GetResult(); break;
             }
-
+*/
             blockChain.ProximaXMain(user, true);
         }
     }

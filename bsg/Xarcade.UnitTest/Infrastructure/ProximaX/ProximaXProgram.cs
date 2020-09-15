@@ -85,7 +85,7 @@ namespace Xarcade.Api.Prototype
 
         private void ListUserWallets(XarcadeUser xarUserDTO)
         {
-            var result = repo.portal.ReadCollection("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("userID", xarUserDTO.UserID), FilterOperator.EQUAL));
+            var result = repo.portal.ReadCollection("Owners", repo.portal.CreateFilter(new KeyValuePair<string, string>("userID", xarUserDTO.UserID), FilterOperator.EQUAL));
         }
 
         //read the function name
