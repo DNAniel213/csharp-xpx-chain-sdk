@@ -9,7 +9,7 @@ namespace Xarcade.Domain.ProximaX
     public class Asset
     {
         /// <summary> The unique identifier that represents the xarcade asset </summary>
-        public long AssetID {get; set;}
+        public string AssetID {get; set;}
        
         /// <summary> The name represents the xarcade asset </summary>
         public string Name {get; set;}

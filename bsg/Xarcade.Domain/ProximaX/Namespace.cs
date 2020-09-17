@@ -9,7 +9,7 @@ namespace Xarcade.Domain.ProximaX
     public class Namespace
     {
         /// <summary> The API generated unique identifier that represents the Xarcade Namespace in the ProximaX Blockchain </summary>
-        public long NamespaceId {get; set;}
+        public string NamespaceId {get; set;}
         
         /// <summary> The domain namespace</summary>
         public string Domain {get; set;}
