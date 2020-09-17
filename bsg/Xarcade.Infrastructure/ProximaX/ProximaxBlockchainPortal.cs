@@ -381,7 +381,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 var senderAccount = Account.CreateFromPrivateKey(param.Sender.PrivateKey, networkType);
 
                 Mosaic mosaicToTransfer = new Mosaic(mosaicInfo.MosaicId, param.Amount);
-                Address recepient = new Address(param.RecepientAddress, networkType);
+                Address recepient = new Address(param.RecipientAddress, networkType);
 
                 var transferTransaction = TransferTransaction.Create(
                     Deadline.Create(),
@@ -644,7 +644,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
         public async Task<XarcadeModel.Transaction> SendXPXAsync(SendXpxParams param)
         {
-            if(param.Sender == null || param.RecepientAddress == null || param.Amount <= 0)
+            if(param.Sender == null || param.RecipientAddress == null || param.Amount <= 0)
             {
                 _logger.LogError("Input is invalid!!");
                 return null;
@@ -664,7 +664,7 @@ namespace Xarcade.Infrastructure.ProximaX
             try
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
-                var Address = new Address(param.RecepientAddress, networkType);
+                var Address = new Address(param.RecipientAddress, networkType);
                 var xpxToTransfer = NetworkCurrencyMosaic.CreateRelative(param.Amount);
                 Account senderAccount = Account.CreateFromPrivateKey(param.Sender.PrivateKey, networkType);
 

@@ -60,7 +60,7 @@ namespace Xarcade.Application.Xarcade
             {
                 MosaicID = token.TokenId, 
                 Sender = SenderUserDB,
-                RecepientAddress = ReceiverUserDB.WalletAddress,
+                RecipientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
                 Message = "PloxWork.jpeg"
             };
@@ -124,7 +124,7 @@ namespace Xarcade.Application.Xarcade
             {
                 MosaicID = token.TokenId, 
                 Sender = SenderUserDB,
-                RecepientAddress = ReceiverUserDB.WalletAddress,
+                RecipientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
                 Message = "PloxWork.jpeg"
             };
@@ -188,7 +188,7 @@ namespace Xarcade.Application.Xarcade
             var param = new SendXpxParams
             {
                 Sender = SenderUserDB,
-                RecepientAddress = ReceiverUserDB.WalletAddress,
+                RecipientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
                 Message = "PloxWork.jpeg"
             };
