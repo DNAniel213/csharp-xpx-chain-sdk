@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chadminer 1303T2
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 10e0cb29-9c96-450f-82c0-9c41650c4048
+    _serializedGuid: afee781c-0595-4344-8d20-64dbb50cf704
   Unlocked: 0
   RequirementGroups:
   - GroupOperand: 0

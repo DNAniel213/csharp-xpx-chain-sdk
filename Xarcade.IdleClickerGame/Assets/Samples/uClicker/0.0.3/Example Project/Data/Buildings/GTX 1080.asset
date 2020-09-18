@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GTX 1080
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 50f976fb-1801-4d1a-bdb5-8ed0ae58ba64
+    _serializedGuid: d7ce2a76-04e7-4fc1-9f7a-d6fc47b0b24d
   Unlocked: 1
   RequirementGroups:
   - GroupOperand: 0
@@ -26,9 +26,12 @@ MonoBehaviour:
         Building: {fileID: 0}
         Amount: 0
       UnlockUpgrade: {fileID: 11400000, guid: 8426f76df65329242a03f0b20e2b4172, type: 2}
+  cardName: GTX 1080
+  description: +5 XARs per second
   Cost:
     Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
     Amount: 600
   YieldAmount:
     Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
     Amount: 5
+  artwork: {fileID: 21300000, guid: e77b7471fd2fec84792b2de7fa7d9ad7, type: 3}

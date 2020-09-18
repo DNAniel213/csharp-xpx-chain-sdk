@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Apartment
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 86244d3d-c901-4038-b86c-b61ec71a4c35
+    _serializedGuid: 7543c88d-0d62-4bcd-81fe-df23f4aa0497
   Unlocked: 0
   RequirementGroups:
   - GroupOperand: 0

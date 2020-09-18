@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rad Miner 1000T 1
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 40cab33d-48ba-4f60-9b3e-236558ab584c
+    _serializedGuid: ebfcd636-ac1b-4771-a92e-442957e2020e
   Unlocked: 0
   RequirementGroups:
   - GroupOperand: 0
