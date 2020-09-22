@@ -30,6 +30,7 @@ namespace Xarcade.Infrastructure.Utilities
             catch (Exception e)
             {
                 // TODO: Log here
+                Console.WriteLine(e);
                 return false;
             }
             

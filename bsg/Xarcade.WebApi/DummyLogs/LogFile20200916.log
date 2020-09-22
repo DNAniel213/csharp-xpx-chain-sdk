@@ -1,0 +1,361 @@
+2020-09-16 03:27:53.451 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:28:12.064 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:28:13.944 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:28:26.368 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:28:27.653 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:28:51.133 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:29:24.013 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/8275432745118017
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:33:31.704 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:35:03.991 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:35:08.929 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:35:10.369 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:35:21.835 +08:00 [ERR] [GetMosaicAsync][358] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 350
+2020-09-16 03:37:10.765 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:37:56.907 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:38:49.836 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:38:53.670 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:39:12.107 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:39:15.846 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:39:21.936 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:39:23.726 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:39:56.414 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:40:03.445 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:40:11.518 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:41:02.625 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:41:18.630 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:41:24.672 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:41:25.050 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:41:31.298 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:41:37.818 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:41:41.866 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:41:50.148 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:42:05.980 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:42:15.063 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:43:31.825 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:43:44.879 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:43:54.169 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:43:55.010 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:44:32.534 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:44:51.516 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:45:01.417 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:45:02.150 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:45:04.579 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:45:14.801 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:45:18.758 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:45:29.443 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:45:30.165 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:45:45.331 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:45:45.621 +08:00 [ERR] [ModifyMosaicSupplyAsync][289] Input is invaid!!
+2020-09-16 03:46:04.895 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:46:06.102 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:46:25.908 +08:00 [ERR] [ModifyMosaicSupplyAsync][291] Input is invaid!!
+2020-09-16 03:46:27.651 +08:00 [ERR] [ModifyMosaicSupplyAsync][291] Input is invaid!!
+2020-09-16 03:46:37.819 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:46:40.623 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:47:25.336 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:48:27.559 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:48:30.377 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:48:51.679 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:48:54.441 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 03:52:15.101 +08:00 [ERR] [ModifyMosaicSupplyAsync][290] Input is invaid!!
+2020-09-16 03:53:35.949 +08:00 [ERR] [ModifyMosaicSupplyAsync][339] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 302
+2020-09-16 03:54:22.968 +08:00 [ERR] [ModifyMosaicSupplyAsync][340] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 303
+2020-09-16 03:54:59.576 +08:00 [ERR] [ModifyMosaicSupplyAsync][340] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9785922418246415
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 302
+2020-09-16 03:59:33.801 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:00:18.167 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:00:28.671 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:00:42.707 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:02:07.531 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:02:39.003 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:04:44.009 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:04:45.968 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:04:47.306 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:05:00.630 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:05:52.378 +08:00 [ERR] [CreateNamespaceAsync][549] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:05:52.780 +08:00 [ERR] [CreateNamespaceAsync][549] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:07:05.986 +08:00 [ERR] [CreateNamespaceAsync][548] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:07:23.887 +08:00 [ERR] [CreateNamespaceAsync][550] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:08:03.249 +08:00 [ERR] [CreateNamespaceAsync][551] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 510
+2020-09-16 04:08:17.658 +08:00 [ERR] [CreateNamespaceAsync][552] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 512
+2020-09-16 04:08:29.664 +08:00 [ERR] [CreateNamespaceAsync][552] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 512
+2020-09-16 04:08:41.700 +08:00 [ERR] [CreateNamespaceAsync][553] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 511
+2020-09-16 04:09:54.191 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 513
+2020-09-16 04:10:06.919 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 513
+2020-09-16 04:10:26.418 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 512
+2020-09-16 08:57:14.197 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 512
+2020-09-16 08:57:44.782 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 513
+2020-09-16 09:42:15.911 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name BSGNamespace
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 513
+2020-09-16 11:56:08.405 +08:00 [ERR] [CreateNamespaceAsync][554] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 541
+2020-09-16 11:56:37.547 +08:00 [ERR] [CreateNamespaceAsync][554] System.IO.InvalidDataException: Invalid name space name bsgnamespaceF
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Transactions.RegisterNamespaceTransaction.CreateRootNamespace(Deadline deadline, String namespaceName, UInt64 duration, NetworkType networkType, UInt64 maxFee)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 513
+2020-09-16 11:56:56.654 +08:00 [ERR] [CreateNamespaceAsync][554] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 541
+2020-09-16 12:21:36.950 +08:00 [ERR] [CreateNamespaceAsync][559] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 541
+2020-09-16 12:27:04.629 +08:00 [ERR] [CreateNamespaceAsync][559] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 543
+2020-09-16 18:24:28.782 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 18:24:29.054 +08:00 [ERR] [GetNamespaceInformationAsync][648] System.NullReferenceException: Object reference not set to an instance of an object.
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetNamespaceInformationAsync(String namespaceName) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 624
+2020-09-16 19:30:48.989 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 19:30:49.309 +08:00 [ERR] [GetNamespaceInformationAsync][648] System.NullReferenceException: Object reference not set to an instance of an object.
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetNamespaceInformationAsync(String namespaceName) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 624
+2020-09-16 19:33:53.055 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 19:33:53.364 +08:00 [ERR] [GetNamespaceInformationAsync][648] System.NullReferenceException: Object reference not set to an instance of an object.
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetNamespaceInformationAsync(String namespaceName) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 624
+2020-09-16 20:42:11.678 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 20:42:11.863 +08:00 [ERR] [GetNamespaceInformationAsync][648] System.NullReferenceException: Object reference not set to an instance of an object.
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetNamespaceInformationAsync(String namespaceName) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 624
+2020-09-16 20:43:38.310 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-16 20:43:38.497 +08:00 [ERR] [GetNamespaceInformationAsync][650] System.NullReferenceException: Object reference not set to an instance of an object.
+   at ProximaX.Sirius.Chain.Sdk.Utils.IdGenerator.GenerateNamespacePath(String name)
+   at ProximaX.Sirius.Chain.Sdk.Model.Namespaces.NamespaceId..ctor(String name)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetNamespaceInformationAsync(String namespaceName) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 624

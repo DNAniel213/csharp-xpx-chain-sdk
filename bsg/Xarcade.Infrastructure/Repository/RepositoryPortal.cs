@@ -209,6 +209,41 @@ namespace Xarcade.Infrastructure.Repository
 
             return success;
         }
+        public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, DateTime newContent)
+        {
+            var success = false;
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var update = Builders<BsonDocument>.Update.Set(field, newContent).CurrentDate("lastModified");
+                var result = collection.UpdateOne(filter, update);
+                success = true;
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                success = false;
+            }
+
+            return success;
+        }
+        public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, long newContent)
+        {
+            var success = false;
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var update = Builders<BsonDocument>.Update.Set(field, newContent).CurrentDate("lastModified");
+                var result = collection.UpdateOne(filter, update);
+                success = true;
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                success = false;
+            }
+
+            return success;
+        }
+
 
         /// <summary>
         /// Deletes a document from the database

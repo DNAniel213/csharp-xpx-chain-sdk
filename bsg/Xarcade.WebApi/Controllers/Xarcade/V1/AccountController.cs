@@ -67,12 +67,12 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpPost]
         [Route(Routes.GenerateOwner)]
-        public async Task<Response> CreateOwnerWallet(string ownerId) //TODO Propose email and Name
+        public async Task<Response> CreateOwnerWallet(string userId) //TODO Propose email and Name
         {
 
             Response response = new Response();
 
-            if(string.IsNullOrWhiteSpace(ownerId)) 
+            if(string.IsNullOrWhiteSpace(userId)) 
             {
                 response.ViewModel = null;
                 response.Message = "Missing or incorrect parameters";
@@ -81,7 +81,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             try
             {
-                var ownerDto = await accountService.CreateOwnerAccountAsync(ownerId);
+                var ownerDto = await accountService.CreateOwnerAccountAsync(userId);
 
                 var ownerViewModel = new OwnerViewModel
                 {

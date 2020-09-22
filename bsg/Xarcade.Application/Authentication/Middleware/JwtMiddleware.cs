@@ -51,17 +51,18 @@ namespace Xarcade.Application.Authentication.Middleware
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var jwtAttachId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+                var jwtAttachId = jwtToken.Claims.First(x => x.Type == "userId").Value;
 
                 // attach account to context on successful jwt validation
                 var searchKey = new XarcadeUserSearchKey()
                 {
-                    JwtAttachId = jwtAttachId
+                    UserID = jwtAttachId
                 };
                 context.Items["Account"] = await Task.Run(() => this.dataAccessAuthentication.LoadXarcadeUser(searchKey));
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine($"Exception occured {e.Message}");
                 // do nothing if jwt validation fails
                 // account is not attached to context so request won't have access to secure routes
             }

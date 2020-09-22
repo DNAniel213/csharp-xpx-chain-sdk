@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Collections.Generic;
 using  Xarcade.Application.Authentication.Models;
 
 namespace Xarcade.Application.Authentication
@@ -14,5 +15,7 @@ namespace Xarcade.Application.Authentication
         Task<bool> VerifyEmailAsync(string token);
         Task<AccountDto> GetXarcadeUserAsync(string userId);
         Task<bool> UpdateXarcadeUserAsync(AccountDto account);
+        AccountDto GetAuthorizedXarcadeUser(IDictionary<object, object> context, string userId);
+
     }
 }

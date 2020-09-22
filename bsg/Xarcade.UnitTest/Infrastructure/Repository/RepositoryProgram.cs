@@ -30,9 +30,9 @@ namespace Xarcade.Api.Prototype
                 while(isUsernameTaken)
                 {
                     Console.Write("User name: ");
-                    user.UserName = Console.ReadLine();
+                    user.Username = Console.ReadLine();
 
-                    isUsernameTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("userName", user.UserName), FilterOperator.EQUAL));
+                    isUsernameTaken = repo.portal.CheckExist("Authentication", repo.portal.CreateFilter(new KeyValuePair<string, string>("userName", user.Username), FilterOperator.EQUAL));
                     if(isUsernameTaken)
                         Console.WriteLine("Username already exists!");
                 }

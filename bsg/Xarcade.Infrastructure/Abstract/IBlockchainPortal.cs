@@ -77,7 +77,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,Namespace namespaceInfo, CreateNamespaceParams param);
+        Task<(Namespace gameName, Transaction tx)> ExtendNamespaceDurationAsync(CreateNamespaceParams param);
         
         /// <summary>
         /// Retrieves namespace information. Returns null if it doesn't exist

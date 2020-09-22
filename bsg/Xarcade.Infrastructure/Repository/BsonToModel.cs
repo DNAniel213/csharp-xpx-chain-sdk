@@ -50,7 +50,7 @@ namespace Xarcade.Infrastructure.Repository
             var xarUserDTO = new XarcadeUser();
 
             xarUserDTO.UserID   = xarUser["UserID"].AsString;
-            xarUserDTO.Username = xarUser["UserName"].AsString;
+            xarUserDTO.Username = xarUser["Username"].AsString;
             xarUserDTO.PasswordHash = xarUser["Password"].AsString;
             xarUserDTO.AcceptTerms    = xarUser["Email"].AsBoolean;
             xarUserDTO.Created  = xarUser["Created"].ToUniversalTime();
@@ -123,8 +123,10 @@ namespace Xarcade.Infrastructure.Repository
         public static Namespace BsonToGameDTO(BsonDocument game)
         {
             var gameDTO = new Namespace();
-            gameDTO.NamespaceId = game["NamespaceID"].AsString;
+        
+            gameDTO.NamespaceId = game["NamespaceId"].AsString;
             gameDTO.Domain      = game["Domain"].AsString;
+
 
             try
             {
@@ -133,6 +135,7 @@ namespace Xarcade.Infrastructure.Repository
                 gameDTO.LayerTwo    = game["LayerTwo"].AsString;
             }catch(Exception e)
             {
+
             }
             gameDTO.Owner       = BsonToOwnerDTO(game["Owner"].AsBsonDocument);
             gameDTO.Expiry      = game["Expiry"].ToUniversalTime();

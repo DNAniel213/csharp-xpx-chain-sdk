@@ -1,4 +1,4 @@
-﻿namespace authentication.prototype.Model.Request
+﻿namespace Xarcade.WebApi.Controllers.Authentication.Models.Request
 {
     public class RegisterRequest
     {
