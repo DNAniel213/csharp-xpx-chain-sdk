@@ -6,8 +6,8 @@ namespace Xarcade.Domain.ProximaX
     {
         public string NamespaceId {get; set;}
         public string Domain {get; set;}
-        public string LayerOne {get; set;}
-        public string LayerTwo {get; set;}
+        public string LayerOne {get; set;} = null;
+        public string LayerTwo {get; set;} = null;
         public Account Owner {get; set;}
         public DateTime Expiry {get; set;}
         public DateTime Created {get; set;}

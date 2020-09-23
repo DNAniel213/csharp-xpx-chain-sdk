@@ -65,7 +65,7 @@ namespace Xarcade.WebApi.Controllers.Authentication
 
         [HttpPost]
         [Route(Routes.Authenticate)]
-        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+        public async Task<AuthenticateResponse> Authenticate([FromBody]AuthenticateRequest request)
         {
             var loginDetails = new LoginDto()
             {
@@ -87,7 +87,7 @@ namespace Xarcade.WebApi.Controllers.Authentication
 
         [HttpPost]
         [Route(Routes.VerifyEmail)]
-        public async Task<VerifyEmailResponse> VerifyEmail(VerifyEmailRequest request)
+        public async Task<VerifyEmailResponse> VerifyEmail([FromBody]VerifyEmailRequest request)
         {
             var isVerified = await this.xarcadeAccountService.VerifyEmailAsync(request.Token);
             if (!isVerified)
@@ -112,6 +112,7 @@ namespace Xarcade.WebApi.Controllers.Authentication
             var response = new GetXarcadeUserResponse();
             if (authorizedUser == null)
             {
+                Console.WriteLine(HttpContext.Items[0]);
                 response.Message = "Authenticated user list are null!";
                 return response;
             }

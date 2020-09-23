@@ -63,7 +63,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<Transaction> LinkMosaicAsync(LinkMosaicParams param);
+        Task<(Mosaic mosaic, Transaction tx)> LinkMosaicAsync(LinkMosaicParams param);
         
         /// <summary>
         /// Creates a new namespace

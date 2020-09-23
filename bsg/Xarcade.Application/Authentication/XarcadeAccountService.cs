@@ -107,6 +107,10 @@ public async Task<bool> RegisterAccountAsync(AccountDto account, string origin)
                 Console.WriteLine("Sending verification mail failed");
                 return false;
             }
+            else
+            {
+                
+            }
 
             return true;
         }
@@ -249,6 +253,7 @@ public async Task<bool> RegisterAccountAsync(AccountDto account, string origin)
             {
                 Username = loginDetails.Username
             };
+
             var existingUser = await Task.Run(() => this.dataAccessAuthentication.LoadXarcadeUser(searchKey));
 
             if (existingUser == null || !existingUser.Verification.IsVerified)

@@ -1,8 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using Xarcade.Application.Authentication;
+using Xarcade.Application.Xarcade;
+using Xarcade.Application.Xarcade.Models;
 using Xarcade.Application.Authentication.Models;
 using Xarcade.Infrastructure.Repository;
+using Xarcade.Infrastructure.ProximaX;
 using Xarcade.Infrastructure.Utilities;
 
 namespace Authentication.Test
@@ -10,6 +13,8 @@ namespace Authentication.Test
     public class Tests
     {
         private IXarcadeAccountService xarcadeAccountServie;
+        private IAccountService accountService;
+        private ProximaxBlockchainPortal blockchainPortal;
 
         [SetUp]
         public void Setup()
@@ -20,7 +25,9 @@ namespace Authentication.Test
                 .AddJsonFile("appsettings.json", true, true)
                 .Build();
             var emailService = new EmailService(config);
+            blockchainPortal = new ProximaxBlockchainPortal(config);
             xarcadeAccountServie = new XarcadeAccountService(dataAccessAuthentication, validator, config, emailService);
+            accountService = new AccountService(dataAccessAuthentication, blockchainPortal);
         }
 
         [Test]
@@ -62,5 +69,17 @@ namespace Authentication.Test
             var result = this.xarcadeAccountServie.RegisterAccountAsync(accountDto, "").GetAwaiter().GetResult();
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void CreateOwnerAccountAsync_Should_Return_Null_When_UserExists()
+        {
+            var result = this.accountService.CreateOwnerAccountAsync("latom");
+            if(result != null)
+                Assert.IsFalse(false);
+            else
+                Assert.IsFalse(true);
+
+        }
+
     }
 }

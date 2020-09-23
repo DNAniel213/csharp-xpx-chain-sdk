@@ -110,7 +110,7 @@ namespace Xarcade.Infrastructure.Repository
         {
             try
             {
-                portal.CreateDocument("Authentication", xarUserDTO.ToBsonDocument());
+                portal.CreateDocument("XarcadeUsers", xarUserDTO.ToBsonDocument());
 
             }catch(Exception e)
             {
@@ -161,20 +161,22 @@ namespace Xarcade.Infrastructure.Repository
             else if(!string.IsNullOrEmpty(searchKey.Email))
             {
                 key = "Email";
-                value = searchKey.UserID;
+                value = searchKey.Email;
             }
             else if(!string.IsNullOrEmpty(searchKey.Username))
             {
                 key = "Username";
-                value = searchKey.UserID;
+                value = searchKey.Username;
+
             }
             else if(!string.IsNullOrEmpty(searchKey.VerificationToken))
             {
                 key = "VerificationToken";
-                value = searchKey.UserID;
+                value = searchKey.VerificationToken;
             }
 
             var userBson = portal.ReadDocument("XarcadeUsers", portal.CreateFilter(new KeyValuePair<string, string>(key, value), FilterOperator.EQUAL));
+
             if(userBson!=null) //if account exists
             {
                 XarcadeUser xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
@@ -238,9 +240,9 @@ namespace Xarcade.Infrastructure.Repository
 
 
 
-        //TODO halp
         public bool UpdateXarcadeUser(XarcadeUser user)
         {
+            var result = portal.UpdateDocument("XarcadeUsers", portal.CreateFilter(new KeyValuePair<string, string>("UserID", user.UserID), FilterOperator.EQUAL), user.ToBsonDocument());
             return true;
         }
 
@@ -258,6 +260,14 @@ namespace Xarcade.Infrastructure.Repository
 
             return true;
         }
+
+        public bool UpdateMosaicLink(string assetId, Namespace newNamespace)
+        {
+            var result = portal.UpdateDocumentField("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("AssetID", assetId), FilterOperator.EQUAL), "Namespace", newNamespace);
+
+            return true;
+        }
+
 
 
 

@@ -182,7 +182,19 @@ namespace Xarcade.Infrastructure.Repository
             }
 
         }
-
+        public bool UpdateDocument(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, BsonDocument newContent )
+        {
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var result = collection.ReplaceOne(filter, newContent);
+                return true;
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return false;
+            }
+        }
         
         /// <summary>
         /// Updates a single field of a single document.
@@ -210,6 +222,23 @@ namespace Xarcade.Infrastructure.Repository
             return success;
         }
         public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, DateTime newContent)
+        {
+            var success = false;
+            try
+            {
+                var collection = database.GetCollection<BsonDocument>(collectionName);
+                var update = Builders<BsonDocument>.Update.Set(field, newContent).CurrentDate("lastModified");
+                var result = collection.UpdateOne(filter, update);
+                success = true;
+            }catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                success = false;
+            }
+
+            return success;
+        }
+        public bool UpdateDocumentField(string collectionName, FilterDefinition<MongoDB.Bson.BsonDocument> filter, string field, Namespace newContent)
         {
             var success = false;
             try

@@ -55,6 +55,7 @@ namespace Xarcade.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseRouting();
 
             //app.UseHttpsRedirection();
             app.UseCors(x => x
@@ -62,9 +63,9 @@ namespace Xarcade.WebApi
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
-            app.UseRouting();
 
             //app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

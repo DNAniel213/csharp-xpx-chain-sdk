@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
 
+using System.Collections.Generic;
 using System;
 
 namespace Xarcade.Infrastructure.Repository
@@ -51,21 +52,29 @@ namespace Xarcade.Infrastructure.Repository
 
             xarUserDTO.UserID   = xarUser["UserID"].AsString;
             xarUserDTO.Username = xarUser["Username"].AsString;
-            xarUserDTO.PasswordHash = xarUser["Password"].AsString;
-            xarUserDTO.AcceptTerms    = xarUser["Email"].AsBoolean;
+            xarUserDTO.PasswordHash = xarUser["PasswordHash"].AsString;
+            xarUserDTO.AcceptTerms    = xarUser["AcceptTerms"].AsBoolean;
             xarUserDTO.Created  = xarUser["Created"].ToUniversalTime();
-            xarUserDTO.Modified  = xarUser["Created"].ToUniversalTime();
+            xarUserDTO.Modified  = xarUser["Modified"].ToUniversalTime();
             xarUserDTO.Role = (Role)xarUser["Role"].ToInt32();
 
             xarUserDTO.UserDetails = BsonToXarcadeUserDetails(xarUser["UserDetails"].AsBsonDocument);
-            xarUserDTO.Verification = BsonToVerificationDetails(xarUser["VerificationDetails"].AsBsonDocument);
-            xarUserDTO.PasswordReset = BsonToPasswordResetDetails(xarUser["PasswordReset"].AsBsonDocument);
-
-            foreach (BsonDocument bsonRefreshToken in xarUser["RefreshTokens"].AsBsonArray)
+            if(!xarUser["Verification"].IsBsonNull)
+                xarUserDTO.Verification = BsonToVerificationDetails(xarUser["Verification"].AsBsonDocument);
+            if(!xarUser["PasswordReset"].IsBsonNull)
+                xarUserDTO.PasswordReset = BsonToPasswordResetDetails(xarUser["PasswordReset"].AsBsonDocument);
+            
+            if(!xarUser["RefreshTokens"].IsBsonNull)
             {
-                var refreshToken = BsonToRefreshToken(bsonRefreshToken);
-                xarUserDTO.RefreshTokens.Add(refreshToken);
+                xarUserDTO.RefreshTokens = new List<RefreshToken>();
+                foreach (BsonDocument bsonRefreshToken in xarUser["RefreshTokens"].AsBsonArray)
+                {
+                    var refreshToken = BsonToRefreshToken(bsonRefreshToken);
+                    xarUserDTO.RefreshTokens.Add(refreshToken);
+                }
             }
+
+
             return xarUserDTO;
         }
         public static PasswordResetDetails BsonToPasswordResetDetails(BsonDocument xarPasswordResetBson)
@@ -83,15 +92,18 @@ namespace Xarcade.Infrastructure.Repository
             var xarRefreshToken = new RefreshToken();
 
             xarRefreshToken.TokenId     = xarRefreshTokenBson["TokenId"].AsInt32;
-            xarRefreshToken.XarcadeUser = BsonToXarcadeUserDTO(xarRefreshTokenBson["XarcadeUser"].AsBsonDocument);
+            if(!xarRefreshTokenBson["XarcadeUser"].IsBsonNull)
+                xarRefreshToken.XarcadeUser = BsonToXarcadeUserDTO(xarRefreshTokenBson["XarcadeUser"].AsBsonDocument);
             xarRefreshToken.Token       = xarRefreshTokenBson["Token"].AsString;
             xarRefreshToken.Expiry      = xarRefreshTokenBson["Expiry"].ToUniversalTime();
             xarRefreshToken.IsExpired   = xarRefreshTokenBson["IsExpired"].AsBoolean;
-            xarRefreshToken.Created     = xarRefreshTokenBson["CreatorIp"].ToUniversalTime();
+            xarRefreshToken.Created     = xarRefreshTokenBson["Created"].ToUniversalTime();
             xarRefreshToken.CreatorIp   = xarRefreshTokenBson["CreatorIp"].AsString;
             xarRefreshToken.Revoked     = xarRefreshTokenBson["Revoked"].ToUniversalTime();
-            xarRefreshToken.RevokerIp   = xarRefreshTokenBson["RevokerIp"].AsString;
-            xarRefreshToken.ReplacementToken = xarRefreshTokenBson["ReplacementToken"].AsString;
+            if(!xarRefreshTokenBson["RevokerIp"].IsBsonNull)
+                xarRefreshToken.RevokerIp   = xarRefreshTokenBson["RevokerIp"].AsString;
+            if(!xarRefreshTokenBson["ReplacementToken"].IsBsonNull)
+                xarRefreshToken.ReplacementToken = xarRefreshTokenBson["ReplacementToken"].AsString;
             xarRefreshToken.IsActive    = xarRefreshTokenBson["IsActive"].AsBoolean;
 
             return xarRefreshToken;
@@ -112,7 +124,8 @@ namespace Xarcade.Infrastructure.Repository
         {
             var xarVerificationToken = new VerificationDetails();
 
-            xarVerificationToken.VerificationToken = verificationDetailsBson["VerificationToken"].AsString;
+            if(!verificationDetailsBson["VerificationToken"].IsBsonNull)
+                xarVerificationToken.VerificationToken = verificationDetailsBson["VerificationToken"].AsString;
             xarVerificationToken.Verified = verificationDetailsBson["Verified"].ToUniversalTime();
             xarVerificationToken.IsVerified = verificationDetailsBson["IsVerified"].AsBoolean;
 
@@ -148,13 +161,10 @@ namespace Xarcade.Infrastructure.Repository
         {
             var mosaicDTO = new Mosaic();
             mosaicDTO.MosaicID  = token["MosaicID"].AsString;
-            try
-            {
+
+            if(!token["Namespace"].IsBsonNull)
                 mosaicDTO.Namespace = BsonToGameDTO(token["Namespace"].AsBsonDocument);
-            }catch(Exception e)
-            {
-                //Console.WriteLine(e.ToString());
-            }
+
             mosaicDTO.AssetID   = token["AssetID"].AsString;
             mosaicDTO.Name      = token["Name"].AsString;
             mosaicDTO.Quantity  = (ulong)token["Quantity"].AsInt64;

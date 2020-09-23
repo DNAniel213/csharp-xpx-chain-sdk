@@ -270,6 +270,7 @@ namespace Xarcade.Infrastructure.ProximaX
                         
                     }
                 }
+                else return (null,null);
 
             }catch(Exception e)
             {
@@ -435,11 +436,11 @@ namespace Xarcade.Infrastructure.ProximaX
             return transaction;
         }
 
-        public async Task<XarcadeModel.Transaction> LinkMosaicAsync(LinkMosaicParams param)
+        public async Task<(XarcadeModel.Mosaic mosaic, XarcadeModel.Transaction tx)> LinkMosaicAsync(LinkMosaicParams param)
         {
             if(param.Account == null || String.IsNullOrWhiteSpace(param.MosaicID) || param.Namespace == null)
             {
-                return null;
+                return (null,null);
             } 
             
 
@@ -465,6 +466,15 @@ namespace Xarcade.Infrastructure.ProximaX
                 {
                     await SignAndAnnounceTransactionAsync(account, mosaicLink);
 
+                    
+                    var namespaceI = new XarcadeModel.Namespace
+                    {   
+                        Domain = param.Namespace.Domain,
+                        LayerOne = param.Namespace.LayerOne, 
+                        LayerTwo = param.Namespace.LayerTwo, 
+                        Owner = param.Account,
+                    };
+
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = mosaicInfo.MosaicId.Id + "",
@@ -472,6 +482,7 @@ namespace Xarcade.Infrastructure.ProximaX
                         Quantity = 0,
                         Created  = DateTime.Now,
                         Owner    = param.Account,
+                        Namespace=  namespaceI
                     };
 
 
@@ -486,10 +497,12 @@ namespace Xarcade.Infrastructure.ProximaX
 
             }catch(Exception e)
             {
+                    Console.WriteLine(e);
+
                 _logger.LogError(e.ToString());
-                return null;
+                return (null,null);
             }
-            return transaction;
+            return (mosaic, transaction);
         }
 
 //TODO @ranz please add check if namespace exists

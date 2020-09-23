@@ -57,24 +57,28 @@ namespace Xarcade.Application.Xarcade
                     Namespace =  game,
                 };
                 var link = await blockchainPortal.LinkMosaicAsync(linkparam);
-                if (link != null)
+
+                if (link.tx != null && link.mosaic!=null)
                 {
                     TokenDto tokendto = new TokenDto
                     {
-                        TokenId     = link.Asset.AssetID,
-                        Name        = link.Asset.Name,
-                        Quantity    = link.Asset.Quantity,
-                        Owner       = link.Asset.Owner.UserID
+                        TokenId     = link.mosaic.AssetID,
+                        Name        = link.mosaic.Name,
+                        Quantity    = link.mosaic.Quantity,
+                        Owner       = link.mosaic.Owner.UserID
                     };
 
                     tokentransaction = new TokenTransactionDto
                     {
-                        Status      = State.Confirmed,
-                        Hash        = link.Hash,
+                        Status      = State.Unconfirmed,
+                        Hash        = link.tx.Hash,
                         Token       = tokendto,
-                        BlockNumber = link.Height,
-                        Created     = link.Created
+                        BlockNumber = link.tx.Height,
+                        Created     = link.tx.Created
                     };
+
+                    dataAccessProximaX.SaveTransaction(link.tx);
+                    dataAccessProximaX.UpdateMosaicLink(Token.TokenId, game);
                 }
                 else
                 {
@@ -83,6 +87,8 @@ namespace Xarcade.Application.Xarcade
                 
             }catch(Exception e)
             {
+                    Console.WriteLine(e);
+
                 _logger.LogError(e.ToString());
             }
             return tokentransaction;
@@ -196,7 +202,7 @@ namespace Xarcade.Application.Xarcade
             }
             return tokentransaction;
         }
-        public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName)
+        public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token)
         {
             if (Token == null)
             {
@@ -207,19 +213,9 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
-
+//TODO ADD CHECK IF NAMESPACE NAME ALREADY EXISTS
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
 
-                Namespace game = dataAccessProximaX.LoadNamespace(NamespaceName);
-
-                if(game != null)
-                {
-                    if(game.Owner.UserID != ownerdto.UserID)
-                    {
-                        
-                        return null;
-                    }
-                }
                 ulong amount = Token.Quantity;
 
                 Account account = new Account
@@ -246,9 +242,9 @@ namespace Xarcade.Application.Xarcade
                     Owner       = ownerdto,
                     Created     = DateTime.Now,
                     MosaicID    = mosaicTuple.tMosaic.MosaicID,
-                    Namespace   = game
                 };
                 this.dataAccessProximaX.SaveMosaic(mosaic);
+                this.dataAccessProximaX.SaveTransaction(mosaicTuple.tx);
 
                 var tokendto = new TokenDto
                 {
@@ -266,6 +262,7 @@ namespace Xarcade.Application.Xarcade
                     BlockNumber = mosaicTuple.tx.Height, 
                     Created     = mosaic.Created
                 };
+
 
             }catch(Exception e)
             {

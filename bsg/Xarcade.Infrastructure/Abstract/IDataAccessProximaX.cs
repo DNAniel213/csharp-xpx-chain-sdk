@@ -28,7 +28,7 @@ namespace Xarcade.Infrastructure.Abstract
         bool UpdateNamespaceDuration(string gameName, DateTime expiry);
         bool UpdateMosaicQuantity(string assetId, long newQuantity);
         bool UpdateXarcadeUser(XarcadeUser user);
-
+        bool UpdateMosaicLink(string assetId, Namespace newNamespace);
         XarcadeUser LoadXarcadeUser(XarcadeUserSearchKey searchKey);
         Owner LoadOwner(string userID);
         User LoadUser(string userID);
