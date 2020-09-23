@@ -34,4 +34,4 @@ MonoBehaviour:
   YieldAmount:
     Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
     Amount: 0.5
-  artwork: {fileID: 21300000, guid: 9c77436ed507af04ea19daeccc61a5c1, type: 3}
+  artwork: {fileID: 21300000, guid: b27c2307ad418f7409766aa005102e57, type: 3}
