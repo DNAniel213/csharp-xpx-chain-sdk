@@ -85,7 +85,7 @@ namespace Xarcade.Api.Prototype
 
         private void ListUserWallets(XarcadeUser xarUserDTO)
         {
-            var result = repo.portal.ReadCollection("Owners", repo.portal.CreateFilter(new KeyValuePair<string, long>("userID", xarUserDTO.UserID), FilterOperator.EQUAL));
+            var result = repo.portal.ReadCollection("Owners", repo.portal.CreateFilter(new KeyValuePair<string, string>("userID", xarUserDTO.UserID), FilterOperator.EQUAL));
         }
 
         //read the function name
@@ -275,6 +275,7 @@ namespace Xarcade.Api.Prototype
 
         private Namespace ExtendNamespaceDurationTest(Account newAccount)
         {
+            /*
             Console.Write("Namespace name:  ");
             string namespaceName = Console.ReadLine();
             Console.Write("Number of Days:  ");
@@ -288,11 +289,11 @@ namespace Xarcade.Api.Prototype
 
             var account = portal.CreateAccountAsync(1 +"", newAccount.PrivateKey);
             var namespaceInfo = portal.GetNamespaceInformationAsync(namespaceName).GetAwaiter().GetResult();
-            Namespace extendNamespace = portal.ExtendNamespaceDurationAsync(namespaceName,newAccount.PrivateKey,namespaceInfo,param).GetAwaiter().GetResult();
+            var extendNamespace = portal.ExtendNamespaceDurationAsync(param).GetAwaiter().GetResult();
             repo.SaveNamespace(extendNamespace);
 
-            Console.WriteLine(extendNamespace.ToString());
-            return extendNamespace;
+            Console.WriteLine(extendNamespace.ToString());*/
+            return null;
         }
     }
 }

@@ -10853,6 +10853,7 @@ img {
   height: auto;
   white-space: nowrap;
   font-weight: 600;
+  padding-left: 50px;
 }
 .off-canvas-sidebar .nav i,
 .sidebar .nav i {
@@ -10979,7 +10980,8 @@ img {
 .off-canvas-sidebar:after,
 .sidebar:after {
   background: #66615b;
-  background: linear-gradient(#66615b, #000 80%);
+  background: linear-gradient(#191D28, #2E3448 100%);
+  background-image:  url("../img/sidebar-bg.png");
   z-index: 3;
 }
 .off-canvas-sidebar[data-color="white"]:after,
@@ -11333,14 +11335,19 @@ img {
   > li.active
   > a,
 .sidebar[data-active-color="danger"] .nav li.active > a i {
-  color: #ef8157;
+  color: #fff;
+  background-color: #5268C2;
+  margin-right: -3px;
   opacity: 1;
+  transform: skew(-10deg);
 }
 .off-canvas-sidebar .user,
 .sidebar .user {
   padding-bottom: 20px;
   margin: 20px auto 0;
   position: relative;
+  overflow-x: hidden;
+
 }
 .off-canvas-sidebar .user:after,
 .sidebar .user:after {
@@ -11351,6 +11358,8 @@ img {
   height: 1px;
   width: calc(100% - 30px);
   background-color: hsla(0, 0%, 100%, 0.3);
+  overflow-x: hidden;
+  
 }
 .off-canvas-sidebar .user .photo,
 .sidebar .user .photo {
@@ -11378,6 +11387,7 @@ img {
 .sidebar .user .info > a {
   display: block;
   line-height: 18px;
+  
 }
 .off-canvas-sidebar .user .info > a > span,
 .sidebar .user .info > a > span {
@@ -11723,7 +11733,7 @@ img {
   margin-top: 5px;
 }
 .card {
-  border-radius: 12px;
+  border-radius: 0px;
   box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
   background-color: #fff;
   color: #252422;
@@ -11733,6 +11743,7 @@ img {
   transition: transform 0.3s cubic-bezier(0.34, 2, 0.6, 1), box-shadow 0.2s ease;
 }
 .card .card-body {
+
   padding: 15px 15px 10px;
 }
 .card .card-body.table-full-width {
@@ -13819,6 +13830,7 @@ img {
     right: -17px;
     opacity: 1;
     top: 7px;
+
     transition: opacity 0.15s ease-in;
   }
   .sidebar

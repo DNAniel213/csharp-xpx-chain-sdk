@@ -30,6 +30,7 @@ namespace Xarcade.Application.Xarcade
         {
             if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", UserID), FilterOperator.EQUAL)))
             {
+                Console.WriteLine("ATAY ");
                 _logger.LogError("User ID already exists!!");
                 return null;
             }

@@ -10,11 +10,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
 using Xarcade.Application.Xarcade;
 using Xarcade.Application.ProximaX;
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Repository;
 using Xarcade.Infrastructure.ProximaX;
+using Xarcade.Infrastructure.Utilities;
+using Xarcade.Application.Authentication;
+using Xarcade.Application.Authentication.Middleware;
 
 namespace Xarcade.WebApi
 {
@@ -37,6 +42,10 @@ namespace Xarcade.WebApi
             services.AddTransient<IDataAccessProximaX, DataAccessProximaX>();
             services.AddTransient<IBlockchainPortal, ProximaxBlockchainPortal>();
             services.AddControllers();
+            services.AddCors(); 
+            services.AddScoped<IXarcadeAccountService, XarcadeAccountService>(); 
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IValidator, XarcadeValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,12 +55,17 @@ namespace Xarcade.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseHttpsRedirection();
+            app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+            //app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
