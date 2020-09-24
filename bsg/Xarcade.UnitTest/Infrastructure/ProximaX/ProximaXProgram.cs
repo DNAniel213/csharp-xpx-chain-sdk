@@ -131,7 +131,7 @@ namespace Xarcade.Api.Prototype
             Account dane2 = portal.CreateAccountAsync(999 +"", TEST_PRIVATE_BSG_1).GetAwaiter().GetResult();
             var param = new SendXpxParams();
             param.Sender = dane2;
-            param.RecepientAddress = newAccount.WalletAddress;
+            param.RecipientAddress = newAccount.WalletAddress;
             param.Amount =  Convert.ToUInt64(Console.ReadLine());
             param.Message = "Pls work.jpg";
             Console.WriteLine(dane2.ToString());
@@ -213,7 +213,7 @@ namespace Xarcade.Api.Prototype
             {
                 MosaicID = portal.GetMosaicAsync(newMosaic.MosaicID +"").GetAwaiter().GetResult().MosaicID,
                 Sender = portal.CreateAccountAsync(1 + "", newAccount.PrivateKey).GetAwaiter().GetResult(),
-                RecepientAddress = portal.CreateAccountAsync(2 + "", TEST_PRIVATE_BSG_1).GetAwaiter().GetResult().WalletAddress,
+                RecipientAddress = portal.CreateAccountAsync(2 + "", TEST_PRIVATE_BSG_1).GetAwaiter().GetResult().WalletAddress,
                 Amount = Convert.ToUInt64(amountToSend),
                 Message = message
             };
