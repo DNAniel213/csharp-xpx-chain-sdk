@@ -13,6 +13,7 @@ namespace Xarcade.WebApi
         public const string GenerateGame = "token/generate/game";  //works
         public const string ExtendGame = "token/extend/game"; //worksx
         public const string Token = "token/token";  //works
+        public const string TokenList = "token";  //works
         public const string Game = "token/game";  //works
         public const string RegisterGame = "token/register";  //works
         public const string GenerateXarToken = "token/generate/xar"; 

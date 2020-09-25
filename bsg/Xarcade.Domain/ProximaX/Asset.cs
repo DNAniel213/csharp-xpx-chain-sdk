@@ -4,10 +4,11 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Asset
     {
-        public string AssetID {get; set;}
-        public string Name {get; set;}
-        public ulong Quantity {get; set;}
-        public Account Owner {get; set;}
+        public string AssetID {get; set;} = null;
+        public string Name {get; set;} = null;
+        public ulong Quantity {get; set;} = 0;
+        public string OwnerId {get; set;} = null;
+        public Account Owner {get; set;} = null; 
         public DateTime Created {get; set;}
 
         public override string ToString()

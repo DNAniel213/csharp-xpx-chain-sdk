@@ -2,8 +2,8 @@ namespace Xarcade.Domain.ProximaX
 {
     public class Mosaic : Asset
     {
-        public string MosaicID {get; set;}
-        public Namespace Namespace {get; set;}
+        public string MosaicID {get; set;} = null;
+        public Namespace Namespace {get; set;} = null;
 
         public override string ToString()
         {

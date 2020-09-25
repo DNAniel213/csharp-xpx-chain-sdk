@@ -54,7 +54,7 @@ namespace Xarcade.Application.Xarcade
                 return null;
             }
  
-            var mosaicList = await blockchainPortal.GetMosaicListAsync(SenderUserDB.WalletAddress, tokenInfo.MosaicID);
+            var mosaicList = await blockchainPortal.GetMosaicListAsync(SenderUserDB.WalletAddress);
 
             foreach (Mosaic mosaic in mosaicList)
             {
