@@ -21,7 +21,6 @@ function loginUser()
             if (data['message'] === 'Ok'){
                 localStorage.setItem('userData', JSON.stringify(data['authenticationData']['account']));
                 localStorage.setItem('token', JSON.stringify(data['authenticationData']['jwtToken']));
-                localStorage.setItem('cookie', JSON.stringify(data['authenticationData']['refreshToken']));
                 redirect: window.location.replace(redirectPage);
             }else{
                 alert(data['message']);
