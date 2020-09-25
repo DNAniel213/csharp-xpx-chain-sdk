@@ -6,6 +6,7 @@ using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
 using Xarcade.Infrastructure.Utilities.Logger;
 using Xarcade.Infrastructure.Abstract;
+using Xarcade.Infrastructure.Cryptography;
 
 namespace Xarcade.Infrastructure.Repository
 {
@@ -113,6 +114,33 @@ namespace Xarcade.Infrastructure.Repository
                 return false;
             }
             return true;
+        }
+
+        public bool SaveKeys(Keys keys)
+        {
+            try
+            {
+                portal.CreateDocument("Keys", keys.ToBsonDocument());
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        public Keys LoadKeys(string thetext)
+        {
+            var privateKeyBson = portal.ReadDocument("Keys", portal.CreateFilter(new KeyValuePair<string, string>("TheText", thetext), FilterOperator.EQUAL));
+
+            if(privateKeyBson!=null) //if key exists
+            {
+                Keys keys = BsonToModel.BsonToPrivateKey(privateKeyBson);
+                return keys;
+            }
+
+            return null;
         }
 
         public Owner LoadOwner(long userID)

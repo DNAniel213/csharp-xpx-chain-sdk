@@ -3,42 +3,46 @@ using System.Security.Cryptography;
 using Xarcade.Infrastructure.ProximaX;
 using Xarcade.Infrastructure.Abstract;
 using Xarcade.Infrastructure.Utilities.Logger;
+using Xarcade.Infrastructure.Repository;
 
-namespace CryptographyService
+namespace Xarcade.Infrastructure.Cryptography
 {
     public class CryptographyService : ICryptographyService
     {
         private readonly IDataAccessProximaX dataAccessProximaX;
-        private readonly RSACryptoServiceProvider _RSAService = new RSACryptoServiceProvider(2048);
+        private RSACryptoServiceProvider _RSAService = new RSACryptoServiceProvider(2048);
         private static ILogger _logger;
 
-        public string Encrypt(string privateKey)
+        public string Encrypt(string text)
         {
-            if(privateKey == null)
+            DataAccessProximaX dataAccessProximaX = new DataAccessProximaX();
+
+            if(text == null)
             {
                 _logger.LogError("parameter is empty");
             }
-
-            try
-            {
-                var privKey = _RSAService.ExportParameters(true);
-
-                var pubKey = _RSAService.ExportParameters(false);
-
-                string pubKeyString;
+            var privKey = _RSAService.ExportParameters(true);
+            var pubKey = _RSAService.ExportParameters(false);
+            string pubKeyString;
                 {
                     var buffer = new System.IO.StringWriter();
                     var serializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
                     serializer.Serialize(buffer, pubKey);
                     pubKeyString = buffer.ToString();
                 }
-
+            string privKeyString;
                 {
-                    var stream = new System.IO.StringReader(pubKeyString);
-                    var deserializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
-                    pubKey = (RSAParameters)deserializer.Deserialize(stream);
+                    var buffer = new System.IO.StringWriter();
+                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
+                    serializer.Serialize(buffer, privKey);
+                    privKeyString = buffer.ToString();
                 }
 
+            try
+            {
+                var stream = new System.IO.StringReader(pubKeyString);
+                var deserializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
+                pubKey = (RSAParameters)deserializer.Deserialize(stream);
 
                 RSACryptoServiceProvider loadPublicKey = new RSACryptoServiceProvider();
                 loadPublicKey.ImportParameters(pubKey);
@@ -48,55 +52,50 @@ namespace CryptographyService
             {
                 _logger.LogError(e.ToString());
             }
-
-            var bytesPlainTextData = System.Text.Encoding.Unicode.GetBytes(privateKey);
+            
+            var bytesPlainTextData = System.Text.Encoding.Unicode.GetBytes(text);
 
             var bytesCypherText = _RSAService.Encrypt(bytesPlainTextData, false);
 
             var cypherText = Convert.ToBase64String(bytesCypherText);
 
+            Keys keys = new Keys
+            {
+                PrivateKey  = privKeyString,
+                PublicKey   = pubKeyString,
+                TheText     = cypherText,
+            };
+            
+            dataAccessProximaX.SaveKeys(keys);
+
             return cypherText;
         }
-        public string Decrypt(string privateKey)
+        public string Decrypt(string text)
         {
-            if(privateKey == null)
+            
+            DataAccessProximaX dataAccessProximaX = new DataAccessProximaX();
+
+            if(text == null)
             {
                 _logger.LogError("parameter is empty");
             }
-            try
-            {
-                var privKey = _RSAService.ExportParameters(true);
 
-                var pubKey = _RSAService.ExportParameters(false);
+            var keysString = dataAccessProximaX.LoadKeys(text);
+            var bytesCypherText = Convert.FromBase64String(text);
 
-                string pubKeyString;
-                {
-                    var buffer = new System.IO.StringWriter();
-                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
-                    serializer.Serialize(buffer, pubKey);
-                    pubKeyString = buffer.ToString();
-                }
+            var stream = new System.IO.StringReader(keysString.PrivateKey);
+            var deserializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
+            var privKey = (RSAParameters)deserializer.Deserialize(stream);
+            
+            RSACryptoServiceProvider csp = new RSACryptoServiceProvider();
+            csp.ImportParameters(privKey);
 
-                {
-                    var stream = new System.IO.StringReader(pubKeyString);
-                    var deserializer = new System.Xml.Serialization.XmlSerializer(typeof(RSAParameters));
-                    pubKey = (RSAParameters)deserializer.Deserialize(stream);
-                }
-
-                RSACryptoServiceProvider loadPrivateKey = new RSACryptoServiceProvider();
-                loadPrivateKey.ImportParameters(privKey);
-            }
-            catch(Exception e)
-            {
-                _logger.LogError(e.ToString());
-            }
-            var bytesCypherText = Convert.FromBase64String(privateKey);
-
-            var bytesPlainTextData = _RSAService.Decrypt(bytesCypherText, false);
+            var bytesPlainTextData = csp.Decrypt(bytesCypherText, false);
 
             var plainTextData = System.Text.Encoding.Unicode.GetString(bytesPlainTextData);
 
             return plainTextData;
+            
         }
 
     }
