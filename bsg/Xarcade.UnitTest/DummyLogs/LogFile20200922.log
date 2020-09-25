@@ -1,0 +1,11 @@
+2020-09-22 18:08:11.557 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-22 18:08:11.638 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-22 18:09:10.967 +08:00 [ERR] [CreateNamespaceAsync][544] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.CreateNamespaceAsync(CreateNamespaceParams param) in C:\Users\RANZ\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 533
+2020-09-22 18:09:10.986 +08:00 [ERR] [CreateDocument][45] System.ArgumentNullException: Value cannot be null. (Parameter 'document')
+   at MongoDB.Driver.Core.Misc.Ensure.IsNotNull[T](T value, String paramName)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, Action`2 bulkWrite)
+   at MongoDB.Driver.MongoCollectionBase`1.InsertOne(TDocument document, InsertOneOptions options, CancellationToken cancellationToken)
+   at Xarcade.Infrastructure.Repository.RepositoryPortal.CreateDocument(String collectionName, BsonDocument doc) in C:\Users\RANZ\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\Repository\RepositoryPortal.cs:line 41
+2020-09-22 18:09:51.307 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-22 18:09:51.391 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
