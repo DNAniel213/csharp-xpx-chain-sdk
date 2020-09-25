@@ -92,8 +92,7 @@ Coded by www.creative-tim.com
       <div class="content">
         <div class="container">
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-            <form class="form" method=""
-              action="https://demos.creative-tim.com/paper-dashboard-2-pro/examples/pages/login.html">
+            <form class="form" method="POST" id="login-form" onsubmit="loginUser()" action="javascript:void(0)">
               <div class="card card-login">
                 <div class="card-header ">
                   <div class="card-header ">
@@ -107,7 +106,7 @@ Coded by www.creative-tim.com
                         <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="First Name...">
+                    <input type="text" class="form-control" placeholder="First Name..." id="username">
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -115,7 +114,7 @@ Coded by www.creative-tim.com
                         <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input type="password" placeholder="Password" class="form-control" id="password">
                   </div>
                   <br>
                   <div class="form-group">
@@ -129,7 +128,7 @@ Coded by www.creative-tim.com
                   </div>
                 </div>
                 <div class="card-footer ">
-                  <a href="javascript:;" class="btn btn-info btn-round btn-block mb-3">Get Started</a>
+                  <button type="submit" class="btn btn-info btn-round btn-block mb-3">Log In</button>
                 </div>
               </div>
             </form>
@@ -159,7 +158,7 @@ Coded by www.creative-tim.com
       <div class="full-page-background" style="background-image: url(../assets/img/auth-bg.png) "></div>
     </div>
   </div>
-
+  <script src="../assets/js/api-dashboard/_script.login.js" asp-append-version="true"></script>
 </body>
 
 </html>
