@@ -30,8 +30,12 @@ namespace Xarcade.Infrastructure.Repository
             userDTO.WalletAddress = user["WalletAddress"].AsString;
             userDTO.PrivateKey    = user["PrivateKey"].AsString;
             userDTO.PublicKey     = user["PublicKey"].AsString;
+
             userDTO.Created       = user["Created"].ToUniversalTime();
-            userDTO.OwnerID       = user["OwnerID"].AsString;
+            if(!user["OwnerID"].IsBsonUndefined)
+                userDTO.OwnerID       = user["OwnerID"].AsString;
+
+
             return userDTO;
         }
 

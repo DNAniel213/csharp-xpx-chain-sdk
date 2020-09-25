@@ -1,0 +1,222 @@
+2020-09-24 08:47:46.025 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 08:47:47.852 +08:00 [ERR] [LinkMosaicAsync][502] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9403255562443525
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 453
+2020-09-24 08:49:19.914 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 08:49:22.778 +08:00 [ERR] [LinkMosaicAsync][502] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9403255562443525
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 453
+2020-09-24 08:51:51.331 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 08:51:53.896 +08:00 [ERR] [LinkMosaicAsync][502] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 489
+2020-09-24 08:53:14.963 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 08:57:01.956 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 09:01:47.603 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 09:02:53.733 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 09:57:00.838 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:33:32.601 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:34:02.808 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:34:34.228 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:34:36.915 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:34:42.255 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:35:09.885 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:38:41.542 +08:00 [ERR] [GetMosaicAsync][366] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 10:43:00.629 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 11:14:49.494 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 11:15:22.795 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 11:19:51.335 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 12:10:10.601 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 12:15:27.944 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 12:17:44.943 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 12:18:27.853 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 12:20:29.558 +08:00 [ERR] [GetMosaicAsync][366] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9575766081779108
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 357
+2020-09-24 16:51:50.059 +08:00 [ERR] [SendMosaicAsync][428] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 17:34:41.034 +08:00 [ERR] [SendMosaicAsync][428] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 17:46:44.937 +08:00 [ERR] [SendMosaicAsync][428] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 17:55:09.976 +08:00 [ERR] [SendMosaicAsync][430] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 18:02:09.030 +08:00 [ERR] [SendMosaicAsync][431] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 18:02:35.709 +08:00 [ERR] [SendMosaicAsync][431] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 18:02:58.969 +08:00 [ERR] [SendMosaicAsync][432] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 389
+2020-09-24 18:03:19.736 +08:00 [ERR] [SendMosaicAsync][433] System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'hex')
+   at ProximaX.Sirius.Chain.Sdk.Utils.Hex.Hex2UInt64(String hex)
+   at ProximaX.Sirius.Chain.Sdk.Model.Mosaics.MosaicId..ctor(String fromHexId)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 391
+2020-09-24 18:04:03.581 +08:00 [ERR] [SendMosaicAsync][433] System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseUInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToUInt64(String value)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 390
+2020-09-24 18:08:33.208 +08:00 [ERR] [SendMosaicAsync][433] System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseUInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToUInt64(String value)
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 390
+2020-09-24 18:13:23.459 +08:00 [ERR] [SendMosaicAsync][433] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.SendMosaicAsync(SendMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 421
+2020-09-24 19:40:32.389 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-24 21:18:50.890 +08:00 [ERR] [GetMosaicListAsync][401] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Domain.ProximaX.Mosaic.ToString() in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\ProximaX\Mosaic.cs:line 10
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicListAsync(String walletAddress, String mosaicId) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 391
+2020-09-24 21:19:03.800 +08:00 [ERR] [GetMosaicListAsync][401] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Domain.ProximaX.Mosaic.ToString() in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\ProximaX\Mosaic.cs:line 10
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicListAsync(String walletAddress, String mosaicId) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 391
+2020-09-24 21:19:39.644 +08:00 [ERR] [GetMosaicListAsync][401] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Domain.ProximaX.Mosaic.ToString() in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\ProximaX\Mosaic.cs:line 10
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicListAsync(String walletAddress, String mosaicId) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 391
+2020-09-24 21:20:18.412 +08:00 [ERR] [GetMosaicListAsync][401] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Domain.ProximaX.Mosaic.ToString() in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\ProximaX\Mosaic.cs:line 10
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicListAsync(String walletAddress, String mosaicId) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 391
+2020-09-24 21:22:39.759 +08:00 [ERR] [GetMosaicListAsync][404] System.NullReferenceException: Object reference not set to an instance of an object.
+   at Xarcade.Domain.ProximaX.Mosaic.ToString() in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Domain\ProximaX\Mosaic.cs:line 10
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicListAsync(String walletAddress, String mosaicId) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 391

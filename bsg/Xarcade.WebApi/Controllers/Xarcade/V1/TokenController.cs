@@ -399,8 +399,10 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             try
             {
                 var token = await tokenService.GetTokenInfoAsync(tokenId);
+
                 tokenViewModel.Name = token.Name;
                 tokenViewModel.Quantity = token.Quantity;
+                
             }catch(Exception e)
             {
                 tokenViewModel = null;

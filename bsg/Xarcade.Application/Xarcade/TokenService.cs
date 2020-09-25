@@ -454,6 +454,7 @@ namespace Xarcade.Application.Xarcade
 
             TokenDto tokenInfo = null;
             Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(TokenId);
+            Mosaic mosaicBalance = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
 
             if(mosaicDto == null)
             {
@@ -467,10 +468,10 @@ namespace Xarcade.Application.Xarcade
                     {
                         TokenId     = mosaicDto.AssetID,
                         Name        = mosaicDto.Name,
-                        Quantity    = mosaicDto.Quantity,
+                        Quantity    = mosaicBalance.Quantity,
                         Owner       = mosaicDto.Owner.UserID,
                     };
-
+                    this.dataAccessProximaX.UpdateMosaicQuantity(tokenInfo.TokenId, Convert.ToInt32(tokenInfo.Quantity));
                 }
                 else
                 {
