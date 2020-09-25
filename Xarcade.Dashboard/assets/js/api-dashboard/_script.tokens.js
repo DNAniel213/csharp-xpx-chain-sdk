@@ -17,13 +17,28 @@ function addToken()
     
     let userData = JSON.parse(localStorage.getItem('userData'));
     let jwtToken = JSON.parse(localStorage.getItem('token'));
+<<<<<<< HEAD
     
     let params = new URLSearchParams({
         name:  tokenNameTextbox.value,
+=======
+    let cookie   = JSON.parse(localStorage.getItem('cookie'));
+    
+    let params = new URLSearchParams({
+        name: tokenNameTextbox.value,
+>>>>>>> 579df66... login, token POST integration
         owner: userData.userId
         //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
     });
 
+<<<<<<< HEAD
+=======
+    let item = {
+        name: tokenNameTextbox.value,
+        owner: userData.userId
+    }
+
+>>>>>>> 579df66... login, token POST integration
     fetch(postToken + '?' + params.toString(), {
         method: 'POST',
         headers: {
@@ -33,6 +48,10 @@ function addToken()
     })
         .then(response => response.json())
         .then(data => {
+<<<<<<< HEAD
+=======
+            console.log(data['message']);z
+>>>>>>> 579df66... login, token POST integration
             if (data['message'] === 'Success!'){
                 displayTokens(item);
                 tokenNameTextbox.value     = '';
@@ -40,7 +59,11 @@ function addToken()
                 tokenNamespaceSelect.value = '';
             }
         })
+<<<<<<< HEAD
         .catch(error => alert('Unable to add token', error));
+=======
+        .catch(error => console.error('Unable to add token', error));
+>>>>>>> 579df66... login, token POST integration
 
 }
 
