@@ -217,6 +217,7 @@ Coded by www.creative-tim.com
             </div>
           </div>
           <!-- END Game Card -->
+          
 
           <div class="btn btn-info btn-round btn-fab btn-lg"  data-toggle="modal" data-target="#createGameModal" data-tooltip="tooltip"  data-placement="right" title="Create New Game">
             +
@@ -250,39 +251,42 @@ Coded by www.creative-tim.com
   </div>
 
   <!-- Create Game Modal -->
-  <div class="modal fade" id="createGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create New Game</h5>
-          
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="progress">
-            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+  <form action="javascript:void(0)" onsubmit="addGame()" method="post">
+    <div class="modal fade" id="createGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create New Game</h5>
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <br>
-          <div class="form-group">
-            <label>Game Title</label>
-            <input type="text" class="form-control" placeholder="Recepient ID" value="DANE Coin">
+          <div class="modal-body">
+            <div class="progress">
+              <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label>Game Title</label>
+              <input type="text" class="form-control" placeholder="Recepient ID" id="game-name">
+            </div>
+  
+  
+            <div class="form-group">
+              <label>Details?</label>
+              <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" id="game-supply">
+            </div>
           </div>
-
-
-          <div class="form-group">
-            <label>Details?</label>
-            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+            <!-- <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal"> Confirm</button> -->
+            <input type="submit" class="btn btn-primary" value="Confirm">
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal"> Confirm</button>
         </div>
       </div>
     </div>
-  </div>
+  </form>
   <!-- END Create Game Modal -->
 
   <!--   Core JS Files   -->
@@ -305,6 +309,10 @@ Coded by www.creative-tim.com
       demo.initChartsPages();
     });
   </script>
+    <script src="../assets/js/api-dashboard/_script.games.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+      getGames();
+    </script>
 </body>
 
 </html>
