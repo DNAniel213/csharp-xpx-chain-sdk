@@ -371,7 +371,7 @@ namespace Xarcade.Infrastructure.ProximaX
             return mosaic;
         }
         
-        public async Task<List<XarcadeModel.Mosaic>> GetMosaicListAsync(string walletAddress, string mosaicId)
+        public async Task<List<XarcadeModel.Mosaic>> GetMosaicListAsync(string walletAddress)
         {
             var networkType = await siriusClient.NetworkHttp.GetNetworkType();
 
@@ -385,7 +385,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     var xarMosaic = new XarcadeModel.Mosaic
                     {
                         Quantity = mosaic.Amount,
-                        MosaicID = mosaic.Id.Id +"",
+                        MosaicID = mosaic.Id.Id  + "",
                     };
                     mosaicList.Add(xarMosaic);
                 }
@@ -397,6 +397,7 @@ namespace Xarcade.Infrastructure.ProximaX
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 _logger.LogError(e.ToString());
                 return null;
             }
@@ -532,7 +533,6 @@ namespace Xarcade.Infrastructure.ProximaX
 
             }catch(Exception e)
             {
-                    Console.WriteLine(e);
 
                 _logger.LogError(e.ToString());
                 return (null,null);

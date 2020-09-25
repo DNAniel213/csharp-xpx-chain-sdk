@@ -7,11 +7,8 @@ namespace Xarcade.Domain.ProximaX
     /// </summary>
     public class Mosaic : Asset
     {
-        /// <summary> The API generated unique identifier that represents the Xarcade Asset in the ProximaX Blockchain </summary>
-        public string MosaicID {get; set;}
-
-        /// <summary> The unique namespace that represents the xarcade asset </summary>
-        public Namespace Namespace {get; set;}
+        public string MosaicID {get; set;} = null;
+        public Namespace Namespace {get; set;} = null;
 
         public override string ToString()
         {

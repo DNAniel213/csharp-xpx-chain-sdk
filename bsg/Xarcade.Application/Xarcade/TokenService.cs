@@ -93,9 +93,9 @@ namespace Xarcade.Application.Xarcade
             }
             return tokentransaction;
         }
-        public async Task<List<TokenDto>> GetTokenListAsync(string userId, string gameId)
+        public async Task<List<TokenDto>> GetTokenListAsync(string userId)
         {
-            if (String.IsNullOrWhiteSpace(userId) || String.IsNullOrWhiteSpace(gameId))
+            if (String.IsNullOrWhiteSpace(userId))
             {
                 return null;
             }
@@ -105,24 +105,35 @@ namespace Xarcade.Application.Xarcade
             {
                 
                 Owner ownerdto = dataAccessProximaX.LoadOwner(userId);
-                var tokenlist = dataAccessProximaX.LoadMosaicList(ownerdto);
-                //var nsresult = repo.portal.ReadDocument("Namespaces", repo.portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", gameId), FilterOperator.EQUAL));
-                foreach (var token in tokenlist)
+                //var tokenlist = await blockchainPortal.GetMosaicListAsync(ownerdto.WalletAddress);
+                var tokenList = dataAccessProximaX.LoadMosaicList(userId);
+
+                foreach (var token in tokenList)
                 {
-                    Mosaic mosaic = BsonToModel.BsonToTokenDTO(token);
+                    var tokenInfo = await blockchainPortal.GetMosaicAsync(token.MosaicID);
+
+
                     TokenDto tokendto = new TokenDto
                     {
-                        TokenId     = mosaic.AssetID,
-                        Name        = mosaic.Name,
-                        Quantity    = mosaic.Quantity,
-                        Owner       = mosaic.Owner.UserID
+                        TokenId     = token.AssetID,
+                        Name        = token.Name
                     };
+                    
+                    if(tokenInfo!=null)
+                    {
+                        tokendto.Quantity    = tokenInfo.Quantity;
+
+                    }
+                    dataAccessProximaX.UpdateMosaicQuantity(tokendto.TokenId, Convert.ToInt64(tokendto.Quantity));
                     tokendtolist.Add(tokendto);
+                    
+
                 }
                 
             }
             catch(Exception e)
             {
+                Console.WriteLine(e);
                 return null;
             }
 
@@ -213,7 +224,6 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
-//TODO ADD CHECK IF NAMESPACE NAME ALREADY EXISTS
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
 
                 ulong amount = Token.Quantity;
@@ -239,6 +249,7 @@ namespace Xarcade.Application.Xarcade
                     AssetID     = Token.TokenId,
                     Name        = Token.Name,
                     Quantity    = Token.Quantity,
+                    OwnerId     = ownerdto.UserID,
                     Owner       = ownerdto,
                     Created     = DateTime.Now,
                     MosaicID    = mosaicTuple.tMosaic.MosaicID,
@@ -409,7 +420,7 @@ namespace Xarcade.Application.Xarcade
 
                 var modifyMosaicT = await blockchainPortal.ModifyMosaicSupplyAsync(modifyparam);
 
-                Transaction t = new Transaction
+                var t = new Transaction
                 {
                     Hash    = modifyMosaicT.Hash,
                     Height  = modifyMosaicT.Height,
@@ -439,6 +450,7 @@ namespace Xarcade.Application.Xarcade
 
             }catch(Exception e)
             {
+                Console.WriteLine(e);
                 _logger.LogError(e.ToString());
                 return null;
             }
@@ -468,9 +480,10 @@ namespace Xarcade.Application.Xarcade
                     {
                         TokenId     = mosaicDto.AssetID,
                         Name        = mosaicDto.Name,
-                        Quantity    = mosaicBalance.Quantity,
                         Owner       = mosaicDto.Owner.UserID,
                     };
+                    if(mosaicBalance != null)
+                        tokenInfo.Quantity = mosaicBalance.Quantity;
                     this.dataAccessProximaX.UpdateMosaicQuantity(tokenInfo.TokenId, Convert.ToInt32(tokenInfo.Quantity));
                 }
                 else

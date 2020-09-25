@@ -192,10 +192,20 @@ namespace Xarcade.Infrastructure.Repository
 
             if(mosaicBson != null) //if mosaic exists
             {
-
                 Mosaic mosaicDTO = BsonToModel.BsonToTokenDTO(mosaicBson);
 
                 return mosaicDTO;
+            }
+            else
+            {
+                mosaicBson = portal.ReadDocument("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("MosaicID", tokenID), FilterOperator.EQUAL));
+                if(mosaicBson != null) //if mosaic exists with mosaicID
+                {
+
+                    Mosaic mosaicDTO = BsonToModel.BsonToTokenDTO(mosaicBson);
+
+                    return mosaicDTO;
+                }
             }
 
             return null;
@@ -227,12 +237,18 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }
 
-        public List<BsonDocument> LoadMosaicList(Owner ownerDTO)
+        public List<Mosaic> LoadMosaicList(string ownerId)
         {
-            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerDTO), FilterOperator.EQUAL));
+            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("OwnerId", ownerId), FilterOperator.EQUAL));
             if(mosaicListBson != null)//if the list exists
             {
-                return mosaicListBson;
+                var mosaicList = new List<Mosaic>();
+                foreach(BsonDocument doc in mosaicListBson)
+                {
+                    Mosaic mosaic = BsonToModel.BsonToTokenDTO(doc);
+                    mosaicList.Add(mosaic);
+                }
+                return mosaicList;
             }
             
             return null;

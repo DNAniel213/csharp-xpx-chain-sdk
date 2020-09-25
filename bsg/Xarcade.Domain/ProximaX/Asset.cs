@@ -8,19 +8,11 @@ namespace Xarcade.Domain.ProximaX
     /// </summary>
     public class Asset
     {
-        /// <summary> The unique identifier that represents the xarcade asset </summary>
-        public string AssetID {get; set;}
-       
-        /// <summary> The name represents the xarcade asset </summary>
-        public string Name {get; set;}
-
-        /// <summary> The quantity of the xarcade asset</summary>
-        public ulong Quantity {get; set;}
-
-        /// <summary> The owner model of the xarcade asset</summary>
-        public Account Owner {get; set;}
-
-        /// <summary> The xarcade asset creation date </summary>
+        public string AssetID {get; set;} = null;
+        public string Name {get; set;} = null;
+        public ulong Quantity {get; set;} = 0;
+        public string OwnerId {get; set;} = null;
+        public Account Owner {get; set;} = null; 
         public DateTime Created {get; set;}
 
         public override string ToString()

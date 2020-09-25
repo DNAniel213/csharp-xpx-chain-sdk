@@ -148,7 +148,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             return response;
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route(Routes.RegisterGame)]
         public async Task<Response> RegisterGame(string userId, string gameId, string tokenId )
         {
@@ -205,7 +205,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             return response;
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route(Routes.ExtendGame)]
         public async Task<Response> ExtendGame(string owner, string gameId, ulong duration)
         {
@@ -258,7 +258,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             return response;
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route(Routes.ModifyTokenSupply)]
         public async Task<Response> ModifyTokenSupply(string userId, string tokenId, ulong supply)
         {
@@ -312,61 +312,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             return response;
         }
 
-        [HttpPost]
-        [Route(Routes.GenerateXarToken)]
-        public async Task<Response> CreateXarToken(string name, ulong supply, string owner)
-        {
-            
-            Response response = new Response();
-            var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, owner);
 
-            if (authorizedUser == null)
-            {
-                Console.WriteLine(HttpContext.Items[0]);
-                response.Message = "Authenticated user list are null!";
-                return response;
-            }
-
-            if (!string.Equals(authorizedUser.UserId, owner))
-            {
-                response.Message = "User is not authenticated!";
-                return response;
-            }
-            if(string.IsNullOrWhiteSpace(name) || supply < 0) 
-            {
-                response.ViewModel = null;
-                response.Message = "Missing or incorrect parameters";
-                return response;
-            }
-            /*
-            try
-            {
-                var xarDto = new XarcadeTokenDto
-                {
-                    TokenId = 0, //TODO needs to be generated
-                    Name = name,
-                    Owner = owner,
-                };
-
-                var xarTokenTransaction = await tokenService.CreateTokenAsync(xarDto);
-
-                var xarTokenTransactionViewModel = new TransactionViewModel
-                {
-                    Hash = xarTokenTransaction.Hash,
-                    Created = xarTokenTransaction.Created,
-                    Status = xarTokenTransaction.Status.ToString()
-                };
-
-                response.Message = "Success!";
-                response.ViewModel = xarTokenTransactionViewModel;
-            }catch(Exception e)
-            {
-                response.Message = e.ToString();
-                response.ViewModel = null;
-            }
-*/
-            return response;
-        }
 
         [HttpGet]
         [Route(Routes.Token)]        
@@ -402,6 +348,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
                 tokenViewModel.Name = token.Name;
                 tokenViewModel.Quantity = token.Quantity;
+                tokenViewModel.TokenId = token.TokenId;
                 
             }catch(Exception e)
             {
@@ -410,6 +357,60 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             return tokenViewModel;
         }
+
+        [HttpGet]
+        [Route(Routes.TokenList)]        
+        public async Task<List<TokenViewModel>> GetTokenList(string userId)
+        {
+            var tokenViewModels = new List<TokenViewModel>();
+            var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, userId);
+
+            if (authorizedUser == null)
+            {
+                Console.WriteLine(HttpContext.Items[0]);
+                //TODO add logger
+
+                return null;
+            }
+
+            if (!string.Equals(authorizedUser.UserId, userId))
+            {
+                //TODO add logger
+
+                return null;
+            }
+
+            if(String.IsNullOrWhiteSpace(userId)) 
+            {
+                tokenViewModels = null;
+            }
+
+
+            try
+            {
+                var tokenList = await tokenService.GetTokenListAsync(userId);
+                if(tokenList.Count > 0)
+                {
+                    foreach(TokenDto tok in tokenList)
+                    {
+                        var token = new TokenViewModel
+                        {
+                            Name = tok.Name,
+                            Quantity = tok.Quantity,
+                            TokenId  = tok.TokenId
+                        };
+                        tokenViewModels.Add(token);
+                    }
+                }
+
+            }catch(Exception e)
+            {
+                tokenViewModels = null;
+            }
+
+            return tokenViewModels;
+        }
+
 
         [HttpGet]
         [Route(Routes.Game)]        
@@ -443,6 +444,66 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             {
 
                 var game = await tokenService.GetGameInfoAsync(gameId);
+                var tokenList = await tokenService.GetTokenListAsync(userId);
+                gameViewModel.Name = game.Name;
+                gameViewModel.Expiry = game.Expiry;
+                gameViewModel.Tokens = new List<TokenViewModel>();
+                if(tokenList.Count > 0)
+                {
+                    gameViewModel.Tokens = new List<TokenViewModel>();
+                    foreach(TokenDto tok in tokenList)
+                    {
+                        var token = new TokenViewModel
+                        {
+                            Name = tok.Name,
+                            Quantity = tok.Quantity,
+                            TokenId  = tok.TokenId
+                        };
+                        gameViewModel.Tokens.Add(token);
+                    }
+                }
+
+            }catch(Exception e)
+            {
+                gameViewModel = null;
+            }
+
+            return gameViewModel;
+        }
+
+/*
+        [HttpGet]
+        [Route(Routes.Game)]        
+        public async Task<List<TokenViewModel>> GetTokenList(string userId)
+        {
+            var gameViewModel = new GameViewModel();
+
+            TokenViewModel tokenViewModel = new TokenViewModel();
+            var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, userId);
+
+            if (authorizedUser == null)
+            {
+                //TODO add logger
+
+                Console.WriteLine(HttpContext.Items[0]);
+                return null;
+            }
+
+            if (!string.Equals(authorizedUser.UserId, userId))
+            {
+                //TODO add logger
+                return null;
+            }
+
+            if(string.IsNullOrWhiteSpace(gameId)) 
+            {
+                gameViewModel = null;
+            }
+
+            try
+            {
+
+                var game = await tokenService.GetGameInfoAsync(gameId);
                 //TODO add GET ALL TOKENS under game
 
                 gameViewModel.Name = game.Name;
@@ -457,8 +518,34 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             return gameViewModel;
         }
-        
+*/
+        [HttpPost]
+        [Route(Routes.GenerateXarToken)]
+        public async Task<Response> CreateXarToken(string name, ulong supply, string owner)
+        {
+            
+            Response response = new Response();
+            var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, owner);
 
+            if (authorizedUser == null)
+            {
+                Console.WriteLine(HttpContext.Items[0]);
+                response.Message = "Authenticated user list are null!";
+                return response;
+            }
 
+            if (!string.Equals(authorizedUser.UserId, owner))
+            {
+                response.Message = "User is not authenticated!";
+                return response;
+            }
+            if(string.IsNullOrWhiteSpace(name) || supply < 0) 
+            {
+                response.ViewModel = null;
+                response.Message = "Missing or incorrect parameters";
+                return response;
+            }
+            return response;
+        }
     }
 }
