@@ -11,24 +11,18 @@ const postToken = 'http://localhost:5000/token/generate/token';
 
 function addToken()
 {
-    const tokenNameTextbox     = document.getElementById('token-name');
-    const tokenSupplyTextbox   = document.getElementById('token-supply');
-    const tokenNamespaceSelect = document.getElementById('token-namespace');
+    let tokenNameTextbox     = document.getElementById('token-name');
+    let tokenSupplyTextbox   = document.getElementById('token-supply');
+    let tokenNamespaceSelect = document.getElementById('token-namespace');
     
     let userData = JSON.parse(localStorage.getItem('userData'));
     let jwtToken = JSON.parse(localStorage.getItem('token'));
-    let cookie   = JSON.parse(localStorage.getItem('cookie'));
     
     let params = new URLSearchParams({
-        name: tokenNameTextbox.value,
+        name:  tokenNameTextbox.value,
         owner: userData.userId
         //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
     });
-
-    let item = {
-        name: tokenNameTextbox.value,
-        owner: userData.userId
-    }
 
     fetch(postToken + '?' + params.toString(), {
         method: 'POST',
@@ -39,7 +33,6 @@ function addToken()
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data['message']);z
             if (data['message'] === 'Success!'){
                 displayTokens(item);
                 tokenNameTextbox.value     = '';
@@ -47,14 +40,14 @@ function addToken()
                 tokenNamespaceSelect.value = '';
             }
         })
-        .catch(error => console.error('Unable to add token', error));
+        .catch(error => alert('Unable to add token', error));
 
 }
 
 function displayTokens(data)
 {
-    const tokenRow = document.getElementById('tokens');
-    const addDiv = '<div class="col-lg-6 col-md-6 col-sm-6">'
+    let tokenRow = document.getElementById('tokens');
+    let addDiv   = '<div class="col-lg-6 col-md-6 col-sm-6">'
                         +'<div class="card card-stats">'
                         +'<div class="card-body ">'
                             +'<div class="row">'
