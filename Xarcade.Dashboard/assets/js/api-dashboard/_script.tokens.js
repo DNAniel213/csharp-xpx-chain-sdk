@@ -1,14 +1,13 @@
 const getToken = 'http://localhost:5000/token/token';
 const postToken = 'http://localhost:5000/token/generate/token';
-let tokens = [];
 
-function getTokens()
-{
-    fetch(getToken)
-        .then(response => response.json())
-        .then(data => displayTokens(data))
-        .catch(error => console.error('Unable to get tokens', error));
-}
+// function getTokens()
+// {
+//     fetch(getToken)
+//         .then(response => response.json())
+//         .then(data => displayTokens(data))
+//         .catch(error => console.error('Unable to get tokens', error));
+// }
 
 function addToken()
 {
@@ -16,24 +15,40 @@ function addToken()
     const tokenSupplyTextbox   = document.getElementById('token-supply');
     const tokenNamespaceSelect = document.getElementById('token-namespace');
     
-    const item = {
+    let userData = JSON.parse(localStorage.getItem('userData'));
+    let jwtToken = JSON.parse(localStorage.getItem('token'));
+    let cookie   = JSON.parse(localStorage.getItem('cookie'));
+    
+    let params = new URLSearchParams({
         name: tokenNameTextbox.value,
-        owner: 'Dane',
-        namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
-    };
+        owner: userData.userId
+        //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
+    });
 
-    fetch(postToken, {
+    let item = {
+        name: tokenNameTextbox.value,
+        owner: userData.userId
+    }
+
+    fetch(postToken + '?' + params.toString(), {
         method: 'POST',
-        body: JSON.stringify(item)
+        headers: {
+            'Authorization': 'Bearer ' + jwtToken,
+            'Content-Type': 'application/json',
+        },
     })
         .then(response => response.json())
-        .then(() => {
-            displayTokens(item);
-            tokenNameTextbox.value     = '';
-            tokenSupplyTextbox.value   = '';
-            tokenNamespaceSelect.value = '';
+        .then(data => {
+            console.log(data['message']);z
+            if (data['message'] === 'Success!'){
+                displayTokens(item);
+                tokenNameTextbox.value     = '';
+                tokenSupplyTextbox.value   = '';
+                tokenNamespaceSelect.value = '';
+            }
         })
         .catch(error => console.error('Unable to add token', error));
+
 }
 
 function displayTokens(data)
