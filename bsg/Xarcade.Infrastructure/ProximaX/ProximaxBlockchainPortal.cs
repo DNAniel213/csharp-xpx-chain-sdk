@@ -300,7 +300,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 var mosaic = new XarcadeModel.Mosaic();
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
                 var account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
-                var mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId( Convert.ToUInt64(param.MosaicID)));
+                var mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(Convert.ToUInt64(param.MosaicID)));
 
                 MosaicSupplyType mosaicSupplyType = param.Amount > 0 ? MosaicSupplyType.INCREASE : MosaicSupplyType.DECREASE;
                 ulong sendAmount = Convert.ToUInt32(param.Amount);
@@ -354,12 +354,13 @@ namespace Xarcade.Infrastructure.ProximaX
             try
             {
 
-                mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(mosaicID));
+                mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(Convert.ToUInt64(mosaicID)));
                 mosaic = new XarcadeModel.Mosaic
                 {
                     MosaicID = mosaicInfo.MosaicId.Id + "",
                     Quantity = mosaicInfo.Supply,
-                };
+                };  
+
 
             }catch(Exception e)
             {
@@ -369,6 +370,37 @@ namespace Xarcade.Infrastructure.ProximaX
 
             return mosaic;
         }
+        
+        public async Task<List<XarcadeModel.Mosaic>> GetMosaicListAsync(string walletAddress, string mosaicId)
+        {
+            var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+
+            var mosaicList = new List<XarcadeModel.Mosaic>();
+            try
+            {
+                Address address = new Address(walletAddress, networkType);
+                AccountInfo accountInfo = await siriusClient.AccountHttp.GetAccountInfo(address);
+                foreach(Mosaic mosaic in accountInfo.Mosaics)
+                {
+                    var xarMosaic = new XarcadeModel.Mosaic
+                    {
+                        Quantity = mosaic.Amount,
+                        MosaicID = mosaic.Id.Id +"",
+                    };
+                    mosaicList.Add(xarMosaic);
+                }
+
+                if(mosaicList.Count > 0)
+                    return mosaicList;
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+        } 
 
 
         public async Task<XarcadeModel.Transaction> SendMosaicAsync(SendMosaicParams param)
@@ -385,7 +417,9 @@ namespace Xarcade.Infrastructure.ProximaX
             try 
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
-                var mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(param.MosaicID));
+
+                var mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(Convert.ToUInt64(param.MosaicID)));
+
                 var senderAccount = Account.CreateFromPrivateKey(param.Sender.PrivateKey, networkType);
 
                 Mosaic mosaicToTransfer = new Mosaic(mosaicInfo.MosaicId, param.Amount);
@@ -404,7 +438,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
                 if(senderAccount!= null && transferTransaction!= null)
                 {
-                    await SignAndAnnounceTransactionAsync(senderAccount, transferTransaction);
+                    var transactionInfo = await SignAndAnnounceTransactionAsync(senderAccount, transferTransaction);
                     mosaic = new XarcadeModel.Mosaic
                     {
                         MosaicID = param.MosaicID + "",
@@ -416,14 +450,15 @@ namespace Xarcade.Infrastructure.ProximaX
 
                     transaction = new XarcadeModel.Transaction
                     {
-                        Hash    = transferTransaction.GetHashCode().ToString(),
-                        Height  = transferTransaction.TransactionInfo.Height,
+                        Hash    = transactionInfo.Hash,
+                        Height  = transactionInfo.Height,
                         Asset   = mosaic,
                         Created = DateTime.Now,
                     };
                 }
             }catch(Exception e)
             {
+
                 _logger.LogError(e.ToString());
                 return null;
             }finally
@@ -450,7 +485,7 @@ namespace Xarcade.Infrastructure.ProximaX
             try
             {
                 var networkType = await siriusClient.NetworkHttp.GetNetworkType();
-                var mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(param.MosaicID));
+                var mosaicInfo = await siriusClient.MosaicHttp.GetMosaic(new MosaicId(Convert.ToUInt64(param.MosaicID)));
                 var namespaceInfo = await siriusClient.NamespaceHttp.GetNamespace(new NamespaceId(param.Namespace.Domain));
                 Account account = Account.CreateFromPrivateKey(param.Account.PrivateKey, networkType);
 
@@ -464,7 +499,7 @@ namespace Xarcade.Infrastructure.ProximaX
 
                 if(account != null && mosaicLink != null)
                 {
-                    await SignAndAnnounceTransactionAsync(account, mosaicLink);
+                    var announcedTransaction = await SignAndAnnounceTransactionAsync(account, mosaicLink);
 
                     
                     var namespaceI = new XarcadeModel.Namespace
@@ -488,8 +523,8 @@ namespace Xarcade.Infrastructure.ProximaX
 
                     transaction = new XarcadeModel.Transaction
                     {
-                        Hash    = mosaicLink.GetHashCode().ToString(),
-                        Height  = mosaicLink.TransactionInfo.Height,
+                        Hash    = announcedTransaction.Hash,
+                        Height  = announcedTransaction.Height,
                         Asset   = mosaic,
                         Created = DateTime.Now,
                     };

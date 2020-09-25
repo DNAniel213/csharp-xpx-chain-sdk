@@ -104,3 +104,39 @@
    at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
    at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
    at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 453
+2020-09-23 23:53:53.455 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-23 23:53:54.314 +08:00 [ERR] [LinkMosaicAsync][502] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9403255562443525
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 453
+2020-09-23 23:56:19.417 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-23 23:56:20.067 +08:00 [ERR] [LinkMosaicAsync][502] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9403255562443525
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 453
+2020-09-23 23:56:56.792 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-09-23 23:56:57.450 +08:00 [ERR] [LinkMosaicAsync][502] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/9403255562443525
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.LinkMosaicAsync(LinkMosaicParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 453

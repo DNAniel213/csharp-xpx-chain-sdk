@@ -50,6 +50,13 @@ namespace Xarcade.Infrastructure.Abstract
         /// <param name="mosaicID">Unique identification that represents the mosaic</param>
         /// <returns></returns>
         Task<Mosaic> GetMosaicAsync(string mosaicID);
+        /// <summary>
+        /// Retrieves a list of mosaics that the user owns
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="mosaicId"></param>
+        /// <returns></returns>
+        Task<List<Mosaic>> GetMosaicListAsync(string walletAddress, string mosaicId);
         
         /// <summary>
         /// Creates a transaction to sends mosaic from one account to another

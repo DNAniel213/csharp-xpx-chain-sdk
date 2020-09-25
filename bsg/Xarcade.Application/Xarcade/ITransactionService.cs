@@ -14,7 +14,7 @@ namespace Xarcade.Application.Xarcade
         /// <param name="sender"></param>
         /// <param name="receiver"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> SendTokenAsync(TokenDto token,AccountDto sender, AccountDto receiver);
+        Task<TokenTransactionDto> SendTokenAsync(TokenDto token,string sender, string receiver, string message);
         
         /// <summary>
         /// Sends an Xar from a user to another user

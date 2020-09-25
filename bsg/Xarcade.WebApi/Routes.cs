@@ -14,9 +14,10 @@ namespace Xarcade.WebApi
         public const string ExtendGame = "token/extend/game"; //worksx
         public const string Token = "token/token";  //works
         public const string Game = "token/game";  //works
-        public const string RegisterGame = "token/register";  //NOT WORKING
+        public const string RegisterGame = "token/register";  //works
+        public const string GenerateXarToken = "token/generate/xar"; 
 
-        public const string GenerateXarToken = "token/generate/xar";
+        
         public const string SendToken = "transaction/send/token";
         public const string Register = "xarcadeaccount/register"; //works
         public const string Authenticate = "xarcadeaccount/login";  //incomplete

@@ -13,7 +13,7 @@ using Xarcade.Application.Xarcade.Models.Transaction;
 namespace Xarcade.Application.Xarcade
 {
    
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
         public readonly IBlockchainPortal blockchainPortal;
         public readonly IDataAccessProximaX dataAccessProximaX;
@@ -27,7 +27,7 @@ namespace Xarcade.Application.Xarcade
         /// <summary>
         /// Sends a custom token from user to another user
         /// </summary>
-        public async Task<TokenTransactionDto> SendTokenAsync(TokenDto token,AccountDto sender, AccountDto receiver)
+        public async Task<TokenTransactionDto> SendTokenAsync(TokenDto token,string sender, string receiver, string message)
         {
             //1.Check if user exist.
             if(sender == null || receiver == null)
@@ -39,37 +39,48 @@ namespace Xarcade.Application.Xarcade
             // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
-            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
-            if (tokenBalance.Quantity < token.Quantity )
-            {
-                _logger.LogError("Not enough tokens to send!!");
-                return null;
-            }
+            var tokenInfo = dataAccessProximaX.LoadMosaic(token.TokenId);
 
-            var SenderUserDB = dataAccessProximaX.LoadUser(sender.UserID); // account from database
-            var ReceiverUserDB = dataAccessProximaX.LoadUser(receiver.UserID); //account from database
+
+
+            var SenderUserDB = dataAccessProximaX.LoadOwner(sender); // account from database
+            var ReceiverUserDB = dataAccessProximaX.LoadOwner(receiver); //account from database
+            
 
             //check return from DB if null or not then return error
             if (SenderUserDB == null || ReceiverUserDB == null)
             {
-                _logger.LogError("A account does not exist!!");
+                _logger.LogError("Account does not exist!!");
                 return null;
             }
  
+            var mosaicList = await blockchainPortal.GetMosaicListAsync(SenderUserDB.WalletAddress, tokenInfo.MosaicID);
+
+            foreach (Mosaic mosaic in mosaicList)
+            {
+                if(mosaic.MosaicID == tokenInfo.MosaicID)
+                {
+                    if(mosaic.Quantity < token.Quantity)
+                    {
+                        _logger.LogError("Not enough tokens to send!!");
+                        return null;
+                    }
+                }
+            }
+
             var param = new SendMosaicParams
             {
-                MosaicID = token.TokenId, 
+                MosaicID = tokenInfo.MosaicID, 
                 Sender = SenderUserDB,
                 RecepientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
-                Message = "PloxWork.jpeg"
+                Message = message
             };
-            
             Transaction sendtokentransaction = await blockchainPortal.SendMosaicAsync(param); 
-            
             //check if the transaction received is correct before saving to DB.
             if (sendtokentransaction == null)
             {
+                
                 _logger.LogError("The transaction does not exist.");
                 return null;
             }
@@ -78,7 +89,7 @@ namespace Xarcade.Application.Xarcade
 
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, // @John Get Status from Monitor Transaction via Listeners
+                Status = State.Unconfirmed,
                 Hash = sendtokentransaction.Hash,
                 Token = token,
                 BlockNumber = sendtokentransaction.Height, 
