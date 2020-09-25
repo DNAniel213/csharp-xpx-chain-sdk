@@ -22,9 +22,12 @@ function loginUser()
                 localStorage.setItem('userData', JSON.stringify(data['authenticationData']['account']));
                 localStorage.setItem('token', JSON.stringify(data['authenticationData']['jwtToken']));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 localStorage.setItem('cookie', JSON.stringify(data['authenticationData']['refreshToken']));
 >>>>>>> 579df66... login, token POST integration
+=======
+>>>>>>> bc94152... create game POST integration
                 redirect: window.location.replace(redirectPage);
             }else{
                 alert(data['message']);

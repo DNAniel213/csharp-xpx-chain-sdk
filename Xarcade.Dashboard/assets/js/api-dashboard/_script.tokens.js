@@ -18,6 +18,7 @@ function addToken()
     let userData = JSON.parse(localStorage.getItem('userData'));
     let jwtToken = JSON.parse(localStorage.getItem('token'));
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     let params = new URLSearchParams({
         name:  tokenNameTextbox.value,
@@ -27,10 +28,16 @@ function addToken()
     let params = new URLSearchParams({
         name: tokenNameTextbox.value,
 >>>>>>> 579df66... login, token POST integration
+=======
+    
+    let params = new URLSearchParams({
+        name:  tokenNameTextbox.value,
+>>>>>>> bc94152... create game POST integration
         owner: userData.userId
         //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
     });
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     let item = {
@@ -39,6 +46,8 @@ function addToken()
     }
 
 >>>>>>> 579df66... login, token POST integration
+=======
+>>>>>>> bc94152... create game POST integration
     fetch(postToken + '?' + params.toString(), {
         method: 'POST',
         headers: {
@@ -49,9 +58,12 @@ function addToken()
         .then(response => response.json())
         .then(data => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             console.log(data['message']);z
 >>>>>>> 579df66... login, token POST integration
+=======
+>>>>>>> bc94152... create game POST integration
             if (data['message'] === 'Success!'){
                 displayTokens(item);
                 tokenNameTextbox.value     = '';
@@ -60,10 +72,14 @@ function addToken()
             }
         })
 <<<<<<< HEAD
+<<<<<<< HEAD
         .catch(error => alert('Unable to add token', error));
 =======
         .catch(error => console.error('Unable to add token', error));
 >>>>>>> 579df66... login, token POST integration
+=======
+        .catch(error => alert('Unable to add token', error));
+>>>>>>> bc94152... create game POST integration
 
 }
 
