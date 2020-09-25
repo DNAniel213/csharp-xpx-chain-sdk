@@ -2,6 +2,10 @@ using System;
 
 namespace Xarcade.Domain.ProximaX
 {
+    /// <summary>
+    /// Xarcade Asset Model
+    /// Represents the xarcade asset
+    /// </summary>
     public class Asset
     {
         public string AssetID {get; set;} = null;
@@ -14,13 +18,13 @@ namespace Xarcade.Domain.ProximaX
         public override string ToString()
         {
             return
-                "===Asset DTO==="  +
-                "\nAssetID: "            + AssetID +
+                "===Xarcade Asset Model==="  +
+                "\nAssetID: "      + AssetID +
                 "\nName: "         + Name + 
-                "\nQuantity: "          +Quantity + 
-                "\nOwner: "          +Owner.UserID + 
-                "\nDate Created: "   + Created +
-                "\n==End of Asset DTO==";
+                "\nQuantity: "     + Quantity + 
+                "\nOwner: "        + Owner.UserID + 
+                "\nDate Created: " + Created +
+                "\n==End of Xarcade Asset Model==";
         }
     }
 }
