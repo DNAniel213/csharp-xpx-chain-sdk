@@ -404,6 +404,8 @@ namespace Xarcade.Infrastructure.ProximaX
         } 
 
 
+
+
         public async Task<XarcadeModel.Transaction> SendMosaicAsync(SendMosaicParams param)
         {
             if(String.IsNullOrWhiteSpace(param.MosaicID) || param.Sender == null || param.Amount <= 0)

@@ -2,8 +2,8 @@ namespace Xarcade.WebApi.Controllers.Xarcade.Models
 {
     public class TokenViewModel
     {
-        public string TokenId {get; set;}
-        public string Name { get; set; }
-        public ulong Quantity { get; set; }
+        public string TokenId {get; set;} = null;
+        public string Name { get; set; } = null;
+        public ulong Quantity { get; set; } = 0;
     }
 }

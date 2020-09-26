@@ -35,6 +35,7 @@ namespace Xarcade.Infrastructure.Abstract
         Mosaic LoadMosaic(string tokenID);
         Namespace LoadNamespace(string gameID);
         List<Mosaic> LoadMosaicList(string ownerId );
+        List<Namespace> LoadNamespaceList(string ownerId);
         Boolean CheckExistNamespace(string namespaceName);
         Boolean CheckExistToken(string tokenName);
     }

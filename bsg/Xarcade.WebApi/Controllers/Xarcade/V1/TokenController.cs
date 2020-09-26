@@ -410,6 +410,59 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             return tokenViewModels;
         }
+        
+        [HttpGet]
+        [Route(Routes.GameList)]        
+        public async Task<List<GameViewModel>> GetGameList(string userId)
+        {
+            var gameViewModels = new List<GameViewModel>();
+            var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, userId);
+
+            if (authorizedUser == null)
+            {
+                Console.WriteLine(HttpContext.Items[0]);
+                //TODO add logger
+
+                return null;
+            }
+
+            if (!string.Equals(authorizedUser.UserId, userId))
+            {
+                //TODO add logger
+
+                return null;
+            }
+
+            if(String.IsNullOrWhiteSpace(userId)) 
+            {
+                gameViewModels = null;
+            }
+
+
+            try
+            {
+                var gameList = await tokenService.GetGameListAsync(userId);
+
+                foreach(GameDto game in gameList)
+                {
+                    var gameViewModel = new GameViewModel
+                    {
+                        Name = game.Name,
+                        Expiry = game.Expiry,
+
+                    };
+                    gameViewModels.Add(gameViewModel);
+                }
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
+                gameViewModels = null;
+            }
+
+            return gameViewModels;
+        }
+
 
 
         [HttpGet]

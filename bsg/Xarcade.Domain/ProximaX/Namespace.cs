@@ -21,6 +21,7 @@ namespace Xarcade.Domain.ProximaX
         public string LayerTwo {get; set;} = null;
 
         /// <summary> The owner of namespace</summary>
+        public string OwnerId {get; set; } = null;
         public Account Owner {get; set;}
         
         /// <summary> The expiry date of the namespace</summary>
