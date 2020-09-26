@@ -21,6 +21,7 @@ function loginUser()
             if (data['message'] === 'Ok'){
                 localStorage.setItem('userData', JSON.stringify(data['authenticationData']['account']));
 <<<<<<< HEAD
+<<<<<<< HEAD
                 localStorage.setItem('token', JSON.stringify(data['authenticationData']['jwtToken']));
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -32,6 +33,9 @@ function loginUser()
 =======
                 localStorage.setItem('jwtToken', JSON.stringify(data['authenticationData']['jwtToken']));
 >>>>>>> ffe61e4... PUT integration
+=======
+                localStorage.setItem('jwtToken', JSON.stringify(data['authenticationData']['jwtToken']));
+>>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
                 redirect: window.location.replace(redirectPage);
             }else{
                 alert(data['message']);

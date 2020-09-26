@@ -42,6 +42,7 @@ function addToken()
     let tokenNamespaceSelect = document.getElementById('token-namespace');
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     let userData = JSON.parse(localStorage.getItem('userData'));
     let jwtToken = JSON.parse(localStorage.getItem('token'));
 <<<<<<< HEAD
@@ -62,10 +63,15 @@ function addToken()
     let params = new URLSearchParams({
         name:  tokenNameTextbox.value,
 >>>>>>> bc94152... create game POST integration
+=======
+    let params = new URLSearchParams({
+        name:  tokenNameTextbox.value,
+>>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
         owner: userData.userId
         //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
     });
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -77,6 +83,8 @@ function addToken()
 >>>>>>> 579df66... login, token POST integration
 =======
 >>>>>>> bc94152... create game POST integration
+=======
+>>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
     fetch(postToken + '?' + params.toString(), {
         method: 'POST',
         headers: {
@@ -88,11 +96,14 @@ function addToken()
         .then(data => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             console.log(data['message']);z
 >>>>>>> 579df66... login, token POST integration
 =======
 >>>>>>> bc94152... create game POST integration
+=======
+>>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
             if (data['message'] === 'Success!'){
                 //getTokens();
                 tokenNameTextbox.value     = '';
@@ -102,6 +113,7 @@ function addToken()
         })
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         .catch(error => alert('Unable to add token', error));
 =======
         .catch(error => console.error('Unable to add token', error));
@@ -109,6 +121,9 @@ function addToken()
 =======
         .catch(error => alert('Unable to add token', error));
 >>>>>>> bc94152... create game POST integration
+=======
+        .catch(error => alert('Unable to add token', error));
+>>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
 
 }
 
