@@ -1,8 +1,12 @@
-const getToken  = 'http://localhost:5000/token/token';
-const postToken = 'http://localhost:5000/token/generate/token';
-const listToken = 'http://localhost:5000/token';
+const getToken          = 'http://localhost:5000/token/token';
+const postToken         = 'http://localhost:5000/token/generate/token';
+const listToken         = 'http://localhost:5000/token';
+const modifyTokenSupply = 'http://localhost:5000/token/modify/supply';
 
 const redirectPage = '../api-dashboard/login.html';
+
+let userData = JSON.parse(localStorage.getItem('userData'));
+let jwtToken = JSON.parse(localStorage.getItem('jwtToken'));
 
 /**
  * Gets a list of tokens of the logged user
@@ -10,9 +14,6 @@ const redirectPage = '../api-dashboard/login.html';
  */
 function getTokens()
 {
-    let userData     = JSON.parse(localStorage.getItem('userData'));
-    let jwtToken     = JSON.parse(localStorage.getItem('token'));
-
     let params = new URLSearchParams({
         userId: userData.userId
     });
@@ -40,9 +41,6 @@ function addToken()
     let tokenSupplyTextbox   = document.getElementById('token-supply');
     let tokenNamespaceSelect = document.getElementById('token-namespace');
     
-    let userData = JSON.parse(localStorage.getItem('userData'));
-    let jwtToken = JSON.parse(localStorage.getItem('token'));
-    
     let params = new URLSearchParams({
         name:  tokenNameTextbox.value,
         owner: userData.userId
@@ -53,7 +51,7 @@ function addToken()
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + jwtToken,
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
     })
         .then(response => response.json())
@@ -69,16 +67,37 @@ function addToken()
 
 }
 
+function modifySupply(tokenId)
+{
+    let supplyInput = document.getElementById('supplyInput');
+
+    let params = new URLSearchParams({
+        userId: userData.userId,
+        tokenId: tokenId,
+        supply: supplyInput
+    });
+
+    fetch(modifyTokenSupply + '?' + params.toString(), {
+        method: 'PUT',
+        headers: {
+            'Authorization': 'Bearer ' + jwtToken,
+            'Content-Type': 'application/json' 
+        },
+    })
+        .then(response => response.json())
+        .then(() => getTokens());
+}
+
 /**
  * Displays tokens of the logged user to the webpage
  * 
- * @param {TokenViewModel} data 
+ * @param {TokenViewModel} tokenData 
  */
-function displayTokens(data)
+function displayTokens(tokenData)
 {
     let tokenRow = document.getElementById('tokens');
 
-    data.forEach(item => {
+    tokenData.forEach(item => {
         let addDiv   = '<div class="col-lg-6 col-md-6 col-sm-6">'
                             +'<div class="card card-stats">'
                             +'<div class="card-body ">'
@@ -124,6 +143,10 @@ function displayTokens(data)
                             +'</div>'
                         +'</div>';
 
+        //let addSupply = document.getElementById('supply-button');
+        //addSupply.setAttribute('onclick', `modifySupply(${item.tokenId})`);
+        //addSupply.setAttribute('onsubmit', item.tokenId);
+        //console.log(addSupply);
         $(tokenRow).append(addDiv);
     });
     

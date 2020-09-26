@@ -20,7 +20,7 @@ function loginUser()
         .then(data => {
             if (data['message'] === 'Ok'){
                 localStorage.setItem('userData', JSON.stringify(data['authenticationData']['account']));
-                localStorage.setItem('token', JSON.stringify(data['authenticationData']['jwtToken']));
+                localStorage.setItem('jwtToken', JSON.stringify(data['authenticationData']['jwtToken']));
                 redirect: window.location.replace(redirectPage);
             }else{
                 alert(data['message']);
