@@ -57,6 +57,6 @@ namespace Xarcade.Application.ProximaX
         /// <param name="Token"></param>
         /// <returns></returns>
         Task<List<TokenDto>> GetTokenListAsync(string userId);
-
+        Task<List<GameDto>> GetGameListAsync(string userId);
     }
 }

@@ -8,16 +8,16 @@ namespace Xarcade.Domain.ProximaX
     public class Account
     {
         /// <summary> The unique identifier that represents the xarcade user </summary>
-        public string UserID {get; set;}
+        public string UserID {get; set;}  = null;
 
         /// <summary> The xarcade user's wallet address </summary>
-        public string WalletAddress {get; set;}
+        public string WalletAddress {get; set;} = null;
 
         /// <summary> The xarcade user's encrypted private key </summary>
-        public string PrivateKey {get; set;}
+        public string PrivateKey {get; set;} = null;
 
         /// <summary> The xarcade user's blockchain generated public key </summary>
-        public string PublicKey {get; set;}
+        public string PublicKey {get; set;} = null;
         
         /// <summary> The xarcade user's account creation date </summary>
         public DateTime Created {get; set;}

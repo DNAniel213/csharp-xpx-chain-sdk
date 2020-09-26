@@ -93,6 +93,8 @@ namespace Xarcade.Application.Xarcade
             }
             return tokentransaction;
         }
+
+        
         public async Task<List<TokenDto>> GetTokenListAsync(string userId)
         {
             if (String.IsNullOrWhiteSpace(userId))
@@ -138,6 +140,38 @@ namespace Xarcade.Application.Xarcade
             }
 
             return tokendtolist;
+        }
+
+        public async Task<List<GameDto>> GetGameListAsync(string userId)
+        {
+            if (String.IsNullOrWhiteSpace(userId))
+            {
+                return null;
+            }
+            
+            List<GameDto> gameDtoList = new List<GameDto>();
+
+            Owner ownerdto = dataAccessProximaX.LoadOwner(userId);
+            var gameList = dataAccessProximaX.LoadNamespaceList(userId);
+
+            foreach (var game in gameList)
+            {
+                var gamedto = new GameDto
+                {
+                    GameId = game.NamespaceId,
+                    Name   = game.Domain,
+                    Owner  = game.Owner.UserID,
+                    Expiry = game.Expiry
+
+                };
+
+                gameDtoList.Add(gamedto);
+            }
+
+            if(gameDtoList.Count <= 0)
+                return null;
+
+            return gameDtoList;
         }
         //create xarcade token
         public async Task<TokenTransactionDto> CreateXarTokenAsync(XarcadeTokenDto xar)
@@ -319,6 +353,7 @@ namespace Xarcade.Application.Xarcade
                         Domain          = createGame.gameName.Domain,
                         LayerOne        = createGame.gameName.LayerOne,
                         LayerTwo        = createGame.gameName.LayerTwo,
+                        OwnerId         = ownerdto.UserID,
                         Owner           = createGame.gameName.Owner,
                         Expiry          = createGame.gameName.Expiry,
                         Created         = createGame.gameName.Created

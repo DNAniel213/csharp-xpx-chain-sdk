@@ -254,6 +254,23 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }
 
+        public List<Namespace> LoadNamespaceList(string ownerId)
+        {
+            var namespaceListBson = portal.ReadCollection("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("OwnerId", ownerId), FilterOperator.EQUAL));
+            if(namespaceListBson != null)//if the list exists
+            {
+                var namespaceList = new List<Namespace>();
+                foreach(BsonDocument doc in namespaceListBson)
+                {
+                    Namespace nmspc = BsonToModel.BsonToGameDTO(doc);
+                    namespaceList.Add(nmspc);
+                }
+                return namespaceList;
+            }
+            
+            return null;
+        }
+
 
 
         public bool UpdateXarcadeUser(XarcadeUser user)

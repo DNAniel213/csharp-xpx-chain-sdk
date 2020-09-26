@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA5MDkxOTksImV4cCI6MTYwMDkxMDA5OSwiaWF0IjoxNjAwOTA5MTk5fQ.LWEQp3f7aeTFXD4ILt4ntm-oapF_VsxObsGp54H4prc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjQ2MzAsImV4cCI6MTYwMTAyNTUzMCwiaWF0IjoxNjAxMDI0NjMwfQ.X6Hj41iO3ua214qE2SYJdUg5gqPM2xSN3d8QXMrltJo",
 							"type": "string"
 						}
 					]
@@ -30,7 +30,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/token/generate/token?name=TestCoinDane_1&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"raw": "https://localhost:5001/token/generate/token?name=Danetestcoin80&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -44,7 +44,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "TestCoinDane_1"
+							"value": "Danetestcoin80"
 						},
 						{
 							"key": "owner",
@@ -72,7 +72,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA5NTA3NTUsImV4cCI6MTYwMDk1MTY1NSwiaWF0IjoxNjAwOTUwNzU1fQ.rk3LAKWp70rIBvuXf3eoB2FLACiDIdr6y0yKjdDZ9-s",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjI1NjAsImV4cCI6MTYwMTAyMzQ2MCwiaWF0IjoxNjAxMDIyNTYwfQ.0tAvRn5HqHMB9HMzsUQwjkb5_1I4ImsPT6w9osCrrF4",
 							"type": "string"
 						}
 					]
@@ -89,7 +89,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/token/token?tokenId=ea630472-7874-4095-baf4-2e2da652e3c9",
+					"raw": "https://localhost:5001/token/token?tokenId=9a5c9bdf-7d03-4cd4-8907-f57478620890",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -107,7 +107,7 @@
 						},
 						{
 							"key": "tokenId",
-							"value": "ea630472-7874-4095-baf4-2e2da652e3c9"
+							"value": "9a5c9bdf-7d03-4cd4-8907-f57478620890"
 						}
 					]
 				},
@@ -123,7 +123,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA5MDkxOTksImV4cCI6MTYwMDkxMDA5OSwiaWF0IjoxNjAwOTA5MTk5fQ.LWEQp3f7aeTFXD4ILt4ntm-oapF_VsxObsGp54H4prc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwODg0MzksImV4cCI6MTYwMTA4OTMzOSwiaWF0IjoxNjAxMDg4NDM5fQ.lYyo4B26toQdF-texpsLLJ6T3OHI5KxOrSdIGwBN8h4",
 							"type": "string"
 						}
 					]
@@ -140,7 +140,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/token/generate/game?name=newnewnewgame1&duration=10000&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"raw": "https://localhost:5001/token/generate/game?name=bestgameeverseasontwo&duration=10000&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -154,7 +154,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "newnewnewgame1"
+							"value": "bestgameeverseasontwo"
 						},
 						{
 							"key": "duration",
@@ -385,7 +385,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA5NDkwMzIsImV4cCI6MTYwMDk0OTkzMiwiaWF0IjoxNjAwOTQ5MDMyfQ.X93fwmqVTSnevFuyjBd0qfetP5t0X-SGSg_8PYYkrBw",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjI3NDAsImV4cCI6MTYwMTAyMzY0MCwiaWF0IjoxNjAxMDIyNzQwfQ.zaM5Erxd5ZhARLdT043LTnhEwh-qqi2nxe4olf_yBGc",
 							"type": "string"
 						}
 					]
@@ -393,7 +393,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/token/modify/supply?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&tokenId=ea630472-7874-4095-baf4-2e2da652e3c9&supply=3100",
+					"raw": "https://localhost:5001/token/modify/supply?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&tokenId=40df0862-c156-4f88-ae6d-a5d113448c38&supply=500",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -412,12 +412,12 @@
 						},
 						{
 							"key": "tokenId",
-							"value": "ea630472-7874-4095-baf4-2e2da652e3c9",
+							"value": "40df0862-c156-4f88-ae6d-a5d113448c38",
 							"description": "token to change supplyz TestCoinDane"
 						},
 						{
 							"key": "supply",
-							"value": "3100",
+							"value": "500",
 							"description": "amount to add/subtract"
 						}
 					]
@@ -433,7 +433,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA4NzQ4MTAsImV4cCI6MTYwMDg3NTcxMCwiaWF0IjoxNjAwODc0ODEwfQ.JALcvvMvP1WfglmCEArNr8bnZl-s3KFWO98YQF-0xW8",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjE4MzUsImV4cCI6MTYwMTAyMjczNSwiaWF0IjoxNjAxMDIxODM1fQ.XzFEK3s06dWdCwvSNd6whQ9ETocJL4vZC9u9eKHR0_c",
 							"type": "string"
 						}
 					]
@@ -441,7 +441,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/token/game?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&gameId=18046016388415547510",
+					"raw": "https://localhost:5001/token/game?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&gameId=17705762521426290009",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -458,7 +458,7 @@
 						},
 						{
 							"key": "gameId",
-							"value": "18046016388415547510"
+							"value": "17705762521426290009"
 						}
 					]
 				}
@@ -473,7 +473,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA5MDkxOTksImV4cCI6MTYwMDkxMDA5OSwiaWF0IjoxNjAwOTA5MTk5fQ.LWEQp3f7aeTFXD4ILt4ntm-oapF_VsxObsGp54H4prc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjIzMjEsImV4cCI6MTYwMTAyMzIyMSwiaWF0IjoxNjAxMDIyMzIxfQ.y6_zZsEX7O0uz7jrmwauBHFALaPbO0C83PNLvbI6nhU",
 							"type": "string"
 						}
 					]
@@ -481,7 +481,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/token/register/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&gameId=17705762521426290009&tokenId=ea630472-7874-4095-baf4-2e2da652e3c9",
+					"raw": "https://localhost:5001/token/register/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&gameId=17705762521426290009&tokenId=40df0862-c156-4f88-ae6d-a5d113448c38",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -505,7 +505,7 @@
 						},
 						{
 							"key": "tokenId",
-							"value": "ea630472-7874-4095-baf4-2e2da652e3c9",
+							"value": "40df0862-c156-4f88-ae6d-a5d113448c38",
 							"description": "TestCoinDane token ID"
 						}
 					]
@@ -529,7 +529,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/transaction/send/token/?senderId=b5fe5a46-0728-490f-8e25-8a4209aff1c2&receiverId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&tokenId=ea630472-7874-4095-baf4-2e2da652e3c9&amount=24&message=testmessage",
+					"raw": "https://localhost:5001/transaction/send/token/?senderId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&receiverId=b5fe5a46-0728-490f-8e25-8a4209aff1c2&tokenId=ea630472-7874-4095-baf4-2e2da652e3c9&amount=18&message=testmessage",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -544,12 +544,12 @@
 					"query": [
 						{
 							"key": "senderId",
-							"value": "b5fe5a46-0728-490f-8e25-8a4209aff1c2",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
 							"description": "dnaniel213"
 						},
 						{
 							"key": "receiverId",
-							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+							"value": "b5fe5a46-0728-490f-8e25-8a4209aff1c2",
 							"description": "john@doe"
 						},
 						{
@@ -559,11 +559,83 @@
 						},
 						{
 							"key": "amount",
-							"value": "24"
+							"value": "18"
 						},
 						{
 							"key": "message",
 							"value": "testmessage"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjQ2MzAsImV4cCI6MTYwMTAyNTUzMCwiaWF0IjoxNjAxMDI0NjMwfQ.X6Hj41iO3ua214qE2SYJdUg5gqPM2xSN3d8QXMrltJo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/token/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwODg0MzksImV4cCI6MTYwMTA4OTMzOSwiaWF0IjoxNjAxMDg4NDM5fQ.lYyo4B26toQdF-texpsLLJ6T3OHI5KxOrSdIGwBN8h4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/game/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"game",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
 						}
 					]
 				}

@@ -9,13 +9,13 @@ namespace Xarcade.Domain.ProximaX
     public class Transaction
     {
         /// <summary> The hash code of the transaction. </summary>
-        public string Hash {get; set;}
+        public string Hash {get; set;} = null;
 
         /// <summary> The height of the transaction. </summary>
-        public ulong Height {get; set;}
+        public ulong Height {get; set;} = 0;
 
         /// <summary> The asset of the transaction. </summary>
-        public Asset Asset {get; set;}
+        public Asset Asset {get; set;} = null;
 
         /// <summary> The date of the transaction. </summary>
         public DateTime Created {get; set;}
