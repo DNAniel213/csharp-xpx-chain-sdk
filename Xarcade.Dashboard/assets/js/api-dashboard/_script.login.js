@@ -3,10 +3,10 @@ const redirectPage = '../api-dashboard/dashboard.html';
 
 function loginUser()
 {
-    const loginUserInput     = document.getElementById('username');
-    const loginPasswordInput = document.getElementById('password');
+    let loginUserInput     = document.getElementById('username');
+    let loginPasswordInput = document.getElementById('password');
 
-    const item = {
+    let item = {
         username: loginUserInput.value,
         password: loginPasswordInput.value,
     }

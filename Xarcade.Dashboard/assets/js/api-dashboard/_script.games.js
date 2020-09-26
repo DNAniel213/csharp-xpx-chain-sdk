@@ -34,7 +34,6 @@ function addGame()
         .then(data => {
             if (data['message'] === 'Transaction Pending!'){
                 displayGames(data);
-                console.log('Something');
             }
         })
         .catch(error => console.error('Unable to add a game', error));
