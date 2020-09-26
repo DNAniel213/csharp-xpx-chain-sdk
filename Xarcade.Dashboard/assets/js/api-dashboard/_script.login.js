@@ -20,6 +20,7 @@ function loginUser()
         .then(data => {
             if (data['message'] === 'Ok'){
                 localStorage.setItem('userData', JSON.stringify(data['authenticationData']['account']));
+<<<<<<< HEAD
                 localStorage.setItem('token', JSON.stringify(data['authenticationData']['jwtToken']));
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -28,6 +29,9 @@ function loginUser()
 >>>>>>> 579df66... login, token POST integration
 =======
 >>>>>>> bc94152... create game POST integration
+=======
+                localStorage.setItem('jwtToken', JSON.stringify(data['authenticationData']['jwtToken']));
+>>>>>>> ffe61e4... PUT integration
                 redirect: window.location.replace(redirectPage);
             }else{
                 alert(data['message']);
