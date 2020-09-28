@@ -39,6 +39,17 @@ namespace Xarcade.Infrastructure.Repository
             return userDTO;
         }
 
+        public static Transaction BsonToTransactionDTO(BsonDocument transaction)
+        {
+            var transactionDTO = new Transaction();
+            transactionDTO.Hash = transaction["Hash"].AsString;
+            transactionDTO.Height = Convert.ToUInt64(transaction["Height"].AsInt64);
+            if(!transaction["Asset"].IsBsonNull)
+                transactionDTO.Asset = BsonToTokenDTO(transaction["Asset"].AsBsonDocument);
+            transactionDTO.Created = transaction["Created"].AsDateTime;
+            return transactionDTO;
+        }
+
         public static Owner BsonToOwnerDTO(BsonDocument owner)
         {
             var ownerDTO = new Owner();

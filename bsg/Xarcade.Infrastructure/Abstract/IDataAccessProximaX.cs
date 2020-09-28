@@ -38,5 +38,6 @@ namespace Xarcade.Infrastructure.Abstract
         List<Namespace> LoadNamespaceList(string ownerId);
         Boolean CheckExistNamespace(string namespaceName);
         Boolean CheckExistToken(string tokenName);
+        Transaction LoadTransaction(string hash);
     }
 }
