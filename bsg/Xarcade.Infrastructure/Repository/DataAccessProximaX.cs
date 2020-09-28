@@ -148,6 +148,20 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }   
 
+        public Transaction LoadTransaction(string hash)
+        {
+            var transactionBson = portal.ReadDocument("Transactions", portal.CreateFilter(new KeyValuePair<string, string>("Hash", hash), FilterOperator.EQUAL));
+
+            if(transactionBson!=null) //if account exists
+            {
+                Transaction transactionDTO = BsonToModel.BsonToTransactionDTO(transactionBson);
+
+                return transactionDTO;
+            }
+
+            return null;
+        }
+
         public XarcadeUser LoadXarcadeUser(XarcadeUserSearchKey searchKey)
         {
             string key = null;
@@ -270,6 +284,7 @@ namespace Xarcade.Infrastructure.Repository
             
             return null;
         }
+
 
 
 

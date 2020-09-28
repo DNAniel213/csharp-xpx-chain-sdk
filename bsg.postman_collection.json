@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjQ2MzAsImV4cCI6MTYwMTAyNTUzMCwiaWF0IjoxNjAxMDI0NjMwfQ.X6Hj41iO3ua214qE2SYJdUg5gqPM2xSN3d8QXMrltJo",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzI1MzcsImV4cCI6MTYwMTI3MzQzNywiaWF0IjoxNjAxMjcyNTM3fQ.N_-DvRq5cI3wuGYr6fTR0IZWfxeo-KwOhV8tFT4yBxc",
 							"type": "string"
 						}
 					]
@@ -30,7 +30,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/token/generate/token?name=Danetestcoin80&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"raw": "https://localhost:5001/token/generate/token?name=Danetestcoin89&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -44,7 +44,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Danetestcoin80"
+							"value": "Danetestcoin89"
 						},
 						{
 							"key": "owner",
@@ -521,7 +521,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA5NTQ3MTcsImV4cCI6MTYwMDk1NTYxNywiaWF0IjoxNjAwOTU0NzE3fQ.oEWtQle2ReeMRezP4MUCWhV8XRzdjmXtemDze1JRaY0",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzI1MzcsImV4cCI6MTYwMTI3MzQzNywiaWF0IjoxNjAxMjcyNTM3fQ.N_-DvRq5cI3wuGYr6fTR0IZWfxeo-KwOhV8tFT4yBxc",
 							"type": "string"
 						}
 					]
@@ -529,7 +529,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5001/transaction/send/token/?senderId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&receiverId=b5fe5a46-0728-490f-8e25-8a4209aff1c2&tokenId=ea630472-7874-4095-baf4-2e2da652e3c9&amount=18&message=testmessage",
+					"raw": "https://localhost:5001/transaction/send/token/?senderId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&receiverId=b5fe5a46-0728-490f-8e25-8a4209aff1c2&tokenId=de1beed6-a03c-4bfc-9b99-09d0005d9b11&amount=18&message=testmessage",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -554,7 +554,7 @@
 						},
 						{
 							"key": "tokenId",
-							"value": "ea630472-7874-4095-baf4-2e2da652e3c9",
+							"value": "de1beed6-a03c-4bfc-9b99-09d0005d9b11",
 							"description": "TestCoinDane_1"
 						},
 						{
@@ -636,6 +636,59 @@
 						{
 							"key": "userId",
 							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzM2NTMsImV4cCI6MTYwMTI3NDU1MywiaWF0IjoxNjAxMjczNjUzfQ.REIIidMftPwG8zyhQSzcr6OpnURGegPydv0H6qcjczM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/transaction/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"transaction",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						},
+						{
+							"key": "supply",
+							"value": "1000",
+							"disabled": true
 						}
 					]
 				}

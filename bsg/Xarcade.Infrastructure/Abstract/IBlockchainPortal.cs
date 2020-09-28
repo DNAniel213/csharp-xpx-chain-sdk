@@ -112,6 +112,6 @@ namespace Xarcade.Infrastructure.Abstract
         /// Retrieves the account information
         /// </summary>
         Task<Account> GetAccountInformationAsync(string address);
-
+        Task<List<Transaction>> GetTransactionListAsync(string walletAddress);
     }
 }

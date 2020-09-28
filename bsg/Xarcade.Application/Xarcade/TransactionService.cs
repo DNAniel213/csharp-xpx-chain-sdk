@@ -9,6 +9,7 @@ using Xarcade.Application.Xarcade.Models.Account;
 using Xarcade.Application.Xarcade.Models.Token;
 using Xarcade.Application.Xarcade.Models.Transaction;
 
+using System.Collections.Generic;
 
 namespace Xarcade.Application.Xarcade
 {
@@ -80,7 +81,6 @@ namespace Xarcade.Application.Xarcade
             //check if the transaction received is correct before saving to DB.
             if (sendtokentransaction == null)
             {
-                
                 _logger.LogError("The transaction does not exist.");
                 return null;
             }
@@ -215,7 +215,7 @@ namespace Xarcade.Application.Xarcade
 
             //Save Transaction in mongodb
             dataAccessProximaX.SaveTransaction(sendxpxtransaction); 
-           
+
             var tokentransactiondto = new TokenTransactionDto
             {
                 Status = 0, // @John for Get Status from Monitor Transaction via Listeners
@@ -227,6 +227,40 @@ namespace Xarcade.Application.Xarcade
 
             return tokentransactiondto;
         }
+
+
+
+        public async Task<List<TokenTransactionDto>> GetTransactionListAsync(string userId)
+        {
+            if (String.IsNullOrWhiteSpace(userId))
+            {
+                return null;
+            }
+
+            var user = dataAccessProximaX.LoadOwner(userId);
+            var transactionList = new List<TokenTransactionDto>();
+            var blockchainTransactions = await blockchainPortal.GetTransactionListAsync(user.WalletAddress);
+
+            if(blockchainTransactions!=null)
+            {
+                foreach(Transaction iTransaction in blockchainTransactions)
+                {
+                    var transaction = new TokenTransactionDto()
+                    {
+                        Status = State.Confirmed,
+                        Hash = iTransaction.Hash,
+                        BlockNumber = iTransaction.Height,
+                        Created = iTransaction.Created
+                    };
+
+                    transactionList.Add(transaction);
+                }
+            }
+
+            if(transactionList.Count > 0)
+                return transactionList;
+            else return null;
+        } 
     }
 
 }

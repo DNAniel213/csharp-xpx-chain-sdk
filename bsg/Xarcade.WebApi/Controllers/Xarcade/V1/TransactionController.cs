@@ -20,6 +20,9 @@ using Xarcade.Application.Authentication;
 using Xarcade.Application.Authentication.Models;
 using Org.BouncyCastle.Ocsp;
 using System;
+using System.Collections.Generic;
+
+
 namespace Xarcade.WebApi.Controllers.Xarcade.V1
 {
     public class TransactionController : ControllerBase
@@ -94,6 +97,52 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             return response;
 
         }
+
+        [HttpGet]
+        [Route(Routes.Transactions)]
+        public async Task<List<TransactionViewModel>> GetTransactionList([FromQuery]string userId)
+        {
+
+            var transactions = new List<TransactionViewModel>();
+            if(String.IsNullOrWhiteSpace(userId) ) 
+            {
+                return null;
+            }
+
+            var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, userId);
+
+            if (authorizedUser == null)
+            {
+                //TODO add LOGGER
+                return null;
+            }
+
+            if (!string.Equals(authorizedUser.UserId, userId))
+            {
+                //TODO add LOGGER
+                return null;
+            }
+
+            var transactionList = await transactionService.GetTransactionListAsync(userId);
+            if(transactionList != null)
+            {
+                foreach(var iTransaction in transactionList)
+                {
+                    var transaction = new TransactionViewModel
+                    {
+                        Hash = iTransaction.Hash,
+                        Created = iTransaction.Created,
+                        Status = "Confirmed"
+                    };
+
+                    transactions.Add(transaction);
+                }
+            }
+
+            return transactions;
+
+        }
+
 
 
 
