@@ -21,6 +21,10 @@ namespace Xarcade.WebApi
 
         
         public const string SendToken = "transaction/send/token";
+        public const string Transactions = "transaction";
+
+
+
         public const string Register = "xarcadeaccount/register"; //works
         public const string Authenticate = "xarcadeaccount/login";  //incomplete
         public const string VerifyEmail = "xarcadeaccount/verifyemail"; //works

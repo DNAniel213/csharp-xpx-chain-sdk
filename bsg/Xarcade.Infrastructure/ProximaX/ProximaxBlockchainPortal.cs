@@ -77,10 +77,10 @@ namespace Xarcade.Infrastructure.ProximaX
                     return null;
                 }
                 
-                await siriusClient.TransactionHttp.Announce(signedTransaction);
+                var announcedTransaction = await siriusClient.TransactionHttp.Announce(signedTransaction);
 
                 //transaction = await GetTransactionInformation(signedTransaction.Hash);
-                xarTransaction.Hash = signedTransaction.Hash;
+                xarTransaction.Hash = announcedTransaction.GetHashCode().ToString();
             }
             catch(Exception e)
             {
@@ -221,7 +221,7 @@ namespace Xarcade.Infrastructure.ProximaX
             }
                 
             XarcadeModel.Mosaic mosaic = null;
-            XarcadeModel.Transaction transaction = null;
+            XarcadeModel.Transaction tx = null;
 
             try
             {
@@ -249,7 +249,7 @@ namespace Xarcade.Infrastructure.ProximaX
                     if(account!= null && mosaicDefinitionTransaction!= null)
                     {
                         
-                        await SignAndAnnounceTransactionAsync(account, mosaicDefinitionTransaction);
+                        tx = await SignAndAnnounceTransactionAsync(account, mosaicDefinitionTransaction);
                     
                         mosaic = new XarcadeModel.Mosaic
                         {
@@ -259,15 +259,8 @@ namespace Xarcade.Infrastructure.ProximaX
                             Created  = DateTime.Now,
                             Owner    = param.Account,
                         };
+                        tx.Asset = mosaic;
 
-                        transaction = new XarcadeModel.Transaction
-                        {
-                            Hash    = mosaicDefinitionTransaction.GetHashCode().ToString(),
-                            Height  = 1,
-                            Asset   = mosaic,
-                            Created = DateTime.Now,
-                        };
-                        
                     }
                 }
                 else return (null,null);
@@ -280,7 +273,7 @@ namespace Xarcade.Infrastructure.ProximaX
                 //TODO research on possible errors to handle
             }
 
-            return (mosaic,transaction) ;
+            return (mosaic,tx) ;
         }
 
         public async Task<XarcadeModel.Transaction> ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param)
@@ -768,6 +761,39 @@ namespace Xarcade.Infrastructure.ProximaX
             }
             
             return transaction;
+        }
+
+        public async Task<List<XarcadeModel.Transaction>> GetTransactionListAsync(string walletAddress)
+        {
+            var transactions = new List<XarcadeModel.Transaction>();
+
+            try
+            {
+                var networkType = await siriusClient.NetworkHttp.GetNetworkType();
+                Address address = new Address(walletAddress, networkType);
+                AccountInfo accountInfo = await siriusClient.AccountHttp.GetAccountInfo(address);
+
+                var transactionList = await siriusClient.AccountHttp.Transactions(accountInfo.PublicAccount);
+
+                foreach(Transaction transaction in transactionList)
+                {
+
+                    var iTransaction = new XarcadeModel.Transaction
+                    {
+                        Hash = transaction.GetHashCode().ToString(),
+                        Height = transaction.TransactionInfo.Height,
+                        Created = transaction.Deadline.GetLocalDateTime()
+                    };
+                    transactions.Add(iTransaction);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+                return null;
+            }
+
+            return transactions;
         }
 
 //FIXME no way to get transaction height @Fixed by Janyl
