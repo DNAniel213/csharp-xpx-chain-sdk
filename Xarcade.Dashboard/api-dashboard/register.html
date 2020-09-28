@@ -145,15 +145,14 @@ Coded by www.creative-tim.com
                   </div>
                 </div>
                 <div class="card-body ">
-                  <form class="form" method=""
-                    action="https://demos.creative-tim.com/paper-dashboard-2-pro/examples/pages/register.html">
+                  <form class="form" method="POST" id="register-form" onsubmit="registerUser()" action="javascript:void(0)">
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="nc-icon nc-single-02"></i>
                         </span>
                       </div>
-                      <input type="text" class="form-control" placeholder="First Name...">
+                      <input type="text" class="form-control" placeholder="First Name..." id="first-name">
                     </div>
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -161,7 +160,7 @@ Coded by www.creative-tim.com
                           <i class="nc-icon nc-circle-10"></i>
                         </span>
                       </div>
-                      <input type="text" placeholder="Last Name..." class="form-control">
+                      <input type="text" placeholder="Last Name..." class="form-control" id="last-name">
                     </div>
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -169,21 +168,45 @@ Coded by www.creative-tim.com
                           <i class="nc-icon nc-email-85"></i>
                         </span>
                       </div>
-                      <input type="email" class="form-control" placeholder="Email...">
+                      <input type="email" class="form-control" placeholder="Email..." id="email">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Username..." id="user-name">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-key-25"></i>
+                        </span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Password..." id="password">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-key-25"></i>
+                        </span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Confirm..." id="password-confirm">
                     </div>
                     <div class="form-check text-left">
                       <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" checked="">
+                        <input class="form-check-input" type="checkbox" checked="" id="terms-conditions">
                         <span class="form-check-sign"></span>
                         I agree to the <a
                           href="">terms
                           and conditions</a>.
                       </label>
                     </div>
+                    <div class="card-footer ">
+                      <button type="submit" class="btn btn-info btn-round">Get Started</a>
+                    </div>
                   </form>
-                </div>
-                <div class="card-footer ">
-                  <a href="javascript:;" class="btn btn-info btn-round">Get Started</a>
                 </div>
               </div>
             </div>
@@ -213,7 +236,7 @@ Coded by www.creative-tim.com
       <div class="full-page-background" style="background-image: url(../assets/img/auth-bg.png) "></div>
     </div>
   </div>
-
+  <script src="../assets/js/api-dashboard/_script.register.js" asp-append-version="true"></script>
 </body>
 
 </html>

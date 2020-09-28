@@ -41,50 +41,11 @@ function addToken()
     let tokenSupplyTextbox   = document.getElementById('token-supply');
     let tokenNamespaceSelect = document.getElementById('token-namespace');
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-    let userData = JSON.parse(localStorage.getItem('userData'));
-    let jwtToken = JSON.parse(localStorage.getItem('token'));
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-=======
->>>>>>> ffe61e4... PUT integration
     let params = new URLSearchParams({
         name:  tokenNameTextbox.value,
-=======
-    let cookie   = JSON.parse(localStorage.getItem('cookie'));
-    
-    let params = new URLSearchParams({
-        name: tokenNameTextbox.value,
->>>>>>> 579df66... login, token POST integration
-=======
-    
-    let params = new URLSearchParams({
-        name:  tokenNameTextbox.value,
->>>>>>> bc94152... create game POST integration
-=======
-    let params = new URLSearchParams({
-        name:  tokenNameTextbox.value,
->>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
         owner: userData.userId
         //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
     });
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    let item = {
-        name: tokenNameTextbox.value,
-        owner: userData.userId
-    }
-
->>>>>>> 579df66... login, token POST integration
-=======
->>>>>>> bc94152... create game POST integration
-=======
->>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
     fetch(postToken + '?' + params.toString(), {
         method: 'POST',
         headers: {
@@ -94,37 +55,14 @@ function addToken()
     })
         .then(response => response.json())
         .then(data => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            console.log(data['message']);z
->>>>>>> 579df66... login, token POST integration
-=======
->>>>>>> bc94152... create game POST integration
-=======
->>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
             if (data['message'] === 'Success!'){
-                //getTokens();
                 tokenNameTextbox.value     = '';
                 tokenSupplyTextbox.value   = '';
                 tokenNamespaceSelect.value = '';
             }
         })
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+        .then(() => getTokens())
         .catch(error => alert('Unable to add token', error));
-=======
-        .catch(error => console.error('Unable to add token', error));
->>>>>>> 579df66... login, token POST integration
-=======
-        .catch(error => alert('Unable to add token', error));
->>>>>>> bc94152... create game POST integration
-=======
-        .catch(error => alert('Unable to add token', error));
->>>>>>> ffe61e4dfedfba6699b4719d31249e96a2ce95c2
-
 }
 
 function modifySupply(tokenId)
@@ -148,6 +86,21 @@ function modifySupply(tokenId)
         .then(() => getTokens());
 }
 
+function getSpecificToken(tokenId)
+{
+    let params = new URLSearchParams({
+        tokenId: tokenId
+    });
+
+    fetch(getToken + '?' + params.toString(),{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json());
+}
+
 /**
  * Displays tokens of the logged user to the webpage
  * 
@@ -155,9 +108,10 @@ function modifySupply(tokenId)
  */
 function displayTokens(tokenData)
 {
-    let tokenRow = document.getElementById('tokens');
+    let tokenRow  = document.getElementById('tokens');
 
     tokenData.forEach(item => {
+        
         let addDiv   = '<div class="col-lg-6 col-md-6 col-sm-6">'
                             +'<div class="card card-stats">'
                             +'<div class="card-body ">'
@@ -181,10 +135,14 @@ function displayTokens(tokenData)
                                 +'<hr>'
                                 +'<div class="row">'
                                 +'<div class="col-lg-4">'
-                                    +'<div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal">'
+                                    // +'<div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal">'
+                                    // +'<i class="nc-icon nc-simple-add"></i>'
+                                    // +'Add supply'
+                                    // +'</div>'
+                                    +'<button type="button" class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal" id="addSupply">'
                                     +'<i class="nc-icon nc-simple-add"></i>'
                                     +'Add supply'
-                                    +'</div>'
+                                    +'</button>'
                                 +'</div>'
                                 +'<div class="col-lg-4">'
                                     +'<div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">'
@@ -202,11 +160,7 @@ function displayTokens(tokenData)
                             +'</div>'
                             +'</div>'
                         +'</div>';
-
-        //let addSupply = document.getElementById('supply-button');
-        //addSupply.setAttribute('onclick', `modifySupply(${item.tokenId})`);
-        //addSupply.setAttribute('onsubmit', item.tokenId);
-        //console.log(addSupply);
+        
         $(tokenRow).append(addDiv);
     });
     
