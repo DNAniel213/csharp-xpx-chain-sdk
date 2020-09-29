@@ -9,11 +9,12 @@ using Xarcade.Application.Xarcade.Models.Account;
 using Xarcade.Application.Xarcade.Models.Token;
 using Xarcade.Application.Xarcade.Models.Transaction;
 
+using System.Collections.Generic;
 
 namespace Xarcade.Application.Xarcade
 {
    
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
         public readonly IBlockchainPortal blockchainPortal;
         public readonly IDataAccessProximaX dataAccessProximaX;
@@ -27,7 +28,7 @@ namespace Xarcade.Application.Xarcade
         /// <summary>
         /// Sends a custom token from user to another user
         /// </summary>
-        public async Task<TokenTransactionDto> SendTokenAsync(TokenDto token,AccountDto sender, AccountDto receiver)
+        public async Task<TokenTransactionDto> SendTokenAsync(TokenDto token,string sender, string receiver, string message)
         {
             //1.Check if user exist.
             if(sender == null || receiver == null)
@@ -39,34 +40,44 @@ namespace Xarcade.Application.Xarcade
             // @Janyl Separate Task: XARA-701 
 
             //3. Check if token is enough against the amount to be sent.
-            var tokenBalance = await blockchainPortal.GetMosaicAsync(token.TokenId);
-            if (tokenBalance.Quantity < token.Quantity )
-            {
-                _logger.LogError("Not enough tokens to send!!");
-                return null;
-            }
+            var tokenInfo = dataAccessProximaX.LoadMosaic(token.TokenId);
 
-            var SenderUserDB = dataAccessProximaX.LoadUser(sender.UserID); // account from database
-            var ReceiverUserDB = dataAccessProximaX.LoadUser(receiver.UserID); //account from database
+
+
+            var SenderUserDB = dataAccessProximaX.LoadOwner(sender); // account from database
+            var ReceiverUserDB = dataAccessProximaX.LoadOwner(receiver); //account from database
+            
 
             //check return from DB if null or not then return error
             if (SenderUserDB == null || ReceiverUserDB == null)
             {
-                _logger.LogError("A account does not exist!!");
+                _logger.LogError("Account does not exist!!");
                 return null;
             }
  
+            var mosaicList = await blockchainPortal.GetMosaicListAsync(SenderUserDB.WalletAddress);
+
+            foreach (Mosaic mosaic in mosaicList)
+            {
+                if(mosaic.MosaicID == tokenInfo.MosaicID)
+                {
+                    if(mosaic.Quantity < token.Quantity)
+                    {
+                        _logger.LogError("Not enough tokens to send!!");
+                        return null;
+                    }
+                }
+            }
+
             var param = new SendMosaicParams
             {
-                MosaicID = token.TokenId, 
+                MosaicID = tokenInfo.MosaicID, 
                 Sender = SenderUserDB,
-                RecepientAddress = ReceiverUserDB.WalletAddress,
+                RecipientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
-                Message = "PloxWork.jpeg"
+                Message = message
             };
-            
             Transaction sendtokentransaction = await blockchainPortal.SendMosaicAsync(param); 
-            
             //check if the transaction received is correct before saving to DB.
             if (sendtokentransaction == null)
             {
@@ -78,7 +89,7 @@ namespace Xarcade.Application.Xarcade
 
             var tokentransactiondto = new TokenTransactionDto
             {
-                Status = 0, // @John Get Status from Monitor Transaction via Listeners
+                Status = State.Unconfirmed,
                 Hash = sendtokentransaction.Hash,
                 Token = token,
                 BlockNumber = sendtokentransaction.Height, 
@@ -124,7 +135,7 @@ namespace Xarcade.Application.Xarcade
             {
                 MosaicID = token.TokenId, 
                 Sender = SenderUserDB,
-                RecepientAddress = ReceiverUserDB.WalletAddress,
+                RecipientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
                 Message = "PloxWork.jpeg"
             };
@@ -188,7 +199,7 @@ namespace Xarcade.Application.Xarcade
             var param = new SendXpxParams
             {
                 Sender = SenderUserDB,
-                RecepientAddress = ReceiverUserDB.WalletAddress,
+                RecipientAddress = ReceiverUserDB.WalletAddress,
                 Amount =  token.Quantity,
                 Message = "PloxWork.jpeg"
             };
@@ -204,7 +215,7 @@ namespace Xarcade.Application.Xarcade
 
             //Save Transaction in mongodb
             dataAccessProximaX.SaveTransaction(sendxpxtransaction); 
-           
+
             var tokentransactiondto = new TokenTransactionDto
             {
                 Status = 0, // @John for Get Status from Monitor Transaction via Listeners
@@ -216,6 +227,40 @@ namespace Xarcade.Application.Xarcade
 
             return tokentransactiondto;
         }
+
+
+
+        public async Task<List<TokenTransactionDto>> GetTransactionListAsync(string userId)
+        {
+            if (String.IsNullOrWhiteSpace(userId))
+            {
+                return null;
+            }
+
+            var user = dataAccessProximaX.LoadOwner(userId);
+            var transactionList = new List<TokenTransactionDto>();
+            var blockchainTransactions = await blockchainPortal.GetTransactionListAsync(user.WalletAddress);
+
+            if(blockchainTransactions!=null)
+            {
+                foreach(Transaction iTransaction in blockchainTransactions)
+                {
+                    var transaction = new TokenTransactionDto()
+                    {
+                        Status = State.Confirmed,
+                        Hash = iTransaction.Hash,
+                        BlockNumber = iTransaction.Height,
+                        Created = iTransaction.Created
+                    };
+
+                    transactionList.Add(transaction);
+                }
+            }
+
+            if(transactionList.Count > 0)
+                return transactionList;
+            else return null;
+        } 
     }
 
 }

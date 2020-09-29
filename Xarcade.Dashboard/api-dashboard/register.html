@@ -1,0 +1,242 @@
+<!--
+=========================================================
+* Paper Dashboard 2 - v2.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Xarcade Web API Dashboard
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../assets/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="login-page">
+  <!-- Extra details for Live View on GitHub Pages -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+    <div class="container">
+      <div class="navbar-wrapper">
+        <div class="navbar-toggle">
+          <button type="button" class="navbar-toggler">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </button>
+        </div>
+        <a class="navbar-brand" href="javascript:;">Xarcade</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nc-icon nc-layout-11"></i>
+              About us
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="" class="nav-link">
+              <i class="nc-icon nc-book-bookmark"></i>
+              Register
+            </a>
+          </li>
+          <li class="nav-item  active ">
+            <a href="./login.html" class="nav-link">
+              <i class="nc-icon nc-tap-01"></i>
+              Login
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="wrapper wrapper-full-page ">
+    <div class="full-page section-image" filter-color="black" data-image="../assets/img/danart.png">
+      <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 ml-auto">
+              <div class="info-area info-horizontal mt-5">
+                <div class="icon icon-primary">
+                  <i class="nc-icon nc-tv-2"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Blockchain Videogames</h5>
+                  <p class="description">
+                    The Xarcade platform distributes video games that are developed based on Sirius Platform technology.
+                  </p>
+                </div>
+              </div>
+              <div class="info-area info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="nc-icon nc-lock-circle-open"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Loren Ipsum</h5>
+                  <p class="description">
+                    These games are integrated into the Sirius Platform through the use of the Xarcade Software Developer Kit (SDK) which can be downloaded by game developers from the platform.
+                  </p>
+                </div>
+              </div>
+              <div class="info-area info-horizontal">
+                <div class="icon icon-info">
+                  <i class="nc-icon nc-atom"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Dolor sit Amet</h5>
+                  <p class="description">
+                    To learn more about Xarcade please download the Xarcade Project Paper below.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mr-auto">
+              <div class="card card-signup text-center">
+                <div class="card-header ">
+                  <h4 class="card-title">Register</h4>
+                  <div class="social">
+                    <button class="btn btn-icon btn-round btn-twitter">
+                      <i class="fa fa-twitter"></i>
+                    </button>
+                    <button class="btn btn-icon btn-round btn-dribbble">
+                      <i class="fa fa-google"></i>
+                    </button>
+                    <button class="btn btn-icon btn-round btn-facebook">
+                      <i class="fa fa-facebook-f"></i>
+                    </button>
+                    <p class="card-description"> or be classical </p>
+                  </div>
+                </div>
+                <div class="card-body ">
+                  <form class="form" method="POST" id="register-form" onsubmit="registerUser()" action="javascript:void(0)">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="First Name..." id="first-name">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-circle-10"></i>
+                        </span>
+                      </div>
+                      <input type="text" placeholder="Last Name..." class="form-control" id="last-name">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-email-85"></i>
+                        </span>
+                      </div>
+                      <input type="email" class="form-control" placeholder="Email..." id="email">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Username..." id="user-name">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-key-25"></i>
+                        </span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Password..." id="password">
+                    </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-key-25"></i>
+                        </span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Confirm..." id="password-confirm">
+                    </div>
+                    <div class="form-check text-left">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" checked="" id="terms-conditions">
+                        <span class="form-check-sign"></span>
+                        I agree to the <a
+                          href="">terms
+                          and conditions</a>.
+                      </label>
+                    </div>
+                    <div class="card-footer ">
+                      <button type="submit" class="btn btn-info btn-round">Get Started</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="footer-nav">
+              <ul>
+                <li><a href="https://www.dandangames.fun" target="_blank">Xarcade</a></li>
+                <li><a href="https://www.dandangames.fun" target="_blank">ProximaX</a></li>
+                <li><a href="https://www.dandangames.fun" target="_blank">Boss Ranz</a></li>
+              </ul>
+            </nav>
+            <div class="credits ml-auto">
+              <span class="copyright">
+                © <script>
+                  document.write(new Date().getFullYear());
+                </script>, made with <i class="fa fa-heart heart"></i> by Black Spear Games
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <div class="full-page-background" style="background-image: url(../assets/img/auth-bg.png) "></div>
+    </div>
+  </div>
+  <script src="../assets/js/api-dashboard/_script.register.js" asp-append-version="true"></script>
+</body>
+
+</html>

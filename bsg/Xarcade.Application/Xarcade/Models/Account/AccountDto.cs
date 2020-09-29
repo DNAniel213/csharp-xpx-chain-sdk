@@ -4,7 +4,7 @@ namespace Xarcade.Application.Xarcade.Models.Account
     /// <summary>Xarcade Application Layer Account DTO Model</summary>
     public class AccountDto
     {
-        public long UserID {get; set;}
+        public string UserID {get; set;}
         public string WalletAddress {get; set;}
         public DateTime Created {get; set;}
 

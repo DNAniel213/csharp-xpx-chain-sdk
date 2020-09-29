@@ -170,146 +170,8 @@ Coded by www.creative-tim.com
       </nav>
       <!-- End Navbar -->
       <div class="content">
-        <div class="row">
-          <!-- Token Card -->
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-12" >
-                    <div class="text-center" style="height:100px">
-                      <img src="../assets/img/dane-icon.png" style="height:100px" class="rounded" alt="aaa">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 col-md-12">
-                    <div class="numbers text-center">
-                      <p class="card-category">DANE Coin</p>
-                      <p class="card-title">26000DANE<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr>
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal">
-                      <i class="nc-icon nc-simple-add"></i>
-                      Add supply
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
-                      <i class="nc-icon nc-send"></i>
-                      Send
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
-                    <i class="nc-icon nc-settings-gear-65"></i>
-                      Modify
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END Token Card -->
-          <!-- Token Card -->
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-12" >
-                    <div class="text-center" style="height:100px">
-                      <img src="../assets/img/bsg.jpg" style="height:100px" class="rounded" alt="aaa">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 col-md-12">
-                    <div class="numbers text-center">
-                      <p class="card-category">BSG Tokens</p>
-                      <p class="card-title">100BSGT<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr>
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#addSupplyModal">
-                      <i class="nc-icon nc-simple-add"></i>
-                      Add supply
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
-                      <i class="nc-icon nc-send"></i>
-                      Send
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
-                    <i class="nc-icon nc-settings-gear-65"></i>
-                      Modify
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END Token Card -->
-          <!-- Token Card -->
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-12" >
-                    <div class="text-center" style="height:100px">
-                      <img src="../assets/img/donkey-icon.jpg" style="height:100px" class="rounded" alt="aaa">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 col-md-12">
-                    <div class="numbers text-center">
-                      <p class="card-category">DONKEY Coin</p>
-                      <p class="card-title">539DNK<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr>
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#addSupplyModal">
-                      <i class="nc-icon nc-simple-add"></i>
-                      Add supply
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#sendSupplyModal">
-                      <i class="nc-icon nc-send"></i>
-                      Send
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="btn btn-outline-info btn-sm btn-block" data-toggle="modal" data-target="#modifyTokenModal">
-                    <i class="nc-icon nc-settings-gear-65"></i>
-                      Modify
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END Token Card -->
-          <div class="btn btn-info btn-round btn-fab btn-lg"  data-toggle="modal" data-target="#createGameModal" data-tooltip="tooltip"  data-placement="right" title="Create New Game">
+        <div class="row" id="tokens">
+          <div class="btn btn-info btn-round btn-fab btn-lg"  data-toggle="modal" data-target="#create-token-modal" data-tooltip="tooltip"  data-placement="right" title="Create Token">
             +
           </div>
           </div>
@@ -340,7 +202,7 @@ Coded by www.creative-tim.com
   </div>
 
     <!-- Create Token Modal -->
-    <div class="modal fade" id="createGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="create-token-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -351,71 +213,73 @@ Coded by www.creative-tim.com
             </button>
           </div>
           <div class="modal-body">
-            <div class="progress">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <br>
-            <div class="form-group">
-              <label>Token Name</label>
-              <input type="text" class="form-control" placeholder="Recepient ID" value="DANE Coin">
+            <form action="javascript:void(0)" onsubmit="addToken()" method="POST">
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <br>
+              <div class="form-group">
+                <label>Token Name</label>
+                <input type="text" class="form-control" placeholder="Recepient ID" id="token-name">
+              </div>
+    
+    
+              <div class="form-group">
+                <label>Token Supply</label>
+                <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" id="token-supply">
+              </div>
+  
+              <div class="form-group">
+                <label>Namespace</label>
+  
+                <select class="custom-select" id="token-namespace">
+                  <option selected>Choose a namespace to link to...</option>
+                  <option value="1">NamespaceX</option>
+                  <option value="2">Apollo</option>
+                  <option value="3">Sputnik</option>
+                </select>
+  
+              </div>
             </div>
   
+            <div class="modal-footer">
+              <label>This will cost xxx XPX</label>
   
-            <div class="form-group">
-              <label>Token Supply</label>
-              <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to send" value="0">
+              <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="create-token-button">Create Token</button>
             </div>
-
-            <div class="form-group">
-              <label>Namespace</label>
-
-              <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Choose a namespace to link to...</option>
-                <option value="1">NamespaceX</option>
-                <option value="2">Apollo</option>
-                <option value="3">Sputnik</option>
-              </select>
-
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <label>This will cost xxx XPX</label>
-
-            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal">Create Token</button>
-          </div>
+            </form>
         </div>
       </div>
     </div>
     <!-- END Create Token Modal -->
 
   <!-- Add Supply Modal -->
-  <div class="modal fade" id="addSupplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Token Supply</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-         
-          <div class="form-group">
-            <label> XPX to DANE</label>
-            <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to convert" value="0">
+    <div class="modal fade" id="addSupplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="su">Add Token Supply</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <label> This will cost ####XPX</label>
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="demo.NOTIF_NotEnoughXPXError('bottom','right')" data-dismiss="modal">Confirm</button>
+          <div class="modal-body">
+           
+            <div class="form-group">
+              <label> XPX to DANE</label>
+              <input type="number" min = "1"  step="1" class="form-control" placeholder="Enter Amount to convert" value="0" id="supplyInput">
+            </div>
+            <label> This will cost ####XPX</label>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="addSupplyConfirm">Confirm</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <!-- END Add Supply Modal -->
 
   <!-- Send Supply Modal -->
@@ -505,6 +369,10 @@ Coded by www.creative-tim.com
       // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
       demo.initChartsPages();
     });
+  </script>
+  <script src="../assets/js/api-dashboard/_script.tokens.js" asp-append-version="true"></script>
+  <script type="text/javascript">
+    getTokens();
   </script>
 </body>
 

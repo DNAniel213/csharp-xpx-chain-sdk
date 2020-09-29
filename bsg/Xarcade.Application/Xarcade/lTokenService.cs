@@ -12,7 +12,7 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string NamespaceName);
+        Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token);
 
         /// <summary>
         /// Creates game
@@ -20,6 +20,8 @@ namespace Xarcade.Application.ProximaX
         /// <param name="Game"></param>
         /// <returns></returns>
         Task<TokenTransactionDto> CreateGameAsync(GameDto Game);
+
+        Task<TokenTransactionDto> RegisterTokenAsync(TokenDto Token, GameDto Game);
 
         /// <summary>
         /// Extends game duration
@@ -40,21 +42,21 @@ namespace Xarcade.Application.ProximaX
         /// </summary>
         /// <param name="TokenId"></param>
         /// <returns></returns>
-        Task<TokenDto> GetTokenInfoAsync(long TokenId);
+        Task<TokenDto> GetTokenInfoAsync(string TokenId);
 
         /// <summary>
         /// Retrieves the information of a specific game
         /// </summary>
         /// <param name="GameId"></param>
         /// <returns></returns>
-        Task<GameDto> GetGameInfoAsync(long GameId);
+        Task<GameDto> GetGameInfoAsync(string GameId);
 
         /// <summary>
         /// Retrieves a list of tokens
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        Task<List<TokenDto>> GetTokenListAsync(long userId, long gameId);
-
+        Task<List<TokenDto>> GetTokenListAsync(string userId);
+        Task<List<GameDto>> GetGameListAsync(string userId);
     }
 }

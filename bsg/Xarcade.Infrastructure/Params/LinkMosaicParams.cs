@@ -5,10 +5,14 @@ namespace Xarcade.Infrastructure.ProximaX.Params
     public class LinkMosaicParams
     {
         /// <summary>
-        /// Account to link the mosaic from
+        /// The account linking a mosaic to a namespace.
         /// </summary>
         public Account Account {get; set;} = null;
-        public ulong MosaicID {get; set;} = 0;
+
+        /// <summary> The blockchain generated unique identifier that represents the mosaic in the ProximaX Blockchain to be linked. </summary>
+        public string MosaicID {get; set;} = null;
+        
+        /// <summary> The namespace to be linked to the mosaic. </summary>
         public Namespace Namespace {get; set;} = null;
     }
 
