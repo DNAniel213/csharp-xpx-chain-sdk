@@ -50,6 +50,14 @@ function addGame()
         .catch(error => console.error('Unable to add a game', error));
 }
 
+function extendGame(gameId)
+{
+    let params = new URLSearchParams({
+        gameId: gameId,
+        owner:  userData.userId,
+    });
+}
+
 function displayGames(gameData)
 {
     let gameRow = document.getElementById('games');
