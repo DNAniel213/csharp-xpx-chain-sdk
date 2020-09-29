@@ -44,7 +44,7 @@ function addGame()
         .then(response => response.json())
         .then(data => {
             if (data['message'] === 'Transaction Pending!'){
-                displayGames(data);
+                getGames();
             }
         })
         .catch(error => console.error('Unable to add a game', error));
@@ -53,9 +53,10 @@ function addGame()
 function displayGames(gameData)
 {
     let gameRow = document.getElementById('games');
+    let count   = 1;
 
     gameData.forEach(item => {
-        let addDiv  = '<div class="col-lg-6 col-md-6 col-sm-6">'
+        let addDiv  = '<div class="col-lg-6 col-md-6 col-sm-6" id="game-div"'+ count +'>'
                         +'<div class="card card-stats">'
                         +'<div class="card-body ">'
                             +'<div class="row">'
@@ -99,8 +100,9 @@ function displayGames(gameData)
                         +'</div>'
                         +'</div>'
                     +'</div>';
-
-        $(gameRow).append(addDiv);
-
+        if(!document.getElementById('game-div'+ count)){
+            $(gameRow).append(addDiv);
+        }
+    
     });
 }

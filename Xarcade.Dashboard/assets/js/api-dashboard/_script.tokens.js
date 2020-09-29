@@ -56,12 +56,15 @@ function addToken()
         .then(response => response.json())
         .then(data => {
             if (data['message'] === 'Success!'){
-                tokenNameTextbox.value     = '';
-                tokenSupplyTextbox.value   = '';
-                tokenNamespaceSelect.value = '';
+                $('#create-token-button').submit(function(e){
+                    e.preventDefault();
+                    $('#create-token-modal').modal('hide');
+                    return false;
+                });
+
+                getTokens();
             }
         })
-        .then(() => getTokens())
         .catch(error => alert('Unable to add token', error));
 }
 
@@ -95,10 +98,12 @@ function getSpecificToken(tokenId)
     fetch(getToken + '?' + params.toString(),{
         method: 'GET',
         headers: {
+            'Authorization': 'Bearer ' + jwtToken,
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json());
+        .then(response => response.json())
+        .then(data => console.log(data));
 }
 
 /**
@@ -108,11 +113,12 @@ function getSpecificToken(tokenId)
  */
 function displayTokens(tokenData)
 {
-    let tokenRow  = document.getElementById('tokens');
+    let tokenRow = document.getElementById('tokens');
+    let count    = 1;
 
     tokenData.forEach(item => {
         
-        let addDiv   = '<div class="col-lg-6 col-md-6 col-sm-6">'
+        let addDiv   = '<div class="col-lg-6 col-md-6 col-sm-6" id="token-div"'+ count +'>'
                             +'<div class="card card-stats">'
                             +'<div class="card-body ">'
                                 +'<div class="row">'
@@ -139,7 +145,7 @@ function displayTokens(tokenData)
                                     // +'<i class="nc-icon nc-simple-add"></i>'
                                     // +'Add supply'
                                     // +'</div>'
-                                    +'<button type="button" class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal" id="addSupply">'
+                                    +'<button type="button" class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal" id="add-supply'+ count +'">'
                                     +'<i class="nc-icon nc-simple-add"></i>'
                                     +'Add supply'
                                     +'</button>'
@@ -160,8 +166,15 @@ function displayTokens(tokenData)
                             +'</div>'
                             +'</div>'
                         +'</div>';
-        
+
+        if(!document.getElementById('token-div'+count)){
         $(tokenRow).append(addDiv);
+            document.getElementById('add-supply'+count).addEventListener('click', function(){
+                getSpecificToken(item.tokenId);
+            });
+        }
+        
+        count++;
     });
     
 }
