@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RabbitManager
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: bcf404fb-1b62-4300-814d-3d9a8eb38402
+    _serializedGuid: 1ae90e40-c642-4650-afb3-02de19a4578f
   SaveSettings:
     SaveType: 0
     SaveName: save
@@ -35,11 +35,11 @@ MonoBehaviour:
     BuildingCostIncrease: 0.15
   State:
     _earnedBuildings:
-    - _serializedGuid: 3e509c33-c84a-4368-9d23-47286aa44791
+    - _serializedGuid: 33f22699-5ddc-4df2-b6d4-36f0f038c9eb
     _earnedBuildingsCount: 02000000
     _earnedUpgrades: []
     _currencies:
-    - _serializedGuid: f805666e-a9dd-48cd-a755-8e3138ef33c5
+    - _serializedGuid: 47eb6801-3744-4364-8638-a7bae72a4032
     _currencyCurrentTotals:
     - 46.850006
     _currencyHistoricalTotals:
