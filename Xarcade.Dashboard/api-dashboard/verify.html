@@ -1,0 +1,153 @@
+<!--
+=========================================================
+* Paper Dashboard 2 - v2.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Xarcade Web API Dashboard
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../assets/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="login-page">
+  <!-- Extra details for Live View on GitHub Pages -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+    <div class="container">
+      <div class="navbar-wrapper">
+        <div class="navbar-toggle">
+          <button type="button" class="navbar-toggler">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </button>
+        </div>
+        <a class="navbar-brand" href="javascript:;">Xarcade</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nc-icon nc-layout-11"></i>
+              About us
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="./register.html" class="nav-link">
+              <i class="nc-icon nc-book-bookmark"></i>
+              Register
+            </a>
+          </li>
+          <li class="nav-item  active ">
+            <a href="./login.html" class="nav-link">
+              <i class="nc-icon nc-tap-01"></i>
+              Login
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="wrapper wrapper-full-page ">
+    <div class="full-page section-image"  data-image="../assets/img/danart.png">
+      <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+      <div class="content">
+        <div class="container">
+          <div class="col-lg-6 col-md-8 ml-auto mr-auto">
+            <form class="form" method="POST" id="login-form" onsubmit="loginUser()" action="javascript:void(0)">
+              <div class="card card-login">
+                <div class="card-header ">
+                  <div class="card-header ">
+                    <h3 class="header text-center">An email is on its way!</h3>
+                    <p class="text-center">Click on the link, or enter the code here</p>
+                  </div>
+                </div>
+                <div class="card-body ">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-single-02"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter verification code" id="verification-code">
+                  </div>
+                  
+                  <br>
+                  <div class="form-group">
+                    <div class="form-check">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <button type="submit" class="btn btn-info btn-round btn-block mb-3">Verify</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="footer-nav">
+              <ul>
+                <li><a href="https://www.dandangames.fun" target="_blank">Xarcade</a></li>
+                <li><a href="https://www.dandangames.fun" target="_blank">ProximaX</a></li>
+                <li><a href="https://www.dandangames.fun" target="_blank">Boss Ranz</a></li>
+              </ul>
+            </nav>
+            <div class="credits ml-auto">
+              <span class="copyright">
+                © <script>
+                  document.write(new Date().getFullYear());
+                </script>, made with <i class="fa fa-heart heart"></i> by Black Spear Games
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <div class="full-page-background" style="background-image: url(../assets/img/auth-bg.png) "></div>
+    </div>
+  </div>
+  <script src="../assets/js/api-dashboard/_script.login.js" asp-append-version="true"></script>
+</body>
+
+</html>

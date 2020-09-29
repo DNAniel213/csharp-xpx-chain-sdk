@@ -198,4 +198,5 @@
   text-align: center;
   left: 40vmin;
   bottom: 5vh;
+  z-index: 99;
 }

@@ -165,25 +165,24 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 return response;
             }
 
-            try
+            var ownerDto = await accountService.CreateOwnerAccountAsync(userId);
+            if(ownerDto== null)
             {
-                var ownerDto = await accountService.CreateOwnerAccountAsync(userId);
-
-                var ownerViewModel = new OwnerViewModel
-                {
-                    WalletAddress = ownerDto.WalletAddress,
-                    Name = null,
-                    Email = null,
-                    Users = null
-                };
-
-                response.Message = "Success!";
-                response.ViewModel = ownerViewModel;
-            }catch(Exception e)
-            {
-                response.Message = e.ToString();
+                response.Message = "Transaction unsuccessful";
                 response.ViewModel = null;
+                return response;
             }
+            var ownerViewModel = new OwnerViewModel
+            {
+                WalletAddress = ownerDto.WalletAddress,
+                Name = null,
+                Email = null,
+                Users = null
+            };
+
+            response.Message = "Success!";
+            response.ViewModel = ownerViewModel;
+
 
             return response;
         }
@@ -222,24 +221,23 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 return response;
             }
 
-            try
+            var userDto = await accountService.CreateUserAccountAsync(Guid.NewGuid().ToString(), ownerId);
+            if(userDto== null)
             {
-                var userDto = await accountService.CreateUserAccountAsync(Guid.NewGuid().ToString(), ownerId);
-
-                var userViewModel = new UserViewModel
-                {
-                    WalletAddress = userDto.WalletAddress,
-                    Name = null,
-                    Email = null,
-                };
-
-                response.Message = "Success!";
-                response.ViewModel = userViewModel;
-            }catch(Exception e)
-            {
-                response.Message = e.ToString();
+                response.Message = "Transaction unsuccessful";
                 response.ViewModel = null;
+                return response;
             }
+
+            var userViewModel = new UserViewModel
+            {
+                WalletAddress = userDto.WalletAddress,
+                Name = null,
+                Email = null,
+            };
+
+            response.Message = "Success!";
+            response.ViewModel = userViewModel;
 
             return response;
         }

@@ -247,18 +247,21 @@ namespace Xarcade.Application.Xarcade
             }
             return tokentransaction;
         }
-        public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token)
+        public async Task<TokenTransactionDto> CreateTokenAsync(TokenDto Token, string gameID)
         {
             if (Token == null)
             {
                 _logger.LogError("Invalid Input!!");
                 return null;
             }
+            if(dataAccessProximaX.CheckExistToken(Token.Name)) return null;
+
             TokenTransactionDto tokentransaction = null;
 
             try
             {
                 Owner ownerdto = dataAccessProximaX.LoadOwner(Token.Owner);
+                Namespace game = dataAccessProximaX.LoadNamespace(gameID);
 
                 ulong amount = Token.Quantity;
 
@@ -276,41 +279,58 @@ namespace Xarcade.Application.Xarcade
                     Account = account,
                 };
 
-                var mosaicTuple = await blockchainPortal.CreateMosaicAsync(mosaicparam);
-
-                Mosaic mosaic = new Mosaic
+                var modifyParams = new ModifyMosaicSupplyParams
                 {
-                    AssetID     = Token.TokenId,
-                    Name        = Token.Name,
-                    Quantity    = Token.Quantity,
-                    OwnerId     = ownerdto.UserID,
-                    Owner       = ownerdto,
-                    Created     = DateTime.Now,
-                    MosaicID    = mosaicTuple.tMosaic.MosaicID,
-                };
-                this.dataAccessProximaX.SaveMosaic(mosaic);
-                this.dataAccessProximaX.SaveTransaction(mosaicTuple.tx);
-
-                var tokendto = new TokenDto
-                {
-                    TokenId     = Token.TokenId,
-                    Name        = Token.Name,
-                    Quantity    = amount,
-                    Owner       = ownerdto.UserID,
+                    Amount    =  Convert.ToInt32(Token.Quantity),
                 };
 
-                tokentransaction = new TokenTransactionDto
+                var linkParams = new LinkMosaicParams
                 {
-                    Status      = State.Unconfirmed,
-                    Hash        = mosaicTuple.tx.Hash,
-                    Token       = tokendto,
-                    BlockNumber = mosaicTuple.tx.Height, 
-                    Created     = mosaic.Created
+                    Namespace =  game,
                 };
 
+                var mosaicTuple = await blockchainPortal.AggregateCreateMosaic(mosaicparam, modifyParams, linkParams);
+                if(mosaicTuple.tx != null)
+                {
+
+
+                    var mosaic = new Mosaic
+                    {
+                        AssetID     = Token.TokenId,
+                        Name        = Token.Name,
+                        Quantity    = Token.Quantity,
+                        OwnerId     = ownerdto.UserID,
+                        Owner       = ownerdto,
+                        Created     = DateTime.Now,
+                        MosaicID    = mosaicTuple.tMosaic.MosaicID,
+                        Namespace   = game
+                    };
+                    this.dataAccessProximaX.SaveMosaic(mosaic);
+                    this.dataAccessProximaX.SaveTransaction(mosaicTuple.tx);
+
+                    var tokendto = new TokenDto
+                    {
+                        TokenId     = Token.TokenId,
+                        Name        = Token.Name,
+                        Quantity    = amount,
+                        Owner       = ownerdto.UserID,
+                    };
+
+                    tokentransaction = new TokenTransactionDto
+                    {
+                        Status      = State.Unconfirmed,
+                        Hash        = mosaicTuple.tx.Hash,
+                        Token       = tokendto,
+                        BlockNumber = mosaicTuple.tx.Height, 
+                        Created     = mosaic.Created
+                    };
+
+                }
+                else return null;
 
             }catch(Exception e)
             {
+                Console.WriteLine(e);
                 _logger.LogError(e.ToString());
                 return null;
             }
