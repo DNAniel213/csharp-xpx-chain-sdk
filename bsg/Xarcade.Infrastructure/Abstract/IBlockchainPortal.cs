@@ -113,5 +113,6 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         Task<Account> GetAccountInformationAsync(string address);
         Task<List<Transaction>> GetTransactionListAsync(string walletAddress);
+        Task<(Mosaic tMosaic, Transaction tx)> AggregateCreateMosaic(CreateMosaicParams createParams, ModifyMosaicSupplyParams modifyParams, LinkMosaicParams linkParams);
     }
 }

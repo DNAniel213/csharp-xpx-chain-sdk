@@ -70,30 +70,31 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 return response;
             }
 
-            try
+            var token = new TokenDto
             {
-                var token = new TokenDto
-                {
-                    TokenId = tokenId,
-                    Quantity = amount
-                };
-                
-                var tokenTransaction = await transactionService.SendTokenAsync(token, senderId, receiverId, message);
-                
-                var tokenTransactionViewModel = new TransactionViewModel
-                {
-                    Hash = tokenTransaction.Hash,
-                    Created = tokenTransaction.Created,
-                    Status = tokenTransaction.Status.ToString()
-                };
-
-                response.Message = "Success!";
-                response.ViewModel = tokenTransactionViewModel;
-            }catch(Exception e)
+                TokenId = tokenId,
+                Quantity = amount
+            };
+            
+            var tokenTransaction = await transactionService.SendTokenAsync(token, senderId, receiverId, message);
+            if(tokenTransaction== null)
             {
-                response.Message = e.ToString();
+                response.Message = "Transaction unsuccessful";
                 response.ViewModel = null;
+                return response;
             }
+
+            
+            var tokenTransactionViewModel = new TransactionViewModel
+            {
+                Hash = tokenTransaction.Hash,
+                Created = tokenTransaction.Created,
+                Status = tokenTransaction.Status.ToString()
+            };
+
+            response.Message = "Success!";
+            response.ViewModel = tokenTransactionViewModel;
+
             return response;
 
         }

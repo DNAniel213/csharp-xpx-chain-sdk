@@ -35,7 +35,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpPost]
         [Route(Routes.GenerateToken)]
-        public async Task<Response> CreateToken(string name,  string owner, string namespaceName)
+        public async Task<Response> CreateToken(string name,  string owner, string namespaceName, ulong quantity)
         {
 
             Response response = new Response();
@@ -67,20 +67,28 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 {
                     TokenId =  Guid.NewGuid().ToString(),
                     Name = name,
-                    Quantity = 0,
+                    Quantity = quantity,
                     Owner    = owner
                 };
 
-                var tokenTransaction = await tokenService.CreateTokenAsync(tokenDto);
+                var tokenTransaction = await tokenService.CreateTokenAsync(tokenDto, namespaceName);
 
-                var tokenTransactionViewModel = new TransactionViewModel
+                if(tokenTransaction != null)
                 {
-                    Hash = tokenTransaction.Hash,
-                    Created = tokenTransaction.Created,
-                    Status = tokenTransaction.Status + ""
-                };
-                response.Message = "Success!";
-                response.ViewModel = tokenTransactionViewModel;
+                    var tokenTransactionViewModel = new TransactionViewModel
+                    {
+                        Hash = tokenTransaction.Hash,
+                        Created = tokenTransaction.Created,
+                        Status = tokenTransaction.Status + ""
+                    };
+                    response.Message = "Success!";
+                    response.ViewModel = tokenTransactionViewModel;
+                }
+                else
+                {
+                    response.Message = "Transaction Unsuccessful!";
+                }
+
             }catch(Exception e)
             {
                 response.Message = e.ToString();
@@ -120,30 +128,30 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 return response;
             }
 
-            try
+            var gameDto = new GameDto
             {
-                var gameDto = new GameDto
-                {
-                    //GameId = Guid.NewGuid().ToString(),
-                    Name = name,
-                    Owner = owner,
-                    Expiry = DateTime.Now 
-                };
-                var game = await tokenService.CreateGameAsync(gameDto);
-
-                var transactionViewModel = new TransactionViewModel
-                {
-                    Hash = game.Hash,
-                    Created = game.Created,
-                    Status = game.Status.ToString()
-                };
-                response.Message = "Transaction Pending!";
-                response.ViewModel = transactionViewModel;
-            }catch(Exception e)
+                //GameId = Guid.NewGuid().ToString(),
+                Name = name,
+                Owner = owner,
+                Expiry = DateTime.Now 
+            };
+            var game = await tokenService.CreateGameAsync(gameDto);
+            if(game== null)
             {
-                response.Message = e.ToString();
+                response.Message = "Transaction unsuccessful";
                 response.ViewModel = null;
+                return response;
             }
+
+            var transactionViewModel = new TransactionViewModel
+            {
+                Hash = game.Hash,
+                Created = game.Created,
+                Status = game.Status.ToString()
+            };
+            response.Message = "Transaction Pending!";
+            response.ViewModel = transactionViewModel;
+
 
             return response;
         }
@@ -187,6 +195,13 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                     return response;
                 }
                 var linkTransaction = await tokenService.RegisterTokenAsync(token, game);
+                if(linkTransaction== null)
+                {
+                    response.Message = "Transaction unsuccessful";
+                    response.ViewModel = null;
+                    return response;
+                }
+
                 var transactionViewModel = new TransactionViewModel
                 {
                     Hash = linkTransaction.Hash,
@@ -232,28 +247,30 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 return response;
             }
 
-            try
+            var gameDto = new GameDto
             {
-                var gameDto = new GameDto
-                {
-                    GameId = gameId,
-                };
-                var gameTransactionDTO = await tokenService.ExtendGameAsync(gameDto, duration); 
+                GameId = gameId,
+            };
 
-                var gameTransactionViewModel = new TransactionViewModel
-                {
-                    Hash = gameTransactionDTO.Hash,
-                    Created = gameTransactionDTO.Created,
-                    Status = gameTransactionDTO.Status +"",
-                };
-                
-                response.Message = "Success!";
-                response.ViewModel = gameTransactionViewModel;
-            }catch(Exception e)
+
+            var gameTransactionDTO = await tokenService.ExtendGameAsync(gameDto, duration); 
+            if(gameTransactionDTO== null)
             {
-                response.Message = e.ToString();
+                response.Message = "Transaction unsuccessful";
                 response.ViewModel = null;
+                return response;
             }
+
+
+            var gameTransactionViewModel = new TransactionViewModel
+            {
+                Hash = gameTransactionDTO.Hash,
+                Created = gameTransactionDTO.Created,
+                Status = gameTransactionDTO.Status +"",
+            };
+            
+            response.Message = "Success!";
+            response.ViewModel = gameTransactionViewModel;
 
             return response;
         }
@@ -285,29 +302,28 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 return response;
             }
 
-            try
+            var tokenDto = new TokenDto
             {
-                var tokenDto = new TokenDto
-                {
-                    TokenId = tokenId,
-                    Quantity =  supply 
-                };
-                var tokenTransaction = await tokenService.ModifyTokenSupplyAsync(tokenDto);
+                TokenId = tokenId,
+                Quantity =  supply 
+            };
+            var tokenTransaction = await tokenService.ModifyTokenSupplyAsync(tokenDto);
 
-
-                var tokenTransactionViewModel = new TransactionViewModel
-                {
-                    Hash = tokenTransaction.Hash,
-                    Created = tokenTransaction.Created,
-                    Status = tokenTransaction.Status.ToString()
-                };
-                response.Message = "Success!";
-                response.ViewModel = tokenTransactionViewModel;
-            }catch(Exception e)
+            if(tokenTransaction== null)
             {
-                response.Message = e.ToString();
+                response.Message = "Transaction unsuccessful";
                 response.ViewModel = null;
+                return response;
             }
+
+            var tokenTransactionViewModel = new TransactionViewModel
+            {
+                Hash = tokenTransaction.Hash,
+                Created = tokenTransaction.Created,
+                Status = tokenTransaction.Status.ToString()
+            };
+            response.Message = "Success!";
+            response.ViewModel = tokenTransactionViewModel;
 
             return response;
         }
@@ -342,18 +358,14 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             }
 
 
-            try
-            {
-                var token = await tokenService.GetTokenInfoAsync(tokenId);
 
-                tokenViewModel.Name = token.Name;
-                tokenViewModel.Quantity = token.Quantity;
-                tokenViewModel.TokenId = token.TokenId;
-                
-            }catch(Exception e)
-            {
-                tokenViewModel = null;
-            }
+            var token = await tokenService.GetTokenInfoAsync(tokenId);
+            if(token== null) return null;
+
+            tokenViewModel.Name = token.Name;
+            tokenViewModel.Quantity = token.Quantity;
+            tokenViewModel.TokenId = token.TokenId;
+
 
             return tokenViewModel;
         }

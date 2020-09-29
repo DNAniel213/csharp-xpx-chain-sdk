@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzI1MzcsImV4cCI6MTYwMTI3MzQzNywiaWF0IjoxNjAxMjcyNTM3fQ.N_-DvRq5cI3wuGYr6fTR0IZWfxeo-KwOhV8tFT4yBxc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEzNjMzNjksImV4cCI6MTYwMTM2NDI2OSwiaWF0IjoxNjAxMzYzMzY5fQ.dbWXgOUJNSH8pYxN6NQlAEOq4Wf12BcFTPJC1JNTj4s",
 							"type": "string"
 						}
 					]
@@ -30,7 +30,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/token/generate/token?name=Danetestcoin89&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"raw": "https://localhost:5001/token/generate/token?name=Danetestcoin293&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&namespaceName=rapidtesting5&quantity=1000",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -44,7 +44,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Danetestcoin89"
+							"value": "Danetestcoin293"
 						},
 						{
 							"key": "owner",
@@ -52,8 +52,11 @@
 						},
 						{
 							"key": "namespaceName",
-							"value": "bsgnamespace14",
-							"disabled": true
+							"value": "rapidtesting5"
+						},
+						{
+							"key": "quantity",
+							"value": "1000"
 						}
 					]
 				},
@@ -123,7 +126,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwODg0MzksImV4cCI6MTYwMTA4OTMzOSwiaWF0IjoxNjAxMDg4NDM5fQ.lYyo4B26toQdF-texpsLLJ6T3OHI5KxOrSdIGwBN8h4",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEzNjQwODQsImV4cCI6MTYwMTM2NDk4NCwiaWF0IjoxNjAxMzY0MDg0fQ.wmPzbuKF5RbriaCZfLkURCkxEqHqPEe46QleDeklpcw",
 							"type": "string"
 						}
 					]
@@ -140,7 +143,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/token/generate/game?name=bestgameeverseasontwo&duration=10000&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"raw": "https://localhost:5001/token/generate/game?name=rapidtesting5&duration=10000&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -154,7 +157,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "bestgameeverseasontwo"
+							"value": "rapidtesting5"
 						},
 						{
 							"key": "duration",
