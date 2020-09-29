@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
+using Xarcade.Infrastructure.Cryptography;
 
 using System.Collections.Generic;
 using System;
@@ -12,6 +13,15 @@ namespace Xarcade.Infrastructure.Repository
     /// </summary>
     public static class BsonToModel
     {
+        public static Keys BsonToPrivateKey(BsonDocument keys)
+        {
+            var privatekey = new Keys();
+            privatekey.TheText = keys["TheText"].AsString;
+            privatekey.PrivateKey = keys["PrivateKey"].AsString;
+            privatekey.PublicKey = keys["PublicKey"].AsString;
+
+            return privatekey;
+        }
         public static Account BsonToAccountDTO(BsonDocument account)
         {
             var accountDTO = new Account();

@@ -9,6 +9,9 @@ public class Binder : MonoBehaviour
     public Text Name;
     public Text Cost;
     public Text Description;
+
+    public Image artworkImage;
+
     private UnlockableComponent _clickerComponent;
     private Button _button;
 
@@ -30,6 +33,7 @@ public class Binder : MonoBehaviour
         this.Name.text = availableUpgrade.name;
         this.Cost.text = availableUpgrade.Cost.ToString();
         this.Description.text = GenerateUpgradeString(availableUpgrade.UpgradePerk);
+        //gameObject.GetComponent<Image>().sprite = artworkImage;
         _button = this.GetComponent<Button>();
         _clickerManager.OnTick.AddListener(IsActive);
         IsActive();
@@ -42,6 +46,7 @@ public class Binder : MonoBehaviour
         this.Cost.text = _clickerManager.BuildingCost(availableBuilding).ToString();
         this.Description.text = string.Format("+{0} {1}s per second", availableBuilding.YieldAmount.Amount,
             availableBuilding.YieldAmount.Currency.name);
+        //artworkImage.sprite = availableBuilding.artwork;
         _button = this.GetComponent<Button>();
         _clickerManager.OnTick.AddListener(IsActive);
         IsActive();

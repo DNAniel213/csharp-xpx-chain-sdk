@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasicButton
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 7e217859-509a-4b7c-9244-6626791f94d1
+    _serializedGuid: 27fd3301-c667-4fc1-a266-85bbf7864680
   Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
   Amount: 1

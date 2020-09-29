@@ -4,6 +4,7 @@ using MongoDB.Bson;
 
 using Xarcade.Domain.ProximaX;
 using Xarcade.Domain.Authentication;
+using Xarcade.Infrastructure.Cryptography;
 
 namespace Xarcade.Infrastructure.Abstract
 {
@@ -25,6 +26,8 @@ namespace Xarcade.Infrastructure.Abstract
         bool SaveXar(Domain.ProximaX.Xarcade xarcadeDTO);
         bool SaveTransaction(Transaction transactionDTO);
         bool SaveXarcadeUser(XarcadeUser xarUserDTO);
+        bool SaveKeys(Keys keys);
+        Keys LoadKeys(string publickey);
         bool UpdateNamespaceDuration(string gameName, DateTime expiry);
         bool UpdateMosaicQuantity(string assetId, long newQuantity);
         bool UpdateXarcadeUser(XarcadeUser user);

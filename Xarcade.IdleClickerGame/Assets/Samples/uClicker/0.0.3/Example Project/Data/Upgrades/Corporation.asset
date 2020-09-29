@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corporation
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: ff720313-27cd-4681-ac03-93f4b7fbb472
+    _serializedGuid: 5b865b17-a62b-4c36-82c5-4335b00e21b6
   Unlocked: 0
   RequirementGroups:
   - GroupOperand: 0
