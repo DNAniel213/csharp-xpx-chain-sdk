@@ -2,24 +2,29 @@ using System;
 
 namespace Xarcade.Domain.ProximaX
 {
+    /// <summary>
+    /// Xarcade Asset Model
+    /// Represents the xarcade asset
+    /// </summary>
     public class Asset
     {
-        public long AssetID {get; set;}
-        public string Name {get; set;}
-        public ulong Quantity {get; set;}
-        public Account Owner {get; set;}
+        public string AssetID {get; set;} = null;
+        public string Name {get; set;} = null;
+        public ulong Quantity {get; set;} = 0;
+        public string OwnerId {get; set;} = null;
+        public Account Owner {get; set;} = null; 
         public DateTime Created {get; set;}
 
         public override string ToString()
         {
             return
-                "===Asset DTO==="  +
-                "\nAssetID: "            + AssetID +
+                "===Xarcade Asset Model==="  +
+                "\nAssetID: "      + AssetID +
                 "\nName: "         + Name + 
-                "\nQuantity: "          +Quantity + 
-                "\nOwner: "          +Owner.UserID + 
-                "\nDate Created: "   + Created +
-                "\n==End of Asset DTO==";
+                "\nQuantity: "     + Quantity + 
+                "\nOwner: "        + Owner.UserID + 
+                "\nDate Created: " + Created +
+                "\n==End of Xarcade Asset Model==";
         }
     }
 }

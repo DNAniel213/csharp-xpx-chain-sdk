@@ -26,15 +26,16 @@ namespace Xarcade.Application.Xarcade
         /// Creates the Owner account
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
-        public async Task<OwnerDto> CreateOwnerAccountAsync(long UserID)
+        public async Task<OwnerDto> CreateOwnerAccountAsync(string UserID)
         {
-            if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", UserID), FilterOperator.EQUAL)))
+            if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", UserID), FilterOperator.EQUAL)))
             {
+                Console.WriteLine("ATAY ");
                 _logger.LogError("User ID already exists!!");
                 return null;
             }
 
-            if (UserID <= 0)
+            if (String.IsNullOrWhiteSpace(UserID))
             {
                 _logger.LogError("Invalid User ID!!");
                 return null;
@@ -94,21 +95,21 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
-        public async Task<UserDto> CreateUserAccountAsync(long UserID, long OwnerID)
+        public async Task<UserDto> CreateUserAccountAsync(string userID, string ownerID)
         {
-            if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, long>("UserID", UserID), FilterOperator.EQUAL)))
+            if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", userID), FilterOperator.EQUAL)))
             {
                 _logger.LogError("User ID already exists!!");
                 return null;
             }
 
-            if (UserID <= 0)
+            if (String.IsNullOrWhiteSpace(userID))
             {
                 _logger.LogError("Invalid User ID!!");
                 return null;
             }
             
-            var wallet = await blockchainPortal.CreateAccountAsync(UserID);
+            var wallet = await blockchainPortal.CreateAccountAsync(userID);
             
             if (wallet == null)
             {
@@ -119,8 +120,8 @@ namespace Xarcade.Application.Xarcade
             //save to db
             var domUser = new User
             {
-                UserID = UserID,
-                OwnerID = OwnerID,
+                UserID = userID,
+                OwnerID = ownerID,
                 WalletAddress = wallet.WalletAddress,
                 PrivateKey = wallet.PrivateKey,
                 PublicKey = wallet.PublicKey,
@@ -129,8 +130,8 @@ namespace Xarcade.Application.Xarcade
 
             var user = new UserDto
             {
-                UserID = UserID,
-                OwnerID = OwnerID,
+                UserID = userID,
+                OwnerID = ownerID,
                 WalletAddress = wallet.WalletAddress,
                 Created = wallet.Created
             };
@@ -151,9 +152,9 @@ namespace Xarcade.Application.Xarcade
         /// Gets the account information of a specific Owner
         /// </summary>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
-        public async Task<OwnerDto> GetOwnerAccountAsync(long UserID)
+        public async Task<OwnerDto> GetOwnerAccountAsync(string userID)
         {
-            var ownerDB = dataAccessProximaX.LoadOwner(UserID);
+            var ownerDB = dataAccessProximaX.LoadOwner(userID);
 
             if (ownerDB == null)
             {
@@ -163,7 +164,7 @@ namespace Xarcade.Application.Xarcade
 
             var ownerAccountInfo = new OwnerDto
             {
-                UserID = UserID,
+                UserID = userID,
                 WalletAddress = ownerDB.WalletAddress,
                 Created = ownerDB.Created
             };
@@ -176,9 +177,9 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
-        public async Task<UserDto> GetUserAccountAsync(long UserID)
+        public async Task<UserDto> GetUserAccountAsync(string userID)
         {
-            var userDB = dataAccessProximaX.LoadUser(UserID);
+            var userDB = dataAccessProximaX.LoadUser(userID);
 
             if (userDB == null)
             {
@@ -188,7 +189,7 @@ namespace Xarcade.Application.Xarcade
             
             var userAccountInfo = new UserDto
             {
-                UserID = UserID,
+                UserID = userID,
                 OwnerID = userDB.OwnerID,
                 WalletAddress = userDB.WalletAddress,
                 Created = userDB.Created
@@ -202,9 +203,9 @@ namespace Xarcade.Application.Xarcade
         /// </summary>
         /// <param name="UserID">Unique identification that represents the user</param>
         /// <param name="OwnerID">Unique identification that represents the owner</param>
-        public async Task<List<UserDto>> GetUserList(long OwnerID)
+        public async Task<List<UserDto>> GetUserList(string ownerID)
         {
-            var userDB = dataAccessProximaX.LoadOwner(OwnerID);
+            var userDB = dataAccessProximaX.LoadOwner(ownerID);
             
             return null;
         }

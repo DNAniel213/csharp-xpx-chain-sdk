@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Xarcade.Application.Xarcade.Models.Transaction;
 using Xarcade.Application.Xarcade.Models.Token;
 using Xarcade.Application.Xarcade.Models.Account;
+using System.Collections.Generic;
 
 namespace Xarcade.Application.Xarcade
 {
@@ -14,7 +15,7 @@ namespace Xarcade.Application.Xarcade
         /// <param name="sender"></param>
         /// <param name="receiver"></param>
         /// <returns></returns>
-        Task<TokenTransactionDto> SendTokenAsync(TokenDto token,AccountDto sender, AccountDto receiver);
+        Task<TokenTransactionDto> SendTokenAsync(TokenDto token,string sender, string receiver, string message);
         
         /// <summary>
         /// Sends an Xar from a user to another user
@@ -32,5 +33,7 @@ namespace Xarcade.Application.Xarcade
         /// <param name="receiver"></param>
         /// <returns></returns>
         Task<TokenTransactionDto> SendXpxAsync(TokenDto token,AccountDto sender, AccountDto receiver);
+        Task<List<TokenTransactionDto>> GetTransactionListAsync(string walletAddress);
+    
     }
 } 

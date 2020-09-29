@@ -29,29 +29,26 @@ namespace Xarcade.Api.Prototype
 
             XarcadeUser user = new XarcadeUser
             {
-                UserID   = 0,
-                Email    = "dnaniel213@gmail.com",
-                UserName = "dnaniel213",
-                Password = "encryptedpassword",
+                UserID   = ")",
             };
             XarcadeTokenDto xartokentest = new XarcadeTokenDto
             {
-                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),
-                Owner = user.UserID
+                TokenId = Guid.NewGuid().ToString(),
+                Owner = user.UserID +""
             };
             TokenDto tokentest = new TokenDto
             {
-                TokenId = Convert.ToUInt64(DateTime.Now.Ticks),//TO ADD some randomness
+                TokenId = Guid.NewGuid().ToString(),//TO ADD some randomness
                 Name = "tokentest",
-                Owner = user.UserID
+                Owner = user.UserID + ""
             };
             //Console.WriteLine("Duration of the game (days):");
             //ulong duration = Convert.ToUInt32(Console.ReadLine());
             GameDto gametest = new GameDto
             {
-                GameId = 1,//should be generated
+                GameId = Guid.NewGuid().ToString(),//should be generated
                 Name = "token",
-                Owner = user.UserID,
+                Owner = user.UserID + "",
                 //Expiry = DateTime.Now.AddDays(364)
             };
             //long tokID = 637321661762507047;
@@ -69,17 +66,18 @@ namespace Xarcade.Api.Prototype
 
             Console.Write("input: ");
             string choice = Console.ReadLine();
+            /*
             switch(choice)
             {
                 case "1":  user = repository.Register(); break;
                 case "2":  user = repository.Login();    break; 
                 case "3":  blockChain.ProximaXMain(user);   break;
-                case "5":  var gameinfo = ts.GetGameInfoAsync(1).GetAwaiter().GetResult(); Console.WriteLine(gameinfo); break;
+                case "5":  var gameinfo = ts.GetGameInfoAsync(1 + "").GetAwaiter().GetResult(); Console.WriteLine(gameinfo); break;
                 //case "0":  var result = ts.CreateTokenAsync(tokentest).GetAwaiter().GetResult(); break;
                 case "6":  var encrypted = cs.Encrypt("EC43AE1640952A963EF1BCEAB151B637121FE2CD1D0146533CF328E18E376DF7"); Console.WriteLine(encrypted); break;
                 case "7":  var decrypted = cs.Decrypt("hREjyidDWJ3wPAyG/wfRjM+HTEAYs+BMcUBWRSspLEaBicHsXaDzI++gbtQv0dGyW1jxbPn0EmbjdBz5Do/hRlYxWvlIL/UiJsHQf8dPV4iPk8HaqELXqL1zUy5xADWCLm+Wg3FT2Z58r68R7jxRu3Aj7KsLSo+YNDXxGTzsx31MOmBnGj0sXCiMixSbdhEUjuM4LeA+wQW4CF0KxiOqFnangCJXdXU0ZAScdstFSZNF2nXZ/h0y39Cx9Ki9IXLSCpcuQm5Z2a/VcKXA/OlcxCt4cxrckkI5vpJ4zZB6QMS5WXK+pjEx5hyWxPIT7X8dgtNTJoOC5TbNounSIEre+A=="); Console.WriteLine(decrypted); break;
             }
-
+*/
             blockChain.ProximaXMain(user, true);
         }
     }

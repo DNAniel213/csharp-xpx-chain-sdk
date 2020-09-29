@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "6cbc4ffc-86d7-4965-a872-0e9d2fbc586a",
+		"name": "bsg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzI1MzcsImV4cCI6MTYwMTI3MzQzNywiaWF0IjoxNjAxMjcyNTM3fQ.N_-DvRq5cI3wuGYr6fTR0IZWfxeo-KwOhV8tFT4yBxc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/token/generate/token?name=Danetestcoin89&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"generate",
+						"token"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Danetestcoin89"
+						},
+						{
+							"key": "owner",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						},
+						{
+							"key": "namespaceName",
+							"value": "bsgnamespace14",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Create Token"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjI1NjAsImV4cCI6MTYwMTAyMzQ2MCwiaWF0IjoxNjAxMDIyNTYwfQ.0tAvRn5HqHMB9HMzsUQwjkb5_1I4ImsPT6w9osCrrF4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/token/token?tokenId=9a5c9bdf-7d03-4cd4-8907-f57478620890",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"token"
+					],
+					"query": [
+						{
+							"key": "supply",
+							"value": "1000",
+							"disabled": true
+						},
+						{
+							"key": "tokenId",
+							"value": "9a5c9bdf-7d03-4cd4-8907-f57478620890"
+						}
+					]
+				},
+				"description": "GET Token Info"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Game",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwODg0MzksImV4cCI6MTYwMTA4OTMzOSwiaWF0IjoxNjAxMDg4NDM5fQ.lYyo4B26toQdF-texpsLLJ6T3OHI5KxOrSdIGwBN8h4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/token/generate/game?name=bestgameeverseasontwo&duration=10000&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"generate",
+						"game"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "bestgameeverseasontwo"
+						},
+						{
+							"key": "duration",
+							"value": "10000"
+						},
+						{
+							"key": "owner",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Extend Game",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA4NzMyNzEsImV4cCI6MTYwMDg3NDE3MSwiaWF0IjoxNjAwODczMjcxfQ.OMDoPG6x_ovwv5ij4JPOG3se3-sTV9giIQAz5Y_nFwws",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/token/extend/game?gameId=testnamespaceyey&owner=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&duration=5000",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"extend",
+						"game"
+					],
+					"query": [
+						{
+							"key": "gameId",
+							"value": "testnamespaceyey"
+						},
+						{
+							"key": "owner",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						},
+						{
+							"key": "duration",
+							"value": "5000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "https://localhost:5001",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"Dane\",\r\n    \"lastName\" : \"Fern\",\r\n    \"email\" : \"dnaniel213@gmail.com\",\r\n    \"userName\" : \"dnaniel213\",\r\n    \"password\" : \"dandandandan\",\r\n    \"confirmPassword\" : \"dandandandan\",\r\n    \"acceptTerms\" : true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/xarcadeaccount/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"xarcadeaccount",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "https://localhost:5001",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\" : \"1D1CB0637BA5310D32D31A4AC99920447D5C9924EA4096C6F3E17019D202D37F85CB0DA467E0C064\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/xarcadeaccount/verifyemail",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"xarcadeaccount",
+						"verifyemail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA4NDEzMjAsImV4cCI6MTYwMDg0MjIyMCwiaWF0IjoxNjAwODQxMzIwfQ.PKW6ORuIJ4AcovO-ryuqMYTiOOySuYPLvyAa30OhlJM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"dnaniel213\",\r\n    \"password\" : \"dandandandan\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/xarcadeaccount/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"xarcadeaccount",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Owner",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDA4NzEzOTYsImV4cCI6MTYwMDg3MjI5NiwiaWF0IjoxNjAwODcxMzk2fQ.hTiKhC8bTN4WYnLZUA0k1EF8adJpeKGbIW1m9ArKQLk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/account/generate/user?ownerId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"account",
+						"generate",
+						"user"
+					],
+					"query": [
+						{
+							"key": "ownerId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						},
+						{
+							"key": "searchId",
+							"value": "b5fe5a46-0728-490f-8e25-8a4209aff1c2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Token SUpply",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjI3NDAsImV4cCI6MTYwMTAyMzY0MCwiaWF0IjoxNjAxMDIyNzQwfQ.zaM5Erxd5ZhARLdT043LTnhEwh-qqi2nxe4olf_yBGc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/token/modify/supply?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&tokenId=40df0862-c156-4f88-ae6d-a5d113448c38&supply=500",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"modify",
+						"supply"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+							"description": "authenticated user ID"
+						},
+						{
+							"key": "tokenId",
+							"value": "40df0862-c156-4f88-ae6d-a5d113448c38",
+							"description": "token to change supplyz TestCoinDane"
+						},
+						{
+							"key": "supply",
+							"value": "500",
+							"description": "amount to add/subtract"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjE4MzUsImV4cCI6MTYwMTAyMjczNSwiaWF0IjoxNjAxMDIxODM1fQ.XzFEK3s06dWdCwvSNd6whQ9ETocJL4vZC9u9eKHR0_c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/token/game?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&gameId=17705762521426290009",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"game"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						},
+						{
+							"key": "gameId",
+							"value": "17705762521426290009"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Link Namespace",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjIzMjEsImV4cCI6MTYwMTAyMzIyMSwiaWF0IjoxNjAxMDIyMzIxfQ.y6_zZsEX7O0uz7jrmwauBHFALaPbO0C83PNLvbI6nhU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/token/register/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&gameId=17705762521426290009&tokenId=40df0862-c156-4f88-ae6d-a5d113448c38",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						"register",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+							"description": "dnaniel213 ID"
+						},
+						{
+							"key": "gameId",
+							"value": "17705762521426290009",
+							"description": "newnewnewgame1 ID (only 1 ra ang ma link, so create a new namespace first)"
+						},
+						{
+							"key": "tokenId",
+							"value": "40df0862-c156-4f88-ae6d-a5d113448c38",
+							"description": "TestCoinDane token ID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzI1MzcsImV4cCI6MTYwMTI3MzQzNywiaWF0IjoxNjAxMjcyNTM3fQ.N_-DvRq5cI3wuGYr6fTR0IZWfxeo-KwOhV8tFT4yBxc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/transaction/send/token/?senderId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f&receiverId=b5fe5a46-0728-490f-8e25-8a4209aff1c2&tokenId=de1beed6-a03c-4bfc-9b99-09d0005d9b11&amount=18&message=testmessage",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"transaction",
+						"send",
+						"token",
+						""
+					],
+					"query": [
+						{
+							"key": "senderId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+							"description": "dnaniel213"
+						},
+						{
+							"key": "receiverId",
+							"value": "b5fe5a46-0728-490f-8e25-8a4209aff1c2",
+							"description": "john@doe"
+						},
+						{
+							"key": "tokenId",
+							"value": "de1beed6-a03c-4bfc-9b99-09d0005d9b11",
+							"description": "TestCoinDane_1"
+						},
+						{
+							"key": "amount",
+							"value": "18"
+						},
+						{
+							"key": "message",
+							"value": "testmessage"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwMjQ2MzAsImV4cCI6MTYwMTAyNTUzMCwiaWF0IjoxNjAxMDI0NjMwfQ.X6Hj41iO3ua214qE2SYJdUg5gqPM2xSN3d8QXMrltJo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/token/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"token",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEwODg0MzksImV4cCI6MTYwMTA4OTMzOSwiaWF0IjoxNjAxMDg4NDM5fQ.lYyo4B26toQdF-texpsLLJ6T3OHI5KxOrSdIGwBN8h4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/game/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"game",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjZGQ5NmVhMC0yZGYzLTQzZTYtODhkZC1mMTZhNjgwMGFkMmYiLCJuYmYiOjE2MDEyNzM2NTMsImV4cCI6MTYwMTI3NDU1MywiaWF0IjoxNjAxMjczNjUzfQ.REIIidMftPwG8zyhQSzcr6OpnURGegPydv0H6qcjczM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/transaction/?userId=cdd96ea0-2df3-43e6-88dd-f16a6800ad2f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"transaction",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cdd96ea0-2df3-43e6-88dd-f16a6800ad2f"
+						},
+						{
+							"key": "supply",
+							"value": "1000",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

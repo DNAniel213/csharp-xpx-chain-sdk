@@ -12,7 +12,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="userID">Unique identification that represents the user</param>
         /// <returns>Account Information</returns>
-        Task<Account> CreateAccountAsync(long userID);
+        Task<Account> CreateAccountAsync(string userID);
 
         /// <summary>
         /// Generates a wallet for a specific user using a private key
@@ -20,7 +20,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// <param name="userID">Unique identification that represents the user</param>
         /// <param name="privateKey">The private key to create the wallet with</param>
         /// <returns></returns>
-        Task<Account> CreateAccountAsync(long userID, string privateKey);
+        Task<Account> CreateAccountAsync(string userID, string privateKey);
 
         /// <summary>
         /// Retrieves the transactions of specified account
@@ -49,7 +49,14 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="mosaicID">Unique identification that represents the mosaic</param>
         /// <returns></returns>
-        Task<Mosaic> GetMosaicAsync(ulong mosaicID);
+        Task<Mosaic> GetMosaicAsync(string mosaicID);
+        /// <summary>
+        /// Retrieves a list of mosaics that the user owns
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="mosaicId"></param>
+        /// <returns></returns>
+        Task<List<Mosaic>> GetMosaicListAsync(string walletAddress);
         
         /// <summary>
         /// Creates a transaction to sends mosaic from one account to another
@@ -63,7 +70,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<Transaction> LinkMosaicAsync(LinkMosaicParams param);
+        Task<(Mosaic mosaic, Transaction tx)> LinkMosaicAsync(LinkMosaicParams param);
         
         /// <summary>
         /// Creates a new namespace
@@ -77,7 +84,7 @@ namespace Xarcade.Infrastructure.Abstract
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<Namespace> ExtendNamespaceDurationAsync(string namespaceName,string privateKey,Namespace namespaceInfo, CreateNamespaceParams param);
+        Task<(Namespace gameName, Transaction tx)> ExtendNamespaceDurationAsync(CreateNamespaceParams param);
         
         /// <summary>
         /// Retrieves namespace information. Returns null if it doesn't exist
@@ -105,6 +112,6 @@ namespace Xarcade.Infrastructure.Abstract
         /// Retrieves the account information
         /// </summary>
         Task<Account> GetAccountInformationAsync(string address);
-
+        Task<List<Transaction>> GetTransactionListAsync(string walletAddress);
     }
 }

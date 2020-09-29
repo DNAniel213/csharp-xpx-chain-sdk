@@ -5,8 +5,8 @@ namespace Xarcade.WebApi.Controllers.Xarcade.Models
 {
     public class GameViewModel
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = null;
         public DateTime Expiry { get; set; }
-        public List<TokenViewModel> Tokens {get; set;}
+        public List<TokenViewModel> Tokens {get; set;} = null;
     }
 }

@@ -18,6 +18,11 @@ namespace Xarcade.Infrastructure.Repository
         public RepositoryPortal portal = new RepositoryPortal(config);
         private static ILogger _logger;
 
+        public DataAccessProximaX()
+        {
+
+        }
+
         public bool SaveOwner(Owner ownerDTO)
         {
             try
@@ -106,7 +111,7 @@ namespace Xarcade.Infrastructure.Repository
         {
             try
             {
-                portal.CreateDocument("Authentication", xarUserDTO.ToBsonDocument());
+                portal.CreateDocument("XarcadeUsers", xarUserDTO.ToBsonDocument());
 
             }catch(Exception e)
             {
@@ -143,9 +148,9 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }
 
-        public Owner LoadOwner(long userID)
+        public Owner LoadOwner(string userID)
         {
-            var ownerBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
+            var ownerBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("UserID", userID), FilterOperator.EQUAL));
             
             if(ownerBson!=null) //if account exists
             {
@@ -157,9 +162,9 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }   
 
-        public User LoadUser(long userID)
+        public User LoadUser(string userID)
         {
-            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
+            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, string>("UserID", userID), FilterOperator.EQUAL));
 
             if(userBson!=null) //if account exists
             {
@@ -170,9 +175,49 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }   
 
-        public XarcadeUser LoadXarcadeUser(long userID)
+        public Transaction LoadTransaction(string hash)
         {
-            var userBson = portal.ReadDocument("Users", portal.CreateFilter(new KeyValuePair<string, long>("UserID", userID), FilterOperator.EQUAL));
+            var transactionBson = portal.ReadDocument("Transactions", portal.CreateFilter(new KeyValuePair<string, string>("Hash", hash), FilterOperator.EQUAL));
+
+            if(transactionBson!=null) //if account exists
+            {
+                Transaction transactionDTO = BsonToModel.BsonToTransactionDTO(transactionBson);
+
+                return transactionDTO;
+            }
+
+            return null;
+        }
+
+        public XarcadeUser LoadXarcadeUser(XarcadeUserSearchKey searchKey)
+        {
+            string key = null;
+            string value = null;
+
+            if(!string.IsNullOrEmpty(searchKey.UserID))
+            {
+                key = "UserID";
+                value = searchKey.UserID;
+            }
+            else if(!string.IsNullOrEmpty(searchKey.Email))
+            {
+                key = "Email";
+                value = searchKey.Email;
+            }
+            else if(!string.IsNullOrEmpty(searchKey.Username))
+            {
+                key = "Username";
+                value = searchKey.Username;
+
+            }
+            else if(!string.IsNullOrEmpty(searchKey.VerificationToken))
+            {
+                key = "VerificationToken";
+                value = searchKey.VerificationToken;
+            }
+
+            var userBson = portal.ReadDocument("XarcadeUsers", portal.CreateFilter(new KeyValuePair<string, string>(key, value), FilterOperator.EQUAL));
+
             if(userBson!=null) //if account exists
             {
                 XarcadeUser xarUserDTO = BsonToModel.BsonToXarcadeUserDTO(userBson);
@@ -182,52 +227,128 @@ namespace Xarcade.Infrastructure.Repository
             return null;
         }
 
-        public Mosaic LoadMosaic(long tokenID)
+        public Mosaic LoadMosaic(string tokenID)
         {
-            var mosaicBson = portal.ReadDocument("Mosaics", portal.CreateFilter(new KeyValuePair<string, long>("AssetID", Convert.ToInt64(tokenID)), FilterOperator.EQUAL));
+            var mosaicBson = portal.ReadDocument("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("AssetID", tokenID), FilterOperator.EQUAL));
+
             if(mosaicBson != null) //if mosaic exists
             {
                 Mosaic mosaicDTO = BsonToModel.BsonToTokenDTO(mosaicBson);
+
                 return mosaicDTO;
             }
-
-            return null;
-        }
-
-        public Namespace LoadNamespace(string gameName)
-        {
-            var namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("Domain", gameName), FilterOperator.EQUAL));
-            if(namespaceBson != null) //if namespace exists
+            else
             {
-                Namespace namespaceDTO = BsonToModel.BsonToGameDTO(namespaceBson);
-                return namespaceDTO;
+                mosaicBson = portal.ReadDocument("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("MosaicID", tokenID), FilterOperator.EQUAL));
+                if(mosaicBson != null) //if mosaic exists with mosaicID
+                {
+
+                    Mosaic mosaicDTO = BsonToModel.BsonToTokenDTO(mosaicBson);
+
+                    return mosaicDTO;
+                }
             }
 
             return null;
         }
 
-        public Namespace LoadNamespace(long gameID)
+
+        public Namespace LoadNamespace(string gameID)
         {
-            var namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, long>("NamespaceId", gameID), FilterOperator.EQUAL));
+            var namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("Domain", gameID), FilterOperator.EQUAL));
+
             if(namespaceBson != null) //if namespace exists
             {
+
                 Namespace namespaceDTO = BsonToModel.BsonToGameDTO(namespaceBson);
+
                 return namespaceDTO;
+            }
+            else 
+            {
+                namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("NamespaceId", gameID), FilterOperator.EQUAL));
+                if(namespaceBson != null)
+                {
+
+                    Namespace namespaceDTO = BsonToModel.BsonToGameDTO(namespaceBson);
+                    return namespaceDTO;
+                }
             }
 
             return null;
         }
 
-        public List<BsonDocument> LoadMosaicList(Owner ownerDTO)
+        public List<Mosaic> LoadMosaicList(string ownerId)
         {
-            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, Owner>("Owner", ownerDTO), FilterOperator.EQUAL));
+            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("OwnerId", ownerId), FilterOperator.EQUAL));
             if(mosaicListBson != null)//if the list exists
             {
-                return mosaicListBson;
+                var mosaicList = new List<Mosaic>();
+                foreach(BsonDocument doc in mosaicListBson)
+                {
+                    Mosaic mosaic = BsonToModel.BsonToTokenDTO(doc);
+                    mosaicList.Add(mosaic);
+                }
+                return mosaicList;
             }
             
             return null;
         }
+
+        public List<Namespace> LoadNamespaceList(string ownerId)
+        {
+            var namespaceListBson = portal.ReadCollection("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("OwnerId", ownerId), FilterOperator.EQUAL));
+            if(namespaceListBson != null)//if the list exists
+            {
+                var namespaceList = new List<Namespace>();
+                foreach(BsonDocument doc in namespaceListBson)
+                {
+                    Namespace nmspc = BsonToModel.BsonToGameDTO(doc);
+                    namespaceList.Add(nmspc);
+                }
+                return namespaceList;
+            }
+            
+            return null;
+        }
+
+
+
+
+        public bool UpdateXarcadeUser(XarcadeUser user)
+        {
+            var result = portal.UpdateDocument("XarcadeUsers", portal.CreateFilter(new KeyValuePair<string, string>("UserID", user.UserID), FilterOperator.EQUAL), user.ToBsonDocument());
+            return true;
+        }
+
+
+        public bool UpdateNamespaceDuration(string gameName, DateTime expiry)
+        {
+            var result = portal.UpdateDocumentField("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("Domain", gameName), FilterOperator.EQUAL), "Expiry", expiry);
+
+            return true;
+        }
+
+        public bool UpdateMosaicQuantity(string assetId, long newQuantity)
+        {
+            var result = portal.UpdateDocumentField("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("AssetID", assetId), FilterOperator.EQUAL), "Quantity", newQuantity);
+
+            return true;
+        }
+
+        public bool UpdateMosaicLink(string assetId, Namespace newNamespace)
+        {
+            var result = portal.UpdateDocumentField("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("AssetID", assetId), FilterOperator.EQUAL), "Namespace", newNamespace);
+
+            return true;
+        }
+
+
+
+
+
+
+
 
         public Boolean CheckExistNamespace(string namespaceName)
         {
