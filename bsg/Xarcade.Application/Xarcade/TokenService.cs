@@ -299,7 +299,6 @@ namespace Xarcade.Application.Xarcade
                         AssetID     = Token.TokenId,
                         Name        = Token.Name,
                         Quantity    = Token.Quantity,
-                        OwnerId     = ownerdto.UserID,
                         Owner       = ownerdto,
                         Created     = DateTime.Now,
                         MosaicID    = mosaicTuple.tMosaic.MosaicID,
@@ -373,7 +372,6 @@ namespace Xarcade.Application.Xarcade
                         Domain          = createGame.gameName.Domain,
                         LayerOne        = createGame.gameName.LayerOne,
                         LayerTwo        = createGame.gameName.LayerTwo,
-                        OwnerId         = ownerdto.UserID,
                         Owner           = createGame.gameName.Owner,
                         Expiry          = createGame.gameName.Expiry,
                         Created         = createGame.gameName.Created
