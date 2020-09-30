@@ -175,7 +175,6 @@ namespace Xarcade.Infrastructure.Repository
             {
 
             }
-            gameDTO.OwnerId     = game["OwnerId"].AsString;
             gameDTO.Owner       = BsonToOwnerDTO(game["Owner"].AsBsonDocument);
             gameDTO.Expiry      = game["Expiry"].ToUniversalTime();
             gameDTO.Created     = game["Created"].ToUniversalTime();
@@ -194,7 +193,6 @@ namespace Xarcade.Infrastructure.Repository
             mosaicDTO.AssetID   = token["AssetID"].AsString;
             mosaicDTO.Name      = token["Name"].AsString;
             mosaicDTO.Quantity  = (ulong)token["Quantity"].AsInt64;
-            mosaicDTO.OwnerId     = token["OwnerId"].AsString;
             mosaicDTO.Owner     = BsonToOwnerDTO(token["Owner"].AsBsonDocument);
             mosaicDTO.Created   = token["Created"].ToUniversalTime();
             return mosaicDTO;

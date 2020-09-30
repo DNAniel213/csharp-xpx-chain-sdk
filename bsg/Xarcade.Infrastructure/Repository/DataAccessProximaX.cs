@@ -212,7 +212,7 @@ namespace Xarcade.Infrastructure.Repository
             }
             else if(!string.IsNullOrEmpty(searchKey.VerificationToken))
             {
-                key = "VerificationToken";
+                key = "Verification.VerificationToken";
                 value = searchKey.VerificationToken;
             }
 
@@ -280,7 +280,7 @@ namespace Xarcade.Infrastructure.Repository
 
         public List<Mosaic> LoadMosaicList(string ownerId)
         {
-            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("OwnerId", ownerId), FilterOperator.EQUAL));
+            var mosaicListBson = portal.ReadCollection("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("Owner.UserID", ownerId), FilterOperator.EQUAL));
             if(mosaicListBson != null)//if the list exists
             {
                 var mosaicList = new List<Mosaic>();
@@ -297,7 +297,7 @@ namespace Xarcade.Infrastructure.Repository
 
         public List<Namespace> LoadNamespaceList(string ownerId)
         {
-            var namespaceListBson = portal.ReadCollection("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("OwnerId", ownerId), FilterOperator.EQUAL));
+            var namespaceListBson = portal.ReadCollection("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("Owner.UserID", ownerId), FilterOperator.EQUAL));
             if(namespaceListBson != null)//if the list exists
             {
                 var namespaceList = new List<Namespace>();

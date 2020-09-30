@@ -11,7 +11,6 @@ namespace Xarcade.Domain.ProximaX
         public string AssetID {get; set;} = null;
         public string Name {get; set;} = null;
         public ulong Quantity {get; set;} = 0;
-        public string OwnerId {get; set;} = null;
         public Account Owner {get; set;} = null; 
         public DateTime Created {get; set;}
 

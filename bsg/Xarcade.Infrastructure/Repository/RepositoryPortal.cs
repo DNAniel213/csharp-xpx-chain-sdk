@@ -316,7 +316,6 @@ namespace Xarcade.Infrastructure.Repository
             }
             return filterObject;
         }
-
         public FilterDefinition<MongoDB.Bson.BsonDocument> CreateFilter(KeyValuePair<string, long> filter, FilterOperator filterOperator)
         {
             FilterDefinition<MongoDB.Bson.BsonDocument> filterObject = null;
