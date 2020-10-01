@@ -3,6 +3,8 @@ const postGame = 'http://localhost:5000/token/generate/game';
 const listGame = 'http://localhost:5000/game/';
 const extend   = 'http://localhost:5000/token/extend/game';
 
+const redirectPage = '../api-dashboard/games.html';
+
 let userData = JSON.parse(localStorage.getItem('userData'));
 let jwtToken = JSON.parse(localStorage.getItem('jwtToken'));
 
@@ -21,7 +23,7 @@ function getGames()
     })
         .then(response => response.json())
         .then(data => displayGames(data))
-        .catch(error => alert('Unable to get tokens', error));
+        .catch(error => alert('Unable to get games', error));
 }
 
 function addGame()
@@ -44,6 +46,7 @@ function addGame()
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data['message'] === 'Transaction Pending!'){
                 getGames();
             }
@@ -53,10 +56,26 @@ function addGame()
 
 function extendGame(gameId)
 {
+    let extendDurationInput = document.getElementById('extend-duration-input');
+
     let params = new URLSearchParams({
         gameId: gameId,
         owner:  userData.userId,
+        duration: extendDurationInput.value
     });
+
+    fetch(extend + '?' + params.toString(), {
+        method: 'PUT',
+        headers: {
+            'Authorization': 'Bearer ' + jwtToken,
+            'Content-Type': 'appliaction/json'
+        }
+    })
+        .then(response => response.json())
+        .then(() => {
+            alert('Transaction successful!')
+            redirect: window.location.replace(redirectPage);
+        })
 }
 
 function displayGames(gameData)
@@ -66,7 +85,7 @@ function displayGames(gameData)
 
     gameData.forEach(item => {
         let tokenName = item.tokens === null ? "Game not linked!" : item.tokens;
-        let addDiv    = '<div class="col-lg-6 col-md-6 col-sm-6" id="game-div"'+ count +'>'
+        let addDiv    = '<div class="col-lg-6 col-md-6 col-sm-6" id="game-div-'+ count +'">'
                         +'<div class="card card-stats">'
                         +'<div class="card-body ">'
                             +'<div class="row">'
@@ -89,9 +108,9 @@ function displayGames(gameData)
                             +'<hr>'
                             +'<div class="row">'
                             +'<div class="col-lg-4">'
-                                +'<div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#addSupplyModal">'
+                                +'<div class="btn btn-outline-info btn-sm btn-block"  data-toggle="modal" data-target="#extend-duration-modal" id="extend-duration-'+ count +'">'
                                 +'<i class="nc-icon nc-simple-add"></i>'
-                                +'Add supply'
+                                +'Extend Duration'
                             +'</div>'
                             +'</div>'
                             +'<div class="col-lg-4">'
@@ -111,8 +130,16 @@ function displayGames(gameData)
                         +'</div>'
                     +'</div>';
 
-        if(!document.getElementById('game-div'+ count)){
+        if(!document.getElementById('game-div-'+ count)){
+            let extendDurationConfirm = document.getElementById('extend-duration-form');
+
             $(gameRow).append(addDiv);
+
+            document.getElementById('extend-duration-'+count).addEventListener('click', function(){
+                extendDurationConfirm.onsubmit = function(){
+                    extendGame(item.name);
+                };
+            });
         }
 
         count++;

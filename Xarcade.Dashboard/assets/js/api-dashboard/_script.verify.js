@@ -1,4 +1,5 @@
 const verifyEmail = 'http://localhost:5000/xarcadeaccount/verifyemail';
+const createOwner = 'http://localhost:5000/account/generate/user';
 
 const redirectPage = '../api-dashboard/login.html';
 
@@ -19,9 +20,11 @@ function verifyUser()
         .then(data => {
             if (data['message'] === 'Ok'){
                 alert('Account verified!');
-                redirect: window.location.replace(redirectPage);
+                //redirect: window.location.replace(redirectPage);
             }
             console.log(data);
         });
+    
+    fetch(createOwner)
 }
 
