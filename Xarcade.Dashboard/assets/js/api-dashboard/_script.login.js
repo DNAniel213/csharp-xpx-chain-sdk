@@ -9,8 +9,8 @@ function loginUser()
 
     let item = {
         username: loginUserInput.value,
-        password: loginPasswordInput.value,
-    }
+        password: loginPasswordInput.value
+    };
 
     fetch(loginURI, {
         method: 'POST',

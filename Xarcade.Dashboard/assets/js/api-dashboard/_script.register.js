@@ -1,6 +1,6 @@
 const registerURI = 'http://localhost:5000/xarcadeaccount/register';
 
-const redirectPage = '../api-dashboard/login.html';
+const redirectPage = '../api-dashboard/verify.html';
 
 function registerUser()
 {
@@ -30,8 +30,7 @@ function registerUser()
         })
         .then(response => response.json())
         .then(data => {
-            if(data['message'] === 'Account Registered!'){
-                alert('Account registered! Please check your email to verify');
+            if(data['message'] === 'Account registered!'){
                 redirect: window.location.replace(redirectPage);
             }else{
                 alert(data['message']);
