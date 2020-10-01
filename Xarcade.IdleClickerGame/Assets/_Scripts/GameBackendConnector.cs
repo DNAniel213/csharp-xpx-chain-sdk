@@ -14,7 +14,7 @@ public class GameBackendConnector : MonoBehaviour
     public void LoginCallback(Xarcade.Models.Account acc)
     {
         Debug.Log("PITI");
-        Debug.Log(acc.Email);
+        Debug.Log(acc.email);
     }
 
 }
