@@ -1,6 +1,7 @@
 const getGame  = 'http://localhost:5000/token/game';
 const postGame = 'http://localhost:5000/token/generate/game';
-const listGame = 'http://localhost:5000/game';
+const listGame = 'http://localhost:5000/game/';
+const extend   = 'http://localhost:5000/token/extend/game';
 
 let userData = JSON.parse(localStorage.getItem('userData'));
 let jwtToken = JSON.parse(localStorage.getItem('jwtToken'));
@@ -64,7 +65,8 @@ function displayGames(gameData)
     let count   = 1;
 
     gameData.forEach(item => {
-        let addDiv  = '<div class="col-lg-6 col-md-6 col-sm-6" id="game-div"'+ count +'>'
+        let tokenName = item.tokens === null ? "Game not linked!" : item.tokens;
+        let addDiv    = '<div class="col-lg-6 col-md-6 col-sm-6" id="game-div"'+ count +'>'
                         +'<div class="card card-stats">'
                         +'<div class="card-body ">'
                             +'<div class="row">'
@@ -77,8 +79,8 @@ function displayGames(gameData)
                             +'<div class="row">'
                             +'<div class="col-12 col-md-12">'
                                 +'<div class="numbers text-center">'
-                                +'<p class="card-category">Uses DANE COIN</p>'
-                                +'<p class="card-title">Flappy Dog Game<p>'
+                                +'<p class="card-category">'+ tokenName +'</p>'
+                                +'<p class="card-title">'+ item.name +'<p>'
                                 +'</div>'
                             +'</div>'
                             +'</div>'
@@ -108,9 +110,11 @@ function displayGames(gameData)
                         +'</div>'
                         +'</div>'
                     +'</div>';
+
         if(!document.getElementById('game-div'+ count)){
             $(gameRow).append(addDiv);
         }
-    
+
+        count++;
     });
 }

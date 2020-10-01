@@ -39,12 +39,11 @@ function addToken()
 {
     let tokenNameTextbox     = document.getElementById('token-name');
     let tokenSupplyTextbox   = document.getElementById('token-supply');
-    let tokenNamespaceSelect = document.getElementById('token-namespace');
     
     let params = new URLSearchParams({
-        name:  tokenNameTextbox.value,
-        owner: userData.userId
-        //namespaceName: tokenNamespaceSelect.options[tokenNamespaceSelect.value].text
+        name:     tokenNameTextbox.value,
+        owner:    userData.userId,
+        quantity: tokenSupplyTextbox.value
     });
     fetch(postToken + '?' + params.toString(), {
         method: 'POST',
@@ -117,8 +116,8 @@ function displayTokens(tokenData)
     let count    = 1;
 
     tokenData.forEach(item => {
-        
-        let addDiv   = '<div class="col-lg-6 col-md-6 col-sm-6" id="token-div"'+ count +'>'
+        //let tokenLink = 
+        let addDiv    = '<div class="col-lg-6 col-md-6 col-sm-6" id="token-div"'+ count +'>'
                             +'<div class="card card-stats">'
                             +'<div class="card-body ">'
                                 +'<div class="row">'
@@ -131,8 +130,8 @@ function displayTokens(tokenData)
                                 +'<div class="row">'
                                 +'<div class="col-12 col-md-12">'
                                     +'<div class="numbers text-center">'
-                                    +'<p class="card-category">'+ item.name +'</p>'
-                                    +'<p class="card-title">26000DANE<p>'
+                                    +'<p class="card-category">'+ item.namespaceName +'</p>'
+                                    +'<p class="card-title">'+ item.quantity +" "+item.name  +'<p>'
                                     +'</div>'
                                 +'</div>'
                                 +'</div>'
@@ -168,12 +167,11 @@ function displayTokens(tokenData)
                         +'</div>';
 
         if(!document.getElementById('token-div'+count)){
-        $(tokenRow).append(addDiv);
+            $(tokenRow).append(addDiv);
             document.getElementById('add-supply'+count).addEventListener('click', function(){
                 getSpecificToken(item.tokenId);
             });
         }
-        
         count++;
     });
     
