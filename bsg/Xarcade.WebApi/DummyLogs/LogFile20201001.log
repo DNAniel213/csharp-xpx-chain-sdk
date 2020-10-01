@@ -185,3 +185,4 @@
    at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
    at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
    at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 394
+2020-10-01 11:45:28.125 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
