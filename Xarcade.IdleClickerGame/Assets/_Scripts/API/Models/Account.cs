@@ -1,22 +1,32 @@
 using System;
+using UnityEngine;
 
 namespace Xarcade.Models
 {
-    [Serializable]
+    [System.Serializable]
     public class Account
     {
-        public string UserId { get; set; }
+        [SerializeField]
+        public string userId;
 
-        public string FirstName { get; set; }
+        [SerializeField]
+        public string firstName;
 
-        public string LastName { get; set; }
+        [SerializeField]
+        public string lastName;
 
-        public string Email { get; set; }
+        [SerializeField]
+        public string email;
 
-        public string Username { get; set; }
+        [SerializeField]
+        public string username;
 
-        public string Password { get; set; }
+        [SerializeField]
+        public string password;
 
-        public bool AcceptTerms { get; set; }
+        [SerializeField]
+        public bool acceptTerms;
+
+
     }
 }

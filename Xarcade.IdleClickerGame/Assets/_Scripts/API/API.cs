@@ -25,13 +25,27 @@ namespace Xarcade
 
             UnityWebRequest request = GenerateJSONRequest(URL + "xarcadeaccount/login/", body, "POST");
             yield return request.Send();
-            JSONNode jsonResult = JSON.Parse(request.downloadHandler.text.Trim());
-            authorizationToken = jsonResult[0]["jwtToken"]; 
-            var x = JsonUtility.FromJson<Account>(jsonResult[0]["account"]);
-            if(x!=null)
+            if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+            {
+                JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
+                authorizationToken = jsonResult[0]["jwtToken"]; 
+                Debug.Log(authorizationToken);
+                Debug.Log(jsonResult[0]["account"]);
+                Account x = new Account();
+
+
+                x = JsonUtility.FromJson<Account>(jsonResult[0]["account"]);  //TODO Dapat ma deserialize ni siya from JSON mahimog Account
+                Debug.Log(x.firstName);  //Then i print ni siya
+
+
                 callback(x);
+
+            }
             else
-                Debug.Log("Request returned Null!");
+            {
+                Debug.Log("Server is not online!");
+            }
+
         }
 
         /*
