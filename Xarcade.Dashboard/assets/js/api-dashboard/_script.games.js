@@ -21,7 +21,7 @@ function getGames()
     })
         .then(response => response.json())
         .then(data => displayGames(data))
-        .catch(error => alert('Unable to get tokens', error));
+        .catch(error => alert('Unable to get games', error));
 }
 
 function addGame()
@@ -44,6 +44,7 @@ function addGame()
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data['message'] === 'Transaction Pending!'){
                 getGames();
             }
