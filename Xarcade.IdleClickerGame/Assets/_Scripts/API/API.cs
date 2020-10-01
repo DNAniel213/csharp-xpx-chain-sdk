@@ -18,6 +18,30 @@ namespace Xarcade
         public static string URL = "http://localhost:5000/";
         public static string authorizationToken = "";    
 
+        public static IEnumerator RegisterPlayer(string firstName,string lastName,string email,string userName,string password,string confirmPassword, bool acceptTerms)
+        {
+            string body ="{\"firstName\":\""+ firstName+ 
+                            "\",\"lastName\": \""+ lastName +
+                            "\",\"email\": \""+ email +
+                            "\",\"userName\": \""+ userName +
+                            "\",\"password\": \""+ password +
+                            "\",\"confirmPassword\": \""+ confirmPassword +
+                            "\",\"acceptTerms\": \""+ acceptTerms +
+                            "\"}";  
+
+            UnityWebRequest request = GenerateJSONRequest(URL + "xarcadeaccount/register/", body, "POST");
+            yield return request.Send();
+            if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+            {
+                JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
+                Debug.Log(jsonResult[0]); 
+
+            }
+            else
+            {
+                Debug.Log("No result!");
+            }
+        }
 
         public static IEnumerator Login(string username, string password, Action<Account> callback)
         {
@@ -29,8 +53,6 @@ namespace Xarcade
             {
                 JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
                 authorizationToken = jsonResult[0]["jwtToken"]; 
-                Debug.Log(authorizationToken);
-                Debug.Log(jsonResult[0]["account"]);
                 Account x = new Account();
 
 
@@ -43,22 +65,102 @@ namespace Xarcade
             }
             else
             {
-                Debug.Log("Server is not online!");
+                Debug.Log("No result!");
             }
 
         }
 
-        /*
-        public static UnityWebRequest GeneratePARAMRequest(string url, WWWForm param, string callType)
+        public static IEnumerator GetToken(string userId, string tokenId, Action<Account> callback)
         {
+            UnityWebRequest request = GenerateGETRequest(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
+            Debug.Log(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
+            if(request != null)
+            {
+                yield return request.SendWebRequest();
+
+                if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+                {
+                    JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
+                    Debug.Log(jsonResult);
+                    Token x = JsonUtility.FromJson<Token>(jsonResult);
+                    
+                    //callback(x);
+
+                }
+                else
+                {
+                    Debug.Log("No result!");
+                }
+            }
+            else
+            {
+                Debug.Log("User is not Authenticated!");
+                yield return null;
+            }
+
+        }
+        
+        public static IEnumerator GetToken(string userId, string tokenId, Action<Account> callback)
+        {
+            UnityWebRequest request = GenerateGETRequest(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
+            Debug.Log(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
+            if(request != null)
+            {
+                yield return request.SendWebRequest();
+
+                if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+                {
+                    JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
+                    Debug.Log(jsonResult);
+                    Token x = JsonUtility.FromJson<Token>(jsonResult);
+                    
+                    //callback(x);
+
+                }
+                else
+                {
+                    Debug.Log("No result!");
+                }
+            }
+            else
+            {
+                Debug.Log("User is not Authenticated!");
+                yield return null;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        public static UnityWebRequest GenerateGETRequest(string uri)
+        {
+            if(String.IsNullOrEmpty(authorizationToken)) return null;
             ServicePointManager.ServerCertificateValidationCallback = TrustCertificate;
-            var request = new UnityWebRequest.Post(url, callType);
-            request.uploadHandler = (UploadHandler) new UploadHandlerRaw(param);
+            var request = UnityWebRequest.Get(uri);
             request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + authorizationToken);
 
             return request;
-        }*/
+        }
+
         public static UnityWebRequest GenerateJSONRequest(string url, string bodyJsonString, string callType)
         {
             ServicePointManager.ServerCertificateValidationCallback = TrustCertificate;
