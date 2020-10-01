@@ -332,7 +332,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
         [HttpGet]
         [Route(Routes.Token)]        
-        public async Task<TokenViewModel> GetTokenInfo([FromBody]string userId, string tokenId)
+        public async Task<TokenViewModel> GetTokenInfo(string userId, string tokenId)
         {
             if(String.IsNullOrWhiteSpace(userId) || String.IsNullOrWhiteSpace(tokenId)) return null;
             TokenViewModel tokenViewModel = new TokenViewModel();

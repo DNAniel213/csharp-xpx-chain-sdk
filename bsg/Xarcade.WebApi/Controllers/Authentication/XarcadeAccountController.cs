@@ -59,7 +59,7 @@ namespace Xarcade.WebApi.Controllers.Authentication
 
             return new RegisterResponse()
             {
-                Message = "Account registered!"
+                Message = "Account registered! Please check your email"
             };
         }
 
