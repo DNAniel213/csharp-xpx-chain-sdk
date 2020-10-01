@@ -31,7 +31,10 @@ public class GameBackendConnector : MonoBehaviour
 
     public void SendToken()
     {
-        
+        Action<Xarcade.Models.Account> callback = LoginCallback;
+
+        StartCoroutine(Xarcade.API.SendToken("cdd96ea0-2df3-43e6-88dd-f16a6800ad2f", "b5fe5a46-0728-490f-8e25-8a4209aff1c2","75e7dedb-457b-494f-81cf-53e230f2f0c9", 18, "Purchasing Upgrade!", callback));
+
     }
 
 }

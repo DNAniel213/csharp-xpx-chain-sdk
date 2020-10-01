@@ -49,7 +49,7 @@ namespace Xarcade
 
             UnityWebRequest request = GenerateJSONRequest(URL + "xarcadeaccount/login/", body, "POST");
             yield return request.Send();
-            if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+            if(!String.IsNullOrEmpty(request.downloadHandler.text) || request.isNetworkError || request.isHttpError)  
             {
                 JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
                 authorizationToken = jsonResult[0]["jwtToken"]; 
@@ -73,12 +73,11 @@ namespace Xarcade
         public static IEnumerator GetToken(string userId, string tokenId, Action<Account> callback)
         {
             UnityWebRequest request = GenerateGETRequest(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
-            Debug.Log(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
             if(request != null)
             {
                 yield return request.SendWebRequest();
 
-                if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+                if(!String.IsNullOrEmpty(request.downloadHandler.text) || request.isNetworkError || request.isHttpError) 
                 {
                     JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
                     Debug.Log(jsonResult);
@@ -100,15 +99,20 @@ namespace Xarcade
 
         }
         
-        public static IEnumerator GetToken(string userId, string tokenId, Action<Account> callback)
+        public static IEnumerator SendToken(string senderId, string receiverId, string tokenId, long amount, string message, Action<Account> callback)
         {
-            UnityWebRequest request = GenerateGETRequest(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
-            Debug.Log(URL + "token/token/?userId=" + userId + "&tokenId=" + tokenId);
+            WWWForm form = new WWWForm();
+            form.AddField("senderId", senderId);
+            form.AddField("receiverId", receiverId);
+            form.AddField("tokenId", tokenId);
+            form.AddField("amount", amount+"");
+            form.AddField("message", message);
+            UnityWebRequest request = GeneratePOSTRequest(URL + "transaction/send/token", form);
             if(request != null)
             {
                 yield return request.SendWebRequest();
 
-                if(!String.IsNullOrEmpty(request.downloadHandler.text)) 
+                if(!String.IsNullOrEmpty(request.downloadHandler.text) || request.isNetworkError || request.isHttpError) 
                 {
                     JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
                     Debug.Log(jsonResult);
@@ -145,7 +149,18 @@ namespace Xarcade
 
 
 
+        public static UnityWebRequest GeneratePOSTRequest(string url, WWWForm form)
+        {
+            if(String.IsNullOrEmpty(authorizationToken)) return null;
+            ServicePointManager.ServerCertificateValidationCallback = TrustCertificate;
+            var request = UnityWebRequest.Post(url, form);
+            Debug.Log(request.uploadHandler.data);
+            request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + authorizationToken);
 
+            return request;
+        }
 
 
         
