@@ -186,3 +186,54 @@
    at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
    at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.GetMosaicAsync(String mosaicID) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 394
 2020-10-01 11:45:28.125 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:21:10.128 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:24:00.593 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:24:05.751 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:24:10.870 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:27:39.536 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:27:44.763 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:27:53.344 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:27:53.528 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:29:36.786 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:29:36.786 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:29:38.678 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:30:16.103 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:31:28.289 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:31:28.399 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:31:30.618 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:31:38.461 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:31:38.461 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:35.815 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:35.818 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:44.511 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:44.581 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:44.847 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:44.912 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:45.045 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:45.107 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 19:50:46.841 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 20:32:29.368 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 20:32:31.481 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 20:34:52.804 +08:00 [ERR] [ReadDocument][148] Document does not exist!!
+2020-10-01 22:01:34.567 +08:00 [ERR] [ModifyMosaicSupplyAsync][380] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/629BEA71FC988196
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 341
+2020-10-01 22:01:57.931 +08:00 [ERR] [ModifyMosaicSupplyAsync][380] Flurl.Http.FlurlHttpException: Call failed with status code 404 (Not Found): GET https://bctestnet1.brimstone.xpxsirius.io/mosaic/629BEA71FC988196
+   at Flurl.Http.FlurlRequest.HandleExceptionAsync(HttpCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.FlurlRequest.SendAsync(HttpMethod verb, HttpContent content, CancellationToken cancellationToken, HttpCompletionOption completionOption)
+   at Flurl.Http.HttpResponseMessageExtensions.ReceiveJson[T](Task`1 response)
+   at ProximaX.Sirius.Chain.Sdk.Infrastructure.MosaicHttp.<>c__DisplayClass2_0.<<GetMosaic>b__0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Reactive.PlatformServices.ExceptionServicesImpl.Rethrow(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServicesImpl.cs:line 16
+   at System.Reactive.ExceptionHelpers.ThrowIfNotNull(Exception exception) in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Internal\ExceptionServices.cs:line 22
+   at System.Reactive.Subjects.AsyncSubject`1.GetResult() in D:\a\1\s\Rx.NET\Source\src\System.Reactive\Subjects\AsyncSubject.cs:line 439
+   at Xarcade.Infrastructure.ProximaX.ProximaxBlockchainPortal.ModifyMosaicSupplyAsync(ModifyMosaicSupplyParams param) in D:\Projects\dotnet\csharp-xrcd-rest-proto\bsg\Xarcade.Infrastructure\ProximaX\ProximaxBlockchainPortal.cs:line 341

@@ -23,6 +23,7 @@ namespace Xarcade.Application.Xarcade
         {
             this.dataAccessProximaX = dataAccessProximaX;
             this.blockchainPortal = blockchainPortal;
+            _logger = LoggerFactory.GetLogger(Logger.Dummy);
         }
         //link the mosaic to namespace
         public async Task<TokenTransactionDto> RegisterTokenAsync(TokenDto Token, GameDto Game)
@@ -93,7 +94,41 @@ namespace Xarcade.Application.Xarcade
             }
             return tokentransaction;
         }
+        public async Task<TokenDto> GetTokenInfoAsync(string TokenId)
+        {
+            if (String.IsNullOrWhiteSpace(TokenId))
+            {
+                _logger.LogError("Invalid Input!!");
+                return null;
+            }
 
+            TokenDto tokenInfo = null;
+            Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(TokenId);
+
+            if(mosaicDto != null)
+            {
+                Mosaic mosaicBalance = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
+
+                if(mosaicDto != null)
+                {
+                    tokenInfo = new TokenDto
+                    {
+                        TokenId     = mosaicDto.AssetID,
+                        Name        = mosaicDto.Name,
+                        Owner       = mosaicDto.Owner.UserID,
+                    };
+                    if(mosaicBalance != null)
+                        tokenInfo.Quantity = mosaicBalance.Quantity;
+                    this.dataAccessProximaX.UpdateMosaicQuantity(tokenInfo.TokenId, Convert.ToInt32(tokenInfo.Quantity));
+                }
+                else
+                {
+                    _logger.LogInfo("GetMosaicAsync failed!");
+                }
+            }
+
+            return tokenInfo;
+        }
         
         public async Task<List<TokenDto>> GetTokenListAsync(string userId)
         {
@@ -118,13 +153,18 @@ namespace Xarcade.Application.Xarcade
                     TokenDto tokendto = new TokenDto
                     {
                         TokenId     = token.AssetID,
-                        Name        = token.Name
+                        Name        = token.Name,
+                        Owner       = userId,
                     };
                     
                     if(tokenInfo!=null)
                     {
                         tokendto.Quantity    = tokenInfo.Quantity;
+                    }
 
+                    if(token.Namespace != null)
+                    {
+                        tokendto.NamespaceId = token.Namespace.NamespaceId;
                     }
                     dataAccessProximaX.UpdateMosaicQuantity(tokendto.TokenId, Convert.ToInt64(tokendto.Quantity));
                     tokendtolist.Add(tokendto);
@@ -509,44 +549,7 @@ namespace Xarcade.Application.Xarcade
             }
         }
 
-        public async Task<TokenDto> GetTokenInfoAsync(string TokenId)
-        {
-            if (String.IsNullOrWhiteSpace(TokenId))
-            {
-                _logger.LogError("Invalid Input!!");
-                return null;
-            }
 
-            TokenDto tokenInfo = null;
-            Mosaic mosaicDto = dataAccessProximaX.LoadMosaic(TokenId);
-            Mosaic mosaicBalance = await blockchainPortal.GetMosaicAsync(mosaicDto.MosaicID);
-
-            if(mosaicDto == null)
-            {
-                _logger.LogInfo("Mosaic not found!");
-            }
-            else
-            {
-                if(mosaicDto != null)
-                {
-                    tokenInfo = new TokenDto
-                    {
-                        TokenId     = mosaicDto.AssetID,
-                        Name        = mosaicDto.Name,
-                        Owner       = mosaicDto.Owner.UserID,
-                    };
-                    if(mosaicBalance != null)
-                        tokenInfo.Quantity = mosaicBalance.Quantity;
-                    this.dataAccessProximaX.UpdateMosaicQuantity(tokenInfo.TokenId, Convert.ToInt32(tokenInfo.Quantity));
-                }
-                else
-                {
-                    _logger.LogInfo("GetMosaicAsync failed!");
-                }
-            }
-
-            return tokenInfo;
-        }
 
         public async Task<GameDto> GetGameInfoAsync(string GameId)
         {

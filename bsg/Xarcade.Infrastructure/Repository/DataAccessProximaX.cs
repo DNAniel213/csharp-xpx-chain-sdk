@@ -247,6 +247,17 @@ namespace Xarcade.Infrastructure.Repository
 
                     return mosaicDTO;
                 }
+                else
+                {
+                    mosaicBson = portal.ReadDocument("Mosaics", portal.CreateFilter(new KeyValuePair<string, string>("Namespace.NamespaceId", tokenID), FilterOperator.EQUAL));
+                    if(mosaicBson != null) //if mosaic exists with mosaicID
+                    {
+
+                        Mosaic mosaicDTO = BsonToModel.BsonToTokenDTO(mosaicBson);
+
+                        return mosaicDTO;
+                    }
+                }
             }
 
             return null;
@@ -269,7 +280,6 @@ namespace Xarcade.Infrastructure.Repository
                 namespaceBson = portal.ReadDocument("Namespaces", portal.CreateFilter(new KeyValuePair<string, string>("NamespaceId", gameID), FilterOperator.EQUAL));
                 if(namespaceBson != null)
                 {
-
                     Namespace namespaceDTO = BsonToModel.BsonToGameDTO(namespaceBson);
                     return namespaceDTO;
                 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2e59e65541bedc4f959b7bc696f46d7, type: 3}
-  m_Name: XAR
+  m_Name: BSG
   m_EditorClassIdentifier: 
   GUIDContainer:
     _serializedGuid: f805666e-a9dd-48cd-a755-8e3138ef33c5

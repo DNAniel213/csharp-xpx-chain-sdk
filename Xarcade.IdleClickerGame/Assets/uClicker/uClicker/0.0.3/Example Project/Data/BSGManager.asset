@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7abe32ad68c414b4b86ec2f9a66932e5, type: 3}
-  m_Name: RabbitManager
+  m_Name: BSGManager
   m_EditorClassIdentifier: 
   GUIDContainer:
     _serializedGuid: bcf404fb-1b62-4300-814d-3d9a8eb38402
@@ -32,21 +32,20 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 990a0369f171f63409e7f9584e998814, type: 2}
     - {fileID: 11400000, guid: d3789d1b5613f864f914f9a3b4672760, type: 2}
     - {fileID: 11400000, guid: 8426f76df65329242a03f0b20e2b4172, type: 2}
-    BuildingCostIncrease: 0.15
+    BuildingCostIncrease: 1
   State:
     _earnedBuildings:
     - _serializedGuid: 3e509c33-c84a-4368-9d23-47286aa44791
     - _serializedGuid: 70a3c3dc-6a0e-4ad6-b2a9-f36ec034bc84
-    _earnedBuildingsCount: 1000000004000000
-    _earnedUpgrades:
-    - _serializedGuid: a8586ba9-d7ed-434f-a968-6c073e1f2eac
-    - _serializedGuid: 86244d3d-c901-4038-b86c-b61ec71a4c35
+    - _serializedGuid: 50f976fb-1801-4d1a-bdb5-8ed0ae58ba64
+    _earnedBuildingsCount: 030000000100000001000000
+    _earnedUpgrades: []
     _currencies:
     - _serializedGuid: f805666e-a9dd-48cd-a755-8e3138ef33c5
     _currencyCurrentTotals:
-    - 508.3018
+    - 730.5
     _currencyHistoricalTotals:
-    - 2343.4038
+    - 2238
   OnTick:
     m_PersistentCalls:
       m_Calls:

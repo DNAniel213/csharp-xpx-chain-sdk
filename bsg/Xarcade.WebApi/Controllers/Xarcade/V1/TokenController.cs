@@ -366,6 +366,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             tokenViewModel.Name = token.Name;
             tokenViewModel.Quantity = token.Quantity;
             tokenViewModel.TokenId = token.TokenId;
+            tokenViewModel.Namespace = token.NamespaceId;
 
 
             return tokenViewModel;
@@ -458,13 +459,27 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
                 foreach(GameDto game in gameList)
                 {
+
+
                     var gameViewModel = new GameViewModel
                     {
                         Name = game.Name,
                         Expiry = game.Expiry,
-
+                        Token = null,
                     };
+                    var token = await tokenService.GetTokenInfoAsync(game.GameId);
+                    if(token!=null)
+                    {
+                        var tokenViewModel = new TokenViewModel
+                        {
+                            TokenId = token.TokenId,
+                            Name = token.Name,
+                            Quantity = token.Quantity
+                        };
+                        gameViewModel.Token = tokenViewModel;
+                    }
                     gameViewModels.Add(gameViewModel);
+
                 }
 
             }catch(Exception e)
@@ -513,22 +528,6 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
                 var tokenList = await tokenService.GetTokenListAsync(userId);
                 gameViewModel.Name = game.Name;
                 gameViewModel.Expiry = game.Expiry;
-                gameViewModel.Tokens = new List<TokenViewModel>();
-                if(tokenList.Count > 0)
-                {
-                    gameViewModel.Tokens = new List<TokenViewModel>();
-                    foreach(TokenDto tok in tokenList)
-                    {
-                        var token = new TokenViewModel
-                        {
-                            Name = tok.Name,
-                            Quantity = tok.Quantity,
-                            TokenId  = tok.TokenId
-                        };
-                        gameViewModel.Tokens.Add(token);
-                    }
-                }
-
             }catch(Exception e)
             {
                 gameViewModel = null;

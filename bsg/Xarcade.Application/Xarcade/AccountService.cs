@@ -28,9 +28,10 @@ namespace Xarcade.Application.Xarcade
         /// <param name="UserID">Unique identification that represents the user</param>
         public async Task<OwnerDto> CreateOwnerAccountAsync(string UserID)
         {
+                Console.WriteLine(UserID);
+
             if (repo.portal.CheckExist("Users", repo.portal.CreateFilter(new KeyValuePair<string, string>("UserID", UserID), FilterOperator.EQUAL)))
             {
-                Console.WriteLine("ATAY ");
                 _logger.LogError("User ID already exists!!");
                 return null;
             }
@@ -79,10 +80,11 @@ namespace Xarcade.Application.Xarcade
 
             try
             {
-                dataAccessProximaX.SaveOwner(domOwner);
+                //dataAccessProximaX.SaveOwner(domOwner);
                 dataAccessProximaX.SaveUser(domUser); 
             }catch(Exception e)
             {
+                Console.WriteLine(e);
                 _logger.LogError(e.ToString());
                 return null;
             }

@@ -28,11 +28,11 @@ MonoBehaviour:
       UnlockUpgrade: {fileID: 0}
   Cost:
     Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
-    Amount: 400
+    Amount: 1200
   UpgradePerk:
   - Type: 0
     TargetBuilding: {fileID: 0}
     TargetClickable: {fileID: 11400000, guid: 03273b677845149b8be77e0bbf13a55c, type: 2}
-    TargetCurrency: {fileID: 0}
+    TargetCurrency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
     Operation: 0
     Amount: 1

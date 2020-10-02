@@ -38,7 +38,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.Owner)]
         public async Task<OwnerViewModel> GetOwner([FromQuery] string userId, string searchId)  //userId -> current authenticated user, searchId -> ang gi search
         {
-            if(String.IsNullOrWhiteSpace(userId))  return null;
+            if(String.IsNullOrWhiteSpace(userId) || String.IsNullOrWhiteSpace(searchId))  return null;
 
             var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, userId);
 
@@ -61,6 +61,7 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
             var ownerViewModel = new OwnerViewModel();
             try
             {
+                Console.WriteLine(searchId);
                 var ownerDto = await accountService.GetOwnerAccountAsync(searchId);
                 var xarcadeUser = await this.xarcadeAccountService.GetXarcadeUserAsync(searchId);
 
@@ -88,7 +89,8 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
         [Route(Routes.User)]
         public async Task<UserViewModel> GetUser([FromQuery] string userId, string searchId)
         {
-            if(string.IsNullOrWhiteSpace(userId)) return null;
+            if(String.IsNullOrWhiteSpace(userId) || String.IsNullOrWhiteSpace(searchId))  return null;
+
             Response response = new Response();
 
             var authorizedUser = this.xarcadeAccountService.GetAuthorizedXarcadeUser(HttpContext.Items, userId);
@@ -146,7 +148,6 @@ namespace Xarcade.WebApi.Controllers.Xarcade.V1
 
             if (authorizedUser == null)
             {
-                Console.WriteLine(HttpContext.Items[0]);
                 response.Message = "Authenticated user list are null!";
                 return response;
             }

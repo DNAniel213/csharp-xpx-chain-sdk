@@ -54,13 +54,14 @@ namespace Xarcade
                 JSONNode jsonResult = JSON.Parse(request.downloadHandler.text);
                 authorizationToken = jsonResult[0]["jwtToken"]; 
                 Account x = new Account();
+                Debug.Log(jsonResult[0]["account"]);
 
 
-                x = JsonUtility.FromJson<Account>(jsonResult[0]["account"]);  //TODO Dapat ma deserialize ni siya from JSON mahimog Account
-                Debug.Log(x.firstName);  //Then i print ni siya
+                //x = JsonUtility.FromJson<Account>(jsonResult[0]["account"]);  //TODO Dapat ma deserialize ni siya from JSON mahimog Account
+                //Debug.Log(x.firstName);  //Then i print ni siya
 
 
-                callback(x);
+                //callback(x);
 
             }
             else

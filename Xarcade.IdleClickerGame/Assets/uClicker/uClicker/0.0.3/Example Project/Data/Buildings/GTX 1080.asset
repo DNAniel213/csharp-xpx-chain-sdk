@@ -28,7 +28,7 @@ MonoBehaviour:
       UnlockUpgrade: {fileID: 11400000, guid: 8426f76df65329242a03f0b20e2b4172, type: 2}
   Cost:
     Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
-    Amount: 600
+    Amount: 1000
   YieldAmount:
     Currency: {fileID: 11400000, guid: a0eaf6f8e25cf47e78246e64e59f3eba, type: 2}
-    Amount: 5
+    Amount: 10

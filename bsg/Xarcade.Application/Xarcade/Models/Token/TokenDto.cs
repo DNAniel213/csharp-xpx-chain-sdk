@@ -8,6 +8,7 @@ namespace Xarcade.Application.Xarcade.Models.Token
         public string Name {get; set;}
         public ulong Quantity {get; set;}
         public string Owner {get; set;} //UserId
+        public string NamespaceId {get; set;}
 
         public override string ToString()
         {
