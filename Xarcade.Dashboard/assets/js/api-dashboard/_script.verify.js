@@ -22,9 +22,6 @@ function verifyUser()
                 alert('Account verified!');
                 //redirect: window.location.replace(redirectPage);
             }
-            console.log(data);
-        });
-    
-    fetch(createOwner)
+        })
 }
 
